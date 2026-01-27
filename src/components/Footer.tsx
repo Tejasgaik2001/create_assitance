@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Twitter, Linkedin, Github, Mail } from "lucide-react";
 
 const footerLinks = {
   Product: ["Features", "Integrations", "Pricing", "Changelog"],
@@ -7,58 +9,122 @@ const footerLinks = {
   Legal: ["Privacy", "Terms", "Security", "Cookies"],
 };
 
+const socialLinks = [
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Github, href: "#", label: "GitHub" },
+  { icon: Mail, href: "#", label: "Email" },
+];
+
 const Footer = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
   return (
-    <footer className="py-16 md:py-24 border-t border-border">
-      <div className="container mx-auto px-6">
+    <footer ref={ref} className="py-16 md:py-24 border-t border-border relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-muted/50 to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-foreground rounded-lg flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="col-span-2 md:col-span-1"
+          >
+            <motion.div 
+              className="flex items-center gap-2 mb-4"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="w-9 h-9 bg-foreground rounded-xl flex items-center justify-center">
                 <span className="text-background font-bold text-lg">C</span>
               </div>
               <span className="font-semibold">Create Assistants</span>
-            </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            </motion.div>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
               Automate and grow your business with custom CRM and AI solutions.
             </p>
-          </div>
+            
+            {/* Social links */}
+            <div className="flex items-center gap-3">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-9 h-9 rounded-lg bg-muted hover:bg-foreground hover:text-background flex items-center justify-center transition-all duration-300"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
+                  whileHover={{ y: -3 }}
+                >
+                  <social.icon className="w-4 h-4" />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
+          {Object.entries(footerLinks).map(([category, links], categoryIndex) => (
+            <motion.div
+              key={category}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 + categoryIndex * 0.1 }}
+            >
               <h4 className="font-semibold mb-4">{category}</h4>
               <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a
+                {links.map((link, linkIndex) => (
+                  <motion.li
+                    key={link}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.3, delay: 0.2 + categoryIndex * 0.05 + linkIndex * 0.05 }}
+                  >
+                    <motion.a
                       href="#"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
+                      whileHover={{ x: 3 }}
                     >
                       {link}
-                    </a>
-                  </li>
+                    </motion.a>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Bottom */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border gap-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border gap-4"
+        >
           <p className="text-sm text-muted-foreground">
             © 2025 Create Assistants. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <motion.a 
+              href="#" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              whileHover={{ y: -2 }}
+            >
               Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            </motion.a>
+            <motion.a 
+              href="#" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              whileHover={{ y: -2 }}
+            >
               Terms of Service
-            </a>
+            </motion.a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

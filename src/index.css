@@ -44,6 +44,8 @@
     --glow-blue: 0 0 60px hsla(217, 91%, 50%, 0.3);
     --glow-purple: 0 0 60px hsla(280, 91%, 60%, 0.3);
     
+    --star: 45 93% 58%;
+    
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
