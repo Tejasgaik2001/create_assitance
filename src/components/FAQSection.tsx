@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { ChevronDown } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -41,8 +41,11 @@ const FAQSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} id="resources" className="py-24 md:py-32">
-      <div className="container mx-auto px-6">
+    <section ref={ref} id="resources" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-transparent to-muted/30 pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl mx-auto">
           {/* Section Header */}
           <motion.div
@@ -51,8 +54,17 @@ const FAQSection = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
+            <motion.span
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.5 }}
+              className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6"
+            >
+              FAQ
+            </motion.span>
             <h2 className="section-headline mb-6">
-              Frequently Asked<br />Questions
+              Frequently Asked
+              <span className="block">Questions</span>
             </h2>
             <p className="body-large">
               Everything you need to know about our services.
@@ -67,20 +79,46 @@ const FAQSection = () => {
           >
             <Accordion type="single" collapsible className="space-y-4">
               {faqs.map((faq, index) => (
-                <AccordionItem
+                <motion.div
                   key={index}
-                  value={`item-${index}`}
-                  className="border border-border rounded-xl px-6 data-[state=open]:bg-muted/30"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 >
-                  <AccordionTrigger className="text-left text-lg font-medium py-6 hover:no-underline">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-6 text-base leading-relaxed">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+                  <AccordionItem
+                    value={`item-${index}`}
+                    className="border border-border rounded-2xl px-6 data-[state=open]:bg-muted/50 data-[state=open]:shadow-lg transition-all duration-300 overflow-hidden"
+                  >
+                    <AccordionTrigger className="text-left text-lg font-medium py-6 hover:no-underline group">
+                      <span className="flex-1">{faq.question}</span>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground pb-6 text-base leading-relaxed">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
               ))}
             </Accordion>
+          </motion.div>
+
+          {/* Additional CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="text-center mt-12"
+          >
+            <p className="text-muted-foreground mb-4">
+              Still have questions?
+            </p>
+            <motion.a
+              href="#"
+              className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
+              whileHover={{ x: 5 }}
+            >
+              Contact our team
+              <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
+            </motion.a>
           </motion.div>
         </div>
       </div>
