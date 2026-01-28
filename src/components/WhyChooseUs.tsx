@@ -1,7 +1,7 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Heart, Users, Zap, Handshake, Check } from "lucide-react";
-import heroVisual from "@/assets/hero-visual.jpg";
+import crmDashboard from "@/assets/crm-dashboard.jpg";
 
 const reasons = [
   {
@@ -34,8 +34,19 @@ const features = [
 ];
 
 const WhyChooseUs = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const imageRotate = useTransform(scrollYProgress, [0, 1], [3, -3]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const floatCard1Y = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const floatCard2Y = useTransform(scrollYProgress, [0, 1], [-40, 40]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -67,8 +78,9 @@ const WhyChooseUs = () => {
       
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Content */}
+          {/* Left Column - Content with parallax */}
           <motion.div
+            style={{ y: contentY }}
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -131,7 +143,7 @@ const WhyChooseUs = () => {
             </div>
           </motion.div>
 
-          {/* Right Column - Visual */}
+          {/* Right Column - Visual with parallax */}
           <motion.div
             initial={{ opacity: 0, x: 60, scale: 0.95 }}
             animate={isInView ? { opacity: 1, x: 0, scale: 1 } : {}}
@@ -140,11 +152,12 @@ const WhyChooseUs = () => {
           >
             <motion.div 
               className="aspect-square rounded-3xl overflow-hidden shadow-2xl"
+              style={{ y: imageY, rotate: imageRotate }}
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.4 }}
             >
               <img 
-                src={heroVisual} 
+                src={crmDashboard} 
                 alt="AI-powered CRM visualization" 
                 className="w-full h-full object-cover"
               />
@@ -152,12 +165,13 @@ const WhyChooseUs = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent" />
             </motion.div>
             
-            {/* Floating stat card */}
+            {/* Floating stat card with parallax */}
             <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              style={{ y: floatCard1Y }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
-              whileHover={{ scale: 1.05, y: -5 }}
+              whileHover={{ scale: 1.05 }}
               className="absolute -bottom-6 -left-6 bg-background border border-border rounded-2xl p-6 shadow-2xl"
             >
               <motion.p 
@@ -171,12 +185,13 @@ const WhyChooseUs = () => {
               <p className="text-sm text-muted-foreground">Average launch time</p>
             </motion.div>
 
-            {/* Additional floating element */}
+            {/* Additional floating element with parallax */}
             <motion.div
-              initial={{ opacity: 0, y: -30, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              style={{ y: floatCard2Y }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}
-              whileHover={{ scale: 1.05, y: 5 }}
+              whileHover={{ scale: 1.05 }}
               className="absolute -top-4 -right-4 bg-foreground text-background rounded-2xl px-5 py-3 shadow-2xl"
             >
               <p className="text-2xl font-bold">50%</p>
