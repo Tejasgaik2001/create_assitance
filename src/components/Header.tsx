@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,7 +17,13 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = ["Product", "Solutions", "Pricing", "Resources"];
+  const navItems = [
+    { name: "Product", href: "#" },
+    { name: "Solutions", href: "#" },
+    { name: "How It Works", href: "/how-it-works" },
+    { name: "Pricing", href: "#" },
+    { name: "Resources", href: "#" }
+  ];
 
   return (
     <motion.header
@@ -31,37 +38,51 @@ const Header = () => {
     >
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <motion.a
-          href="#"
+        <motion.div
           className="flex items-center gap-2"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <motion.div 
-            className="w-9 h-9 bg-foreground rounded-xl flex items-center justify-center"
-            whileHover={{ rotate: 5 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            <span className="text-background font-bold text-lg">C</span>
-          </motion.div>
-          <span className="font-semibold text-lg hidden sm:block">Create Assistants</span>
-        </motion.a>
+          <Link to="/" className="flex items-center gap-2">
+            <motion.div 
+              className="w-9 h-9 bg-foreground rounded-xl flex items-center justify-center"
+              whileHover={{ rotate: 5 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <span className="text-background font-bold text-lg">C</span>
+            </motion.div>
+            <span className="font-semibold text-lg hidden sm:block">Create Assistants</span>
+          </Link>
+        </motion.div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item, index) => (
-            <motion.a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+            <motion.div
+              key={item.name}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
               whileHover={{ y: -2 }}
             >
-              {item}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-foreground group-hover:w-full transition-all duration-300" />
-            </motion.a>
+              {item.href.startsWith("/") ? (
+                <Link
+                  to={item.href}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                >
+                  {item.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-foreground group-hover:w-full transition-all duration-300" />
+                </Link>
+              ) : (
+                <a
+                  href={item.href}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                >
+                  {item.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-foreground group-hover:w-full transition-all duration-300" />
+                </a>
+              )}
+            </motion.div>
           ))}
         </nav>
 
@@ -126,17 +147,30 @@ const Header = () => {
           >
             <div className="container mx-auto px-6 py-4 flex flex-col gap-2">
               {navItems.map((item, index) => (
-                <motion.a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-base text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-border/50"
+                <motion.div
+                  key={item.name}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item}
-                </motion.a>
+                  {item.href.startsWith("/") ? (
+                    <Link
+                      to={item.href}
+                      className="text-base text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-border/50 block"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={item.href}
+                      className="text-base text-muted-foreground hover:text-foreground transition-colors py-3 border-b border-border/50 block"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </a>
+                  )}
+                </motion.div>
               ))}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}

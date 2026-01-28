@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef } from "react";
+import heroVideo from "@/assets/hero.mp4";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -218,8 +219,8 @@ const HeroSection = () => {
               transition={{ duration: 0.4 }}
             >
               {/* Video placeholder - Replace src with your video URL */}
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
-                {/* Play button overlay */}
+              {/* <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
+              
                 <motion.div
                   className="w-20 h-20 rounded-full bg-primary flex items-center justify-center cursor-pointer shadow-2xl"
                   whileHover={{ scale: 1.1 }}
@@ -227,7 +228,8 @@ const HeroSection = () => {
                 >
                   <Play className="w-8 h-8 text-primary-foreground ml-1" />
                 </motion.div>
-              </div>
+              </div> */}
+                  <video src={heroVideo} autoPlay loop muted/>
               
               {/* Decorative glow */}
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl blur-xl -z-10" />
