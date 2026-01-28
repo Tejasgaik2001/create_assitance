@@ -1,9 +1,17 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const IntroSection = () => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const textY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const lineScale = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
 
   const words = [
     { text: "Create Assistants", highlight: false },
@@ -17,23 +25,20 @@ const IntroSection = () => {
 
   return (
     <section ref={ref} className="py-24 md:py-32 relative overflow-hidden">
-      {/* Decorative elements */}
+      {/* Decorative elements with parallax */}
       <motion.div
-        className="absolute top-1/2 left-0 w-px h-32 bg-gradient-to-b from-transparent via-border to-transparent"
-        initial={{ scaleY: 0 }}
-        animate={isInView ? { scaleY: 1 } : {}}
-        transition={{ duration: 1, delay: 0.5 }}
+        className="absolute top-1/2 left-0 w-px h-32 bg-gradient-to-b from-transparent via-border to-transparent origin-center"
+        style={{ scaleY: lineScale }}
       />
       <motion.div
-        className="absolute top-1/2 right-0 w-px h-32 bg-gradient-to-b from-transparent via-border to-transparent"
-        initial={{ scaleY: 0 }}
-        animate={isInView ? { scaleY: 1 } : {}}
-        transition={{ duration: 1, delay: 0.5 }}
+        className="absolute top-1/2 right-0 w-px h-32 bg-gradient-to-b from-transparent via-border to-transparent origin-center"
+        style={{ scaleY: lineScale }}
       />
 
       <div className="container mx-auto px-6">
         <motion.div
           className="max-w-4xl mx-auto text-center"
+          style={{ y: textY }}
         >
           <p className="text-2xl md:text-3xl lg:text-4xl font-medium leading-relaxed">
             {words.map((word, index) => (
