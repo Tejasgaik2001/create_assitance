@@ -47,8 +47,8 @@ const Header = () => {
       <Navbar>
         {/* Desktop Navigation */}
         <NavBody>
-          <div className="flex items-center gap-2">
-            <Link to="/" className="flex items-center gap-2">
+          <div className="flex items-center gap-2 relative z-30">
+            <Link to="/" className="flex items-center gap-2 cursor-pointer">
               <motion.img
                 src={logo}
                 alt="Create Assistants Logo"
@@ -60,7 +60,7 @@ const Header = () => {
             </Link>
           </div>
           <NavItems items={navItems} />
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 relative z-30">
             <ThemeToggle />
             <NavbarButton variant="primary" onClick={() => { }}>Book a Consultation</NavbarButton>
           </div>
