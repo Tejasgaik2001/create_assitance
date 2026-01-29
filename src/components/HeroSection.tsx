@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef } from "react";
 import heroVideo from "@/assets/hero.mp4";
+import { CursorSpotlight } from "@/components/CursorSpotlight";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -25,15 +27,18 @@ const HeroSection = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15,
         delay: i * 0.15,
-        ease: "easeOut" as const,
       },
     }),
   };
 
   return (
     <section ref={containerRef} className="min-h-screen relative overflow-hidden pt-20 pb-16">
+      {/* Cursor spotlight effect */}
+      <CursorSpotlight />
       {/* Animated background elements with parallax */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Gradient orbs with parallax */}
@@ -55,7 +60,7 @@ const HeroSection = () => {
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
-        
+
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
       </div>
@@ -86,7 +91,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-8rem)]">
           {/* Left Column - Content */}
-          <motion.div 
+          <motion.div
             className="text-left"
             style={{ y: contentY, opacity }}
           >
@@ -94,7 +99,7 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/80 backdrop-blur-sm border border-border mb-8"
             >
               <Sparkles className="w-4 h-4 text-primary" />
@@ -145,10 +150,10 @@ const HeroSection = () => {
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ type: "spring", stiffness: 80, damping: 15, delay: 0.5 }}
               className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl"
             >
-              We design, build and manage an integrated CRM and AI workforce that 
+              We design, build and manage an integrated CRM and AI workforce that
               captures leads, engages customers and scales your business.
             </motion.p>
 
@@ -156,10 +161,10 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
+              transition={{ type: "spring", stiffness: 120, damping: 18, delay: 0.7 }}
               className="flex flex-col sm:flex-row items-start gap-4"
             >
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+              <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="xl" className="group shadow-xl shadow-primary/20" asChild>
                   <a href="/book-a-call">
                     Book a Free Consultation
@@ -172,12 +177,12 @@ const HeroSection = () => {
                     </motion.span>
                   </a>
                 </Button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+              </MagneticWrapper>
+              <MagneticWrapper strength={0.2}>
                 <Button variant="outline" size="xl">
                   Learn More
                 </Button>
-              </motion.div>
+              </MagneticWrapper>
             </motion.div>
 
             {/* Trust indicators */}
@@ -196,7 +201,7 @@ const HeroSection = () => {
                     key={company}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 1.1 + i * 0.1 }}
+                    transition={{ type: "spring" as const, stiffness: 150, damping: 18, delay: 1.1 + i * 0.1 }}
                     whileHover={{ scale: 1.05 }}
                     className="text-lg font-semibold text-muted-foreground/40 hover:text-muted-foreground/60 transition-colors cursor-default"
                   >
@@ -211,14 +216,14 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, x: 60, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
             style={{ y: videoY }}
             className="relative"
           >
-            <motion.div 
+            <motion.div
               className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border border-border bg-muted/50"
               whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               {/* Video placeholder - Replace src with your video URL */}
               {/* <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
@@ -231,8 +236,8 @@ const HeroSection = () => {
                   <Play className="w-8 h-8 text-primary-foreground ml-1" />
                 </motion.div>
               </div> */}
-                  <video src={heroVideo} autoPlay loop muted/>
-              
+              <video src={heroVideo} autoPlay loop muted />
+
               {/* Decorative glow */}
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl blur-xl -z-10" />
             </motion.div>
@@ -241,7 +246,7 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              transition={{ type: "spring" as const, stiffness: 120, damping: 18, delay: 0.8 }}
               whileHover={{ scale: 1.05, y: -5 }}
               className="absolute -bottom-6 -left-6 bg-background border border-border rounded-2xl p-5 shadow-2xl"
             >
@@ -275,7 +280,7 @@ const HeroSection = () => {
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex items-start justify-center p-2"
         >
-          <motion.div 
+          <motion.div
             className="w-1 h-2 bg-muted-foreground/50 rounded-full"
             animate={{ opacity: [0.5, 1, 0.5] }}
             transition={{ duration: 1.5, repeat: Infinity }}

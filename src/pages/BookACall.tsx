@@ -5,6 +5,8 @@ import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { CursorSpotlight } from "@/components/CursorSpotlight";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const BookACall = () => {
   const expectations = [
@@ -34,6 +36,8 @@ const BookACall = () => {
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       <main>
+        {/* Cursor spotlight effect */}
+        <CursorSpotlight />
         <section className="relative overflow-hidden pt-24 pb-16">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-1/4 -left-24 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
@@ -75,6 +79,7 @@ const BookACall = () => {
                   <motion.div
                     key={item.title}
                     whileHover={{ scale: 1.03, y: -4 }}
+                    transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
                     className="glass-card rounded-xl p-6 border border-border/40 shadow-lg"
                   >
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 flex items-center justify-center mb-4">
@@ -138,7 +143,7 @@ const BookACall = () => {
                 Join hundreds of businesses that have already streamlined their operations with Create Assistants. Your growth journey starts with a simple conversation.
               </p>
 
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20">
                   Schedule Your Call Now
                   <motion.span
@@ -149,7 +154,7 @@ const BookACall = () => {
                     <ArrowRight className="w-4 h-4" />
                   </motion.span>
                 </Button>
-              </motion.div>
+              </MagneticWrapper>
             </AnimatedSection>
           </div>
         </section>

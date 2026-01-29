@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const WhatYouGet = () => {
   const pillars = [
@@ -77,7 +78,7 @@ const WhatYouGet = () => {
                 scale with confidence.
               </p>
 
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20">
                   Explore The 3 Pillars
                   <motion.span
@@ -88,7 +89,7 @@ const WhatYouGet = () => {
                     <ArrowRight className="w-4 h-4" />
                   </motion.span>
                 </Button>
-              </motion.div>
+              </MagneticWrapper>
             </AnimatedSection>
           </div>
         </section>
@@ -175,7 +176,7 @@ const WhatYouGet = () => {
                   Next up: a deeper look at our AI Employees.
                 </p>
 
-                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+                <MagneticWrapper strength={0.25}>
                   <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
                     <a href="#">
                       Explore our AI Employees
@@ -188,7 +189,7 @@ const WhatYouGet = () => {
                       </motion.span>
                     </a>
                   </Button>
-                </motion.div>
+                </MagneticWrapper>
               </div>
             </AnimatedSection>
           </div>
