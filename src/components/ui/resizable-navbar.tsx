@@ -128,17 +128,12 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         <a
           onMouseEnter={() => setHovered(idx)}
           onClick={onItemClick}
-          className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
+          className="group relative px-4 py-2 text-neutral-600 dark:text-neutral-300 transition-colors duration-200 hover:text-neutral-900 dark:hover:text-white"
           key={`link-${idx}`}
           href={item.link}
         >
-          {hovered === idx && (
-            <motion.div
-              layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
-            />
-          )}
           <span className="relative z-20">{item.name}</span>
+          <span className="absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-violet-600 transition-transform duration-300 ease-out group-hover:scale-x-100 dark:bg-violet-400" />
         </a>
       ))}
     </motion.div>

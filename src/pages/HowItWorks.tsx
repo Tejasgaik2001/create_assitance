@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, MessageSquare, Calendar, CreditCard, Heart, CheckCircle, Zap } from "lucide-react";
+import { ArrowRight, Users, MessageSquare, Calendar, CreditCard, Heart } from "lucide-react";
 import { FiZap, FiShield, FiTrendingUp, FiCheckCircle } from "react-icons/fi";
 import AnimatedSection from "@/components/AnimatedSection";
-import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Timeline } from "@/components/ui/timeline";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
+import { RollingTextList } from "@/components/ui/RollingTextList";
+import { VerticalTimeline } from "@/components/ui/VerticalTimeline";
 
 const HowItWorks = () => {
   const steps = [
@@ -80,71 +80,47 @@ const HowItWorks = () => {
     { icon: FiCheckCircle, title: "Hands-Off Growth", description: "Fully automated system" }
   ];
 
-  const timelineData = steps.map((step) => {
-    const Icon = step.icon;
-    return {
-      title: (
-        <motion.div
-          initial={{ opacity: 0, x: -20, scale: 0.9 }}
-          whileInView={{ opacity: 1, x: 0, scale: 1 }}
-          viewport={{ once: false, margin: "-50px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-2xl font-bold text-accent"
-        >
-          Step {step.number}
-        </motion.div>
-      ),
-      content: (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
-          className="glass-card rounded-2xl p-6 md:p-8 shadow-xl border border-accent/40 bg-muted/30"
-        >
-          <div className="flex items-start gap-4">
-            <div className="shrink-0">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 flex items-center justify-center shadow-md">
-                <Icon className="w-6 h-6 text-foreground" />
-              </div>
-            </div>
-            <div className="min-w-0">
-              <h3 className="text-xl font-bold">{step.title}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{step.subtitle}</p>
-              <p className="text-sm md:text-base text-muted-foreground leading-relaxed mt-4">
-                {step.description}
-              </p>
-              <ul className="mt-5 space-y-2">
-                {step.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <CheckCircle className="mt-0.5 w-4 h-4 text-green-500 shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </motion.div>
-      ),
-    };
-  });
-
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       <main>
         {/* Hero Section */}
         <section className="relative overflow-hidden pt-24 pb-16">
-          {/* Background elements */}
+          {/* Background elements with animations */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/4 -left-24 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 -right-24 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.01)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:60px_60px]" />
+            {/* Animated gradient orbs */}
+            <motion.div
+              className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+              animate={{
+                x: [0, 50, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
+              animate={{
+                x: [0, -50, 0],
+                scale: [1.1, 1, 1.1],
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Extra floating orb */}
+            <motion.div
+              className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 backdrop-blur-sm border border-gray-200/50 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 mb-6">
                 <FiZap className="w-3 h-3 text-accent" />
                 <span className="text-xs font-medium">5-Step Growth Engine</span>
               </div>
@@ -164,8 +140,41 @@ const HowItWorks = () => {
         </section>
 
         {/* Steps Timeline Section */}
-        <section className="py-16 relative">
-          <div className="container mx-auto px-4">
+        <section className="py-16 relative overflow-hidden">
+          {/* Background effects */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Left floating orb */}
+            <motion.div
+              className="absolute top-20 -left-20 w-80 h-80 bg-accent/15 rounded-full blur-3xl"
+              animate={{
+                y: [0, 40, 0],
+                scale: [1, 1.15, 1],
+              }}
+              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Right floating orb */}
+            <motion.div
+              className="absolute bottom-40 -right-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl"
+              animate={{
+                y: [0, -40, 0],
+                scale: [1.1, 1, 1.1],
+              }}
+              transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Center accent */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-12">
               <h2 className="section-headline mb-6">
                 <span className="text-gradient">Your 5-Step Process</span>
@@ -175,15 +184,43 @@ const HowItWorks = () => {
               </p>
             </AnimatedSection>
 
-            <div className="relative w-full overflow-clip">
-              <Timeline data={timelineData} />
-            </div>
+            <VerticalTimeline steps={steps} />
           </div>
         </section>
 
         {/* Why It Works Section */}
-        <section className="py-16 relative bg-muted/20">
-          <div className="container mx-auto px-4">
+        <section className="py-16 relative bg-muted/20 overflow-hidden">
+          {/* Background effects */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Central pulsing orb */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.2, 1],
+              }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Top left orb */}
+            <motion.div
+              className="absolute -top-20 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
+              animate={{
+                x: [0, 30, 0],
+                y: [0, 20, 0],
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Bottom right orb */}
+            <motion.div
+              className="absolute -bottom-10 right-1/4 w-72 h-72 bg-accent/8 rounded-full blur-3xl"
+              animate={{
+                x: [0, -20, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-12">
               <h2 className="section-headline mb-6">
                 Why This Process <span className="text-gradient">Works</span>
@@ -194,34 +231,45 @@ const HowItWorks = () => {
               </p>
             </AnimatedSection>
 
-            <StaggeredChildren className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {benefits.map((benefit, index) => {
-                const Icon = benefit.icon;
-                return (
-                  <a
-                    key={index}
-                    href="#"
-                    className="w-full p-4 rounded border-[1px] border-slate-300 relative overflow-hidden group bg-white dark:bg-slate-950 dark:border-slate-800"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
-                    <Icon className="absolute z-10 -top-12 -right-12 text-9xl text-slate-100 group-hover:text-violet-400 group-hover:rotate-12 transition-transform duration-300 dark:text-slate-900" />
-                    <Icon className="mb-2 text-2xl text-violet-600 group-hover:text-white transition-colors relative z-10 duration-300" />
-                    <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-10 duration-300 dark:text-slate-100">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-slate-400 group-hover:text-violet-200 relative z-10 duration-300 text-sm">
-                      {benefit.description}
-                    </p>
-                  </a>
-                );
-              })}
-            </StaggeredChildren>
+            <RollingTextList items={benefits} className="w-full" />
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 relative">
-          <div className="container mx-auto px-4">
+        <section className="py-16 relative overflow-hidden">
+          {/* Background effects */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Left glow */}
+            <motion.div
+              className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
+              animate={{
+                x: [0, 40, 0],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Right glow */}
+            <motion.div
+              className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl"
+              animate={{
+                x: [0, -40, 0],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Center subtle orb */}
+            <motion.div
+              className="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl"
+              animate={{
+                y: [0, 20, 0],
+              }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center">
               <div className="max-w-3xl mx-auto">
                 <h2 className="section-headline mb-6">
