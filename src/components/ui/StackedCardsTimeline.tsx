@@ -29,8 +29,8 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
             style={{ height: `${(steps.length + 1) * 100}vh` }}
         >
             {/* Sticky container that holds all cards */}
-            <div className="sticky top-0 h-screen flex items-end justify-center overflow-hidden pb-20">
-                <div className="w-full max-w-4xl mx-auto px-4 relative h-[600px]">
+            <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden pb-10 pt-0">
+                <div className="w-full max-w-4xl mx-auto px-4 relative h-[500px]">
                     {steps.map((step, index) => {
                         const Icon = step.icon;
 
@@ -46,7 +46,7 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                         const exitStart = cardEnd; // Start exiting
                         const exitEnd = cardEnd + 0.1; // Fully exited
 
-                        // Y position: Smoother transition curves
+                        // Y position: Smoother transition curves with reduced travel distance
                         const y = useTransform(
                             scrollYProgress,
                             [
@@ -56,29 +56,29 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                 exitEnd,
                             ],
                             [
-                                300, // Start from bottom
+                                150, // Start from bottom
                                 0,   // Center
                                 0,   // Stay centered
-                                -400, // Exit to top
+                                -200, // Exit to top
                             ]
                         );
 
-                        // Opacity: Strict visibility - 0 when stacked, 1 when active
+                        // Opacity: Aggressive hiding of non-active cards
                         const opacity = useTransform(
                             scrollYProgress,
                             [
                                 enterStart,
-                                enterEnd - (cardDuration * 0.2), // Fade in strictly before settling
+                                enterEnd - (cardDuration * 0.1), // Fade in fast
                                 enterEnd,
                                 exitStart,
-                                exitEnd,
+                                exitStart + (cardDuration * 0.1), // Fade out immediately when next card starts
                             ],
                             [
-                                0,  // Completely invisible in stack
-                                1,  // Fully visible before settlement
-                                1,  // Stay visible
-                                1,  // Stay visible
-                                0,  // Fade out
+                                0,   // Invisible in stack
+                                1,   // Fully visible before settlement
+                                1,   // Stay visible
+                                1,   // Stay visible
+                                0,   // Fade out immediately to clear way for next card
                             ]
                         );
 
@@ -92,14 +92,14 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                 exitEnd,
                             ],
                             [
-                                0.85, // Start smaller
+                                0.9,  // Start smaller
                                 1,    // Full size
                                 1,    // Maintain size
                                 0.95, // Exit scale
                             ]
                         );
 
-                        // Z-index: Ensure strict layering
+                        // Z-index: Ensure strict layering where active is always top
                         const zIndex = steps.length - index;
 
                         return (
@@ -128,29 +128,117 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                         </div>
                                     </div>
 
-                                    {/* Content */}
-                                    <div>
-                                        <h3 className="text-3xl md:text-4xl font-black mb-2">{step.title}</h3>
-                                        <p className="text-lg text-accent font-medium mb-4">{step.subtitle}</p>
-                                        <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">
-                                            {step.description}
-                                        </p>
+                                    {/* Content with staggered animations */}
+                                    <motion.div
+                                        initial="hidden"
+                                        animate="visible"
+                                        variants={{
+                                            hidden: { opacity: 0 },
+                                            visible: {
+                                                opacity: 1,
+                                                transition: {
+                                                    staggerChildren: 0.1,
+                                                    delayChildren: 0.2,
+                                                }
+                                            }
+                                        }}
+                                    >
+                                        <motion.h3
+                                            className="text-3xl md:text-4xl font-black mb-2"
+                                            variants={{
+                                                hidden: { opacity: 0, y: 20 },
+                                                visible: {
+                                                    opacity: 1,
+                                                    y: 0,
+                                                    transition: {
+                                                        type: "spring",
+                                                        stiffness: 100,
+                                                        damping: 15
+                                                    }
+                                                }
+                                            }}
+                                        >
+                                            {step.title}
+                                        </motion.h3>
 
-                                        {/* Features List */}
-                                        <ul className="space-y-3">
-                                            {step.features.map((feature, idx) => (
-                                                <li
-                                                    key={idx}
-                                                    className="flex items-start gap-3"
-                                                >
-                                                    <div className="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
-                                                        <div className="w-2 h-2 rounded-full bg-green-500" />
-                                                    </div>
-                                                    <span className="text-sm md:text-base text-muted-foreground">{feature}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                        {step.subtitle && (
+                                            <motion.p
+                                                className="text-lg text-accent font-medium mb-4"
+                                                variants={{
+                                                    hidden: { opacity: 0, y: 20 },
+                                                    visible: {
+                                                        opacity: 1,
+                                                        y: 0,
+                                                        transition: {
+                                                            type: "spring",
+                                                            stiffness: 100,
+                                                            damping: 15
+                                                        }
+                                                    }
+                                                }}
+                                            >
+                                                {step.subtitle}
+                                            </motion.p>
+                                        )}
+
+                                        <motion.p
+                                            className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6"
+                                            variants={{
+                                                hidden: { opacity: 0, y: 20 },
+                                                visible: {
+                                                    opacity: 1,
+                                                    y: 0,
+                                                    transition: {
+                                                        type: "spring",
+                                                        stiffness: 100,
+                                                        damping: 15
+                                                    }
+                                                }
+                                            }}
+                                        >
+                                            {step.description}
+                                        </motion.p>
+
+                                        {/* Features List with stagger */}
+                                        {step.features.length > 0 && (
+                                            <motion.ul
+                                                className="space-y-3"
+                                                variants={{
+                                                    hidden: { opacity: 0 },
+                                                    visible: {
+                                                        opacity: 1,
+                                                        transition: {
+                                                            staggerChildren: 0.08
+                                                        }
+                                                    }
+                                                }}
+                                            >
+                                                {step.features.map((feature, idx) => (
+                                                    <motion.li
+                                                        key={idx}
+                                                        className="flex items-start gap-3"
+                                                        variants={{
+                                                            hidden: { opacity: 0, x: -10 },
+                                                            visible: {
+                                                                opacity: 1,
+                                                                x: 0,
+                                                                transition: {
+                                                                    type: "spring",
+                                                                    stiffness: 120,
+                                                                    damping: 15
+                                                                }
+                                                            }
+                                                        }}
+                                                    >
+                                                        <div className="mt-1 w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                                                            <div className="w-2 h-2 rounded-full bg-green-500" />
+                                                        </div>
+                                                        <span className="text-sm md:text-base text-muted-foreground">{feature}</span>
+                                                    </motion.li>
+                                                ))}
+                                            </motion.ul>
+                                        )}
+                                    </motion.div>
 
                                     {/* Progress Indicator */}
                                     <div className="mt-8 flex items-center gap-2">

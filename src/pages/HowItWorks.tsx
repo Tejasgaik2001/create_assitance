@@ -1,14 +1,13 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, MessageSquare, Calendar, CreditCard, Heart, CheckCircle, Zap } from "lucide-react";
+import { ArrowRight, Users, MessageSquare, Calendar, CreditCard, Heart } from "lucide-react";
 import { FiZap, FiShield, FiTrendingUp, FiCheckCircle } from "react-icons/fi";
 import AnimatedSection from "@/components/AnimatedSection";
-import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { RollingTextList } from "@/components/ui/RollingTextList";
-import { StackedCardsTimeline } from "@/components/ui/StackedCardsTimeline";
+import { VerticalTimeline } from "@/components/ui/VerticalTimeline";
 
 const HowItWorks = () => {
   const steps = [
@@ -81,24 +80,47 @@ const HowItWorks = () => {
     { icon: FiCheckCircle, title: "Hands-Off Growth", description: "Fully automated system" }
   ];
 
-
-
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       <main>
         {/* Hero Section */}
         <section className="relative overflow-hidden pt-24 pb-16">
-          {/* Background elements */}
+          {/* Background elements with animations */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/4 -left-24 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 -right-24 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.01)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:60px_60px]" />
+            {/* Animated gradient orbs */}
+            <motion.div
+              className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+              animate={{
+                x: [0, 50, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
+              animate={{
+                x: [0, -50, 0],
+                scale: [1.1, 1, 1.1],
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Extra floating orb */}
+            <motion.div
+              className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 backdrop-blur-sm border border-gray-200/50 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 mb-6">
                 <FiZap className="w-3 h-3 text-accent" />
                 <span className="text-xs font-medium">5-Step Growth Engine</span>
               </div>
@@ -118,8 +140,41 @@ const HowItWorks = () => {
         </section>
 
         {/* Steps Timeline Section */}
-        <section className="py-16 relative">
-          <div className="container mx-auto px-4">
+        <section className="py-16 relative overflow-hidden">
+          {/* Background effects */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Left floating orb */}
+            <motion.div
+              className="absolute top-20 -left-20 w-80 h-80 bg-accent/15 rounded-full blur-3xl"
+              animate={{
+                y: [0, 40, 0],
+                scale: [1, 1.15, 1],
+              }}
+              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Right floating orb */}
+            <motion.div
+              className="absolute bottom-40 -right-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl"
+              animate={{
+                y: [0, -40, 0],
+                scale: [1.1, 1, 1.1],
+              }}
+              transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Center accent */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-12">
               <h2 className="section-headline mb-6">
                 <span className="text-gradient">Your 5-Step Process</span>
@@ -129,13 +184,43 @@ const HowItWorks = () => {
               </p>
             </AnimatedSection>
 
-            <StackedCardsTimeline steps={steps} />
+            <VerticalTimeline steps={steps} />
           </div>
         </section>
 
         {/* Why It Works Section */}
-        <section className="py-16 relative bg-muted/20">
-          <div className="container mx-auto px-4">
+        <section className="py-16 relative bg-muted/20 overflow-hidden">
+          {/* Background effects */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Central pulsing orb */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.2, 1],
+              }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Top left orb */}
+            <motion.div
+              className="absolute -top-20 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
+              animate={{
+                x: [0, 30, 0],
+                y: [0, 20, 0],
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Bottom right orb */}
+            <motion.div
+              className="absolute -bottom-10 right-1/4 w-72 h-72 bg-accent/8 rounded-full blur-3xl"
+              animate={{
+                x: [0, -20, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-12">
               <h2 className="section-headline mb-6">
                 Why This Process <span className="text-gradient">Works</span>
@@ -151,8 +236,40 @@ const HowItWorks = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 relative">
-          <div className="container mx-auto px-4">
+        <section className="py-16 relative overflow-hidden">
+          {/* Background effects */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Left glow */}
+            <motion.div
+              className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
+              animate={{
+                x: [0, 40, 0],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Right glow */}
+            <motion.div
+              className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl"
+              animate={{
+                x: [0, -40, 0],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Center subtle orb */}
+            <motion.div
+              className="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl"
+              animate={{
+                y: [0, 20, 0],
+              }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            {/* Grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center">
               <div className="max-w-3xl mx-auto">
                 <h2 className="section-headline mb-6">
