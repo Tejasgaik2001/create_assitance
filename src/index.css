@@ -32,8 +32,8 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
     --ring: 50 100% 76%;
 
     --radius: 0.75rem;
@@ -132,7 +132,7 @@
   }
 
   .glass-card {
-    @apply bg-card/80 backdrop-blur-xl border border-border/50 shadow-lg;
+    @apply bg-card/90 backdrop-blur-xl border border-border/40 shadow-lg;
   }
 
   .hover-lift {
@@ -155,5 +155,18 @@
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
+  }
+
+  /* Light mode enhancements */
+  .light .glass-card {
+    @apply bg-white/95 border-gray-200/60 shadow-md;
+  }
+
+  .light .badge {
+    @apply bg-gray-100/80 text-gray-700 border-gray-200/60;
+  }
+
+  .light .chip {
+    @apply bg-gray-50/90 text-gray-600 border-gray-200/50;
   }
 }

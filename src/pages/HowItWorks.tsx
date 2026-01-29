@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, MessageSquare, Calendar, CreditCard, Heart, CheckCircle, Zap, Shield, TrendingUp } from "lucide-react";
+import { ArrowRight, Users, MessageSquare, Calendar, CreditCard, Heart, CheckCircle, Zap } from "lucide-react";
+import { FiZap, FiShield, FiTrendingUp, FiCheckCircle } from "react-icons/fi";
 import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
@@ -72,22 +73,38 @@ const HowItWorks = () => {
   ];
 
   const benefits = [
-    { icon: Zap, title: "Lightning Fast Responses", description: "AI responds instantly, 24/7" },
-    { icon: Shield, title: "Never Lose a Lead", description: "Automated follow-ups ensure no gaps" },
-    { icon: TrendingUp, title: "Increase Conversion", description: "Streamlined process boosts sales" },
-    { icon: CheckCircle, title: "Hands-Off Growth", description: "Fully automated system" }
+    { icon: FiZap, title: "Lightning Fast Responses", description: "AI responds instantly, 24/7" },
+    { icon: FiShield, title: "Never Lose a Lead", description: "Automated follow-ups ensure no gaps" },
+    { icon: FiTrendingUp, title: "Increase Conversion", description: "Streamlined process boosts sales" },
+    { icon: FiCheckCircle, title: "Hands-Off Growth", description: "Fully automated system" }
   ];
 
   const timelineData = steps.map((step) => {
     const Icon = step.icon;
     return {
-      title: `Step ${step.number}`,
+      title: (
+        <motion.div
+          initial={{ opacity: 0, x: -20, scale: 0.9 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: false, margin: "-50px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-2xl font-bold text-accent"
+        >
+          Step {step.number}
+        </motion.div>
+      ),
       content: (
-        <div className="glass-card rounded-2xl p-6 md:p-8 shadow-xl border border-border/40">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+          className="glass-card rounded-2xl p-6 md:p-8 shadow-xl border border-accent/40 bg-muted/30"
+        >
           <div className="flex items-start gap-4">
             <div className="shrink-0">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 flex items-center justify-center shadow-md">
-                <Icon className="w-6 h-6 text-primary" />
+                <Icon className="w-6 h-6 text-foreground" />
               </div>
             </div>
             <div className="min-w-0">
@@ -99,14 +116,14 @@ const HowItWorks = () => {
               <ul className="mt-5 space-y-2">
                 {step.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <CheckCircle className="mt-0.5 w-4 h-4 text-primary shrink-0" />
+                    <CheckCircle className="mt-0.5 w-4 h-4 text-green-500 shrink-0" />
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-        </div>
+        </motion.div>
       ),
     };
   });
@@ -126,8 +143,8 @@ const HowItWorks = () => {
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/60 backdrop-blur-sm border border-border/30 mb-6">
-                <Zap className="w-3 h-3 text-primary" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 backdrop-blur-sm border border-gray-200/50 mb-6">
+                <FiZap className="w-3 h-3 text-accent" />
                 <span className="text-xs font-medium">5-Step Growth Engine</span>
               </div>
 
@@ -163,77 +180,79 @@ const HowItWorks = () => {
           </div>
         </section>
 
-      {/* Why It Works Section */}
-      <section className="py-16 relative bg-muted/20">
-        <div className="container mx-auto px-4">
-          <AnimatedSection direction="up" className="text-center mb-12">
-            <h2 className="section-headline mb-6">
-              Why This Process <span className="text-gradient">Works</span>
-            </h2>
-            <p className="body-large max-w-3xl mx-auto">
-              By capturing every lead and automating engagement, Create Assistants eliminates manual tasks, 
-              speeds up responses and keeps prospects moving forward.
-            </p>
-          </AnimatedSection>
-
-          <StaggeredChildren className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.03, y: -3 }}
-                  className="glass-card rounded-xl p-4 text-center group cursor-pointer border border-border/30"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
-                    className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r from-primary/20 to-accent/20 mb-3"
-                  >
-                    <Icon className="w-6 h-6 text-primary" />
-                  </motion.div>
-                  <h3 className="text-base font-bold mb-2">{benefit.title}</h3>
-                  <p className="text-xs text-muted-foreground">{benefit.description}</p>
-                </motion.div>
-              );
-            })}
-          </StaggeredChildren>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 relative">
-        <div className="container mx-auto px-4">
-          <AnimatedSection direction="up" className="text-center">
-            <div className="max-w-3xl mx-auto">
+        {/* Why It Works Section */}
+        <section className="py-16 relative bg-muted/20">
+          <div className="container mx-auto px-4">
+            <AnimatedSection direction="up" className="text-center mb-12">
               <h2 className="section-headline mb-6">
-                Ready to See This System <span className="text-gradient">In Action?</span>
+                Why This Process <span className="text-gradient">Works</span>
               </h2>
-              <p className="body-large mb-10">
-                Book a free consultation and we'll walk you through how Create Assistants can 
-                capture more leads, close more sales and free up your time.
+              <p className="body-large max-w-3xl mx-auto">
+                By capturing every lead and automating engagement, Create Assistants eliminates manual tasks,
+                speeds up responses and keeps prospects moving forward.
               </p>
-              
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-block"
-              >
-                <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20">
-                  Book a Free Consultation
-                  <motion.span
-                    className="inline-block"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
+            </AnimatedSection>
+
+            <StaggeredChildren className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {benefits.map((benefit, index) => {
+                const Icon = benefit.icon;
+                return (
+                  <a
+                    key={index}
+                    href="#"
+                    className="w-full p-4 rounded border-[1px] border-slate-300 relative overflow-hidden group bg-white dark:bg-slate-950 dark:border-slate-800"
                   >
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.span>
-                </Button>
-              </motion.div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+                    <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
+                    <Icon className="absolute z-10 -top-12 -right-12 text-9xl text-slate-100 group-hover:text-violet-400 group-hover:rotate-12 transition-transform duration-300 dark:text-slate-900" />
+                    <Icon className="mb-2 text-2xl text-violet-600 group-hover:text-white transition-colors relative z-10 duration-300" />
+                    <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-10 duration-300 dark:text-slate-100">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-slate-400 group-hover:text-violet-200 relative z-10 duration-300 text-sm">
+                      {benefit.description}
+                    </p>
+                  </a>
+                );
+              })}
+            </StaggeredChildren>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 relative">
+          <div className="container mx-auto px-4">
+            <AnimatedSection direction="up" className="text-center">
+              <div className="max-w-3xl mx-auto">
+                <h2 className="section-headline mb-6">
+                  Ready to See This System <span className="text-gradient">In Action?</span>
+                </h2>
+                <p className="body-large mb-10">
+                  Book a free consultation and we'll walk you through how Create Assistants can
+                  capture more leads, close more sales and free up your time.
+                </p>
+
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-block"
+                >
+                  <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
+                    <a href="/book-a-call">
+                      Book a Free Consultation
+                      <motion.span
+                        className="inline-block"
+                        animate={{ x: [0, 4, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                      </motion.span>
+                    </a>
+                  </Button>
+                </motion.div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>

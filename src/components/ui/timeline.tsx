@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
 export type TimelineItem = {
   title: React.ReactNode;
@@ -40,25 +40,69 @@ export function Timeline({ data }: { data: TimelineItem[] }) {
 }
 
 function TimelineRow({ item, index }: { item: TimelineItem; index: number }) {
+  const rowRef = React.useRef<HTMLDivElement>(null);
+  const isInView = useInView(rowRef, {
+    margin: "-40% 0px -40% 0px",
+    once: false
+  });
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, delay: index * 0.05, ease: "easeOut" }}
+      ref={rowRef}
+      initial={{ opacity: 0.4, y: 24 }}
+      animate={{
+        opacity: isInView ? 1 : 0.4,
+        y: isInView ? 0 : 10,
+        scale: isInView ? 1 : 0.98
+      }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="relative"
     >
       <div className="grid gap-6 md:grid-cols-[10rem_1fr] md:gap-10">
         <div className="relative pl-10 md:pl-0">
-          <div className="text-sm font-semibold text-foreground md:pt-0.5">
+          <motion.div
+            className="text-sm font-semibold text-foreground md:pt-0.5"
+            animate={{
+              scale: isInView ? 1.05 : 1,
+              color: isInView ? "var(--primary)" : "var(--foreground)"
+            }}
+            transition={{ duration: 0.3 }}
+          >
             {item.title}
-          </div>
+          </motion.div>
         </div>
 
         <div className="relative">
-          <div className="absolute left-4 top-2 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-primary bg-background shadow-sm md:hidden" />
+          <motion.div
+            className="absolute left-4 top-2 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-primary bg-background shadow-sm md:hidden"
+            animate={{
+              scale: isInView ? 1.3 : 1,
+              backgroundColor: isInView ? "var(--primary)" : "var(--background)"
+            }}
+            transition={{ duration: 0.3 }}
+          />
           <div className="absolute left-4 top-2 h-px w-6 bg-gradient-to-r from-primary to-accent md:hidden" />
-          <div className="pl-10 md:pl-0">{item.content}</div>
+          <motion.div
+            className="pl-10 md:pl-0"
+            animate={{
+              filter: isInView ? "none" : "grayscale(30%)"
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              animate={{
+                boxShadow: isInView
+                  ? "0 0 30px rgba(var(--primary-rgb, 99, 102, 241), 0.15), 0 4px 20px rgba(0,0,0,0.1)"
+                  : "0 1px 3px rgba(0,0,0,0.05)",
+                borderColor: isInView ? "var(--primary)" : "var(--border)"
+              }}
+              transition={{ duration: 0.4 }}
+              className="rounded-2xl overflow-hidden"
+              style={{ borderWidth: "1px", borderStyle: "solid" }}
+            >
+              {item.content}
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </motion.div>

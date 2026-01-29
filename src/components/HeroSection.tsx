@@ -160,15 +160,17 @@ const HeroSection = () => {
               className="flex flex-col sm:flex-row items-start gap-4"
             >
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                <Button variant="hero" size="xl" className="group shadow-xl shadow-primary/20">
-                  Book a Free Consultation
-                  <motion.span
-                    className="inline-block"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="w-5 h-5" />
-                  </motion.span>
+                <Button variant="hero" size="xl" className="group shadow-xl shadow-primary/20" asChild>
+                  <a href="/book-a-call">
+                    Book a Free Consultation
+                    <motion.span
+                      className="inline-block"
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.span>
+                  </a>
                 </Button>
               </motion.div>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>

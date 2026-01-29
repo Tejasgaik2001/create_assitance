@@ -1,37 +1,7 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Heart, Users, Zap, Handshake, Check } from "lucide-react";
+import { FiBriefcase, FiHeart, FiUsers, FiZap } from "react-icons/fi";
 import crmDashboard from "@/assets/crm-dashboard.jpg";
-
-const reasons = [
-  {
-    icon: Heart,
-    title: "Family-Owned & USA-Based",
-    description: "We're a family-owned agency in Iowa, committed to integrity and innovation.",
-  },
-  {
-    icon: Users,
-    title: "Real Humans + AI",
-    description: "Our AI employees work alongside our human experts for seamless 24/7 coverage.",
-  },
-  {
-    icon: Zap,
-    title: "Quick Launch",
-    description: "Go live in four weeks or less with a proven onboarding process.",
-  },
-  {
-    icon: Handshake,
-    title: "Ongoing Partnership",
-    description: "We become your systems department, providing continuous improvements and support.",
-  },
-];
-
-const features = [
-  "24/7 AI-powered support",
-  "Custom CRM integration",
-  "Lead qualification automation",
-  "Real-time analytics dashboard",
-];
 
 const WhyChooseUs = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -75,7 +45,7 @@ const WhyChooseUs = () => {
     <section ref={ref} id="solutions" className="py-24 md:py-32 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-muted/50 to-transparent pointer-events-none" />
-      
+
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Content with parallax */}
@@ -91,55 +61,42 @@ const WhyChooseUs = () => {
             >
               Why Us
             </motion.span>
-            
+
             <motion.h2 variants={itemVariants} className="section-headline mb-6">
               Why Choose
               <span className="text-primary block">Create Assistants</span>
             </motion.h2>
-            
+
             <motion.p variants={itemVariants} className="body-large mb-10">
-              We're not just another software vendor. We're your dedicated growth partner, 
+              We're not just another software vendor. We're your dedicated growth partner,
               combining cutting-edge AI with genuine human expertise.
             </motion.p>
 
-            {/* Features list */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-3 mb-10">
-              {features.map((feature, index) => (
-                <motion.span
-                  key={feature}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted text-sm"
-                >
-                  <Check className="w-3.5 h-3.5 text-primary" />
-                  {feature}
-                </motion.span>
-              ))}
-            </motion.div>
-
-            <div className="grid sm:grid-cols-2 gap-6">
-              {reasons.map((reason, index) => (
-                <motion.div
-                  key={reason.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  className="flex gap-4 group"
-                  whileHover={{ x: 5 }}
-                >
-                  <motion.div 
-                    className="w-11 h-11 rounded-xl bg-muted flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
-                    whileHover={{ rotate: 5, scale: 1.05 }}
-                  >
-                    <reason.icon className="w-5 h-5" />
-                  </motion.div>
-                  <div>
-                    <h3 className="font-semibold mb-1">{reason.title}</h3>
-                    <p className="text-sm text-muted-foreground">{reason.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
+              <Card
+                title="Family-Owned"
+                subtitle="Family-owned agency in Iowa, committed to integrity."
+                href="#"
+                Icon={FiHeart}
+              />
+              <Card
+                title="Real Humans + AI"
+                subtitle="AI employees work alongside human experts."
+                href="#"
+                Icon={FiUsers}
+              />
+              <Card
+                title="Quick Launch"
+                subtitle="Go live in four weeks or less."
+                href="#"
+                Icon={FiZap}
+              />
+              <Card
+                title="Ongoing Partnership"
+                subtitle="We become your systems department."
+                href="#"
+                Icon={FiBriefcase}
+              />
             </div>
           </motion.div>
 
@@ -150,21 +107,21 @@ const WhyChooseUs = () => {
             transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="relative"
           >
-            <motion.div 
+            <motion.div
               className="aspect-square rounded-3xl overflow-hidden shadow-2xl"
               style={{ y: imageY, rotate: imageRotate }}
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.4 }}
             >
-              <img 
-                src={crmDashboard} 
-                alt="AI-powered CRM visualization" 
+              <img
+                src={crmDashboard}
+                alt="AI-powered CRM visualization"
                 className="w-full h-full object-cover"
               />
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 via-transparent to-transparent" />
             </motion.div>
-            
+
             {/* Floating stat card with parallax */}
             <motion.div
               style={{ y: floatCard1Y }}
@@ -174,7 +131,7 @@ const WhyChooseUs = () => {
               whileHover={{ scale: 1.05 }}
               className="absolute -bottom-6 -left-6 bg-background border border-border rounded-2xl p-6 shadow-2xl"
             >
-              <motion.p 
+              <motion.p
                 className="text-4xl font-bold text-primary mb-1"
                 initial={{ scale: 0 }}
                 animate={isInView ? { scale: 1 } : {}}
@@ -201,6 +158,27 @@ const WhyChooseUs = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Card = ({ title, subtitle, Icon, href }: { title: string; subtitle: string; Icon: any; href: string }) => {
+  return (
+    <a
+      href={href}
+      className="w-full p-4 rounded border-[1px] border-slate-300 relative overflow-hidden group bg-white dark:bg-slate-950 dark:border-slate-800"
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
+
+      <Icon className="absolute z-10 -top-12 -right-12 text-9xl text-slate-100 group-hover:text-violet-400 group-hover:rotate-12 transition-transform duration-300 dark:text-slate-900" />
+      <Icon className="mb-2 text-2xl text-violet-600 group-hover:text-white transition-colors relative z-10 duration-300" />
+      <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-10 duration-300 dark:text-slate-100">
+        {title}
+      </h3>
+      <p className="text-slate-400 group-hover:text-violet-200 relative z-10 duration-300 text-sm">
+        {subtitle}
+      </p>
+    </a>
   );
 };
 
