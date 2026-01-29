@@ -22,12 +22,12 @@ const Footer = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <footer ref={ref} className="py-16 md:py-24 border-t border-border relative overflow-hidden">
+    <footer ref={ref} className="py-8 md:py-12 border-t border-border relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-muted/50 to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mb-8">
           {/* Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -102,10 +102,10 @@ const Footer = () => {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border gap-4"
+          className="flex flex-col md:flex-row items-center justify-between pt-5 border-t border-border gap-4"
         >
           <p className="text-sm text-muted-foreground">
-            © 2025 Create Assistants. All rights reserved.
+            © 2026 Create Assistants. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <motion.a

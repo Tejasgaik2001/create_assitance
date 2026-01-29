@@ -13,7 +13,7 @@ export const SnapSection = ({ children, className, id }: SnapSectionProps) => {
         <section
             id={id}
             className={cn(
-                "h-screen w-full flex items-center justify-center snap-start snap-always",
+                "h-screen w-full flex items-center justify-center snap-start snap-always py-12 lg:py-0",
                 className
             )}
         >
@@ -52,9 +52,19 @@ interface AnimatedSnapContainerProps {
 export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapContainerProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0); // -1 for up, 1 for down
+    const [isDesktop, setIsDesktop] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
     const isScrolling = useRef(false);
-    const touchStartY = useRef(0);
+
+    useEffect(() => {
+        const checkDesktop = () => {
+            setIsDesktop(window.innerWidth >= 1024);
+        };
+
+        checkDesktop();
+        window.addEventListener('resize', checkDesktop);
+        return () => window.removeEventListener('resize', checkDesktop);
+    }, []);
 
     const goToSection = useCallback((index: number, scrollDirection: number) => {
         if (index < 0 || index >= children.length || isScrolling.current) return;
@@ -63,49 +73,27 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
         setDirection(scrollDirection);
         setCurrentIndex(index);
 
-        // Reset scrolling lock after animation (longer for slower animation)
+        // Reset scrolling lock after animation
         setTimeout(() => {
             isScrolling.current = false;
-        }, 1000);
+        }, 500);
     }, [children.length]);
 
     const handleWheel = useCallback((e: WheelEvent) => {
+        if (!isDesktop) return;
         e.preventDefault();
 
         if (isScrolling.current) return;
 
         if (e.deltaY > 0) {
-            // Scroll down - go to next section
             goToSection(currentIndex + 1, 1);
         } else if (e.deltaY < 0) {
-            // Scroll up - go to previous section
             goToSection(currentIndex - 1, -1);
         }
-    }, [currentIndex, goToSection]);
-
-    const handleTouchStart = useCallback((e: TouchEvent) => {
-        touchStartY.current = e.touches[0].clientY;
-    }, []);
-
-    const handleTouchEnd = useCallback((e: TouchEvent) => {
-        if (isScrolling.current) return;
-
-        const touchEndY = e.changedTouches[0].clientY;
-        const diff = touchStartY.current - touchEndY;
-
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-                // Swipe up - go to next
-                goToSection(currentIndex + 1, 1);
-            } else {
-                // Swipe down - go to previous
-                goToSection(currentIndex - 1, -1);
-            }
-        }
-    }, [currentIndex, goToSection]);
+    }, [currentIndex, goToSection, isDesktop]);
 
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
-        if (isScrolling.current) return;
+        if (!isDesktop || isScrolling.current) return;
 
         if (e.key === "ArrowDown" || e.key === "PageDown") {
             e.preventDefault();
@@ -114,7 +102,7 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
             e.preventDefault();
             goToSection(currentIndex - 1, -1);
         }
-    }, [currentIndex, goToSection]);
+    }, [currentIndex, goToSection, isDesktop]);
 
     const handleDotClick = useCallback((index: number) => {
         if (isScrolling.current || index === currentIndex) return;
@@ -124,20 +112,16 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
 
     useEffect(() => {
         const container = containerRef.current;
-        if (!container) return;
+        if (!container || !isDesktop) return;
 
         container.addEventListener("wheel", handleWheel, { passive: false });
-        container.addEventListener("touchstart", handleTouchStart, { passive: true });
-        container.addEventListener("touchend", handleTouchEnd, { passive: true });
         window.addEventListener("keydown", handleKeyDown);
 
         return () => {
             container.removeEventListener("wheel", handleWheel);
-            container.removeEventListener("touchstart", handleTouchStart);
-            container.removeEventListener("touchend", handleTouchEnd);
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [handleWheel, handleTouchStart, handleTouchEnd, handleKeyDown]);
+    }, [handleWheel, handleKeyDown, isDesktop]);
 
     const slideVariants = {
         enter: (dir: number) => ({
@@ -157,6 +141,16 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
         }),
     };
 
+    // Render list for Mobile/Tablet
+    if (!isDesktop) {
+        return (
+            <div className={cn("w-full flex flex-col", className)}>
+                {children}
+            </div>
+        );
+    }
+
+    // Render Snap Scroll for Desktop
     return (
         <div
             ref={containerRef}
@@ -179,7 +173,7 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
                 ))}
             </div>
 
-            <AnimatePresence initial={false} mode="wait" custom={direction}>
+            <AnimatePresence initial={false} custom={direction}>
                 <motion.div
                     key={currentIndex}
                     custom={direction}
@@ -192,9 +186,11 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
                         opacity: { duration: 0.1, ease: "easeInOut" },
                         scale: { duration: 0.1, ease: "easeInOut" },
                     }}
-                    className="h-screen w-full absolute inset-0"
+                    className="h-screen w-full absolute inset-0 overflow-y-auto"
                 >
-                    {children[currentIndex]}
+                    <div className="h-full w-full flex items-center justify-center relative overscroll-contain">
+                        {children[currentIndex]}
+                    </div>
                 </motion.div>
             </AnimatePresence>
         </div>
