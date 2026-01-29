@@ -221,12 +221,12 @@ const TimelineCard = ({
 export const VerticalTimeline = ({ steps }: VerticalTimelineProps) => {
     return (
         <div className="relative py-10">
-            {/* Center vertical line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent/50 to-transparent transform -translate-x-1/2" />
+            {/* Center vertical line - hidden on mobile */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent/50 to-transparent transform -translate-x-1/2" />
 
-            {/* Animated glowing dot that follows scroll (decorative) */}
+            {/* Animated glowing dot - hidden on mobile */}
             <motion.div
-                className="absolute left-1/2 top-0 w-3 h-3 bg-accent rounded-full transform -translate-x-1/2 shadow-lg shadow-accent/50"
+                className="hidden md:block absolute left-1/2 top-0 w-3 h-3 bg-accent rounded-full transform -translate-x-1/2 shadow-lg shadow-accent/50"
                 animate={{
                     boxShadow: [
                         "0 0 10px rgba(var(--accent-rgb), 0.5)",
@@ -238,51 +238,48 @@ export const VerticalTimeline = ({ steps }: VerticalTimelineProps) => {
             />
 
             {/* Timeline items */}
-            <div className="space-y-16 md:space-y-24">
+            <div className="space-y-8 md:space-y-24">
                 {steps.map((step, index) => {
                     const isLeft = index % 2 === 0;
 
                     return (
                         <div
                             key={step.number}
-                            className="relative grid grid-cols-1 md:grid-cols-[1fr_60px_1fr] gap-4 items-center"
+                            className="relative"
                         >
-                            {/* Left side content */}
-                            <div className={`${isLeft ? 'block' : 'hidden md:block'} ${!isLeft ? 'md:invisible' : ''}`}>
-                                {isLeft && <TimelineCard step={step} index={index} isLeft={true} />}
-                            </div>
-
-                            {/* Center dot */}
-                            <div className="hidden md:flex justify-center relative">
-                                <motion.div
-                                    initial={{ scale: 0 }}
-                                    whileInView={{ scale: 1 }}
-                                    viewport={{ once: false, margin: "-100px" }}
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 200,
-                                        damping: 15,
-                                        delay: 0.2
-                                    }}
-                                    className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-accent/30 z-10"
-                                >
-                                    <span className="text-lg font-bold text-white">{step.number}</span>
-                                </motion.div>
-                            </div>
-
-                            {/* Right side content */}
-                            <div className={`${!isLeft ? 'block' : 'hidden md:block'} ${isLeft ? 'md:invisible' : ''}`}>
-                                {!isLeft && <TimelineCard step={step} index={index} isLeft={false} />}
-                            </div>
-
-                            {/* Mobile view - show all cards in single column */}
-                            <div className="block md:hidden col-span-1">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-accent/30">
-                                        <span className="text-sm font-bold text-white">{step.number}</span>
-                                    </div>
-                                    <div className="flex-1 h-px bg-accent/30" />
+                            {/* Desktop view - alternating layout with timeline */}
+                            <div className="hidden md:grid md:grid-cols-[1fr_60px_1fr] gap-4 items-center">
+                                {/* Left side content */}
+                                <div className={`${!isLeft ? 'invisible' : ''}`}>
+                                    {isLeft && <TimelineCard step={step} index={index} isLeft={true} />}
                                 </div>
+
+                                {/* Center dot */}
+                                <div className="flex justify-center relative">
+                                    <motion.div
+                                        initial={{ scale: 0 }}
+                                        whileInView={{ scale: 1 }}
+                                        viewport={{ once: false, margin: "-100px" }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 200,
+                                            damping: 15,
+                                            delay: 0.2
+                                        }}
+                                        className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-accent/30 z-10"
+                                    >
+                                        <span className="text-lg font-bold text-white">{step.number}</span>
+                                    </motion.div>
+                                </div>
+
+                                {/* Right side content */}
+                                <div className={`${isLeft ? 'invisible' : ''}`}>
+                                    {!isLeft && <TimelineCard step={step} index={index} isLeft={false} />}
+                                </div>
+                            </div>
+
+                            {/* Mobile view - just cards, no timeline */}
+                            <div className="block md:hidden">
                                 <TimelineCard step={step} index={index} isLeft={false} />
                             </div>
                         </div>
