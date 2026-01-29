@@ -6,8 +6,9 @@ import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Timeline } from "@/components/ui/timeline";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
+import { RollingTextList } from "@/components/ui/RollingTextList";
+import { StackedCardsTimeline } from "@/components/ui/StackedCardsTimeline";
 
 const HowItWorks = () => {
   const steps = [
@@ -80,54 +81,7 @@ const HowItWorks = () => {
     { icon: FiCheckCircle, title: "Hands-Off Growth", description: "Fully automated system" }
   ];
 
-  const timelineData = steps.map((step) => {
-    const Icon = step.icon;
-    return {
-      title: (
-        <motion.div
-          initial={{ opacity: 0, x: -20, scale: 0.9 }}
-          whileInView={{ opacity: 1, x: 0, scale: 1 }}
-          viewport={{ once: false, margin: "-50px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-2xl font-bold text-accent"
-        >
-          Step {step.number}
-        </motion.div>
-      ),
-      content: (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
-          className="glass-card rounded-2xl p-6 md:p-8 shadow-xl border border-accent/40 bg-muted/30"
-        >
-          <div className="flex items-start gap-4">
-            <div className="shrink-0">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 flex items-center justify-center shadow-md">
-                <Icon className="w-6 h-6 text-foreground" />
-              </div>
-            </div>
-            <div className="min-w-0">
-              <h3 className="text-xl font-bold">{step.title}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{step.subtitle}</p>
-              <p className="text-sm md:text-base text-muted-foreground leading-relaxed mt-4">
-                {step.description}
-              </p>
-              <ul className="mt-5 space-y-2">
-                {step.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <CheckCircle className="mt-0.5 w-4 h-4 text-green-500 shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </motion.div>
-      ),
-    };
-  });
+
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
@@ -175,9 +129,7 @@ const HowItWorks = () => {
               </p>
             </AnimatedSection>
 
-            <div className="relative w-full overflow-clip">
-              <Timeline data={timelineData} />
-            </div>
+            <StackedCardsTimeline steps={steps} />
           </div>
         </section>
 
@@ -194,28 +146,7 @@ const HowItWorks = () => {
               </p>
             </AnimatedSection>
 
-            <StaggeredChildren className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {benefits.map((benefit, index) => {
-                const Icon = benefit.icon;
-                return (
-                  <a
-                    key={index}
-                    href="#"
-                    className="w-full p-4 rounded border-[1px] border-slate-300 relative overflow-hidden group bg-white dark:bg-slate-950 dark:border-slate-800"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-indigo-600 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300" />
-                    <Icon className="absolute z-10 -top-12 -right-12 text-9xl text-slate-100 group-hover:text-violet-400 group-hover:rotate-12 transition-transform duration-300 dark:text-slate-900" />
-                    <Icon className="mb-2 text-2xl text-violet-600 group-hover:text-white transition-colors relative z-10 duration-300" />
-                    <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-10 duration-300 dark:text-slate-100">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-slate-400 group-hover:text-violet-200 relative z-10 duration-300 text-sm">
-                      {benefit.description}
-                    </p>
-                  </a>
-                );
-              })}
-            </StaggeredChildren>
+            <RollingTextList items={benefits} className="w-full" />
           </div>
         </section>
 
