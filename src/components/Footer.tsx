@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Twitter, Linkedin, Github, Mail } from "lucide-react";
+import logo from "@/assets/logo.gif";
 
 const footerLinks = {
   Product: ["Features", "Integrations", "Pricing", "Changelog"],
@@ -24,7 +25,7 @@ const Footer = () => {
     <footer ref={ref} className="py-16 md:py-24 border-t border-border relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-muted/50 to-transparent pointer-events-none" />
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
           {/* Brand */}
@@ -34,20 +35,18 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
             className="col-span-2 md:col-span-1"
           >
-            <motion.div 
+            <motion.div
               className="flex items-center gap-2 mb-4"
               whileHover={{ x: 5 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="w-9 h-9 bg-foreground rounded-xl flex items-center justify-center">
-                <span className="text-background font-bold text-lg">C</span>
-              </div>
+              <img src={logo} alt="Create Assistants Logo" className="w-9 h-9 object-cover" />
               <span className="font-semibold">Create Assistants</span>
             </motion.div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
               Automate and grow your business with custom CRM and AI solutions.
             </p>
-            
+
             {/* Social links */}
             <div className="flex items-center gap-3">
               {socialLinks.map((social, index) => (
@@ -109,15 +108,15 @@ const Footer = () => {
             © 2025 Create Assistants. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <motion.a 
-              href="#" 
+            <motion.a
+              href="#"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               whileHover={{ y: -2 }}
             >
               Privacy Policy
             </motion.a>
-            <motion.a 
-              href="#" 
+            <motion.a
+              href="#"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               whileHover={{ y: -2 }}
             >

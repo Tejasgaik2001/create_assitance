@@ -14,6 +14,7 @@ import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import logo from "@/assets/logo.gif";
 
 const Header = () => {
   const navItems = [
@@ -48,13 +49,13 @@ const Header = () => {
         <NavBody>
           <div className="flex items-center gap-2">
             <Link to="/" className="flex items-center gap-2">
-              <motion.div
-                className="w-9 h-9 bg-foreground rounded-xl flex items-center justify-center"
+              <motion.img
+                src={logo}
+                alt="Create Assistants Logo"
+                className="w-9 h-9 object-contain p-1"
                 whileHover={{ rotate: 5 }}
                 transition={{ type: "spring", stiffness: 400 }}
-              >
-                <span className="text-background font-bold text-lg">C</span>
-              </motion.div>
+              />
               <span className="font-semibold text-lg hidden sm:block">Create Assistants</span>
             </Link>
           </div>
@@ -70,9 +71,11 @@ const Header = () => {
           <MobileNavHeader>
             <div className="flex items-center gap-2">
               <Link to="/" className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-foreground rounded-lg flex items-center justify-center">
-                  <span className="text-background font-bold text-base">C</span>
-                </div>
+                <img
+                  src={logo}
+                  alt="Create Assistants Logo"
+                  className="w-8 h-8 object-contain p-1"
+                />
               </Link>
             </div>
             <MobileNavToggle
