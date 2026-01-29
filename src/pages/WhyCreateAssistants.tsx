@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const WhyCreateAssistants = () => {
   const reasons = [
@@ -102,7 +103,7 @@ const WhyCreateAssistants = () => {
                 Most software tools leave you to figure things out on your own. At Create Assistants, we take a different approach: we combine a powerful CRM with AI employees and hands‑on service. You get a complete growth system and a team dedicated to your success.
               </p>
 
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
                   <a href="/book-a-call">
                     Book a Free Consultation
@@ -115,7 +116,7 @@ const WhyCreateAssistants = () => {
                     </motion.span>
                   </a>
                 </Button>
-              </motion.div>
+              </MagneticWrapper>
             </AnimatedSection>
           </div>
         </section>
@@ -292,7 +293,7 @@ const WhyCreateAssistants = () => {
                 With Create Assistants, your success is our success. We stay with you after launch, adjusting your automations, retraining AI employees and introducing new features as your business evolves. You get continuous improvements without having to hire a systems team.
               </p>
 
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
                   <a href="/book-a-call">
                     Book a Free Consultation
@@ -305,7 +306,7 @@ const WhyCreateAssistants = () => {
                     </motion.span>
                   </a>
                 </Button>
-              </motion.div>
+              </MagneticWrapper>
             </AnimatedSection>
           </div>
         </section>

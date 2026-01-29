@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const AIEmployees = () => {
   const capabilities = [
@@ -67,7 +68,7 @@ const AIEmployees = () => {
                 handle repetitive tasks and let your people focus on high‑value work.
               </p>
 
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20">
                   See AI in Action
                   <motion.span
@@ -78,7 +79,7 @@ const AIEmployees = () => {
                     <ArrowRight className="w-4 h-4" />
                   </motion.span>
                 </Button>
-              </motion.div>
+              </MagneticWrapper>
             </AnimatedSection>
           </div>
         </section>
@@ -235,7 +236,7 @@ const AIEmployees = () => {
                   Want to see how AI employees can <span className="text-gradient">transform</span> your customer interactions?
                 </h2>
 
-                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+                <MagneticWrapper strength={0.25}>
                   <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
                     <a href="#">
                       Explore the Command Center
@@ -248,7 +249,7 @@ const AIEmployees = () => {
                       </motion.span>
                     </a>
                   </Button>
-                </motion.div>
+                </MagneticWrapper>
               </div>
             </AnimatedSection>
           </div>

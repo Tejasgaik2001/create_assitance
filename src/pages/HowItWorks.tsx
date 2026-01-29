@@ -7,6 +7,7 @@ import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Timeline } from "@/components/ui/timeline";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const HowItWorks = () => {
   const steps = [
@@ -231,11 +232,7 @@ const HowItWorks = () => {
                   capture more leads, close more sales and free up your time.
                 </p>
 
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-block"
-                >
+                <MagneticWrapper strength={0.25}>
                   <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
                     <a href="/book-a-call">
                       Book a Free Consultation
@@ -248,7 +245,7 @@ const HowItWorks = () => {
                       </motion.span>
                     </a>
                   </Button>
-                </motion.div>
+                </MagneticWrapper>
               </div>
             </AnimatedSection>
           </div>

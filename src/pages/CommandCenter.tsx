@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const CommandCenter = () => {
   const features = [
@@ -112,7 +113,7 @@ const CommandCenter = () => {
                 Most small businesses juggle spreadsheets, disjointed apps and manual reminders. The result? Missed leads, inconsistent follow‑ups and zero visibility into sales. The Create Assistants Command Center replaces that chaos with a single, integrated system. Everything from lead capture to payment happens in one place.
               </p>
 
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20">
                   Discover Why Create Assistants
                   <motion.span
@@ -123,7 +124,7 @@ const CommandCenter = () => {
                     <ArrowRight className="w-4 h-4" />
                   </motion.span>
                 </Button>
-              </motion.div>
+              </MagneticWrapper>
             </AnimatedSection>
           </div>
         </section>
@@ -326,7 +327,7 @@ const CommandCenter = () => {
                 The Command Center isn’t just a CRM. It’s your business’s heartbeat. Centralising tools saves time, reduces errors and gives you visibility into what’s working and what’s not. You can finally stop juggling platforms and focus on growing your business.
               </p>
 
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} className="inline-block">
+              <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20">
                   Discover Why Create Assistants
                   <motion.span
@@ -337,7 +338,7 @@ const CommandCenter = () => {
                     <ArrowRight className="w-4 h-4" />
                   </motion.span>
                 </Button>
-              </motion.div>
+              </MagneticWrapper>
             </AnimatedSection>
           </div>
         </section>
