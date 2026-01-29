@@ -98,7 +98,6 @@ const AIEmployees = () => {
           style={{ backgroundImage: 'linear-gradient(hsl(var(--accent)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--accent)) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
         {/* Cinematic Glows */}
-        <div className="absolute top-[-20%] left-[-10%] w-[80%] lg:w-[60%] h-[60%] bg-accent/10 dark:bg-accent/20 blur-[100px] lg:blur-[120px] rounded-full" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[70%] lg:w-[50%] h-[50%] bg-primary/10 dark:bg-primary/20 blur-[120px] lg:blur-[150px] rounded-full" />
       </div>
 
