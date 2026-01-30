@@ -8,18 +8,18 @@ const WhyChooseUs = () => {
   const isInView = useInView(ref, { once: false, margin: "-10%" });
 
   return (
-    <section ref={ref} id="solutions" className="h-screen w-full flex items-center justify-center relative overflow-hidden bg-background">
+    <section ref={ref} id="solutions" className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
           {/* Left Column - Content */}
           <div className="text-left">
             <motion.span
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-accent border border-accent text-sm font-bold uppercase tracking-widest mb-6"
+              className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-primary/10 text-accent border border-accent text-xs sm:text-sm font-bold uppercase tracking-widest mb-4 sm:mb-6"
             >
               Why Us
             </motion.span>
@@ -28,7 +28,7 @@ const WhyChooseUs = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-5xl md:text-7xl font-bold tracking-tighter leading-[0.85] mb-8 uppercase italic"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-[0.9] sm:leading-[0.85] mb-6 sm:mb-8 uppercase italic"
             >
               Why Choose
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent block drop-shadow-sm">Create Assistants</span>
@@ -38,13 +38,13 @@ const WhyChooseUs = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl font-medium"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 sm:mb-10 max-w-xl font-medium"
             >
               We're not just another software vendor. We're your dedicated growth partner,
               combining cutting-edge AI with genuine human expertise.
             </motion.p>
 
-            <div className="grid gap-5 grid-cols-1 sm:grid-cols-2">
+            <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2">
               {[
                 { title: "Family-Owned", subtitle: "Iowa born & raised, committed to integrity.", icon: FiHeart, color: "primary" },
                 { title: "Real Humans + AI", subtitle: "AI efficiency backed by expert humans.", icon: FiUsers, color: "accent" },
@@ -65,7 +65,7 @@ const WhyChooseUs = () => {
                     y: -6,
                     transition: { type: "spring", stiffness: 400, damping: 15 }
                   }}
-                  className="group relative p-6 rounded-2xl border border-border/40 bg-gradient-to-br from-background via-background/95 to-background/80 backdrop-blur-sm shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-accent/20 hover:border-accent/50 transition-all duration-500 overflow-hidden"
+                  className="group relative p-5 sm:p-6 rounded-2xl border border-border/40 bg-gradient-to-br from-background via-background/95 to-background/80 backdrop-blur-sm shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-accent/20 hover:border-accent/50 transition-all duration-500 overflow-hidden"
                 >
                   {/* Gradient overlays */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -82,15 +82,15 @@ const WhyChooseUs = () => {
                           scale: { type: "spring", stiffness: 400, damping: 10 }
                         }
                       }}
-                      className="inline-block p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 shadow-md shadow-primary/10 mb-4 group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-300"
+                      className="inline-block p-2.5 sm:p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 shadow-md shadow-primary/10 mb-3 sm:mb-4 group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-300"
                     >
-                      <item.icon className={`text-2xl ${item.color === 'primary' ? 'text-accent' : 'text-accent'} drop-shadow-lg`} />
+                      <item.icon className={`text-xl sm:text-2xl ${item.color === 'primary' ? 'text-accent' : 'text-accent'} drop-shadow-lg`} />
                     </motion.div>
 
-                    <h3 className="font-bold text-xl bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight italic mb-2 transition-all duration-500">
+                    <h3 className="font-bold text-lg sm:text-xl bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight italic mb-1.5 sm:mb-2 transition-all duration-500">
                       {item.title}
                     </h3>
-                    <p className="text-muted-foreground/90 group-hover:text-muted-foreground text-sm font-medium leading-relaxed transition-colors duration-500">
+                    <p className="text-muted-foreground/90 group-hover:text-muted-foreground text-xs sm:text-sm font-medium leading-relaxed transition-colors duration-500">
                       {item.subtitle}
                     </p>
                   </div>
@@ -100,7 +100,7 @@ const WhyChooseUs = () => {
           </div>
 
           {/* Right Column - Visual */}
-          <div className="relative lg:pl-8">
+          <div className="relative lg:pl-8 lg:block hidden">
             <motion.div
               initial={{ opacity: 0, x: 100, scale: 0.8, rotate: 5 }}
               animate={isInView ? { opacity: 1, x: 0, scale: 1, rotate: 0 } : { opacity: 0, x: 100, scale: 0.8, rotate: 5 }}

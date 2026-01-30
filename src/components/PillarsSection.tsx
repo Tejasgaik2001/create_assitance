@@ -129,18 +129,18 @@ const PillarsSection = () => {
   const isInView = useInView(ref, { once: false, margin: "-10%" });
 
   return (
-    <section ref={ref} id="product" className="h-screen w-full flex items-center justify-center bg-muted/30 relative overflow-hidden py-12">
+    <section ref={ref} id="product" className="min-h-screen w-full flex items-center justify-center bg-muted/30 relative overflow-hidden py-24 sm:py-32">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.08)_0%,transparent_50%)] pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-12 sm:mb-16 md:mb-20">
           <motion.span
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5 }}
-            className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-accent border border-primary text-sm font-medium mb-4"
+            className="inline-block px-3 sm:px-4 py-1.5 rounded-full bg-primary/10 text-accent border border-primary text-xs sm:text-sm font-medium mb-4 sm:mb-6"
           >
             Our Services
           </motion.span>
@@ -148,7 +148,7 @@ const PillarsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent uppercase italic"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent uppercase italic"
           >
             What We Offer
           </motion.h2>
@@ -156,14 +156,14 @@ const PillarsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-muted-foreground max-w-2xl mx-auto font-medium"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-medium px-4"
           >
             Three pillars that transform how you capture, engage, and convert leads.
           </motion.p>
         </div>
 
         {/* Pillars Grid */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {pillars.map((pillar, index) => (
             <PillarCard key={pillar.title} pillar={pillar} index={index} isSectionInView={isInView} />
           ))}

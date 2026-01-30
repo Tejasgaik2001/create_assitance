@@ -51,8 +51,8 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
       id="resources"
       className={
         withFooter
-          ? "min-h-screen w-full flex flex-col relative overflow-hidden bg-background py-20"
-          : "min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-20"
+          ? "min-h-screen w-full flex flex-col relative overflow-hidden bg-background pt-24 sm:pt-32 pb-16"
+          : "min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background pt-24 sm:pt-32 pb-16"
       }
     >
       {/* Background decoration */}
