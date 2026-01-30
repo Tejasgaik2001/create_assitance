@@ -32,7 +32,7 @@ const IntroSection = () => {
   ];
 
   return (
-    <section ref={ref} className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-20 lg:py-0">
+    <section ref={ref} className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
       {/* Premium Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
 
@@ -66,7 +66,7 @@ const IntroSection = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight"
+                  className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight"
                 >
                   <span className="text-foreground">Transform Your Business with </span>
                   <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
@@ -123,7 +123,7 @@ const IntroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="grid grid-cols-3 gap-4 pt-4"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4"
               >
                 {stats.map((stat, index) => {
                   const Icon = stat.icon;
@@ -171,7 +171,7 @@ const IntroSection = () => {
               initial={{ opacity: 0, x: 40 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="relative"
+              className="relative hidden lg:block"
             >
               <div className="relative aspect-square max-w-2xl mx-auto">
                 {/* Main Hero Card */}
