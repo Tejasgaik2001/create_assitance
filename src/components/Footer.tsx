@@ -85,10 +85,10 @@ const Footer = () => {
                   >
                     <motion.a
                       href="#"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
-                      whileHover={{ x: 3 }}
+                      className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
                     >
                       {link}
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-[#ff843c] transition-transform duration-300 ease-out group-hover:scale-x-100" />
                     </motion.a>
                   </motion.li>
                 ))}
@@ -110,17 +110,17 @@ const Footer = () => {
           <div className="flex items-center gap-6">
             <motion.a
               href="#"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              whileHover={{ y: -2 }}
+              className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy Policy
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-[#ff843c] transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </motion.a>
             <motion.a
               href="#"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              whileHover={{ y: -2 }}
+              className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Terms of Service
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-[#ff843c] transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </motion.a>
           </div>
         </motion.div>

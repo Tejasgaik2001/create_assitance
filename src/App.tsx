@@ -12,6 +12,7 @@ import CommandCenter from "./pages/CommandCenter";
 import WhyCreateAssistants from "./pages/WhyCreateAssistants";
 import BookACall from "./pages/BookACall";
 import NotFound from "./pages/NotFound";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/how-it-works" element={<HowItWorks />} />

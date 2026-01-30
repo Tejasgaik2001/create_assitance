@@ -1,228 +1,218 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BrainCircuit, Headphones, Layers3, CheckCircle } from "lucide-react";
-import AnimatedSection from "@/components/AnimatedSection";
-import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { AssemblingWord } from "@/components/ui/AssemblingWord";
 
-// Floating Pillar Card Component
-const FloatingPillarCard = ({ pillar, index }: { pillar: any; index: number }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const Icon = pillar.icon;
-
-  // Different floating durations for each card to avoid sync
-  const floatDuration = 2.5 + (index * 0.5); // 2.5s, 3s, 3.5s
+// Scroll-linked section wrapper
+const ScrollSection = ({
+  children,
+  className = "",
+  id,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  id?: string;
+}) => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.div
+    <motion.section
+      ref={sectionRef}
+      id={id}
+      initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.section>
+  );
+};
+
+// Flip Card Component
+const RoadmapCard = ({ pillar, index }: { pillar: any; index: number }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const Icon = pillar.icon;
+  const isEven = index % 2 === 0;
+
+  return (
+    <div
+      className="relative w-full h-[500px] perspective-1000 cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      animate={isHovered ? { y: 0 } : { y: [0, -8, 0] }}
-      transition={isHovered ? { duration: 0.3 } : { duration: floatDuration, repeat: Infinity, ease: "easeInOut" }}
-      className="glass-card rounded-2xl overflow-hidden border border-border/40 shadow-xl cursor-pointer"
     >
-      <div className="relative h-44 overflow-hidden">
-        {/* Image with shrink effect on hover */}
-        <motion.img
-          src={pillar.image}
-          alt={pillar.title}
-          className="h-full w-full object-cover"
-          loading="lazy"
-          animate={{
-            scale: isHovered ? 0.95 : 1,
-          }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        />
+      <motion.div
+        className="relative w-full h-full transition-all duration-700 preserve-3d"
+        animate={{ rotateY: isHovered ? 180 : 0 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* Front Face - Image */}
+        <div className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-xl border border-border/20 bg-background">
+          <img
+            src={pillar.image}
+            alt={pillar.title}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-        {/* Gradient overlay */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent"
-          animate={{
-            opacity: isHovered ? 1 : 0.8,
-          }}
-          transition={{ duration: 0.3 }}
-        />
-
-        {/* Icon and title - always visible */}
-        <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
-          <motion.div
-            className="w-11 h-11 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 backdrop-blur-sm border border-border/30 flex items-center justify-center"
-            animate={{
-              scale: isHovered ? 1.1 : 1,
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            <Icon className="w-5 h-5 text-primary" />
-          </motion.div>
-          <div className="min-w-0">
-            <h3 className="text-lg font-bold leading-tight">{pillar.title}</h3>
-            <motion.p
-              className="text-xs text-muted-foreground"
-              animate={{
-                opacity: isHovered ? 1 : 0.7,
-              }}
-            >
-              {pillar.subtitle}
-            </motion.p>
+          <div className="absolute bottom-0 left-0 right-0 p-8">
+            <div className="inline-flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                <Icon className="w-5 h-5 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-white">{pillar.title}</h3>
+            </div>
+            <p className="text-white/80 text-sm font-medium">Hover to explore details</p>
           </div>
         </div>
 
-        {/* Floating info overlay on hover */}
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0 bg-background/95 backdrop-blur-md flex items-center justify-center p-6"
-            >
-              <div className="text-center">
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.1 }}
-                  className="w-14 h-14 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 border border-accent/30 flex items-center justify-center mx-auto mb-4"
-                >
-                  <Icon className="w-7 h-7 text-primary" />
-                </motion.div>
-                <motion.h3
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.15 }}
-                  className="text-xl font-bold mb-2"
-                >
-                  {pillar.title}
-                </motion.h3>
-                <motion.p
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-sm text-muted-foreground"
-                >
-                  {pillar.subtitle}
-                </motion.p>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+        {/* Back Face - Content */}
+        <div
+          className="absolute inset-0 w-full h-full backface-hidden rounded-2xl overflow-hidden shadow-xl border border-border/40 bg-background/95 backdrop-blur-xl p-8 flex flex-col justify-center"
+          style={{ transform: "rotateY(180deg)" }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <Icon className="w-5 h-5 text-primary" />
+            </div>
+            <h3 className="text-2xl font-bold tracking-tight text-foreground">{pillar.title}</h3>
+          </div>
 
-      {/* Content section */}
-      <motion.div
-        className="p-6"
-        animate={{
-          opacity: isHovered ? 0.6 : 1,
-        }}
-        transition={{ duration: 0.3 }}
-      >
-        <ul className="space-y-3">
-          {pillar.points.map((point: string, idx: number) => (
-            <motion.li
-              key={point}
-              className="flex items-start gap-2 text-sm text-muted-foreground"
-              animate={{
-                x: isHovered ? 5 : 0,
-                opacity: isHovered ? 0.8 : 1,
-              }}
-              transition={{ duration: 0.3, delay: idx * 0.05 }}
-            >
-              <CheckCircle className="mt-0.5 w-4 h-4 text-primary shrink-0" />
-              <span>{point}</span>
-            </motion.li>
-          ))}
-        </ul>
+          <p className="text-lg text-muted-foreground mb-8">
+            {pillar.subtitle}
+          </p>
+
+          <ul className="space-y-4">
+            {pillar.points.map((point: string) => (
+              <li key={point} className="flex items-start gap-3 text-muted-foreground/90 text-sm md:text-base">
+                <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </motion.div>
-    </motion.div>
+
+      {/* Connector Dot for Desktop */}
+      <div className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-lg z-20 hidden md:block
+        ${isEven ? "-right-[58px]" : "-left-[58px]"}`}
+      />
+    </div>
   );
 };
 
 const WhatYouGet = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const narrativeRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  // Main scroll progress
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Narrative section scroll progress for snake drawing
+  const { scrollYProgress: narrativeProgress } = useScroll({
+    target: narrativeRef,
+    offset: ["start center", "end center"],
+  });
+
+  const pathLength = useTransform(narrativeProgress, [0, 0.8], [0, 1]);
+
+  // Parallax transforms
+  const backgroundY1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const backgroundY2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const backgroundY3 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const guidingLineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const guidingLineOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 0.6, 0.6, 0]);
+
   const pillars = [
     {
       title: "Business Operating System",
       subtitle: "Integrated CRM & Marketing",
       icon: Layers3,
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
       points: [
-        "All your tools in one place: Forms, funnels, email/SMS campaigns, pipelines, payments and scheduling",
-        "Never miss a lead: every call, text, chat and form submission is captured and organised",
-        "Automated follow-ups: workflows and nurturing sequences keep prospects warm",
-        "Crystal-clear visibility: conversations, sales stages and revenue in real time",
+        "All your tools in one place: Forms, funnels, email/SMS campaigns",
+        "Never miss a lead: every call, text, chat and form submission captured",
+        "Automated follow-ups: workflows and nurturing sequences",
+        "Crystal-clear visibility: conversations and sales stages",
       ],
     },
     {
       title: "AI Voice & Chat Employees",
       subtitle: "Human-like coverage, 24/7",
       icon: BrainCircuit,
-      image:
-        "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
       points: [
-        "24/7 coverage: handle inbound calls, texts and chats around the clock",
-        "Smart conversations: answer FAQs, qualify leads, book appointments and collect payments",
-        "Free your team: remove repetitive work so humans focus on high-value tasks",
-        "Always on brand: trained on your scripts and tone, with easy human takeover",
+        "24/7 coverage: outbound/inbound calls, texts and chats",
+        "Smart conversations: answer FAQs, qualify leads, book appts",
+        "Free your team: remove repetitive work, focus on high-value tasks",
+        "Always on brand: trained on your scripts and tone",
       ],
     },
     {
-      title: "Done-For-You Setup & Management",
+      title: "Done-For-You Setup",
       subtitle: "White-glove onboarding + support",
       icon: Headphones,
-      image:
-        "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=1200&q=80",
+      image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=1200&q=80",
       points: [
-        "Launch in weeks, not months: go live in as little as four weeks",
-        "Custom configuration: automations, pipelines and AI scripts tailored to your business",
-        "Ongoing partnership: check-ins, AI re-training and real human support",
-        "Built on trust: family-owned and U.S.-based with personalised service",
+        "Launch in weeks: go live in as little as four weeks",
+        "Custom configuration: automations tailored to your business",
+        "Ongoing partnership: check-ins, AI re-training and support",
+        "Built on trust: family-owned and U.S.-based service",
       ],
     },
   ];
 
   return (
-    <div className="min-h-screen bg-background transition-colors duration-300">
+    <div ref={containerRef} className="min-h-screen bg-background transition-colors duration-300 relative">
       <Header />
+
+      {/* Guiding gradient line for page flow */}
+      {!prefersReducedMotion && (
+        <motion.div
+          className="fixed left-8 top-0 w-px bg-gradient-to-b from-transparent via-primary/40 to-transparent pointer-events-none z-40 hidden lg:block"
+          style={{
+            height: guidingLineHeight,
+            opacity: guidingLineOpacity,
+          }}
+        />
+      )}
+
       <main>
         {/* Hero Section */}
-        <section className="relative overflow-hidden pt-24 pb-16">
+        <ScrollSection className="relative overflow-hidden pt-24 pb-16">
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            {/* Animated gradient orbs */}
             <motion.div
               className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
-              animate={{
-                x: [0, 50, 0],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              style={{ y: backgroundY1 }}
+              transition={{ duration: 8, repeat: Infinity }}
             />
             <motion.div
               className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
-              animate={{
-                x: [0, -50, 0],
-                scale: [1.1, 1, 1.1],
-              }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Extra floating orb */}
-            <motion.div
-              className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              style={{ y: backgroundY2 }}
             />
             {/* Grid pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center max-w-3xl mx-auto"
+            >
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 mb-6">
                 <span className="text-xs font-medium">The Complete Create Assistants Solution</span>
               </div>
@@ -234,188 +224,175 @@ const WhatYouGet = () => {
 
               <p className="body-large mb-10 max-w-2xl mx-auto text-sm md:text-base">
                 You don't need another app; you need a system that works. Create Assistants combines a powerful business
-                operating system, human-like AI employees and hands-on support—so you capture leads, convert customers and
-                scale with confidence.
+                operating system, human-like AI employees and hands-on support.
               </p>
 
               <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20">
-                  Explore The 3 Pillars
-                  <motion.span
-                    className="inline-block"
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.span>
+                  Explore The Roadmap
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </MagneticWrapper>
-            </AnimatedSection>
+            </motion.div>
           </div>
-        </section>
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+        </ScrollSection>
 
-        {/* Three Pillars Section */}
-        <section className="py-16 relative overflow-hidden">
-          {/* Background effects */}
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Left floating orb */}
-            <motion.div
-              className="absolute top-20 -left-20 w-80 h-80 bg-accent/15 rounded-full blur-3xl"
-              animate={{
-                y: [0, 40, 0],
-                scale: [1, 1.15, 1],
-              }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Right floating orb */}
-            <motion.div
-              className="absolute bottom-20 -right-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl"
-              animate={{
-                y: [0, -40, 0],
-                scale: [1.1, 1, 1.1],
-              }}
-              transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Center accent */}
-            <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.3, 0.5, 0.3],
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Grid pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
-          </div>
-
-          <div className="container mx-auto px-4 relative z-10">
-            <AnimatedSection direction="up" className="text-center mb-12">
+        {/* Snake Roadmap Section */}
+        <section ref={narrativeRef} className="py-24 relative overflow-visible">
+          <div className="container mx-auto px-4 relative">
+            <div className="text-center mb-24">
               <h2 className="section-headline mb-6">
-                The Complete <span className="text-gradient">Create Assistants</span> Solution
+                The Path to <span className="text-gradient">Automated Growth</span>
               </h2>
               <p className="body-large max-w-3xl mx-auto">
-                Three pillars working together—unified software, AI employees and white-glove service.
+                Hover over each step to discover how our pillars drive your success.
               </p>
-            </AnimatedSection>
+            </div>
 
-            <StaggeredChildren className="grid lg:grid-cols-3 gap-6">
-              {pillars.map((pillar, index) => (
-                <FloatingPillarCard key={pillar.title} pillar={pillar} index={index} />
-              ))}
-            </StaggeredChildren>
+            <div className="max-w-5xl mx-auto relative">
+              {/* Snake Curved Line - Desktop Only */}
+              <div className="absolute inset-0 pointer-events-none hidden md:block h-full" aria-hidden="true">
+                <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+                  {/* Base Track - Faint */}
+                  <path
+                    d="M 25 10 C 25 25, 75 25, 75 50 C 75 75, 25 75, 25 90"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeOpacity="0.1"
+                    strokeWidth="0.5"
+                    className="text-foreground"
+                    vectorEffect="non-scaling-stroke"
+                    style={{ strokeDasharray: "4 4" }}
+                  />
+                  {/* Filling Animation Track - Bright */}
+                  <motion.path
+                    d="M 25 10 C 25 25, 75 25, 75 50 C 75 75, 25 75, 25 90"
+                    fill="none"
+                    stroke="url(#snake-gradient)"
+                    strokeWidth="1.5"
+                    pathLength={pathLength}
+                    vectorEffect="non-scaling-stroke"
+                    style={{
+                      pathLength: pathLength,
+                      filter: "drop-shadow(0 0 4px rgba(249, 115, 22, 0.5))"
+                    }}
+                  />
+                  <defs>
+                    <linearGradient id="snake-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#f97316" />
+                      <stop offset="50%" stopColor="#ef4444" />
+                      <stop offset="100%" stopColor="#f97316" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+
+              <div className="space-y-12 md:space-y-0 relative z-10">
+                {pillars.map((pillar, index) => {
+                  const isEven = index % 2 === 0;
+                  return (
+                    <div
+                      key={pillar.title}
+                      className={`md:flex ${isEven ? 'md:justify-start' : 'md:justify-end'} relative md:py-16`}
+                    >
+                      <motion.div
+                        className="md:w-[45%]"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                      >
+                        <RoadmapCard pillar={pillar} index={index} />
+                      </motion.div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Why It Matters Section */}
-        <section className="py-16 relative bg-muted/20 overflow-hidden">
+        <ScrollSection className="py-24 relative bg-muted/30 overflow-hidden border-y border-border/40">
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            {/* Central pulsing orb */}
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-              }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"
+              style={{ y: backgroundY1 }}
             />
-            {/* Top right orb */}
-            <motion.div
-              className="absolute -top-10 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
-              animate={{
-                x: [0, 30, 0],
-                y: [0, 20, 0],
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Bottom left orb */}
-            <motion.div
-              className="absolute -bottom-10 left-1/4 w-72 h-72 bg-accent/8 rounded-full blur-3xl"
-              animate={{
-                x: [0, -20, 0],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
-
-          <div className="container mx-auto px-4 relative z-10">
-            <AnimatedSection direction="up" className="text-center max-w-4xl mx-auto">
-              <h2 className="section-headline mb-6">
-                Why It <span className="text-gradient">Matters</span>
-              </h2>
-              <p className="body-large">
-                By combining these three pillars—unified software, AI employees and white-glove service—you get more than a
-                toolkit. You get a complete operating system designed to capture every opportunity and grow with you.
-              </p>
-            </AnimatedSection>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-16 relative overflow-hidden">
-          {/* Background effects */}
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Left glow */}
-            <motion.div
-              className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
-              animate={{
-                x: [0, 40, 0],
-                opacity: [0.4, 0.7, 0.4],
-              }}
-              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Right glow */}
-            <motion.div
-              className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl"
-              animate={{
-                x: [0, -40, 0],
-                opacity: [0.5, 0.8, 0.5],
-              }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Center subtle orb */}
-            <motion.div
-              className="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl"
-              animate={{
-                y: [0, 20, 0],
-              }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Grid pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            <AnimatedSection direction="up" className="text-center">
-              <div className="max-w-3xl mx-auto">
-                <h2 className="section-headline mb-6">
-                  Ready to see how these pieces <span className="text-gradient">fit together?</span>
-                </h2>
-                <p className="body-large mb-10">
-                  Next up: a deeper look at our AI Employees.
-                </p>
-
-                <MagneticWrapper strength={0.25}>
-                  <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
-                    <a href="#">
-                      Explore our AI Employees
-                      <motion.span
-                        className="inline-block"
-                        animate={{ x: [0, 4, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.span>
-                    </a>
-                  </Button>
-                </MagneticWrapper>
-              </div>
-            </AnimatedSection>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center max-w-4xl mx-auto"
+            >
+              <h2 className="section-headline mb-6">
+                Why It <span className="text-gradient">Matters</span>
+              </h2>
+              <p className="body-large text-lg md:text-xl text-muted-foreground leading-relaxed">
+                By combining these three pillars—<span className="text-foreground font-semibold">unified software</span>, <span className="text-foreground font-semibold">AI employees</span> and <span className="text-foreground font-semibold">white-glove service</span>—you get more than a toolkit. You get a complete operating system designed to capture every opportunity and grow with you.
+              </p>
+            </motion.div>
           </div>
-        </section>
+        </ScrollSection>
+
+        {/* CTA Section */}
+        <ScrollSection className="py-24 relative overflow-hidden">
+          {/* Background effects */}
+          <div className="absolute inset-0 pointer-events-none">
+            <motion.div
+              className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
+              style={{ y: backgroundY1 }}
+            />
+            <motion.div
+              className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl"
+              style={{ y: backgroundY2 }}
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10 text-center">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="section-headline mb-6">
+                Ready to see how these <AssemblingWord word="pieces" className="text-[#ff843c]" /> <br className="md:hidden" />
+                fit together?
+              </h2>
+              <p className="body-large mb-10">
+                Next up: a deeper look at our AI Employees.
+              </p>
+
+              <MagneticWrapper strength={0.25}>
+                <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
+                  <a href="#">
+                    Explore our AI Employees
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </a>
+                </Button>
+              </MagneticWrapper>
+            </div>
+          </div>
+        </ScrollSection>
       </main>
       <Footer />
+
+      <style>{`
+        .backface-hidden {
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        }
+        .preserve-3d {
+          transform-style: preserve-3d;
+        }
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+      `}</style>
     </div>
   );
 };
