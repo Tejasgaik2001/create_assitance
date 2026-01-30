@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { MotionText } from "@/components/ui/MotionText";
+import { MagnifiedDocText } from "@/components/ui/MagnifiedDocText";
+
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, MessageSquare, Calendar, CreditCard, Heart } from "lucide-react";
 import { FiZap, FiShield, FiTrendingUp, FiCheckCircle } from "react-icons/fi";
@@ -127,7 +130,13 @@ const HowItWorks = () => {
 
               <h1 className="hero-headline mb-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
                 <span className="block">How It Works –</span>
-                <span className="block text-gradient">Your Automated Growth Engine</span>
+                <span className="block w-full">
+                  <MagnifiedDocText
+                    text="Your Automated Growth Engine"
+                    containerClassName="justify-center text-gradient"
+                    className="text-inherit"
+                  />
+                </span>
               </h1>
 
               <p className="body-large mb-8 max-w-2xl mx-auto text-sm md:text-base">
@@ -273,7 +282,7 @@ const HowItWorks = () => {
             <AnimatedSection direction="up" className="text-center">
               <div className="max-w-3xl mx-auto">
                 <h2 className="section-headline mb-6">
-                  Ready to See This System <span className="text-gradient">In Action?</span>
+                  Ready to See This System <MotionText text="In Action?" className="ml-2 inline-block" />
                 </h2>
                 <p className="body-large mb-10">
                   Book a free consultation and we'll walk you through how Create Assistants can
