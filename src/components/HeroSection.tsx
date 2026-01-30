@@ -65,7 +65,7 @@ const HeroSection = () => {
               className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/30 backdrop-blur-sm shadow-lg shadow-primary/10"
             >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-accent animate-pulse" />
-              <span className="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent bg-clip-text text-transparent">
+              <span className="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 AI-Powered Growth Platform
               </span>
             </motion.div>
