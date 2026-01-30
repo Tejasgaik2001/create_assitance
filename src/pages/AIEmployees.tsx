@@ -143,7 +143,7 @@ const AIEmployees = () => {
 
             <motion.h1
               variants={itemVariants}
-              className="text-slate-900 dark:text-white text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-7xl font-black leading-[1.1] tracking-tight"
+              className="text-slate-900 dark:text-white text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-7xl font-bold leading-[1.1] tracking-tight"
             >
               Meet Your <span className="block text-accent dark:text-accent">Hardest‑Working</span>
               <span className="block">Team Members</span>
@@ -292,7 +292,7 @@ const AIEmployees = () => {
                   </div>
 
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[10px] font-black text-primary/40 dark:text-primary/60 uppercase tracking-tighter">0{index + 1}</span>
+                    <span className="text-[10px] font-bold text-primary/40 dark:text-primary/60 uppercase tracking-tighter">0{index + 1}</span>
                     <h3 className="font-bold text-xl text-slate-900 dark:text-white">{item.title}</h3>
                   </div>
 
@@ -550,7 +550,7 @@ const AIEmployees = () => {
               </div>
 
               <motion.h2
-                className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight text-slate-900 dark:text-white"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-slate-900 dark:text-white"
               >
                 Ready to <span className="text-accent dark:text-accent">Transform</span> Your Business?
               </motion.h2>
@@ -636,7 +636,7 @@ const AIEmployees = () => {
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   className="absolute bottom-8 right-8 p-6 bg-accent rounded-3xl shadow-2xl text-accent-foreground max-w-[200px] hidden xl:block"
                 >
-                  <div className="text-3xl font-black mb-1">94%</div>
+                  <div className="text-3xl font-bold mb-1">94%</div>
                   <div className="text-[10px] uppercase font-bold tracking-widest opacity-80 leading-tight">Reduction in Response Latency</div>
                 </motion.div>
               </div>

@@ -11,7 +11,7 @@ import { AnimatedSnapContainer } from "@/components/FullScreenSection";
 import { cn } from "@/lib/utils";
 import { useState, useRef } from "react";
 
-const DropInHoverText = ({ text, trigger, className, highlightClass = "text-orange-600 dark:text-orange-400" }: { text: string; trigger: boolean; className?: string; highlightClass?: string }) => {
+const DropInHoverText = ({ text, trigger, className, highlightClass = "text-accent" }: { text: string; trigger: boolean; className?: string; highlightClass?: string }) => {
   return (
     <span className={cn("inline-flex flex-wrap transition-colors duration-300", trigger ? highlightClass : "", className)}>
       {text.split("").map((char, i) => (
@@ -87,7 +87,7 @@ const ConsultationStepCard = ({ item, index }: { item: any; index: number }) => 
       >
         <div className="relative h-full p-6 rounded-[1.8rem] bg-white dark:bg-slate-950 overflow-hidden flex flex-col md:flex-row gap-6">
           {/* Background Step Number */}
-          <div className="absolute top-2 right-6 text-6xl font-black text-slate-100 dark:text-slate-900/30 pointer-events-none select-none z-0">
+          <div className="absolute top-2 right-6 text-6xl font-bold text-slate-100 dark:text-slate-900/30 pointer-events-none select-none z-0">
             0{index + 1}
           </div>
 
@@ -101,7 +101,7 @@ const ConsultationStepCard = ({ item, index }: { item: any; index: number }) => 
           <div
             className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             style={{
-              background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 120, 41, 0.12), transparent 40%)`,
+              background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, hsla(34, 67%, 57%, 0.12), transparent 40%)`,
             }}
           />
 
@@ -109,16 +109,16 @@ const ConsultationStepCard = ({ item, index }: { item: any; index: number }) => 
             <div className={cn(
               "w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-500",
               isHovered
-                ? "bg-orange-600 text-white scale-110 rotate-12 shadow-xl shadow-orange-500/30"
-                : "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400"
+                ? "bg-accent text-white scale-110 rotate-12 shadow-xl shadow-accent/30"
+                : "bg-accent/10 dark:bg-accent/30 text-accent"
             )}>
               <Icon className="w-7 h-7" />
             </div>
           </div>
 
           <div className="relative z-20 flex-1">
-            <h3 className="text-2xl font-black mb-3 text-slate-900 dark:text-white tracking-tight uppercase italic">
-              <DropInHoverText text={item.title} trigger={isHovered} highlightClass="text-orange-600 dark:text-orange-400" />
+            <h3 className="text-2xl font-bold mb-3 text-slate-900 dark:text-white tracking-tight uppercase italic">
+              <DropInHoverText text={item.title} trigger={isHovered} highlightClass="text-accent" />
             </h3>
             <p className="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
               {item.description}
@@ -152,19 +152,19 @@ const FinalMegaCTA = () => {
     <section key="cta" className="h-screen w-full flex flex-col justify-between relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       {/* Intense Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.1)_0%,transparent_70%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,120,41,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,120,41,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(219,154,70,0.1)_0%,transparent_70%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(219,154,70,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(219,154,70,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
         {/* Animated Mesh Gradients */}
         <motion.div
           animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
           transition={{ duration: 15, repeat: Infinity }}
-          className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[150px]"
+          className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[150px]"
         />
         <motion.div
           animate={{ x: [0, -50, 0], y: [0, 30, 0] }}
           transition={{ duration: 20, repeat: Infinity }}
-          className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[150px]"
+          className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[150px]"
         />
       </div>
 
@@ -181,14 +181,14 @@ const FinalMegaCTA = () => {
               }}
               animate={{ rotateX: rotate.x, rotateY: rotate.y, scale: isHovered ? 1.01 : 1 }}
               transition={{ type: "spring", stiffness: 150, damping: 20 }}
-              className="relative p-10 md:p-14 rounded-[3rem] overflow-hidden bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl border border-slate-200/60 dark:border-white/10 shadow-[0_50px_100px_-20px_rgba(249,115,22,0.2)] group"
+              className="relative p-10 md:p-14 rounded-[3rem] overflow-hidden bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl border border-slate-200/60 dark:border-white/10 shadow-[0_50px_100px_-20px_rgba(219,154,70,0.2)] group"
               style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
             >
               {/* Glossy Border Effect */}
               <div
                 className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[3rem]"
                 style={{
-                  background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 120, 41, 0.4), transparent 40%)`,
+                  background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, hsla(34, 67%, 57%, 0.4), transparent 40%)`,
                   padding: '2px',
                   WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                   WebkitMaskComposite: 'destination-out',
@@ -199,7 +199,7 @@ const FinalMegaCTA = () => {
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                 style={{
-                  background: `radial-gradient(1000px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 120, 41, 0.1), transparent 80%)`,
+                  background: `radial-gradient(1000px circle at ${mousePos.x}px ${mousePos.y}px, hsla(34, 67%, 57%, 0.1), transparent 80%)`,
                 }}
               />
 
@@ -209,40 +209,40 @@ const FinalMegaCTA = () => {
               <div className="relative z-20 text-center flex flex-col items-center">
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-orange-600 text-white mb-8 font-black tracking-[0.2em] uppercase text-xs shadow-2xl shadow-orange-500/40"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-accent text-white mb-8 font-bold tracking-[0.2em] uppercase text-xs shadow-2xl shadow-accent/40"
                 >
                   <Zap className="w-4 h-4 fill-current" />
                   <span>Authority Scale</span>
                 </motion.div>
 
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white mb-8 leading-[0.8] tracking-tighter uppercase italic">
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-8 leading-[0.8] tracking-tighter uppercase italic">
                   <DropInHoverText text="Ready to" trigger={isHovered} className="block" highlightClass="text-slate-900 dark:text-white" />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400 drop-shadow-2xl">Scale Up?</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80 drop-shadow-2xl">Scale Up?</span>
                 </h2>
 
                 <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed font-bold">
-                  Your journey to operational excellence starts with a single high‑impact conversation. Let's build your <span className="text-orange-600 dark:text-orange-400">Empire</span>.
+                  Your journey to operational excellence starts with a single high‑impact conversation. Let's build your <span className="text-accent">Empire</span>.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-6 items-center">
                   <MagneticWrapper strength={0.3}>
-                    <Button onClick={() => window.scrollTo({ top: window.innerHeight * 2, behavior: 'smooth' })} className="h-16 md:h-20 px-12 md:px-16 rounded-[2.5rem] bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-lg md:text-xl transition-all duration-500 shadow-2xl hover:shadow-orange-500/40 hover:-translate-y-2 group/btn relative overflow-hidden">
-                      <div className="absolute inset-0 bg-orange-600 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
+                    <Button onClick={() => window.scrollTo({ top: window.innerHeight * 2, behavior: 'smooth' })} className="h-16 md:h-20 px-12 md:px-16 rounded-[2.5rem] bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg md:text-xl transition-all duration-500 shadow-2xl hover:shadow-accent/40 hover:-translate-y-2 group/btn relative overflow-hidden">
+                      <div className="absolute inset-0 bg-accent translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
                       <span className="relative z-10 flex items-center gap-4">
                         Back to Scheduler <ArrowRight className="w-6 h-6 md:w-7 md:h-7 group-hover/btn:translate-x-2 transition-transform" />
                       </span>
                     </Button>
                   </MagneticWrapper>
 
-                  <button className="text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.2em] text-xs hover:text-orange-600 dark:hover:text-orange-400 transition-all hover:tracking-[0.4em]">
+                  <button className="text-slate-400 dark:text-slate-500 font-bold uppercase tracking-[0.2em] text-xs hover:text-accent transition-all hover:tracking-[0.4em]">
                     Download Info Pack
                   </button>
                 </div>
               </div>
 
               {/* Decorative Corner Glows */}
-              <div className="absolute top-0 right-0 w-32 md:w-48 h-32 md:h-48 bg-orange-500/10 blur-[80px] rounded-full" />
-              <div className="absolute bottom-0 left-0 w-32 md:w-48 h-32 md:h-48 bg-amber-500/10 blur-[80px] rounded-full" />
+              <div className="absolute top-0 right-0 w-32 md:w-48 h-32 md:h-48 bg-accent/10 blur-[80px] rounded-full" />
+              <div className="absolute bottom-0 left-0 w-32 md:w-48 h-32 md:h-48 bg-accent/10 blur-[80px] rounded-full" />
             </motion.div>
           </AnimatedSection>
         </div>
@@ -288,14 +288,14 @@ const BookACall = () => {
         <motion.div
           animate={{ scale: [1, 1.1, 1], x: [0, 40, 0], y: [0, 20, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 -left-24 w-96 h-96 bg-orange-500/10 rounded-full blur-[100px]"
+          className="absolute top-1/4 -left-24 w-96 h-96 bg-accent/10 rounded-full blur-[100px]"
         />
         <motion.div
           animate={{ scale: [1.1, 1, 1.1], x: [0, -40, 0], y: [0, -20, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 -right-24 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px]"
+          className="absolute bottom-1/4 -right-24 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,120,41,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,120,41,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,120,41,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,120,41,0.1)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(219,154,70,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(219,154,70,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(219,154,70,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(219,154,70,0.1)_1px,transparent_1px)] bg-[size:50px_50px]" />
         <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-slate-50 dark:from-slate-950 via-slate-50/50 dark:via-slate-950/50 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-slate-50 dark:from-slate-950 via-slate-50/50 dark:via-slate-950/50 to-transparent" />
       </div>
@@ -305,14 +305,14 @@ const BookACall = () => {
           {/* Left Content */}
           <div className="text-left">
             <AnimatedSection direction="left">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-500/20 text-orange-700 dark:text-orange-400 mb-6 font-bold tracking-tight uppercase">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-6 font-bold tracking-tight uppercase">
                 <Calendar className="w-3.5 h-3.5" />
                 <span className="text-xs">Strategic Consultation</span>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-[0.9] mb-6 text-slate-900 dark:text-white">
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[0.9] mb-6 text-slate-900 dark:text-white">
                 Schedule Your <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80">
                   Free Consultation
                 </span>
               </h1>
@@ -323,12 +323,12 @@ const BookACall = () => {
 
               <div className="flex flex-col sm:flex-row gap-5">
                 <MagneticWrapper strength={0.2}>
-                  <Button onClick={() => window.scrollTo({ top: window.innerHeight * 2, behavior: 'smooth' })} className="h-14 px-8 rounded-2xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-base transition-all duration-300 shadow-xl shadow-orange-500/20 hover:-translate-y-1">
+                  <Button onClick={() => window.scrollTo({ top: window.innerHeight * 2, behavior: 'smooth' })} className="h-14 px-8 rounded-2xl bg-accent hover:bg-accent/90 text-white font-bold text-base transition-all duration-300 shadow-xl shadow-accent/20 hover:-translate-y-1">
                     Book Your Slot
                   </Button>
                 </MagneticWrapper>
                 <MagneticWrapper strength={0.1}>
-                  <button className="text-slate-500 dark:text-slate-400 font-bold hover:text-orange-600 dark:hover:text-orange-400 transition-colors flex items-center gap-2 px-4 text-sm">
+                  <button className="text-slate-500 dark:text-slate-400 font-bold hover:text-accent dark:hover:text-accent transition-colors flex items-center gap-2 px-4 text-sm">
                     View FAQ <ArrowRight size={16} />
                   </button>
                 </MagneticWrapper>
@@ -347,7 +347,7 @@ const BookACall = () => {
                 <motion.div
                   whileHover={{ rotateY: -4, rotateX: 2, scale: 1.01 }}
                   transition={{ type: "spring", stiffness: 150, damping: 30 }}
-                  className="relative rounded-[3.5rem] overflow-hidden border border-slate-200/50 dark:border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] dark:shadow-[0_50px_100px_-20px_rgba(249,115,22,0.2)] bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl p-4"
+                  className="relative rounded-[3.5rem] overflow-hidden border border-slate-200/50 dark:border-white/10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] dark:shadow-[0_50px_100px_-20px_rgba(219,154,70,0.2)] bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl p-4"
                 >
                   <div className="relative rounded-[2.8rem] overflow-hidden aspect-[4/3]">
                     <img
@@ -355,7 +355,7 @@ const BookACall = () => {
                       alt="Strategic Partnership"
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-orange-600/20 via-transparent to-transparent mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 via-transparent to-transparent mix-blend-overlay" />
 
                     {/* Pulsing Tech Nodes */}
                     {[
@@ -367,10 +367,10 @@ const BookACall = () => {
                         key={i}
                         animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0.8, 0.4] }}
                         transition={{ duration: 3, repeat: Infinity, delay: i * 0.7 }}
-                        className="absolute w-3.5 h-3.5 bg-orange-500 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.8)]"
+                        className="absolute w-3.5 h-3.5 bg-accent rounded-full shadow-[0_0_20px_rgba(219,154,70,0.8)]"
                         style={pos}
                       >
-                        <div className="absolute inset-0 bg-orange-400 rounded-full animate-ping" />
+                        <div className="absolute inset-0 bg-accent rounded-full animate-ping" />
                       </motion.div>
                     ))}
 
@@ -380,7 +380,7 @@ const BookACall = () => {
                         <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
                         <div className="absolute inset-0 bg-green-400 rounded-full animate-ping opacity-50" />
                       </div>
-                      <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Consultation Live</span>
+                      <span className="text-[10px] font-bold text-white uppercase tracking-[0.2em]">Consultation Live</span>
                     </div>
                   </div>
                 </motion.div>
@@ -389,15 +389,15 @@ const BookACall = () => {
                 <motion.div
                   animate={{ y: [0, -25, 0], x: [0, 15, 0] }}
                   transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-14 -left-14 bg-white dark:bg-slate-900 shadow-[0_30px_60px_-15px_rgba(249,115,22,0.3)] p-7 rounded-[3rem] border border-orange-500/10 backdrop-blur-2xl z-20 hidden xl:block"
+                  className="absolute -top-14 -left-14 bg-white dark:bg-slate-900 shadow-[0_30px_60px_-15px_rgba(219,154,70,0.3)] p-7 rounded-[3rem] border border-accent/10 backdrop-blur-2xl z-20 hidden xl:block"
                 >
                   <div className="flex flex-col gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-orange-600 text-white flex items-center justify-center shadow-xl shadow-orange-500/40">
+                    <div className="w-14 h-14 rounded-2xl bg-accent text-white flex items-center justify-center shadow-xl shadow-accent/40">
                       <TrendingUp size={28} />
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] mb-1">Efficiency</div>
-                      <div className="text-3xl font-black text-slate-900 dark:text-white tracking-tighter">+84.2%</div>
+                      <div className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em] mb-1">Efficiency</div>
+                      <div className="text-3xl font-bold text-slate-900 dark:text-white tracking-tighter">+84.2%</div>
                     </div>
                   </div>
                 </motion.div>
@@ -408,8 +408,8 @@ const BookACall = () => {
                   transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                   className="absolute -bottom-12 -right-12 bg-slate-900 dark:bg-white shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)] p-8 rounded-[3rem] border border-white/10 dark:border-slate-200/50 z-20 flex flex-col gap-5 text-center min-w-[220px]"
                 >
-                  <div className="text-[10px] text-orange-500 font-black uppercase tracking-[0.3em] mb-1">Next Available</div>
-                  <div className="text-2xl font-black text-white dark:text-slate-900 tracking-tighter">Today, 2:30 PM</div>
+                  <div className="text-[10px] text-accent font-bold uppercase tracking-[0.3em] mb-1">Next Available</div>
+                  <div className="text-2xl font-bold text-white dark:text-slate-900 tracking-tighter">Today, 2:30 PM</div>
                   <div className="flex items-center justify-center gap-4">
                     <div className="flex -space-x-3">
                       {[1, 2, 3].map(i => (
@@ -421,7 +421,7 @@ const BookACall = () => {
                 </motion.div>
 
                 {/* Background Atmosphere */}
-                <div className="absolute -inset-32 bg-orange-500/10 blur-[150px] rounded-full -z-10 animate-pulse pointer-events-none" />
+                <div className="absolute -inset-32 bg-accent/10 blur-[150px] rounded-full -z-10 animate-pulse pointer-events-none" />
               </div>
             </AnimatedSection>
           </div>
@@ -433,20 +433,20 @@ const BookACall = () => {
     <section key="expectations" className="h-screen w-full flex items-center justify-center relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,120,41,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,120,41,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,120,41,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,120,41,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
-        <div className="absolute top-1/2 -left-20 w-80 h-80 bg-orange-500/10 rounded-full blur-[100px]" />
-        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(219,154,70,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(219,154,70,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(219,154,70,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(219,154,70,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute top-1/2 -left-20 w-80 h-80 bg-accent/10 rounded-full blur-[100px]" />
+        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-accent/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 pt-20">
         <AnimatedSection direction="up" className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-500/20 text-orange-700 dark:text-orange-400 mb-4 font-bold tracking-tight uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-4 font-bold tracking-tight uppercase">
             <Target className="w-3.5 h-3.5" />
             <span className="text-xs">The Roadmap</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-none mb-4 text-slate-900 dark:text-white">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-none mb-4 text-slate-900 dark:text-white">
             What to Expect <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400 uppercase italic">on the Call</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80 uppercase italic">on the Call</span>
           </h2>
         </AnimatedSection>
 
@@ -463,7 +463,7 @@ const BookACall = () => {
       {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,120,41,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,120,41,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,120,41,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,120,41,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 rounded-full blur-[140px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[140px]" />
       </div>
 
       <div className="container mx-auto px-4 w-full relative z-10 pt-20">
@@ -471,12 +471,12 @@ const BookACall = () => {
           <div className="grid lg:grid-cols-5 gap-12 items-center">
             <div className="lg:col-span-2 text-left">
               <AnimatedSection direction="left">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-500/20 text-orange-700 dark:text-orange-400 mb-8 font-bold tracking-tight uppercase">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-8 font-bold tracking-tight uppercase">
                   <Shield className="w-3.5 h-3.5" />
                   <span className="text-xs">Secure Booking</span>
                 </div>
-                <h2 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white leading-[0.9] mb-8 tracking-tighter uppercase">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400">Instant</span> <br />
+                <h2 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-[0.9] mb-8 tracking-tighter uppercase">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80">Instant</span> <br />
                   Availability
                 </h2>
                 <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed font-medium max-w-md">
@@ -499,7 +499,7 @@ const BookACall = () => {
                       whileHover={{ x: 8 }}
                       className="group flex items-center gap-4 p-3 rounded-2xl hover:bg-white dark:hover:bg-slate-900 shadow-sm hover:shadow-md border border-transparent hover:border-slate-200 dark:hover:border-slate-800 transition-all duration-500"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400 flex items-center justify-center group-hover:bg-orange-600 group-hover:text-white group-hover:scale-110 transition-all duration-500">
+                      <div className="w-10 h-10 rounded-xl bg-accent/10 dark:bg-accent/10 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-white group-hover:scale-110 transition-all duration-500">
                         <item.icon size={18} />
                       </div>
                       <span className="text-slate-600 dark:text-slate-400 font-bold uppercase tracking-widest text-[10px] md:text-xs group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
@@ -515,15 +515,15 @@ const BookACall = () => {
               <AnimatedSection direction="right" delay={0.3}>
                 <motion.div
                   whileHover={{ y: -5 }}
-                  className="relative group p-1 rounded-[3rem] bg-gradient-to-br from-slate-200 via-white to-slate-200 dark:from-slate-800 dark:via-slate-900 dark:to-slate-800 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] dark:shadow-[0_40px_100px_-20px_rgba(249,115,22,0.1)]"
+                  className="relative group p-1 rounded-[3rem] bg-gradient-to-br from-slate-200 via-white to-slate-200 dark:from-slate-800 dark:via-slate-900 dark:to-slate-800 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] dark:shadow-[0_40px_100px_-20px_rgba(219,154,70,0.1)]"
                 >
                   <div className="p-6 md:p-10 rounded-[2.8rem] bg-white/80 dark:bg-slate-950/80 backdrop-blur-3xl border border-white/40 dark:border-white/5 overflow-hidden flex flex-col items-center justify-center relative min-h-[520px]">
                     {/* Interior Mesh Decor */}
-                    <div className="absolute inset-0 bg-[linear-gradient(rgba(249,115,22,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(249,115,22,0.02)_1px,transparent_1px)] bg-[size:30px_30px] opacity-50 pointer-events-none" />
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(219,154,70,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(219,154,70,0.02)_1px,transparent_1px)] bg-[size:30px_30px] opacity-50 pointer-events-none" />
 
                     {/* Floating Glows */}
-                    <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/10 blur-[80px] rounded-full animate-pulse" />
-                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-amber-500/10 blur-[80px] rounded-full animate-pulse" />
+                    <div className="absolute top-0 right-0 w-48 h-48 bg-accent/10 blur-[80px] rounded-full animate-pulse" />
+                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 blur-[80px] rounded-full animate-pulse" />
 
                     {/* Scheduler Content Container */}
                     <div className="relative z-10 w-full flex flex-col items-center">
@@ -537,8 +537,8 @@ const BookACall = () => {
                         </motion.div>
                         <h3 className="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-[0.3em]">Select a Time</h3>
                         <div className="flex items-center gap-2 justify-center mt-3">
-                          <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-ping" />
-                          <span className="text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest">Global Sync Active</span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
+                          <span className="text-[10px] font-bold text-accent uppercase tracking-widest">Global Sync Active</span>
                         </div>
                       </div>
 
@@ -548,17 +548,17 @@ const BookACall = () => {
                         ].map((time, idx) => (
                           <motion.button
                             key={time}
-                            whileHover={{ scale: 1.02, backgroundColor: idx === 0 ? "" : "rgba(249, 115, 22, 0.05)" }}
+                            whileHover={{ scale: 1.02, backgroundColor: idx === 0 ? "" : "rgba(219, 154, 70, 0.05)" }}
                             whileTap={{ scale: 0.98 }}
                             className={cn(
                               "p-5 rounded-2xl border transition-all flex flex-col items-center justify-center gap-1",
                               idx === 0
-                                ? "bg-orange-600 border-orange-500 text-white shadow-xl shadow-orange-500/40"
+                                ? "bg-accent border-accent text-white shadow-xl shadow-accent/40"
                                 : "bg-white dark:bg-slate-900/40 border-slate-100 dark:border-white/5 text-slate-900 dark:text-slate-200 shadow-sm"
                             )}
                           >
-                            <span className="text-base font-black tracking-tight">{time} AM</span>
-                            <span className={cn(idx === 0 ? "text-orange-100" : "text-slate-500", "text-[10px] font-bold uppercase tracking-[0.1em]")}>
+                            <span className="text-base font-bold tracking-tight">{time} AM</span>
+                            <span className={cn(idx === 0 ? "text-white/90" : "text-slate-500", "text-[10px] font-bold uppercase tracking-[0.1em]")}>
                               {idx === 0 ? "Selected" : "Available"}
                             </span>
                           </motion.button>
@@ -573,12 +573,12 @@ const BookACall = () => {
                             ))}
                           </div>
                           <div className="text-left">
-                            <p className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-widest">Enterprise Team</p>
+                            <p className="text-[10px] font-bold text-slate-900 dark:text-white uppercase tracking-widest">Enterprise Team</p>
                             <p className="text-[9px] font-bold text-slate-400 uppercase">Ready for strategy</p>
                           </div>
                         </div>
-                        <div className="px-4 py-2 rounded-xl bg-orange-500/5 border border-orange-500/10">
-                          <p className="text-[9px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest">Session: <span className="text-slate-900 dark:text-white">30 Min</span></p>
+                        <div className="px-4 py-2 rounded-xl bg-accent/5 border border-accent/10">
+                          <p className="text-[9px] font-bold text-accent uppercase tracking-widest">Session: <span className="text-slate-900 dark:text-white">30 Min</span></p>
                         </div>
                       </div>
                     </div>

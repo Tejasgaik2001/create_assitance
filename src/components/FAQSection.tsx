@@ -87,7 +87,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                     damping: 20,
                     delay: 0.1
                   }}
-                  className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]"
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]"
                 >
                   <span className="text-foreground">Frequently Asked </span>
                   <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
@@ -171,7 +171,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-accent/10 opacity-0 data-[state=open]:opacity-100 transition-opacity duration-500" />
 
                         <AccordionTrigger className="relative text-left py-4 hover:no-underline">
-                          <span className="text-sm sm:text-base lg:text-lg font-black uppercase tracking-tight italic group-hover:text-primary transition-colors flex-1 pr-3 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent group-data-[state=open]:from-primary group-data-[state=open]:to-accent">
+                          <span className="text-sm sm:text-base lg:text-lg font-bold uppercase tracking-tight italic group-hover:text-primary transition-colors flex-1 pr-3 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent group-data-[state=open]:from-primary group-data-[state=open]:to-accent">
                             {faq.question}
                           </span>
                         </AccordionTrigger>

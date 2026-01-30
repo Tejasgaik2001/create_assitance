@@ -144,7 +144,7 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                         }}
                                     >
                                         <motion.h3
-                                            className="text-3xl md:text-4xl font-black mb-2"
+                                            className="text-3xl md:text-4xl font-bold mb-2"
                                             variants={{
                                                 hidden: { opacity: 0, y: 20 },
                                                 visible: {

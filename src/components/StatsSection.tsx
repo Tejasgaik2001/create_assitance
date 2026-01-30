@@ -55,7 +55,7 @@ const StatsSection = () => {
           <motion.span
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-            className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-accent/80 border border-primary text-sm font-black uppercase tracking-widest mb-6"
+            className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-accent/80 border border-primary text-sm font-bold uppercase tracking-widest mb-6"
           >
             Our Impact
           </motion.span>
@@ -63,7 +63,7 @@ const StatsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-black tracking-tight mb-4 uppercase italic text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent"
+            className="text-4xl md:text-6xl font-bold tracking-tight mb-4 uppercase italic text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent"
           >
             Numbers That Speak
           </motion.h2>
@@ -157,7 +157,7 @@ const StatsSection = () => {
                   }}
                   className="text-center mb-8"
                 >
-                  <div className="text-7xl md:text-8xl font-black bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent drop-shadow-2xl">
+                  <div className="text-7xl md:text-8xl font-bold bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent drop-shadow-2xl">
                     <CountUp value={stat.value} duration={stat.duration} suffix={stat.suffix} isVisible={isInView} />
                   </div>
                 </motion.div>

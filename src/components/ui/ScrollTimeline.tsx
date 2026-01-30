@@ -99,7 +99,7 @@ export const ScrollTimeline = ({ steps }: ScrollTimelineProps) => {
 
                                     {/* Content */}
                                     <div>
-                                        <h3 className="text-3xl md:text-4xl font-black mb-2">{step.title}</h3>
+                                        <h3 className="text-3xl md:text-4xl font-bold mb-2">{step.title}</h3>
                                         <p className="text-lg text-accent font-medium mb-4">{step.subtitle}</p>
                                         <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">
                                             {step.description}
@@ -130,8 +130,8 @@ export const ScrollTimeline = ({ steps }: ScrollTimelineProps) => {
                                             <div
                                                 key={idx}
                                                 className={`h-1 rounded-full transition-all duration-300 ${idx === index
-                                                        ? "w-8 bg-accent"
-                                                        : "w-1 bg-muted-foreground/30"
+                                                    ? "w-8 bg-accent"
+                                                    : "w-1 bg-muted-foreground/30"
                                                     }`}
                                             />
                                         ))}

@@ -366,20 +366,30 @@ const WhyCreateAssistants = () => {
                         <div className="transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-1/2">
                           <div className="h-[48px] md:h-14 flex items-center gap-4">
                             <span className="text-sm font-bold text-primary/60">{item.step}</span>
-                            <h3 className="text-xl md:text-3xl font-black text-neutral-900 dark:text-white uppercase tracking-tighter">{item.title}</h3>
+                            <h3 className="text-xl md:text-3xl font-bold text-neutral-900 dark:text-white uppercase tracking-tighter">
+                              {item.title}
+                            </h3>
                           </div>
                           <div className="h-[48px] md:h-14 flex items-center gap-4">
-                            <span className="text-sm font-bold text-orange-500">{item.step}</span>
-                            <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter italic text-orange-500">{item.title}</h3>
+                            <span className="text-sm font-bold text-accent">{item.step}</span>
+                            <h3 className="text-xl md:text-3xl font-bold uppercase tracking-tighter italic text-accent">
+                              {item.title}
+                            </h3>
                           </div>
                         </div>
                       </div>
-                      <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl overflow-hidden bg-muted/50 flex items-center justify-center transition-all duration-300 group-hover:bg-orange-500/10">
-                        <Icon className="w-5 h-5 md:w-6 md:h-6 text-orange-500 transition-transform duration-300 group-hover:scale-110" />
+
+                      <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl overflow-hidden bg-muted/50 flex items-center justify-center transition-all duration-300 group-hover:bg-accent/10">
+                        <Icon className="w-5 h-5 md:w-6 md:h-6 text-accent transition-transform duration-300 group-hover:scale-110" />
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">{item.description}</p>
-                    <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-orange-500 to-red-500 transition-all duration-500 group-hover:w-full" />
+
+                    <p className="text-sm text-muted-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {item.description}
+                    </p>
+
+                    <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-accent to-accent/50 transition-all duration-500 group-hover:w-full" />
+
                     <AnimatePresence>
                       {isHovered && (
                         <motion.div
@@ -410,8 +420,11 @@ const WhyCreateAssistants = () => {
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-20">
-              <span className="text-orange-600 font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">Our DNA</span>
-              <h2 className="section-headline mb-8">Our Mission & <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-red-600">Values</span></h2>
+              <span className="text-primary font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">Our DNA</span>
+              <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tighter leading-tight">
+                Our <span className="text-gradient">Mission & Values</span>
+              </h2>
+              <div className="h-1 w-20 bg-primary/20 mx-auto mb-8 rounded-full" />
               <p className="body-large max-w-2xl mx-auto text-muted-foreground/80 font-medium leading-relaxed">
                 Create Assistants is a family‑owned agency based in Iowa. We believe small businesses deserve enterprise-grade automation.
               </p>
