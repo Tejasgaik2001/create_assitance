@@ -8,20 +8,20 @@ interface AnimatedSectionProps {
   direction?: "up" | "down" | "left" | "right";
 }
 
-const AnimatedSection = ({ 
-  children, 
-  className = "", 
+const AnimatedSection = ({
+  children,
+  className = "",
   delay = 0,
-  direction = "up" 
+  direction = "up"
 }: AnimatedSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const directions = {
-    up: { y: 60, x: 0 },
-    down: { y: -60, x: 0 },
-    left: { x: 60, y: 0 },
-    right: { x: -60, y: 0 },
+    up: { y: 40, x: 0 },
+    down: { y: -40, x: 0 },
+    left: { x: 40, y: 0 },
+    right: { x: -40, y: 0 },
   };
 
   const variants: Variants = {
@@ -34,9 +34,9 @@ const AnimatedSection = ({
       x: 0,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 1.0,
         delay,
-        ease: "easeOut" as const,
+        ease: [0.22, 1, 0.36, 1], // Smooth out ease
       },
     },
   };
