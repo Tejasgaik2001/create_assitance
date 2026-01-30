@@ -232,10 +232,9 @@ const WhyCreateAssistants = () => {
             const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
             const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-              const rect = e.currentTarget.getBoundingClientRect();
               setMousePos({
-                x: e.clientX - rect.left,
-                y: e.clientY - rect.top,
+                x: e.clientX,
+                y: e.clientY,
               });
             };
 
@@ -263,8 +262,8 @@ const WhyCreateAssistants = () => {
                       </div>
                       {/* State 2: Hover - Italic + Color */}
                       <div className="h-[48px] md:h-14 flex items-center gap-4">
-                        <span className="text-sm font-bold text-primary">{item.step}</span>
-                        <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter italic text-primary">
+                        <span className="text-sm font-bold text-orange-500">{item.step}</span>
+                        <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter italic text-orange-500">
                           {item.title}
                         </h3>
                       </div>
@@ -272,8 +271,8 @@ const WhyCreateAssistants = () => {
                   </div>
 
                   {/* Right side - Icon only (image follows cursor) */}
-                  <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl overflow-hidden bg-muted/50 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/10">
-                    <Icon className="w-5 h-5 md:w-6 md:h-6 text-primary transition-transform duration-300 group-hover:scale-110" />
+                  <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl overflow-hidden bg-muted/50 flex items-center justify-center transition-all duration-300 group-hover:bg-orange-500/10">
+                    <Icon className="w-5 h-5 md:w-6 md:h-6 text-orange-500 transition-transform duration-300 group-hover:scale-110" />
                   </div>
                 </div>
 
@@ -283,7 +282,7 @@ const WhyCreateAssistants = () => {
                 </p>
 
                 {/* Decorative gradient bar */}
-                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-accent transition-all duration-500 group-hover:w-full" />
+                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-orange-500 to-red-500 transition-all duration-500 group-hover:w-full" />
 
                 {/* Cursor-following image */}
                 <AnimatePresence>

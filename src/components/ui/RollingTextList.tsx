@@ -24,18 +24,18 @@ const RollingTextItem = ({ item }: RollingTextItemProps) => {
                             {item.title}
                         </h2>
                         <Icon
-                            className="text-2xl md:text-3xl text-violet-600 dark:text-violet-400 transition-all duration-300 shrink-0"
+                            className="text-2xl md:text-3xl text-orange-500 dark:text-orange-400 transition-all duration-300 shrink-0"
                             style={{ fill: 'none', stroke: 'currentColor', strokeWidth: '2' }}
                         />
                     </div>
 
                     {/* State 2: Hover - Italic + Color + Filled Icon */}
                     <div className="h-[48px] md:h-16 flex items-center justify-between gap-4">
-                        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter italic text-violet-600 dark:text-violet-400">
+                        <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter italic text-orange-500 dark:text-orange-400">
                             {item.title}
                         </h2>
                         <Icon
-                            className="text-2xl md:text-3xl text-violet-600 dark:text-violet-400 transition-all duration-300 shrink-0"
+                            className="text-2xl md:text-3xl text-orange-500 dark:text-orange-400 transition-all duration-300 shrink-0"
                             style={{ fill: 'currentColor', stroke: 'currentColor', strokeWidth: '0' }}
                         />
                     </div>
@@ -48,7 +48,7 @@ const RollingTextItem = ({ item }: RollingTextItemProps) => {
             </p>
 
             {/* Decorative gradient bar */}
-            <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-600 to-indigo-600 transition-all duration-500 group-hover:w-full" />
+            <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-orange-500 to-red-500 transition-all duration-500 group-hover:w-full" />
         </div>
     );
 };
