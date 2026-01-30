@@ -12,7 +12,7 @@ import { ThreeDCard } from "@/components/ui/ThreeDCard";
 import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
 
-const DropInHoverText = ({ text, trigger, className, highlightClass = "text-violet-600 dark:text-violet-400" }: { text: string; trigger: boolean; className?: string; highlightClass?: string }) => {
+const DropInHoverText = ({ text, trigger, className, highlightClass = "text-orange-600 dark:text-orange-400" }: { text: string; trigger: boolean; className?: string; highlightClass?: string }) => {
   return (
     <span className={cn("inline-flex flex-wrap transition-colors duration-300", trigger ? highlightClass : "", className)}>
       {text.split("").map((char, i) => (
@@ -53,18 +53,18 @@ const AutomationCard = ({ item, index }: { item: any, index: number }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Node Point */}
-      <div className="absolute left-6 top-6 -translate-x-1/2 -translate-y-[2px] w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-violet-500 z-10 flex items-center justify-center shadow-[0_0_10px_rgba(139,92,246,0.3)]">
-        <div className={cn("w-2 h-2 rounded-full bg-violet-500 transition-transform duration-300", isHovered ? "scale-150" : "")} />
+      <div className="absolute left-6 top-6 -translate-x-1/2 -translate-y-[2px] w-6 h-6 rounded-full bg-white dark:bg-slate-900 border-2 border-orange-500 z-10 flex items-center justify-center shadow-[0_0_10px_rgba(255,120,41,0.3)]">
+        <div className={cn("w-2 h-2 rounded-full bg-orange-500 transition-transform duration-300", isHovered ? "scale-150" : "")} />
       </div>
 
       <div className={cn(
         "p-5 rounded-2xl border backdrop-blur-sm transition-all duration-300 shadow-sm",
         isHovered
-          ? "bg-violet-50/80 dark:bg-violet-900/20 border-violet-300 dark:border-violet-700 shadow-xl translate-x-1"
+          ? "bg-orange-50/80 dark:bg-orange-900/20 border-orange-300 dark:border-orange-700 shadow-xl translate-x-1"
           : "bg-white/50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800"
       )}>
         <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 flex items-center gap-2">
-          <Icon className={cn("w-5 h-5 transition-colors duration-300", isHovered ? "text-violet-600 dark:text-violet-400" : "text-slate-500")} />
+          <Icon className={cn("w-5 h-5 transition-colors duration-300", isHovered ? "text-orange-600 dark:text-orange-400" : "text-slate-500")} />
           <DropInHoverText text={item.title} trigger={isHovered} />
         </h3>
         <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -96,7 +96,7 @@ const IntegrationNode = ({ text, index }: { text: string; index: number }) => {
       className={cn(
         "relative p-4 rounded-xl border transition-all duration-500 group overflow-hidden h-full",
         isHovered
-          ? "bg-blue-50/80 dark:bg-blue-950/20 border-blue-400 dark:border-blue-500/50 shadow-xl shadow-blue-500/10 -translate-x-2"
+          ? "bg-orange-50/80 dark:bg-orange-950/20 border-orange-400 dark:border-orange-500/50 shadow-xl shadow-orange-500/10 -translate-x-2"
           : "bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-800"
       )}
     >
@@ -104,14 +104,14 @@ const IntegrationNode = ({ text, index }: { text: string; index: number }) => {
         <div className={cn(
           "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-500 shadow-sm",
           isHovered
-            ? "bg-blue-600 text-white scale-110 rotate-[360deg] shadow-blue-500/40"
-            : "bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400"
+            ? "bg-orange-600 text-white scale-110 rotate-[360deg] shadow-orange-500/40"
+            : "bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-400"
         )}>
           <Icon size={20} />
         </div>
         <div className="flex-1">
           <h4 className="font-bold text-slate-900 dark:text-white mb-2 text-lg">
-            <DropInHoverText text={title} trigger={isHovered} highlightClass="text-blue-600 dark:text-blue-400" />
+            <DropInHoverText text={title} trigger={isHovered} highlightClass="text-orange-600 dark:text-orange-400" />
           </h4>
           <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
             {desc}
@@ -121,7 +121,7 @@ const IntegrationNode = ({ text, index }: { text: string; index: number }) => {
 
       {/* Animated side highlight */}
       <div className={cn(
-        "absolute right-0 top-0 bottom-0 w-1 bg-blue-500 transition-transform duration-500 origin-bottom",
+        "absolute right-0 top-0 bottom-0 w-1 bg-orange-500 transition-transform duration-500 origin-bottom",
         isHovered ? "scale-y-100" : "scale-y-0"
       )} />
     </motion.div>
@@ -156,7 +156,7 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
       >
         {/* Main Base Card */}
         <div
-          className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-blue-400 to-indigo-600 p-[1px] shadow-2xl"
+          className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-orange-400 to-amber-600 p-[1px] shadow-2xl"
           style={{ transform: 'translateZ(0px)' }}
         >
           <div className="w-full h-full rounded-[2.4rem] overflow-hidden bg-slate-950">
@@ -175,11 +175,11 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
           className="absolute -top-12 -left-12 p-6 rounded-3xl bg-white/10 dark:bg-slate-900/10 backdrop-blur-2xl border border-white/20 shadow-2xl hidden lg:block"
         >
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-blue-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/40">
+            <div className="w-12 h-12 rounded-2xl bg-orange-500 flex items-center justify-center text-white shadow-lg shadow-orange-500/40">
               <CheckCircle size={24} />
             </div>
             <div>
-              <div className="text-[10px] text-blue-400 font-bold uppercase tracking-widest">System Status</div>
+              <div className="text-[10px] text-orange-400 font-bold uppercase tracking-widest">System Status</div>
               <div className="text-sm font-bold text-white">Endpoints Synced</div>
             </div>
           </div>
@@ -187,7 +187,7 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
 
         <motion.div
           style={{ transform: 'translateZ(40px)' }}
-          className="absolute -bottom-10 -right-10 p-6 rounded-3xl bg-slate-900/80 backdrop-blur-xl border border-blue-500/30 shadow-2xl max-w-[240px] hidden lg:block"
+          className="absolute -bottom-10 -right-10 p-6 rounded-3xl bg-slate-900/80 backdrop-blur-xl border border-orange-500/30 shadow-2xl max-w-[240px] hidden lg:block"
         >
           <div className="space-y-3">
             <div className="flex justify-between items-center">
@@ -199,7 +199,7 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
                 initial={{ width: 0 }}
                 whileInView={{ width: '99%' }}
                 transition={{ duration: 1.5, delay: 0.5 }}
-                className="h-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"
+                className="h-full bg-orange-500 shadow-[0_0_10px_#f97316]"
               />
             </div>
           </div>
@@ -234,33 +234,33 @@ const ToolCard = ({ item, index }: { item: any; index: number }) => {
       className={cn(
         "p-6 rounded-2xl border transition-all duration-500 relative overflow-hidden group h-full flex flex-col justify-between",
         isHovered
-          ? "bg-blue-50/80 dark:bg-blue-900/10 border-blue-300 dark:border-blue-800 shadow-xl -translate-y-1"
+          ? "bg-orange-50/80 dark:bg-orange-900/10 border-orange-300 dark:border-orange-800 shadow-xl -translate-y-1"
           : "bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-800/60"
       )}
     >
       {/* Background Decorative Gradient */}
       <div className={cn(
-        "absolute -right-8 -bottom-8 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl transition-opacity duration-500",
+        "absolute -right-8 -bottom-8 w-32 h-32 bg-orange-500/5 rounded-full blur-2xl transition-opacity duration-500",
         isHovered ? "opacity-100" : "opacity-0"
       )} />
 
       <div>
         <div className={cn(
           "w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-300",
-          isHovered ? "bg-blue-500 text-white rotate-6" : "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
+          isHovered ? "bg-orange-500 text-white rotate-6" : "bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400"
         )}>
           <Icon className="w-6 h-6" />
         </div>
 
         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
-          <DropInHoverText text={item.title} trigger={isHovered} highlightClass="text-blue-600 dark:text-blue-400" />
+          <DropInHoverText text={item.title} trigger={isHovered} highlightClass="text-orange-600 dark:text-orange-400" />
         </h3>
         <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
           {item.description}
         </p>
       </div>
 
-      <div className="mt-8 flex items-center text-xs font-semibold text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="mt-8 flex items-center text-xs font-semibold text-orange-600 dark:text-orange-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         Learn more <ArrowRight className="ml-1 w-3 h-3" />
       </div>
     </motion.div>
@@ -315,7 +315,7 @@ const GlossyCard = ({ item, index }: { item: any; index: number }) => {
       <div
         className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{
-          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.12), transparent 40%)`,
+          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 120, 41, 0.12), transparent 40%)`,
         }}
       />
 
@@ -323,7 +323,7 @@ const GlossyCard = ({ item, index }: { item: any; index: number }) => {
       <div
         className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
         style={{
-          background: `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.2), transparent 40%)`,
+          background: `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 120, 41, 0.2), transparent 40%)`,
           padding: '1px',
           WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
           WebkitMaskComposite: 'destination-out',
@@ -332,20 +332,20 @@ const GlossyCard = ({ item, index }: { item: any; index: number }) => {
 
       <div className="relative z-20 p-8 flex flex-col h-full">
         <div className={cn(
-          "w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 bg-blue-500/10 text-blue-600 dark:text-blue-400 group-hover:bg-blue-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 shadow-lg group-hover:shadow-blue-500/25",
+          "w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 bg-orange-500/10 text-orange-600 dark:text-orange-400 group-hover:bg-orange-500 group-hover:text-white group-hover:scale-110 group-hover:rotate-3 shadow-lg group-hover:shadow-orange-500/25",
         )}>
           <Icon className="w-7 h-7" />
         </div>
 
         <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
-          <DropInHoverText text={item.title} trigger={isHovered} highlightClass="text-blue-600 dark:text-blue-400" />
+          <DropInHoverText text={item.title} trigger={isHovered} highlightClass="text-orange-600 dark:text-orange-400" />
         </h3>
 
         <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">
           {item.description}
         </p>
 
-        <div className="mt-auto pt-8 flex items-center text-xs font-semibold text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+        <div className="mt-auto pt-8 flex items-center text-xs font-semibold text-orange-600 dark:text-orange-400 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
           Live Data Stream <TrendingUp className="ml-2 w-3 h-3" />
         </div>
       </div>
@@ -368,7 +368,7 @@ const JourneyStep = ({ item, index }: { item: any; index: number }) => {
       className={cn(
         "relative p-8 rounded-3xl border transition-all duration-700 h-full flex flex-col group overflow-hidden",
         isHovered
-          ? "bg-blue-50/50 dark:bg-blue-900/10 border-blue-500/30 shadow-[0_20px_50px_-15px_rgba(59,130,246,0.15)] scale-[1.02] -translate-y-2"
+          ? "bg-orange-50/50 dark:bg-orange-900/10 border-orange-500/30 shadow-[0_20px_50px_-15px_rgba(255,120,41,0.15)] scale-[1.02] -translate-y-2"
           : "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800"
       )}
     >
@@ -379,13 +379,13 @@ const JourneyStep = ({ item, index }: { item: any; index: number }) => {
 
       <div className={cn(
         "w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500",
-        isHovered ? "bg-blue-500 text-white scale-110 shadow-lg shadow-blue-500/20" : "bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400"
+        isHovered ? "bg-orange-500 text-white scale-110 shadow-lg shadow-orange-500/20" : "bg-orange-100 dark:bg-orange-950 text-orange-600 dark:text-orange-400"
       )}>
         <Icon className="w-7 h-7" />
       </div>
 
       <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-        <DropInHoverText text={item.title} trigger={isHovered} highlightClass="text-blue-600 dark:text-blue-400" />
+        <DropInHoverText text={item.title} trigger={isHovered} highlightClass="text-orange-600 dark:text-orange-400" />
       </h3>
 
       <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-8">
@@ -398,10 +398,10 @@ const JourneyStep = ({ item, index }: { item: any; index: number }) => {
           <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center text-[10px] text-slate-400 border-b border-slate-200 dark:border-slate-800 pb-1">
               <span>Available slots</span>
-              <span className="text-blue-500 font-bold">12:30 PM</span>
+              <span className="text-orange-500 font-bold">12:30 PM</span>
             </div>
             <div className="flex gap-1.5 opacity-50">
-              {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-6 w-full rounded-md bg-blue-500/10" />)}
+              {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-6 w-full rounded-md bg-orange-500/10" />)}
             </div>
           </div>
         )}
@@ -413,18 +413,18 @@ const JourneyStep = ({ item, index }: { item: any; index: number }) => {
                 initial={{ width: 0 }}
                 whileInView={{ width: '100%' }}
                 transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
-                className="h-full bg-blue-500"
+                className="h-full bg-orange-500"
               />
             </div>
-            <div className="absolute -top-4 right-0 px-2 py-0.5 rounded bg-blue-500 text-white text-[8px] font-bold">Signed</div>
+            <div className="absolute -top-4 right-0 px-2 py-0.5 rounded bg-orange-500 text-white text-[8px] font-bold">Signed</div>
           </div>
         )}
 
         {index === 2 && (
           <div className="flex items-center gap-4 h-full">
-            <div className="w-full bg-blue-500/5 rounded-lg p-2 flex items-center justify-between border border-blue-500/10">
-              <div className="text-[10px] font-mono dark:text-blue-400">#INV-8952</div>
-              <div className="h-4 w-4 rounded-full bg-blue-500 flex items-center justify-center">
+            <div className="w-full bg-orange-500/5 rounded-lg p-2 flex items-center justify-between border border-orange-500/10">
+              <div className="text-[10px] font-mono dark:text-orange-400">#INV-8952</div>
+              <div className="h-4 w-4 rounded-full bg-orange-500 flex items-center justify-center">
                 <CheckCircle size={10} className="text-white" />
               </div>
             </div>
@@ -520,12 +520,12 @@ const CommandCenter = () => {
     <section key="hero" className="min-h-screen lg:h-screen w-full flex items-center justify-center relative overflow-hidden pt-24 pb-20 lg:pt-0 lg:pb-0 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       {/* Background Matrix/Grid Effect */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(30,58,138,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(30,58,138,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(30,58,138,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(30,58,138,0.1)_1px,transparent_1px)] bg-[size:40px_40px] opacity-100" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,120,41,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,120,41,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,120,41,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,120,41,0.1)_1px,transparent_1px)] bg-[size:40px_40px] opacity-100" />
         <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-slate-50 dark:from-slate-950 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-slate-50 dark:from-slate-950 to-transparent" />
         {/* Glows */}
-        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-blue-500/5 dark:bg-blue-600/10 rounded-full blur-[100px] -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500/5 dark:bg-blue-600/10 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-orange-500/5 dark:bg-orange-600/10 rounded-full blur-[100px] -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-orange-500/5 dark:bg-orange-600/10 rounded-full blur-[120px]" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 w-full">
@@ -535,15 +535,15 @@ const CommandCenter = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-500/30 text-blue-700 dark:text-blue-400 mb-6"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100/50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-500/30 text-orange-700 dark:text-orange-400 mb-6"
             >
-              <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
               <span className="text-xs font-semibold tracking-wide uppercase">Operational Control</span>
             </motion.div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 text-slate-900 dark:text-white">
               Control Your Entire Business <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400">
                 From One Screen
               </span>
             </h1>
@@ -553,7 +553,7 @@ const CommandCenter = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-8 h-12 text-base shadow-lg shadow-blue-500/20 dark:shadow-blue-900/20">
+              <Button className="bg-orange-600 hover:bg-orange-700 text-white rounded-full px-8 h-12 text-base shadow-lg shadow-orange-500/20 dark:shadow-orange-900/20">
                 Start Monitoring
               </Button>
               <Button variant="outline" className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full px-8 h-12 text-base">
@@ -568,10 +568,10 @@ const CommandCenter = () => {
               initial={{ opacity: 0, rotateX: 10, rotateY: -10, scale: 0.9 }}
               animate={{ opacity: 1, rotateX: 5, rotateY: -10, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-blue-900/10 dark:shadow-blue-900/50 border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm transform-style-3d group"
+              className="relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-orange-900/10 dark:shadow-orange-900/50 border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm transform-style-3d group"
               style={{ transformStyle: 'preserve-3d' }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-violet-500/5 dark:from-blue-500/10 dark:to-violet-500/10 pointer-events-none group-hover:opacity-75 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-amber-500/5 dark:from-orange-500/10 dark:to-amber-500/10 pointer-events-none group-hover:opacity-75 transition-opacity" />
               <img
                 src={dashboardMockup}
                 alt="Command Center Dashboard"
@@ -582,22 +582,22 @@ const CommandCenter = () => {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-6 -right-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-4 rounded-xl border border-blue-500/20 dark:border-blue-500/30 shadow-xl hidden md:block"
+                className="absolute -top-6 -right-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-4 rounded-xl border border-orange-500/20 dark:border-orange-500/30 shadow-xl hidden md:block"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-500/10 dark:bg-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                  <div className="w-10 h-10 rounded-full bg-orange-500/10 dark:bg-orange-500/20 flex items-center justify-center text-orange-600 dark:text-orange-400">
                     <TrendingUp size={20} />
                   </div>
                   <div>
                     <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Monthly Revenue</div>
-                    <div className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">$124,500 <span className="text-blue-600 dark:text-blue-400 text-xs ml-1">+12%</span></div>
+                    <div className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">$124,500 <span className="text-orange-600 dark:text-orange-400 text-xs ml-1">+12%</span></div>
                   </div>
                 </div>
               </motion.div>
             </motion.div>
 
             {/* Back Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/10 dark:bg-blue-500/20 blur-[100px] -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-500/10 dark:bg-orange-500/20 blur-[100px] -z-10" />
           </div>
         </div>
       </div>
@@ -623,7 +623,7 @@ const CommandCenter = () => {
                     }}
                     className={cn(
                       "inline-block",
-                      (word === "CRM" || word === "Marketing") ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400" : ""
+                      (word === "CRM" || word === "Marketing") ? "text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400" : ""
                     )}
                   >
                     {char}
@@ -655,20 +655,20 @@ const CommandCenter = () => {
           {/* Left Content: Logic Flow */}
           <div className="relative">
             <AnimatedSection direction="left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-500/30 text-blue-700 dark:text-blue-400 mb-6">
-                <Zap className="w-3 h-3 text-blue-500" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100/50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-500/30 text-orange-700 dark:text-orange-400 mb-6">
+                <Zap className="w-3 h-3 text-orange-500" />
                 <span className="text-xs font-semibold tracking-wide uppercase">Workflow Engine</span>
               </div>
               <h2 className="section-headline mb-8">
                 Automations That <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400">
                   Work While You Sleep
                 </span>
               </h2>
 
               <div className="relative space-y-8">
                 {/* Vertical Connection Line */}
-                <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-gradient-to-b from-blue-500/50 via-indigo-500/50 to-transparent" />
+                <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-gradient-to-b from-orange-500/50 via-amber-500/50 to-transparent" />
 
                 {automations.map((item, index) => (
                   <AutomationCard key={item.title} item={item} index={index} />
@@ -680,7 +680,7 @@ const CommandCenter = () => {
           {/* Right Content: Workflow Visualization */}
           <AnimatedSection direction="right" className="relative h-full flex items-center justify-center">
             {/* Abstract Background Blob */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-500/10 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="relative w-full max-w-md aspect-[4/5] bg-slate-100 dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col">
               {/* Mock Header */}
@@ -702,13 +702,13 @@ const CommandCenter = () => {
                   <motion.div
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
-                    className="bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-500/30 p-4 rounded-xl shadow-lg relative"
+                    className="bg-white dark:bg-slate-800 border border-orange-200 dark:border-orange-500/30 p-4 rounded-xl shadow-lg relative"
                   >
-                    <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-lg bg-blue-500" />
+                    <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-lg bg-orange-500" />
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400"><Users size={16} /></div>
+                      <div className="p-2 rounded-lg bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400"><Users size={16} /></div>
                       <div>
-                        <div className="text-[10px] text-blue-500 dark:text-blue-400 font-bold uppercase tracking-wider">Trigger</div>
+                        <div className="text-[10px] text-orange-500 dark:text-orange-400 font-bold uppercase tracking-wider">Trigger</div>
                         <div className="text-sm font-medium text-slate-900 dark:text-white">New Lead Submitted</div>
                       </div>
                     </div>
@@ -717,7 +717,7 @@ const CommandCenter = () => {
                       <motion.div
                         animate={{ height: ["0%", "100%"], opacity: [0, 1, 0] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                        className="w-full bg-blue-500"
+                        className="w-full bg-orange-500"
                       />
                     </div>
                   </motion.div>
@@ -727,16 +727,16 @@ const CommandCenter = () => {
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-500/30 p-4 rounded-xl shadow-lg relative ml-8"
+                    className="bg-white dark:bg-slate-800 border border-orange-200 dark:border-orange-500/30 p-4 rounded-xl shadow-lg relative ml-8"
                   >
                     <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 z-20" />
                     {/* Connecting Curve */}
                     <div className="absolute -left-8 -top-8 w-8 h-[calc(100%+32px)] border-l-2 border-b-2 border-slate-200 dark:border-slate-700 rounded-bl-2xl -z-10" />
 
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400"><Mail size={16} /></div>
+                      <div className="p-2 rounded-lg bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400"><Mail size={16} /></div>
                       <div>
-                        <div className="text-[10px] text-blue-500 dark:text-blue-400 font-bold uppercase tracking-wider">Action</div>
+                        <div className="text-[10px] text-orange-500 dark:text-orange-400 font-bold uppercase tracking-wider">Action</div>
                         <div className="text-sm font-medium text-slate-900 dark:text-white">Send Welcome Email</div>
                       </div>
                     </div>
@@ -747,10 +747,10 @@ const CommandCenter = () => {
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4 }}
-                    className="bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-500/30 p-3 rounded-lg shadow-lg relative w-max self-center"
+                    className="bg-white dark:bg-slate-800 border border-orange-200 dark:border-orange-500/30 p-3 rounded-lg shadow-lg relative w-max self-center"
                   >
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+                      <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
                       <span className="text-xs font-medium text-slate-600 dark:text-slate-300">Wait 2 Days</span>
                     </div>
                     {/* Connector Line Down */}
@@ -762,13 +762,13 @@ const CommandCenter = () => {
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6 }}
-                    className="bg-white dark:bg-slate-800 border border-blue-200 dark:border-blue-500/30 p-4 rounded-xl shadow-lg relative"
+                    className="bg-white dark:bg-slate-800 border border-orange-200 dark:border-orange-500/30 p-4 rounded-xl shadow-lg relative"
                   >
                     <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-0.5 h-8 bg-slate-200 dark:bg-slate-700" />
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400"><MessageSquare size={16} /></div>
+                      <div className="p-2 rounded-lg bg-orange-100 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400"><MessageSquare size={16} /></div>
                       <div>
-                        <div className="text-[10px] text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">Follow Up</div>
+                        <div className="text-[10px] text-orange-600 dark:text-orange-400 font-bold uppercase tracking-wider">Follow Up</div>
                         <div className="text-sm font-medium text-slate-900 dark:text-white">SMS Check-in</div>
                       </div>
                     </div>
@@ -787,12 +787,12 @@ const CommandCenter = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <AnimatedSection direction="up">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-500/30 text-blue-700 dark:text-blue-400 mb-6">
-              <CreditCard className="w-3 h-3 text-blue-500" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100/50 dark:bg-orange-900/30 border border-orange-200 dark:border-orange-500/30 text-orange-700 dark:text-orange-400 mb-6">
+              <CreditCard className="w-3 h-3 text-orange-500" />
               <span className="text-xs font-semibold tracking-wide uppercase">Financial Ecosystem</span>
             </div>
             <h2 className="section-headline mb-6">
-              Built‑In <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">Scheduling & Payments</span>
+              Built‑In <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400">Scheduling & Payments</span>
             </h2>
             <p className="body-large text-slate-500 dark:text-slate-400">
               From first hello to final settlement. Manage the entire customer lifecycle without leaving your command center.
@@ -811,12 +811,12 @@ const CommandCenter = () => {
     // Real-Time Visibility
     <section key="visibility" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       {/* Background Grid Decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(30,58,138,0.1)_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-40 dark:opacity-20" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 dark:via-blue-500/50 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,120,41,0.1)_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-40 dark:opacity-20" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-500/20 dark:via-orange-500/50 to-transparent" />
 
       <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection direction="up" className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-100/10 border border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400 mb-6 font-medium">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-100/10 border border-orange-200 dark:border-orange-500/20 text-orange-700 dark:text-orange-400 mb-6 font-medium">
             <BarChart3 className="w-3 h-3" />
             <span className="text-xs tracking-wide uppercase">Performance Insights</span>
           </div>
@@ -836,7 +836,7 @@ const CommandCenter = () => {
                     }}
                     className={cn(
                       "inline-block",
-                      (word === "Visibility") ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400" : "text-slate-900 dark:text-white"
+                      (word === "Visibility") ? "text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400" : "text-slate-900 dark:text-white"
                     )}
                   >
                     {char}
@@ -873,12 +873,12 @@ const CommandCenter = () => {
           {/* Right Content: Advanced Integration Nodes */}
           <div>
             <AnimatedSection direction="right" className="mb-0">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400 mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20 text-orange-700 dark:text-orange-400 mb-4">
                 <Shield className="w-3 h-3" />
                 <span className="text-xs font-semibold tracking-wide uppercase">Unified Infrastructure</span>
               </div>
               <h2 className="section-headline mb-4 text-left font-bold">
-                Seamless Integration with <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">AI Employees</span>
+                Seamless Integration with <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400">AI Employees</span>
               </h2>
               <p className="body-large text-slate-500 dark:text-slate-400 text-left mb-8 max-w-xl">
                 Bridge the gap between artificial intelligence and human operations. Our command center acts as the final destination for all automated interactions.
@@ -929,7 +929,7 @@ const StrategicAdvantageCard = () => {
     <section className="min-h-screen lg:min-h-screen w-full flex flex-col relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.05)_0%,transparent_70%)]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(255,120,41,0.05)_0%,transparent_70%)]" />
       </div>
 
       <div className="flex-grow flex items-center justify-center py-12 lg:py-16">
@@ -945,7 +945,7 @@ const StrategicAdvantageCard = () => {
               <div
                 className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[2.5rem]"
                 style={{
-                  background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.4), transparent 40%)`,
+                  background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 120, 41, 0.4), transparent 40%)`,
                   padding: '2px',
                   WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                   WebkitMaskComposite: 'destination-out',
@@ -956,7 +956,7 @@ const StrategicAdvantageCard = () => {
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                 style={{
-                  background: `radial-gradient(800px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59, 130, 246, 0.08), transparent 80%)`,
+                  background: `radial-gradient(800px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 120, 41, 0.08), transparent 80%)`,
                 }}
               />
 
@@ -964,13 +964,13 @@ const StrategicAdvantageCard = () => {
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] dark:opacity-[0.05] pointer-events-none" />
 
               <div className="relative z-20 text-center flex flex-col items-center">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-700 dark:text-blue-400 mb-6 transition-transform duration-500 group-hover:scale-105">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20 text-orange-700 dark:text-orange-400 mb-6 transition-transform duration-500 group-hover:scale-105">
                   <Shield className="w-3.5 h-3.5" />
                   <span className="text-xs font-bold tracking-widest uppercase">Strategic Advantage</span>
                 </div>
 
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight tracking-tight">
-                  <DropInHoverText text="Why It Matters" trigger={true} highlightClass="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400" />
+                  <DropInHoverText text="Why It Matters" trigger={true} highlightClass="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-600 dark:from-orange-400 dark:to-amber-400" />
                 </h2>
 
                 <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-2xl leading-relaxed font-medium">
@@ -979,23 +979,23 @@ const StrategicAdvantageCard = () => {
 
                 <div className="flex flex-col sm:flex-row gap-6 items-center">
                   <MagneticWrapper strength={0.2}>
-                    <Button className="h-16 px-10 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(59,130,246,0.3)] hover:-translate-y-1 group/btn relative overflow-hidden">
-                      <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
+                    <Button className="h-16 px-10 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(255,120,41,0.3)] hover:-translate-y-1 group/btn relative overflow-hidden">
+                      <div className="absolute inset-0 bg-orange-600 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
                       <span className="relative z-10 flex items-center gap-3">
                         Discover Assistants <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                       </span>
                     </Button>
                   </MagneticWrapper>
 
-                  <button className="text-slate-500 dark:text-slate-400 font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-2 group/text">
+                  <button className="text-slate-500 dark:text-slate-400 font-semibold hover:text-orange-600 dark:hover:text-orange-400 transition-colors flex items-center gap-2 group/text">
                     Book a Strategy Call <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/text:opacity-100 group-hover/text:translate-x-0 transition-all" />
                   </button>
                 </div>
               </div>
 
               {/* Decorative Corner Glows */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-[60px] rounded-full" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-violet-500/10 blur-[60px] rounded-full" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 blur-[60px] rounded-full" />
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-500/10 blur-[60px] rounded-full" />
             </motion.div>
           </AnimatedSection>
         </div>
