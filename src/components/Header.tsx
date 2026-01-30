@@ -62,7 +62,7 @@ const Header = () => {
           <NavItems items={navItems} />
           <div className="flex items-center gap-4 relative z-30">
             <ThemeToggle />
-            <NavbarButton variant="primary" onClick={() => { }}>Book a Consultation</NavbarButton>
+            <NavbarButton className="border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-white dark:text-accent dark:hover:text-black font-bold transition-all duration-300 shadow-none hover:shadow-lg hover:shadow-accent/20" onClick={() => { }}>Book a Consultation</NavbarButton>
           </div>
         </NavBody>
 
@@ -104,8 +104,7 @@ const Header = () => {
               </div>
               <NavbarButton
                 onClick={() => setIsMobileMenuOpen(false)}
-                variant="primary"
-                className="w-full"
+                className="w-full border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-white transition-all duration-300"
               >
                 Book a Consultation
               </NavbarButton>
