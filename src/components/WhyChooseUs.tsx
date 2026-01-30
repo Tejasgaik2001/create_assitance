@@ -19,7 +19,7 @@ const WhyChooseUs = () => {
             <motion.span
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-accent border border-accent text-sm font-black uppercase tracking-widest mb-6"
+              className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-accent border border-accent text-sm font-bold uppercase tracking-widest mb-6"
             >
               Why Us
             </motion.span>
@@ -28,7 +28,7 @@ const WhyChooseUs = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.85] mb-8 uppercase italic"
+              className="text-5xl md:text-7xl font-bold tracking-tighter leading-[0.85] mb-8 uppercase italic"
             >
               Why Choose
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent block drop-shadow-sm">Create Assistants</span>
@@ -87,7 +87,7 @@ const WhyChooseUs = () => {
                       <item.icon className={`text-2xl ${item.color === 'primary' ? 'text-accent' : 'text-accent'} drop-shadow-lg`} />
                     </motion.div>
 
-                    <h3 className="font-black text-xl bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight italic mb-2 transition-all duration-500">
+                    <h3 className="font-bold text-xl bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight italic mb-2 transition-all duration-500">
                       {item.title}
                     </h3>
                     <p className="text-muted-foreground/90 group-hover:text-muted-foreground text-sm font-medium leading-relaxed transition-colors duration-500">
@@ -146,8 +146,8 @@ const WhyChooseUs = () => {
               >
                 <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
                 <div className="relative">
-                  <p className="text-4xl lg:text-6xl font-black bg-gradient-to-br from-primary via-accent to-accent bg-clip-text text-transparent tracking-tighter mb-1 lg:mb-2 drop-shadow-lg whitespace-nowrap">4 WEEKS</p>
-                  <p className="text-[10px] lg:text-xs font-black text-muted-foreground/80 uppercase tracking-widest leading-tight">Average Launch Time</p>
+                  <p className="text-4xl lg:text-6xl font-bold bg-gradient-to-br from-primary via-accent to-accent bg-clip-text text-transparent tracking-tighter mb-1 lg:mb-2 drop-shadow-lg whitespace-nowrap">4 WEEKS</p>
+                  <p className="text-[10px] lg:text-xs font-bold text-muted-foreground/80 uppercase tracking-widest leading-tight">Average Launch Time</p>
                 </div>
               </motion.div>
             </motion.div>

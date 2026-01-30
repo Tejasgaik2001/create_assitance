@@ -36,7 +36,7 @@ const TestimonialSection = () => {
             initial={{ opacity: 0, filter: "blur(10px)", y: 30 }}
             animate={isInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(10px)", y: 30 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-3xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight mb-12 uppercase italic"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight mb-12 uppercase italic"
           >
             "After implementing the system, we cut our response time from
             hours to seconds and booked{" "}
@@ -59,11 +59,11 @@ const TestimonialSection = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mb-14"
           >
-            <div className="w-20 h-20 rounded-[1.5rem] bg-primary/10 mx-auto mb-6 flex items-center justify-center text-3xl font-black text-primary border border-primary/20">
+            <div className="w-20 h-20 rounded-[1.5rem] bg-primary/10 mx-auto mb-6 flex items-center justify-center text-3xl font-bold text-primary border border-primary/20">
               SM
             </div>
-            <p className="text-2xl font-black uppercase tracking-tight italic">Sarah Mitchell</p>
-            <p className="text-background/50 font-black uppercase tracking-[0.2em] text-xs mt-1">CEO, Midwest Realty Group</p>
+            <p className="text-2xl font-bold uppercase tracking-tight italic">Sarah Mitchell</p>
+            <p className="text-background/50 font-bold uppercase tracking-[0.2em] text-xs mt-1">CEO, Midwest Realty Group</p>
           </motion.div>
 
           <motion.div

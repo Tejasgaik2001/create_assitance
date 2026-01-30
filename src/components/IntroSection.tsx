@@ -66,7 +66,7 @@ const IntroSection = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight"
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight"
                 >
                   <span className="text-foreground">Transform Your Business with </span>
                   <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
@@ -153,7 +153,7 @@ const IntroSection = () => {
                         >
                           <Icon className={`w-6 h-6 ${stat.color === 'primary' ? 'text-primary' : 'text-accent'} drop-shadow-lg`} />
                         </motion.div>
-                        <div className="text-2xl sm:text-3xl font-black bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
+                        <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
                           {stat.value}
                         </div>
                         <div className="text-xs sm:text-sm text-muted-foreground/90 font-semibold leading-tight">

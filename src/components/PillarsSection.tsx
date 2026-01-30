@@ -30,7 +30,7 @@ const pillars = [
     description:
       "Our team handles everything from initial setup to continuous optimisation. Launch your system in as little as four weeks with personalised onboarding and training, then enjoy ongoing updates and strategy.",
     number: "03",
-    color: "from-orange-500/20 to-red-500/20",
+    color: "from-accent/20 to-accent/20",
     image: automation,
   },
 ];
@@ -77,7 +77,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
           <div className="flex items-start justify-between mb-6">
             <motion.span
               whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-black text-accent shadow-md backdrop-blur-sm"
+              className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-bold text-accent shadow-md backdrop-blur-sm"
             >
               {pillar.number}
             </motion.span>
@@ -96,7 +96,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
           </motion.div>
 
           {/* Title with better contrast */}
-          <h3 className="text-xl lg:text-2xl font-black mb-4 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight leading-tight">
+          <h3 className="text-xl lg:text-2xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight leading-tight">
             {pillar.title}
             <motion.span
               initial={{ opacity: 0, x: -5 }}
@@ -148,7 +148,7 @@ const PillarsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-black tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent uppercase italic"
+            className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent uppercase italic"
           >
             What We Offer
           </motion.h2>
