@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { MotionText } from "@/components/ui/MotionText";
-import { MagnifiedDocText } from "@/components/ui/MagnifiedDocText";
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, MessageSquare, Calendar, CreditCard, Heart } from "lucide-react";
@@ -130,12 +129,8 @@ const HowItWorks = () => {
 
               <h1 className="hero-headline mb-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
                 <span className="block">How It Works –</span>
-                <span className="block w-full">
-                  <MagnifiedDocText
-                    text="Your Automated Growth Engine"
-                    containerClassName="justify-center text-gradient"
-                    className="text-inherit"
-                  />
+                <span className="block w-full text-gradient">
+                  Your Automated Growth Engine
                 </span>
               </h1>
 
