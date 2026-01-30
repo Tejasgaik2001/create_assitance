@@ -76,7 +76,7 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
         // Increased lock duration to prevent momentum scrolling from skipping sections
         setTimeout(() => {
             isScrolling.current = false;
-        }, 1200);
+        }, 1000);
     }, [children.length]);
 
     const handleWheel = useCallback((e: WheelEvent) => {
@@ -128,22 +128,19 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
 
     const slideVariants = {
         enter: (dir: number) => ({
-            y: dir > 0 ? "50vh" : "-50vh",
+            y: dir > 0 ? "100%" : "-100%",
             opacity: 0,
-            scale: 1.1,
-            filter: "blur(10px)",
+            scale: 1,
         }),
         center: {
             y: 0,
             opacity: 1,
             scale: 1,
-            filter: "blur(0px)",
         },
         exit: (dir: number) => ({
-            y: dir > 0 ? "-20vh" : "20vh",
+            y: dir > 0 ? "-100%" : "100%",
             opacity: 0,
-            scale: 0.9,
-            filter: "blur(10px)",
+            scale: 1,
         }),
     };
 
@@ -171,14 +168,10 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
                     animate="center"
                     exit="exit"
                     transition={{
-                        y: { type: "spring", stiffness: 60, damping: 20, mass: 0.8 },
-                        opacity: { duration: 0.4, ease: "easeOut" },
-                        scale: { duration: 0.4, ease: "easeOut" },
-                        rotateX: { duration: 0.4, ease: "easeOut" },
-                        filter: { duration: 0.3 }
+                        y: { duration: 0.8, ease: [0.65, 0, 0.35, 1] },
+                        opacity: { duration: 0.8, ease: [0.65, 0, 0.35, 1] }
                     }}
                     className="h-screen w-full absolute inset-0 overflow-hidden"
-                    style={{ perspective: "1500px" }}
                 >
                     <div className="h-full w-full flex items-center justify-center relative overscroll-contain">
                         {children[currentIndex]}

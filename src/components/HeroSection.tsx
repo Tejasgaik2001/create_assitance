@@ -1,292 +1,300 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef } from "react";
 import heroVideo from "@/assets/hero.mp4";
-import { CursorSpotlight } from "@/components/CursorSpotlight";
-import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const HeroSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  // Parallax transforms
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const videoY = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const orbY1 = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const orbY2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: false, margin: "-10%" });
 
   const textVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
+      filter: "blur(0px)",
       transition: {
         type: "spring" as const,
         stiffness: 100,
         damping: 15,
-        delay: i * 0.15,
+        delay: i * 0.1,
       },
     }),
   };
 
   return (
-    <section ref={containerRef} className="min-h-screen relative overflow-hidden pt-20 pb-16">
-      {/* Cursor spotlight effect */}
-      <CursorSpotlight />
-      {/* Animated background elements with parallax */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Gradient orbs with parallax */}
+    <section ref={ref} className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-20">
+      {/* Enhanced Background decoration */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Animated gradient orbs */}
         <motion.div
-          className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
-          style={{ y: orbY1 }}
           animate={{
             x: [0, 50, 0],
-            scale: [1, 1.1, 1],
+            y: [0, 30, 0],
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3]
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
         />
         <motion.div
-          className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
-          style={{ y: orbY2 }}
           animate={{
-            x: [0, -50, 0],
-            scale: [1.1, 1, 1.1],
+            x: [0, -40, 0],
+            y: [0, -25, 0],
+            scale: [1, 1.15, 1],
+            opacity: [0.2, 0.4, 0.2]
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
         />
 
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        {/* Premium grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
       </div>
 
-      {/* Floating particles with staggered parallax */}
-      {[...Array(8)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-primary/30 rounded-full"
-          style={{
-            left: `${15 + i * 10}%`,
-            top: `${20 + (i % 4) * 18}%`,
-          }}
-          animate={{
-            y: [0, -40, 0],
-            opacity: [0.2, 0.8, 0.2],
-            scale: [1, 1.5, 1],
-          }}
-          transition={{
-            duration: 4 + i * 0.5,
-            repeat: Infinity,
-            delay: i * 0.4,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-8rem)]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
           {/* Left Column - Content */}
-          <motion.div
-            className="text-left"
-            style={{ y: contentY, opacity }}
-          >
-            {/* Badge */}
+          <div className="text-left space-y-8">
+            {/* Enhanced Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.9 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/80 backdrop-blur-sm border border-border mb-8"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/30 backdrop-blur-sm shadow-lg shadow-primary/10"
             >
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium">AI-Powered Business Growth</span>
+              <Sparkles className="w-4 h-4 text-accent animate-pulse" />
+              <span className="text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                AI-Powered Growth Platform
+              </span>
             </motion.div>
 
-            {/* Animated headline */}
-            <div className="mb-8 overflow-hidden">
+            {/* Enhanced Headline */}
+            <div className="space-y-4">
               <motion.h1
                 custom={0}
                 variants={textVariants}
                 initial="hidden"
-                animate="visible"
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]"
+                animate={isInView ? "visible" : "hidden"}
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] uppercase"
               >
-                <span className="block">Automate & Grow</span>
+                <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient drop-shadow-2xl">
+                  Automate
+                </span>
+                <div className="flex items-center gap-3 sm:gap-4 mt-2">
+                  <motion.span
+                    initial={{ scaleX: 0 }}
+                    animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="text-foreground/10 italic font-light text-4xl sm:text-5xl md:text-6xl lg:text-7xl origin-left"
+                  >
+                    &
+                  </motion.span>
+                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient drop-shadow-2xl">
+                    Scale
+                  </span>
+                </div>
               </motion.h1>
-              <motion.h1
+
+              <motion.h2
                 custom={1}
                 variants={textVariants}
                 initial="hidden"
-                animate="visible"
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]"
+                animate={isInView ? "visible" : "hidden"}
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-none relative inline-block"
               >
-                <span className="block">Your Business with</span>
-              </motion.h1>
-              <motion.h1
-                custom={2}
-                variants={textVariants}
-                initial="hidden"
-                animate="visible"
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]"
-              >
-                <span className="inline-block">
-                  <span className="text-gradient bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    Custom CRM & AI
-                  </span>
-                  <motion.span
-                    className="inline-block w-1 h-10 md:h-12 lg:h-14 bg-primary ml-2 rounded-full"
-                    animate={{ opacity: [1, 0, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  />
+                <span className="bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent">
+                  Your Business
                 </span>
-              </motion.h1>
+                <motion.span
+                  className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-r from-primary to-accent rounded-full"
+                  initial={{ scaleX: 0 }}
+                  animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                />
+              </motion.h2>
             </div>
 
-            {/* Subheading */}
+            {/* Enhanced Description */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 80, damping: 15, delay: 0.5 }}
-              className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
+              className="text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium"
             >
-              We design, build and manage an integrated CRM and AI workforce that
-              captures leads, engages customers and scales your business.
+              We build your unified <span className="text-foreground font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">AI workforce</span> that captures leads,
+              engages customers, and transforms your business into an <span className="text-accent font-semibold italic">automated powerhouse</span>.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* Enhanced CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 120, damping: 18, delay: 0.7 }}
-              className="flex flex-col sm:flex-row items-start gap-4"
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.5 }}
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4"
             >
-              <MagneticWrapper strength={0.25}>
-                <Button variant="hero" size="xl" className="group shadow-xl shadow-primary/20" asChild>
+              {/* Primary CTA with enhanced effects */}
+              <div className="relative group">
+                {/* Animated glow effect */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0.4, 0.7, 0.4]
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full blur-2xl opacity-60"
+                />
+
+                <Button
+                  variant="hero"
+                  size="xl"
+                  className="relative z-10 rounded-full px-8 sm:px-12 h-14 sm:h-16 bg-gradient-to-r from-primary via-accent to-primary text-primary-foreground shadow-2xl shadow-primary/30 hover:shadow-primary/50 active:scale-95 transition-all text-base sm:text-lg font-black uppercase tracking-tight overflow-hidden border-none group"
+                  asChild
+                >
                   <a href="/book-a-call">
-                    Book a Free Consultation
-                    <motion.span
-                      className="inline-block"
-                      animate={{ x: [0, 4, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <ArrowRight className="w-4 h-4" />
-                    </motion.span>
+                    {/* Shimmer effect */}
+                    <motion.div
+                      animate={{ x: ["-200%", "200%"] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+                    />
+                    <span className="relative z-10 flex items-center gap-2">
+                      Book Consultation
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </a>
                 </Button>
-              </MagneticWrapper>
-              <MagneticWrapper strength={0.2}>
-                <Button variant="outline" size="xl">
-                  Learn More
-                </Button>
-              </MagneticWrapper>
+              </div>
+
+              {/* Secondary CTA with enhanced design */}
+              <motion.button
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative px-8 py-4 rounded-full border-2 border-border/60 bg-background/40 backdrop-blur-sm hover:border-accent/50 hover:bg-background/60 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-foreground/80 group-hover:text-accent">
+                  <Play className="w-4 h-4" />
+                  Watch Demo
+                </span>
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileHover={{ y: 0 }}
+                  className="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent"
+                />
+              </motion.button>
             </motion.div>
 
             {/* Trust indicators */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="mt-12 flex flex-col gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.6 }}
+              className="flex flex-wrap items-center gap-4 pt-4"
             >
-              <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium">
-                Trusted by innovative businesses
-              </p>
-              <div className="flex items-center gap-8 flex-wrap">
-                {["TechFlow", "GrowthHub", "ScaleUp", "InnovateCo"].map((company, i) => (
-                  <motion.div
-                    key={company}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ type: "spring" as const, stiffness: 150, damping: 18, delay: 1.1 + i * 0.1 }}
-                    whileHover={{ scale: 1.05 }}
-                    className="text-lg font-semibold text-muted-foreground/40 hover:text-muted-foreground/60 transition-colors cursor-default"
-                  >
-                    {company}
-                  </motion.div>
-                ))}
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background" />
+                  ))}
+                </div>
+                <span className="text-xs font-semibold text-muted-foreground">500+ businesses trust us</span>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right Column - Video Placeholder */}
+          {/* Right Column - Enhanced Visual */}
           <motion.div
-            initial={{ opacity: 0, x: 60, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
-            style={{ y: videoY }}
-            className="relative"
+            initial={{ opacity: 0, scale: 0.85, x: 60, rotate: 3 }}
+            animate={isInView ? { opacity: 1, scale: 1, x: 0, rotate: 0 } : { opacity: 0, scale: 0.85, x: 60, rotate: 3 }}
+            transition={{
+              type: "spring",
+              stiffness: 80,
+              damping: 20,
+              delay: 0.3
+            }}
+            className="relative hidden lg:block"
           >
-            <motion.div
-              className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border border-border bg-muted/50"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            >
-              {/* Video placeholder - Replace src with your video URL */}
-              {/* <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
-              
-                <motion.div
-                  className="w-20 h-20 rounded-full bg-primary flex items-center justify-center cursor-pointer shadow-2xl"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Play className="w-8 h-8 text-primary-foreground ml-1" />
-                </motion.div>
-              </div> */}
-              <video src={heroVideo} autoPlay loop muted />
+            <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
+              {/* Video with enhanced effects */}
+              <video
+                src={heroVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+              />
 
-              {/* Decorative glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl blur-xl -z-10" />
-            </motion.div>
+              {/* Enhanced overlays */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-accent/30 mix-blend-overlay" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
 
-            {/* Floating stats cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring" as const, stiffness: 120, damping: 18, delay: 0.8 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="absolute -bottom-6 -left-6 bg-background border border-border rounded-2xl p-5 shadow-2xl"
-            >
-              <p className="text-3xl font-bold text-primary mb-1">24/7</p>
-              <p className="text-sm text-muted-foreground">AI Coverage</p>
-            </motion.div>
+              {/* Floating Stats Card - Enhanced */}
+              <motion.div
+                animate={{
+                  y: [0, -12, 0],
+                  rotate: [-1, 1, -1]
+                }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.05, y: -8 }}
+                className="absolute -bottom-10 -left-10 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2.5rem] p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all"
+              >
+                <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
+                <div className="relative">
+                  <p className="text-5xl lg:text-6xl font-black text-accent tracking-tighter mb-1 drop-shadow-lg">
+                    24/7
+                  </p>
+                  <p className="text-xs font-black text-foreground/70 uppercase tracking-widest leading-none">
+                    COVERAGE
+                  </p>
+                </div>
+              </motion.div>
 
+              {/* Glowing corner accent */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/30 to-transparent rounded-[3rem] blur-xl" />
+            </div>
+
+            {/* Floating particles effect */}
             <motion.div
-              initial={{ opacity: 0, y: -30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
-              whileHover={{ scale: 1.05, y: 5 }}
-              className="absolute -top-4 -right-4 bg-foreground text-background rounded-2xl px-5 py-3 shadow-2xl"
-            >
-              <p className="text-2xl font-bold">4 weeks</p>
-              <p className="text-xs opacity-80">to launch</p>
-            </motion.div>
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-10 -right-10 w-40 h-40 bg-primary/30 rounded-full blur-3xl"
+            />
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Enhanced Scroll Indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        animate={{ y: [0, 12, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-70 transition-opacity cursor-pointer select-none"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex items-start justify-center p-2"
-        >
-          <motion.div
-            className="w-1 h-2 bg-muted-foreground/50 rounded-full"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-        </motion.div>
+        <div className="w-px h-20 bg-gradient-to-b from-primary via-accent to-transparent" />
+        <span className="text-[9px] font-bold uppercase tracking-[0.4em] rotate-180 [writing-mode:vertical-lr] text-muted-foreground">
+          Scroll
+        </span>
       </motion.div>
+
+      {/* Additional CSS for gradient animation */}
+      <style>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+          animation: gradient 3s ease infinite;
+        }
+      `}</style>
     </section>
   );
 };

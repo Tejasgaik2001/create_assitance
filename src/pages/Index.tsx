@@ -6,22 +6,29 @@ import StatsSection from "@/components/StatsSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import TestimonialSection from "@/components/TestimonialSection";
 import FAQSection from "@/components/FAQSection";
-import Footer from "@/components/Footer";
+import { AnimatedSnapContainer } from "@/components/FullScreenSection";
+import { CursorSpotlight } from "@/components/CursorSpotlight";
 
 const Index = () => {
+  const sections = [
+    <HeroSection key="hero" />,
+    <IntroSection key="intro" />,
+    <PillarsSection key="pillars" />,
+    <StatsSection key="stats" />,
+    <WhyChooseUs key="why" />,
+    <TestimonialSection key="testimonials" />,
+    <FAQSection key="faq-footer" withFooter />
+  ];
+
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       <main>
-        <HeroSection />
-        <IntroSection />
-        <PillarsSection />
-        <StatsSection />
-        <WhyChooseUs />
-        <TestimonialSection />
-        <FAQSection />
+        <CursorSpotlight />
+        <AnimatedSnapContainer>
+          {sections}
+        </AnimatedSnapContainer>
       </main>
-      <Footer />
     </div>
   );
 };
