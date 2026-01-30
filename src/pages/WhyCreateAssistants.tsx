@@ -446,29 +446,29 @@ const WhyCreateAssistants = () => {
           </div>
         </div>
 
-        {/* Team Section - Cinematic Layer Tunnel */}
-        <div ref={teamContainerRef} className="relative h-[600vh] bg-slate-950">
-          <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
+        {/* Team Section - Cinematic Gallery */}
+        <div ref={teamContainerRef} className="relative md:h-[600vh] bg-slate-950">
+          <div className="md:sticky md:top-0 md:h-screen w-full flex flex-col items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
 
-            {/* Background Texture / Gradient */}
+            {/* Background Texture / Gradient (All Devices) */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)] pointer-events-none" />
-            <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] pointer-events-none" />
 
-            {/* Cinematic Title Behind Layers */}
+            {/* Cinematic Title Behind Layers (All Devices - Parallax on Mobile too) */}
             <motion.div
               style={{
-                opacity: useTransform(teamScrollY, [0, 0.1, 0.9, 1], [0, 0.3, 0.3, 0]),
-                scale: useTransform(teamScrollY, [0, 1], [0.8, 1.2]),
+                opacity: useTransform(teamScrollY, [0, 0.1, 0.9, 1], [0, 0.2, 0.2, 0]),
+                scale: useTransform(teamScrollY, [0, 1], [0.9, 1.1]),
+                y: useTransform(teamScrollY, [0, 1], [50, -50])
               }}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+              className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden"
             >
-              <h2 className="text-[15vw] font-black text-white/5 tracking-tighter uppercase select-none">
-                THE COLLECTIVE
+              <h2 className="text-[20vw] md:text-[15vw] font-black text-white/5 tracking-tighter uppercase select-none opacity-50 text-center leading-[0.8] md:leading-none">
+                THE<br className="md:hidden" />COLLECTIVE
               </h2>
             </motion.div>
 
-            {/* The Layers (Team Member Pairs) */}
-            <div className="relative w-full max-w-7xl h-[600px] z-20 hidden md:block">
+            {/* Desktop Tunnel (Z-Axis Layers) */}
+            <div className="relative w-full max-w-7xl h-full z-20 hidden md:block">
               {teamPairs.map((pair, index) => (
                 <TeamPairLayer
                   key={index}
@@ -480,36 +480,58 @@ const WhyCreateAssistants = () => {
               ))}
             </div>
 
-            {/* Final Reveal Text */}
+            {/* Mobile Reveal Stack (Simplified for Performance) */}
+            <div className="md:hidden w-full px-6 py-24 z-20 space-y-12 relative h-auto">
+              <div className="text-center mb-16">
+                <span className="text-indigo-400 font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60 font-mono">Precision Engineered</span>
+                <h2 className="text-5xl font-black text-white tracking-tighter italic">THE <span className="text-indigo-400">TEAM</span></h2>
+              </div>
+
+              {team.map((member, index) => (
+                <AnimatedSection
+                  key={member.name}
+                  direction={index % 2 === 0 ? "left" : "right"}
+                  className="w-full"
+                >
+                  <div className="relative group">
+                    <div className="absolute -inset-4 bg-indigo-500/5 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="relative flex flex-col rounded-[2.5rem] bg-slate-900/60 backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl">
+                      <div className="aspect-[4/3] w-full overflow-hidden">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0"
+                        />
+                      </div>
+                      <div className="p-8">
+                        <h4 className="text-2xl font-black text-white tracking-tight mb-1">{member.name}</h4>
+                        <p className="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mb-4">{member.role}</p>
+                        <p className="text-sm text-slate-400 italic leading-relaxed">"{member.bio}"</p>
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              ))}
+
+              <div className="pt-20 text-center pb-12">
+                <p className="text-slate-500 text-[10px] font-mono uppercase tracking-[0.3em] mb-4 opacity-40">End of the line</p>
+                <div className="h-px w-8 bg-indigo-500/30 mx-auto" />
+              </div>
+            </div>
+
+            {/* Final Reveal Text (Desktop Only - Mobile has it in stack) */}
             <motion.div
               style={{
                 opacity: useTransform(teamScrollY, [0.92, 0.98], [0, 1]),
                 y: useTransform(teamScrollY, [0.92, 0.98], [40, 0]),
               }}
-              className="absolute bottom-16 z-50 text-center px-4"
+              className="absolute bottom-16 z-50 text-center px-4 hidden md:block"
             >
               <span className="text-indigo-400 font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
               <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
                 THE <span className="text-indigo-400">TEAM</span>
               </h2>
             </motion.div>
-
-            {/* Mobile Fallback - Static Grid */}
-            <div className="md:hidden w-full px-6 py-20 z-50 bg-slate-950">
-              <div className="text-center mb-12">
-                <span className="text-indigo-400 font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
-                <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-indigo-400">Team</span></h2>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {team.map((member) => (
-                  <div key={member.name} className="flex flex-col items-center text-center p-4 rounded-3xl bg-white/5 border border-white/10">
-                    <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover mb-3" />
-                    <h4 className="text-sm font-bold text-white">{member.name}</h4>
-                    <p className="text-[10px] text-indigo-400 uppercase font-black">{member.role}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
 
