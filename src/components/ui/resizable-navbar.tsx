@@ -133,7 +133,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
           href={item.link}
         >
           <span className="relative z-20">{item.name}</span>
-          <span className="absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-violet-600 transition-transform duration-300 ease-out group-hover:scale-x-100 dark:bg-violet-400" />
+          <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-[#ff843c] transition-transform duration-300 ease-out group-hover:scale-x-100" />
         </a>
       ))}
     </motion.div>

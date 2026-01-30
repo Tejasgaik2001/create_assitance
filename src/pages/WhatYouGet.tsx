@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { useRef, useState } from "react";
+import { AssemblingWord } from "@/components/ui/AssemblingWord";
 
 // Scroll-linked section wrapper
 const ScrollSection = ({
@@ -343,15 +344,24 @@ const WhatYouGet = () => {
 
         {/* CTA Section */}
         <ScrollSection className="py-24 relative overflow-hidden">
-
+          {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
+            <motion.div
+              className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
+              style={{ y: backgroundY1 }}
+            />
+            <motion.div
+              className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl"
+              style={{ y: backgroundY2 }}
+            />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center">
             <div className="max-w-3xl mx-auto">
               <h2 className="section-headline mb-6">
-                Ready to see how these pieces <span className="text-gradient">fit together?</span>
+                Ready to see how these <AssemblingWord word="pieces" className="text-[#ff843c]" /> <br className="md:hidden" />
+                fit together?
               </h2>
               <p className="body-large mb-10">
                 Next up: a deeper look at our AI Employees.
