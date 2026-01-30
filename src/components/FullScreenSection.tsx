@@ -73,10 +73,10 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
         setDirection(scrollDirection);
         setCurrentIndex(index);
 
-        // Reset scrolling lock after animation
+        // Increased lock duration to prevent momentum scrolling from skipping sections
         setTimeout(() => {
             isScrolling.current = false;
-        }, 500);
+        }, 1200);
     }, [children.length]);
 
     const handleWheel = useCallback((e: WheelEvent) => {
@@ -84,6 +84,9 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
         e.preventDefault();
 
         if (isScrolling.current) return;
+
+        // Add a threshold to ignore minor scroll movements and prevent accidental skips
+        if (Math.abs(e.deltaY) < 20) return;
 
         if (e.deltaY > 0) {
             goToSection(currentIndex + 1, 1);
@@ -125,19 +128,22 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
 
     const slideVariants = {
         enter: (dir: number) => ({
-            y: dir > 0 ? "100%" : "-100%",
+            y: dir > 0 ? "50vh" : "-50vh",
             opacity: 0,
-            scale: 0.95,
+            scale: 1.1,
+            filter: "blur(10px)",
         }),
         center: {
             y: 0,
             opacity: 1,
             scale: 1,
+            filter: "blur(0px)",
         },
         exit: (dir: number) => ({
-            y: dir > 0 ? "-100%" : "100%",
+            y: dir > 0 ? "-20vh" : "20vh",
             opacity: 0,
-            scale: 0.95,
+            scale: 0.9,
+            filter: "blur(10px)",
         }),
     };
 
@@ -156,23 +162,6 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
             ref={containerRef}
             className={cn("h-screen w-full overflow-hidden relative", className)}
         >
-            {/* Navigation dots */}
-            <div className="fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
-                {children.map((_, index) => (
-                    <button
-                        key={index}
-                        onClick={() => handleDotClick(index)}
-                        className={cn(
-                            "w-3 h-3 rounded-full transition-all duration-400",
-                            currentIndex === index
-                                ? "bg-primary scale-125"
-                                : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                        )}
-                        aria-label={`Go to section ${index + 1}`}
-                    />
-                ))}
-            </div>
-
             <AnimatePresence initial={false} custom={direction}>
                 <motion.div
                     key={currentIndex}
@@ -182,11 +171,14 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
                     animate="center"
                     exit="exit"
                     transition={{
-                        y: { type: "spring", stiffness: 80, damping: 20, duration: 0.1 },
-                        opacity: { duration: 0.1, ease: "easeInOut" },
-                        scale: { duration: 0.1, ease: "easeInOut" },
+                        y: { type: "spring", stiffness: 60, damping: 20, mass: 0.8 },
+                        opacity: { duration: 0.4, ease: "easeOut" },
+                        scale: { duration: 0.4, ease: "easeOut" },
+                        rotateX: { duration: 0.4, ease: "easeOut" },
+                        filter: { duration: 0.3 }
                     }}
-                    className="h-screen w-full absolute inset-0 overflow-y-auto"
+                    className="h-screen w-full absolute inset-0 overflow-hidden"
+                    style={{ perspective: "1500px" }}
                 >
                     <div className="h-full w-full flex items-center justify-center relative overscroll-contain">
                         {children[currentIndex]}
