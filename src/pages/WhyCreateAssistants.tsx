@@ -1,14 +1,12 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Zap, Clock, Settings, Lightbulb, Target, Award, Heart, MapPin, MessageSquare, Shield } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { MagneticWrapper } from "@/components/MagneticWrapper";
-// import { AnimatedSnapContainer } from "@/components/FullScreenSection"; // Removed
-import { RollingTextList } from "@/components/ui/RollingTextList";
-import { cn } from "@/lib/utils";
-import AnimatedSection from "@/components/AnimatedSection";
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Shield, Clock, Lightbulb, Users, Target, Settings, Zap, Award, Heart, MapPin, MessageSquare, ArrowRight } from 'lucide-react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import AnimatedSection from '../components/AnimatedSection';
+import { Button } from '../components/ui/button';
+import { cn } from '../lib/utils';
+import { MagneticWrapper } from '@/components/MagneticWrapper';
 
 const WhyCreateAssistants = () => {
   const reasons = [
@@ -34,7 +32,7 @@ const WhyCreateAssistants = () => {
     },
   ];
 
-  const process = [
+  const processData = [
     {
       step: "01",
       title: "Discovery",
@@ -65,7 +63,7 @@ const WhyCreateAssistants = () => {
     },
   ];
 
-  const values = [
+  const valuesData = [
     {
       title: "Integrity & Results",
       description: "Transparent values guide every system we build.",
@@ -82,6 +80,50 @@ const WhyCreateAssistants = () => {
       icon: MessageSquare,
     },
   ];
+
+  const teamMembers = [
+    {
+      name: "Alex Rivera",
+      role: "Founder & CEO",
+      bio: "Visionary leader with 10+ years in AI automation and business strategy.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
+    },
+    {
+      name: "Sarah Chen",
+      role: "Head of AI Implementation",
+      bio: "Master of neural networks and large language model fine-tuning.",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&h=400&q=80",
+    },
+    {
+      name: "David Park",
+      role: "CRM Architect",
+      bio: "Specializes in building complex, high-converson customer journey systems.",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80",
+    },
+    {
+      name: "Elena Rodriguez",
+      role: "Growth Strategist",
+      bio: "Direct-response marketing expert focused on scaling local businesses.",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&h=400&q=80",
+    },
+    {
+      name: "Marcus Thorne",
+      role: "Technical Director",
+      bio: "Ensures seamless integration between diverse software stacks and AI.",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=400&q=80",
+    },
+  ];
+
+  const teamPairs = [];
+  for (let i = 0; i < teamMembers.length; i += 2) {
+    teamPairs.push(teamMembers.slice(i, i + 2));
+  }
+
+  const teamContainerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: teamScrollY } = useScroll({
+    target: teamContainerRef,
+    offset: ["start end", "end start"],
+  });
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-300 text-foreground dark:text-white">
@@ -155,7 +197,6 @@ const WhyCreateAssistants = () => {
 
         {/* Why Choose Section (Orbital Satellite Grid) */}
         <div className="py-16 w-full bg-background relative overflow-hidden min-h-[700px] flex items-center justify-center">
-          {/* Background Ambient Orbs */}
           <div className="absolute inset-0 pointer-events-none">
             <motion.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-[140px]"
@@ -165,10 +206,7 @@ const WhyCreateAssistants = () => {
           </div>
 
           <div className="container mx-auto px-4 relative z-10 w-full max-w-7xl">
-            {/* Responsive Orbital View (MD+) */}
             <div className="hidden md:grid grid-cols-12 grid-rows-3 gap-4 lg:gap-8 items-center">
-
-              {/* Center Hub */}
               <div className="col-start-4 col-end-10 lg:col-start-5 lg:col-end-9 row-start-2 text-center z-20">
                 <AnimatedSection direction="up">
                   <span className="text-primary font-semibold tracking-wider uppercase text-[10px] md:text-xs mb-3 block">
@@ -184,20 +222,15 @@ const WhyCreateAssistants = () => {
                 </AnimatedSection>
               </div>
 
-              {/* Satellite Cards - Orbiting */}
-              {[0, 1, 2, 3].map((index) => {
-                const reason = reasons[index];
+              {reasons.map((reason, index) => {
                 const Icon = reason.icon;
-
-                // Responsive Grid Placement
                 const gridClasses = [
-                  "col-start-1 col-end-5 lg:col-end-4 row-start-1 md:mt-[-40px] md:ml-[20px] lg:mt-[-30px] lg:ml-[40px]", // Top Left
-                  "col-start-9 lg:col-start-10 col-end-13 row-start-1 md:mt-[20px] md:mr-[0px] lg:mt-[40px] lg:mr-[20px]",   // Top Right
-                  "col-start-1 col-end-5 lg:col-end-4 row-start-3 md:mb-[30px] md:ml-[-20px] lg:mb-[50px] lg:ml-[-10px]",  // Bottom Left
-                  "col-start-9 lg:col-start-10 col-end-13 row-start-3 md:mb-[-20px] md:mr-[0px] lg:mb-[-10px] lg:mr-[50px]",  // Bottom Right
+                  "col-start-1 col-end-5 lg:col-end-4 row-start-1 md:mt-[-40px] md:ml-[20px] lg:mt-[-30px] lg:ml-[40px]",
+                  "col-start-9 lg:col-start-10 col-end-13 row-start-1 md:mt-[20px] md:mr-[0px] lg:mt-[40px] lg:mr-[20px]",
+                  "col-start-1 col-end-5 lg:col-end-4 row-start-3 md:mb-[30px] md:ml-[-20px] lg:mb-[50px] lg:ml-[-10px]",
+                  "col-start-9 lg:col-start-10 col-end-13 row-start-3 md:mb-[-20px] md:mr-[0px] lg:mb-[-10px] lg:mr-[50px]",
                 ];
 
-                // Entrance animation
                 const spawnX = [150, -150, 150, -150];
                 const spawnY = [100, 100, -100, -100];
 
@@ -213,7 +246,7 @@ const WhyCreateAssistants = () => {
                   >
                     <motion.div
                       animate={{
-                        y: [0, -12, 0, 12, 0], // Elliptical orbit feel
+                        y: [0, -12, 0, 12, 0],
                         x: index % 2 === 0 ? [0, 8, 0, -8, 0] : [0, -8, 0, 8, 0],
                         rotate: index % 2 === 0 ? [0, 1, 0, -1, 0] : [0, -1, 0, 1, 0]
                       }}
@@ -231,7 +264,6 @@ const WhyCreateAssistants = () => {
                         }}
                         className="glass-card p-5 lg:p-7 rounded-[1.5rem] lg:rounded-[2rem] border border-primary/10 shadow-2xl backdrop-blur-xl group relative overflow-hidden transition-all duration-300 hover:border-primary/40"
                       >
-                        {/* Internal Animated Orb effect for the card */}
                         <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                           <motion.div
                             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/20 rounded-full blur-3xl"
@@ -251,7 +283,6 @@ const WhyCreateAssistants = () => {
                             {reason.description}
                           </p>
                         </div>
-
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
                       </motion.div>
                     </motion.div>
@@ -260,7 +291,6 @@ const WhyCreateAssistants = () => {
               })}
             </div>
 
-            {/* Mobile View: Standard Grid fallback (XS to MD) */}
             <div className="md:hidden flex flex-col items-center">
               <div className="text-center mb-12">
                 <AnimatedSection direction="up">
@@ -294,11 +324,6 @@ const WhyCreateAssistants = () => {
               animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div
-              className="absolute top-20 -left-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl"
-              animate={{ x: [0, 30, 0], y: [0, 20, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
           </div>
 
@@ -313,120 +338,34 @@ const WhyCreateAssistants = () => {
             </AnimatedSection>
 
             <div className="w-full max-w-5xl mx-auto relative">
-              {process.map((item, index) => {
-                const Icon = item.icon;
-                const [isHovered, setIsHovered] = useState(false);
-                const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-                const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-                  setMousePos({
-                    x: e.clientX,
-                    y: e.clientY,
-                  });
-                };
-
-                return (
-                  <motion.div
-                    key={item.step}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="group relative w-full cursor-pointer border-b border-neutral-200 dark:border-neutral-800 py-5"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    onMouseMove={handleMouseMove}
-                  >
-                    <div className="flex items-center justify-between gap-6">
-                      <div className="relative overflow-hidden h-[48px] md:h-14 flex-1">
-                        <div className="transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-1/2">
-                          <div className="h-[48px] md:h-14 flex items-center gap-4">
-                            <span className="text-sm font-bold text-primary/60">{item.step}</span>
-                            <h3 className="text-xl md:text-3xl font-bold text-neutral-900 dark:text-white uppercase tracking-tighter">
-                              {item.title}
-                            </h3>
-                          </div>
-                          <div className="h-[48px] md:h-14 flex items-center gap-4">
-                            <span className="text-sm font-bold text-accent">{item.step}</span>
-                            <h3 className="text-xl md:text-3xl font-bold uppercase tracking-tighter italic text-accent">
-                              {item.title}
-                            </h3>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl overflow-hidden bg-muted/50 flex items-center justify-center transition-all duration-300 group-hover:bg-accent/10">
-                        <Icon className="w-5 h-5 md:w-6 md:h-6 text-accent transition-transform duration-300 group-hover:scale-110" />
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {item.description}
-                    </p>
-
-                    <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-accent to-accent/50 transition-all duration-500 group-hover:w-full" />
-
-                    <AnimatePresence>
-                      {isHovered && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.8 }}
-                          transition={{ duration: 0.2 }}
-                          className="fixed pointer-events-none z-50 w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
-                          style={{
-                            left: mousePos.x + 20,
-                            top: mousePos.y - 80,
-                          }}
-                        >
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
-                          <div className="absolute bottom-2 left-3 text-xs font-medium text-white/90">
-                            {item.title}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                );
-              })}
+              {processData.map((item, index) => (
+                <ProcessItem key={item.step} item={item} index={index} />
+              ))}
             </div>
           </div>
         </div>
 
         {/* Values Section */}
         <div className="py-32 w-full flex items-center justify-center bg-[#FDFCFB] dark:bg-[#030614] relative overflow-hidden transition-colors duration-500">
-          {/* Enhanced Background Layering */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] dark:bg-primary/10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] dark:bg-orange-500/10" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40" />
-
-            {/* Ambient Accent orbs */}
-            <motion.div
-              className="absolute top-20 right-10 w-64 h-64 bg-accent/10 rounded-full blur-3xl opacity-50"
-              animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-20">
-              <span className="text-primary font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">Our DNA</span>
+              <span className="text-orange-500 font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">Our DNA</span>
               <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tighter leading-tight">
                 Our <span className="text-gradient">Mission & Values</span>
               </h2>
-              <div className="h-1 w-20 bg-primary/20 mx-auto mb-8 rounded-full" />
+              <div className="h-1 w-20 bg-orange-500/20 mx-auto mb-8 rounded-full" />
               <p className="body-large max-w-2xl mx-auto text-muted-foreground/80 font-medium leading-relaxed">
                 Create Assistants is a family‑owned agency based in Iowa. We believe small businesses deserve enterprise-grade automation.
               </p>
             </AnimatedSection>
 
             <div className="grid md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
-              {values.map((value, index) => {
+              {valuesData.map((value, index) => {
                 const Icon = value.icon;
                 return (
                   <motion.div
@@ -434,41 +373,18 @@ const WhyCreateAssistants = () => {
                     initial={{ opacity: 0, scale: 0.9, y: 40 }}
                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    transition={{
-                      duration: 0.8,
-                      delay: index * 0.15,
-                      ease: [0.16, 1, 0.3, 1]
-                    }}
+                    transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
                     whileHover={{ y: -10 }}
                     className="relative group h-full"
                   >
-                    {/* Floating Shadow Layer */}
-                    <div className="absolute inset-x-8 -bottom-4 h-8 bg-black/5 blur-2xl group-hover:bg-primary/10 transition-colors duration-500 rounded-full" />
-
-                    <div className="glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center transition-all duration-500 group-hover:shadow-[0_48px_80px_-20px_rgba(0,0,0,0.08)]">
-
-                      {/* Gradient Hover spotlight */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-                      {/* Icon Podium */}
-                      <div className="relative mb-10">
-                        <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-150" />
-                        <div className="w-20 h-20 rounded-3xl bg-white dark:bg-white/5 shadow-inner border border-white/80 dark:border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
-                          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center group-hover:from-primary/20 group-hover:to-accent/20 transition-all">
-                            <Icon className="w-7 h-7 text-primary" />
-                          </div>
+                    <div className="glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center">
+                      <div className="relative mb-8">
+                        <div className="w-20 h-20 rounded-3xl bg-white dark:bg-white/5 shadow-inner border border-white/80 dark:border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110">
+                          <Icon className="w-7 h-7 text-orange-600" />
                         </div>
                       </div>
-
-                      <h3 className="text-2xl font-bold mb-4 tracking-tight relative z-10 transition-colors duration-300 group-hover:text-primary">
-                        {value.title}
-                      </h3>
-                      <p className="text-muted-foreground/90 leading-relaxed relative z-10 font-medium text-sm lg:text-base">
-                        {value.description}
-                      </p>
-
-                      {/* Animated bottom bar reveal */}
-                      <div className="absolute bottom-0 inset-x-0 h-1.5 bg-gradient-to-r from-transparent via-primary/40 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
+                      <h3 className="text-2xl font-bold mb-4 group-hover:text-orange-600 transition-colors">{value.title}</h3>
+                      <p className="text-muted-foreground/90 font-medium text-sm lg:text-base">{value.description}</p>
                     </div>
                   </motion.div>
                 );
@@ -477,63 +393,63 @@ const WhyCreateAssistants = () => {
           </div>
         </div>
 
-        {/* Team Section */}
-        <div className="py-24 w-full flex items-center justify-center bg-slate-950 text-white relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
+        {/* Team Section - Cinematic Layer Tunnel */}
+        <div ref={teamContainerRef} className="relative h-[600vh] bg-slate-950">
+          <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] pointer-events-none" />
+
             <motion.div
-              className="absolute top-1/4 -right-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl opacity-30"
-              animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            />
-          </div>
+              style={{
+                opacity: useTransform(teamScrollY, [0, 0.1, 0.9, 1], [0, 0.3, 0.3, 0]),
+                scale: useTransform(teamScrollY, [0, 1], [0.8, 1.2]),
+              }}
+              className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+            >
+              <h2 className="text-[15vw] font-black text-white/5 tracking-tighter uppercase select-none">
+                THE COLLECTIVE
+              </h2>
+            </motion.div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <AnimatedSection direction="right">
-                  <h2 className="section-headline mb-6 text-white">
-                    Meet the <span className="text-indigo-400">Team</span>
-                  </h2>
-                  <p className="body-large mb-4 text-slate-200">
-                    We're a small, close‑knit group of technologists, marketers and process nerds. Our diverse backgrounds allow us to craft systems that truly work.
-                  </p>
-                </AnimatedSection>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
-                  className="mt-8"
-                >
-                  <MagneticWrapper strength={0.25}>
-                    <Button variant="outline" size="lg" className="group border-slate-700 text-slate-900 bg-slate-100 hover:bg-white hover:text-slate-900">
-                      Meet Our Team
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </MagneticWrapper>
-                </motion.div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 30, scale: 0.9 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="relative h-80 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80"
-                  alt="Team collaboration"
-                  className="h-full w-full object-cover opacity-80"
+            <div className="relative w-full max-w-7xl h-[600px] z-20 hidden md:block">
+              {teamPairs.map((pair, index) => (
+                <TeamPairLayer
+                  key={index}
+                  members={pair}
+                  progress={teamScrollY}
+                  index={index}
+                  total={teamPairs.length}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-sm border border-slate-700">
-                    <Users className="w-4 h-4 text-indigo-400" />
-                    <span className="text-xs font-medium text-slate-200">Close-Knit Team</span>
+              ))}
+            </div>
+
+            <motion.div
+              style={{
+                opacity: useTransform(teamScrollY, [0.92, 0.98], [0, 1]),
+                y: useTransform(teamScrollY, [0.92, 0.98], [40, 0]),
+              }}
+              className="absolute bottom-16 z-50 text-center px-4"
+            >
+              <span className="text-indigo-400 font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
+              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
+                THE <span className="text-indigo-400">TEAM</span>
+              </h2>
+            </motion.div>
+
+            <div className="md:hidden w-full px-6 py-20 z-50 bg-slate-950">
+              <div className="text-center mb-12">
+                <span className="text-indigo-400 font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
+                <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-indigo-400">Team</span></h2>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {teamMembers.map((member) => (
+                  <div key={member.name} className="flex flex-col items-center text-center p-4 rounded-3xl bg-white/5 border border-white/10">
+                    <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover mb-3" />
+                    <h4 className="text-sm font-bold text-white">{member.name}</h4>
+                    <p className="text-[10px] text-indigo-400 uppercase font-black">{member.role}</p>
                   </div>
-                </div>
-              </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -550,21 +466,13 @@ const WhyCreateAssistants = () => {
 
           <div className="container mx-auto px-4 text-center relative z-10">
             <AnimatedSection direction="up" className="max-w-3xl mx-auto">
-              <h2 className="section-headline mb-6">
-                Partnership, <span className="text-gradient">Not a One‑Off</span>
-              </h2>
+              <h2 className="section-headline mb-6">Partnership, <span className="text-gradient">Not a One‑Off</span></h2>
               <p className="body-large mb-8">
                 Your success is our success. We stay with you after launch, adjusting your automations and retaining AI employees without you hiring a systems team.
               </p>
             </AnimatedSection>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="inline-block"
-            >
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="inline-block">
               <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
                   <a href="/book-a-call">
@@ -579,6 +487,136 @@ const WhyCreateAssistants = () => {
       </main>
       <Footer />
     </div>
+  );
+};
+
+const ProcessItem = ({ item, index }: { item: any; index: number }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const Icon = item.icon;
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="group relative w-full cursor-pointer border-b border-neutral-200 dark:border-neutral-800 py-5"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+    >
+      <div className="flex items-center justify-between gap-6">
+        <div className="relative overflow-hidden h-[48px] md:h-14 flex-1">
+          <div className="transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-1/2">
+            <div className="h-[48px] md:h-14 flex items-center gap-4">
+              <span className="text-sm font-bold text-primary/60">{item.step}</span>
+              <h3 className="text-xl md:text-3xl font-bold text-neutral-900 dark:text-white uppercase tracking-tighter">
+                {item.title}
+              </h3>
+            </div>
+            <div className="h-[48px] md:h-14 flex items-center gap-4">
+              <span className="text-sm font-bold text-accent">{item.step}</span>
+              <h3 className="text-xl md:text-3xl font-bold uppercase tracking-tighter italic text-accent">
+                {item.title}
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl overflow-hidden bg-muted/50 flex items-center justify-center transition-all duration-300 group-hover:bg-accent/10">
+          <Icon className="w-5 h-5 md:w-6 md:h-6 text-accent transition-transform duration-300 group-hover:scale-110" />
+        </div>
+      </div>
+
+      <p className="text-sm text-muted-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {item.description}
+      </p>
+
+      <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-accent to-accent/50 transition-all duration-500 group-hover:w-full" />
+
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            className="fixed pointer-events-none z-50 w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
+            style={{ left: mousePos.x + 20, top: mousePos.y - 80 }}
+          >
+            <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+const TeamPairLayer = ({ members, progress, index, total }: { members: any[]; progress: any; index: number; total: number }) => {
+  const start = index / total;
+  const end = (index + 1) / total;
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      {members.map((member, mIndex) => (
+        <IndividualMemberCard
+          key={member.name}
+          member={member}
+          progress={progress}
+          rangeStart={start + (mIndex * 0.15 / total)}
+          rangeEnd={end - ((1 - mIndex) * 0.05 / total)}
+          mIndex={mIndex}
+        />
+      ))}
+    </div>
+  );
+};
+
+const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }: { member: any; progress: any; rangeStart: number; rangeEnd: number; mIndex: number }) => {
+  const duration = rangeEnd - rangeStart;
+  const focusStart = rangeStart + (duration * 0.25);
+  const focusEnd = rangeEnd - (duration * 0.25);
+
+  const zPos = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [-5000, 0, 0, 2000]);
+  const opacity = useTransform(progress, [rangeStart, rangeStart + 0.05, focusStart, focusEnd, rangeEnd - 0.05, rangeEnd], [0, 1, 1, 1, 1, 0]);
+  const scale = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [0.3, 1, 1, 2.5]);
+  const blur = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], ["blur(40px)", "blur(0px)", "blur(0px)", "blur(60px)"]);
+
+  return (
+    <motion.div
+      style={{
+        position: "absolute",
+        left: mIndex === 0 ? "28%" : "72%",
+        top: "50%",
+        x: "-50%",
+        y: "-50%",
+        z: zPos,
+        opacity: opacity,
+        scale: scale,
+        filter: blur,
+      }}
+      className="w-[420px] aspect-[4/5] z-10 origin-center pointer-events-auto"
+    >
+      <div className="relative w-full h-full rounded-[4rem] bg-slate-900 border border-white/10 shadow-[0_100px_200px_rgba(0,0,0,0.8)] overflow-hidden group">
+        <img
+          src={member.image}
+          alt={member.name}
+          className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-12 flex flex-col justify-end">
+          <h4 className="text-4xl font-black text-white tracking-tighter leading-none mb-2">{member.name}</h4>
+          <p className="text-xs text-indigo-400 font-bold uppercase tracking-[0.3em] mb-4">{member.role}</p>
+          <div className="h-px w-16 bg-indigo-500/50 mb-4" />
+          <p className="text-base text-slate-200 italic leading-relaxed line-clamp-3">"{member.bio}"</p>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent pointer-events-none" />
+      </div>
+    </motion.div>
   );
 };
 
