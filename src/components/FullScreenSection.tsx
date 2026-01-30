@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ReactNode, useEffect, useState, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
+import { ScrollToTopButton } from "./ScrollToTop";
 
 interface SnapSectionProps {
     children: ReactNode;
@@ -177,6 +178,11 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
                         {children[currentIndex]}
                     </div>
                 </motion.div>
+            </AnimatePresence>
+            <AnimatePresence>
+                {currentIndex > 0 && (
+                    <ScrollToTopButton onClick={() => goToSection(0, -1)} />
+                )}
             </AnimatePresence>
         </div>
     );
