@@ -74,7 +74,7 @@ const TestimonialSection = () => {
             <Button
               variant="hero"
               size="xl"
-              className="w-full sm:w-auto bg-primary text-primary-foreground hover:scale-105 active:scale-95 transition-all hover:bg-accent hover:text-primary duration-300 rounded-full px-8 sm:px-12 h-14 sm:h-auto whitespace-normal sm:whitespace-nowrap"
+              className="w-full sm:w-auto bg-primary text-primary-foreground py-3 hover:scale-105 active:scale-95 transition-all hover:bg-accent hover:text-primary duration-300 rounded-full px-8 sm:px-12 h-14 sm:h-auto whitespace-normal sm:whitespace-nowrap"
               asChild
             >
               <a href="/book-a-call" className="flex items-center justify-center">

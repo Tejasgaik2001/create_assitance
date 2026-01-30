@@ -1,16 +1,12 @@
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Zap, Clock, Settings, Lightbulb, Target, Award, Heart, MapPin, MessageSquare, Shield, MousePointer2, Mouse } from "lucide-react";
-import { ArrowRight, Users, Zap, Clock, Settings, Lightbulb, Target, Award, Heart, MapPin, MessageSquare, Shield, MousePointer2, Mouse } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { MagneticWrapper } from "@/components/MagneticWrapper";
-import { RollingTextList } from "@/components/ui/RollingTextList";
-import { cn } from "@/lib/utils";
-import AnimatedSection from "@/components/AnimatedSection";
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Shield, Clock, Lightbulb, Users, Target, Settings, Zap, Award, Heart, MapPin, MessageSquare, ArrowRight } from 'lucide-react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import AnimatedSection from '../components/AnimatedSection';
+import { Button } from '../components/ui/button';
+import { cn } from '../lib/utils';
+import { MagneticWrapper } from '@/components/MagneticWrapper';
 
 const WhyCreateAssistants = () => {
   const reasons = [
@@ -36,7 +32,7 @@ const WhyCreateAssistants = () => {
     },
   ];
 
-  const process = [
+  const processData = [
     {
       step: "01",
       title: "Discovery",
@@ -67,7 +63,7 @@ const WhyCreateAssistants = () => {
     },
   ];
 
-  const values = [
+  const valuesData = [
     {
       title: "Integrity & Results",
       description: "Transparent values guide every system we build.",
@@ -85,7 +81,7 @@ const WhyCreateAssistants = () => {
     },
   ];
 
-  const team = [
+  const teamMembers = [
     {
       name: "Alex Rivera",
       role: "Founder & CEO",
@@ -119,52 +115,8 @@ const WhyCreateAssistants = () => {
   ];
 
   const teamPairs = [];
-  for (let i = 0; i < team.length; i += 2) {
-    teamPairs.push(team.slice(i, i + 2));
-  }
-
-  const teamContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: teamScrollY } = useScroll({
-    target: teamContainerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const team = [
-    {
-      name: "Alex Rivera",
-      role: "Founder & CEO",
-      bio: "Visionary leader with 10+ years in AI automation and business strategy.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      name: "Sarah Chen",
-      role: "Head of AI Implementation",
-      bio: "Master of neural networks and large language model fine-tuning.",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      name: "David Park",
-      role: "CRM Architect",
-      bio: "Specializes in building complex, high-converson customer journey systems.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      name: "Elena Rodriguez",
-      role: "Growth Strategist",
-      bio: "Direct-response marketing expert focused on scaling local businesses.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-    {
-      name: "Marcus Thorne",
-      role: "Technical Director",
-      bio: "Ensures seamless integration between diverse software stacks and AI.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=400&q=80",
-    },
-  ];
-
-  const teamPairs = [];
-  for (let i = 0; i < team.length; i += 2) {
-    teamPairs.push(team.slice(i, i + 2));
+  for (let i = 0; i < teamMembers.length; i += 2) {
+    teamPairs.push(teamMembers.slice(i, i + 2));
   }
 
   const teamContainerRef = useRef<HTMLDivElement>(null);
@@ -270,14 +222,9 @@ const WhyCreateAssistants = () => {
                 </AnimatedSection>
               </div>
 
-              {[0, 1, 2, 3].map((index) => {
-                const reason = reasons[index];
+              {reasons.map((reason, index) => {
                 const Icon = reason.icon;
                 const gridClasses = [
-                  "col-start-1 col-end-5 lg:col-end-4 row-start-1 md:mt-[-40px] md:ml-[20px] lg:mt-[-30px] lg:ml-[40px]",
-                  "col-start-9 lg:col-start-10 col-end-13 row-start-1 md:mt-[20px] md:mr-[0px] lg:mt-[40px] lg:mr-[20px]",
-                  "col-start-1 col-end-5 lg:col-end-4 row-start-3 md:mb-[30px] md:ml-[-20px] lg:mb-[50px] lg:ml-[-10px]",
-                  "col-start-9 lg:col-start-10 col-end-13 row-start-3 md:mb-[-20px] md:mr-[0px] lg:mb-[-10px] lg:mr-[50px]",
                   "col-start-1 col-end-5 lg:col-end-4 row-start-1 md:mt-[-40px] md:ml-[20px] lg:mt-[-30px] lg:ml-[40px]",
                   "col-start-9 lg:col-start-10 col-end-13 row-start-1 md:mt-[20px] md:mr-[0px] lg:mt-[40px] lg:mr-[20px]",
                   "col-start-1 col-end-5 lg:col-end-4 row-start-3 md:mb-[30px] md:ml-[-20px] lg:mb-[50px] lg:ml-[-10px]",
@@ -299,7 +246,6 @@ const WhyCreateAssistants = () => {
                   >
                     <motion.div
                       animate={{
-                        y: [0, -12, 0, 12, 0],
                         y: [0, -12, 0, 12, 0],
                         x: index % 2 === 0 ? [0, 8, 0, -8, 0] : [0, -8, 0, 8, 0],
                         rotate: index % 2 === 0 ? [0, 1, 0, -1, 0] : [0, -1, 0, 1, 0]
@@ -392,76 +338,9 @@ const WhyCreateAssistants = () => {
             </AnimatedSection>
 
             <div className="w-full max-w-5xl mx-auto relative">
-              {process.map((item, index) => {
-                const Icon = item.icon;
-                const [isHovered, setIsHovered] = useState(false);
-                const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-                const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-                  setMousePos({ x: e.clientX, y: e.clientY });
-                  setMousePos({ x: e.clientX, y: e.clientY });
-                };
-
-                return (
-                  <motion.div
-                    key={item.step}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="group relative w-full cursor-pointer border-b border-neutral-200 dark:border-neutral-800 py-5"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    onMouseMove={handleMouseMove}
-                  >
-                    <div className="flex items-center justify-between gap-6">
-                      <div className="relative overflow-hidden h-[48px] md:h-14 flex-1">
-                        <div className="transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-1/2">
-                          <div className="h-[48px] md:h-14 flex items-center gap-4">
-                            <span className="text-sm font-bold text-primary/60">{item.step}</span>
-                            <h3 className="text-xl md:text-3xl font-bold text-neutral-900 dark:text-white uppercase tracking-tighter">
-                              {item.title}
-                            </h3>
-                          </div>
-                          <div className="h-[48px] md:h-14 flex items-center gap-4">
-                            <span className="text-sm font-bold text-accent">{item.step}</span>
-                            <h3 className="text-xl md:text-3xl font-bold uppercase tracking-tighter italic text-accent">
-                              {item.title}
-                            </h3>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl overflow-hidden bg-muted/50 flex items-center justify-center transition-all duration-300 group-hover:bg-accent/10">
-                        <Icon className="w-5 h-5 md:w-6 md:h-6 text-accent transition-transform duration-300 group-hover:scale-110" />
-                      </div>
-                    </div>
-
-                    <p className="text-sm text-muted-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {item.description}
-                    </p>
-
-                    <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-accent to-accent/50 transition-all duration-500 group-hover:w-full" />
-
-                    <AnimatePresence>
-                      {isHovered && (
-                        <motion.div
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.8 }}
-                          transition={{ duration: 0.2 }}
-                          className="fixed pointer-events-none z-50 w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
-                          style={{ left: mousePos.x + 20, top: mousePos.y - 80 }}
-                          style={{ left: mousePos.x + 20, top: mousePos.y - 80 }}
-                        >
-                          <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                          <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                );
-              })}
+              {processData.map((item, index) => (
+                <ProcessItem key={item.step} item={item} index={index} />
+              ))}
             </div>
           </div>
         </div>
@@ -470,24 +349,23 @@ const WhyCreateAssistants = () => {
         <div className="py-32 w-full flex items-center justify-center bg-[#FDFCFB] dark:bg-[#030614] relative overflow-hidden transition-colors duration-500">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] dark:bg-orange-500/10" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] dark:bg-orange-500/10" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-20">
-              <span className="text-primary font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">Our DNA</span>
+              <span className="text-orange-500 font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">Our DNA</span>
               <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tighter leading-tight">
                 Our <span className="text-gradient">Mission & Values</span>
               </h2>
-              <div className="h-1 w-20 bg-primary/20 mx-auto mb-8 rounded-full" />
+              <div className="h-1 w-20 bg-orange-500/20 mx-auto mb-8 rounded-full" />
               <p className="body-large max-w-2xl mx-auto text-muted-foreground/80 font-medium leading-relaxed">
                 Create Assistants is a family‑owned agency based in Iowa. We believe small businesses deserve enterprise-grade automation.
               </p>
             </AnimatedSection>
 
             <div className="grid md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
-              {values.map((value, index) => {
+              {valuesData.map((value, index) => {
                 const Icon = value.icon;
                 return (
                   <motion.div
@@ -496,317 +374,250 @@ const WhyCreateAssistants = () => {
                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                    transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
                     whileHover={{ y: -10 }}
                     className="relative group h-full"
                   >
                     <div className="glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center">
-                      <div className="glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center">
-                        <div className="relative mb-10">
-                          <div className="w-20 h-20 rounded-3xl bg-white dark:bg-white/5 shadow-inner border border-white/80 dark:border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110">
-                            <Icon className="w-7 h-7 text-orange-600" />
-                            <div className="w-20 h-20 rounded-3xl bg-white dark:bg-white/5 shadow-inner border border-white/80 dark:border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110">
-                              <Icon className="w-7 h-7 text-orange-600" />
-                            </div>
-                          </div>
-                          <h3 className="text-2xl font-bold mb-4 group-hover:text-orange-600">{value.title}</h3>
-                          <p className="text-muted-foreground/90 font-medium text-sm lg:text-base">{value.description}</p>
-                          <h3 className="text-2xl font-bold mb-4 group-hover:text-orange-600">{value.title}</h3>
-                          <p className="text-muted-foreground/90 font-medium text-sm lg:text-base">{value.description}</p>
+                      <div className="relative mb-8">
+                        <div className="w-20 h-20 rounded-3xl bg-white dark:bg-white/5 shadow-inner border border-white/80 dark:border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110">
+                          <Icon className="w-7 h-7 text-orange-600" />
                         </div>
-                      </motion.div>
-                      );
-              })}
-                    </div>
-                  </div>
-        </div>
-
-            {/* Team Section - Cinematic Layer Tunnel */}
-            <div ref={teamContainerRef} className="relative h-[600vh] bg-slate-950">
-              <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
-
-                {/* Background Texture / Gradient */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)] pointer-events-none" />
-                <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] pointer-events-none" />
-
-                {/* Cinematic Title Behind Layers */}
-                <motion.div
-                  style={{
-                    opacity: useTransform(teamScrollY, [0, 0.1, 0.9, 1], [0, 0.3, 0.3, 0]),
-                    scale: useTransform(teamScrollY, [0, 1], [0.8, 1.2]),
-                  }}
-                  className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
-                >
-                  <h2 className="text-[15vw] font-black text-white/5 tracking-tighter uppercase select-none">
-                    THE COLLECTIVE
-                  </h2>
-                </motion.div>
-
-                {/* The Layers (Team Member Pairs) */}
-                <div className="relative w-full max-w-7xl h-[600px] z-20 hidden md:block">
-                  {teamPairs.map((pair, index) => (
-                    <TeamPairLayer
-                      key={index}
-                      members={pair}
-                      progress={teamScrollY}
-                      index={index}
-                      total={teamPairs.length}
-                    />
-                  ))}
-                </div>
-
-                {/* Final Reveal Text */}
-                <motion.div
-                  style={{
-                    opacity: useTransform(teamScrollY, [0.92, 0.98], [0, 1]),
-                    y: useTransform(teamScrollY, [0.92, 0.98], [40, 0]),
-                  }}
-                  className="absolute bottom-16 z-50 text-center px-4"
-                >
-                  <span className="text-indigo-400 font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
-                  <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
-                    THE <span className="text-indigo-400">TEAM</span>
-                  </h2>
-                </motion.div>
-
-                {/* Mobile Fallback - Static Grid */}
-                <div className="md:hidden w-full px-6 py-20 z-50 bg-slate-950">
-                  <div className="text-center mb-12">
-                    <span className="text-indigo-400 font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
-                    <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-indigo-400">Team</span></h2>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    {team.map((member) => (
-                      <div key={member.name} className="flex flex-col items-center text-center p-4 rounded-3xl bg-white/5 border border-white/10">
-                        <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover mb-3" />
-                        <h4 className="text-sm font-bold text-white">{member.name}</h4>
-                        <p className="text-[10px] text-indigo-400 uppercase font-black">{member.role}</p>
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Final Reveal Text (Desktop Only - Mobile has it in stack) */}
-                <motion.div
-                  style={{
-                    opacity: useTransform(teamScrollY, [0.92, 0.98], [0, 1]),
-                    y: useTransform(teamScrollY, [0.92, 0.98], [40, 0]),
-                  }}
-                  className="absolute bottom-16 z-50 text-center px-4 hidden md:block"
-                >
-                  <span className="text-indigo-400 font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
-                  <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
-                    THE <span className="text-indigo-400">TEAM</span>
-                  </h2>
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Partnership/CTA */}
-            <div className="py-24 w-full flex items-center justify-center bg-background relative overflow-hidden">
-              <div className="absolute inset-0 pointer-events-none">
-                <motion.div
-                  className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-50"
-                  animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                />
-              </div>
-
-              <div className="container mx-auto px-4 text-center relative z-10">
-                <AnimatedSection direction="up" className="max-w-3xl mx-auto">
-                  <h2 className="section-headline mb-6">Partnership, <span className="text-gradient">Not a One‑Off</span></h2>
-                  <h2 className="section-headline mb-6">Partnership, <span className="text-gradient">Not a One‑Off</span></h2>
-                  <p className="body-large mb-8">
-                    Your success is our success. We stay with you after launch, adjusting your automations and retaining AI employees without you hiring a systems team.
-                  </p>
-                </AnimatedSection>
-                <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="inline-block">
-                  <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="inline-block">
-                    <MagneticWrapper strength={0.25}>
-                      <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
-                        <a href="/book-a-call">Book a Free Consultation<ArrowRight className="w-4 h-4 ml-2" /></a>
-                        <a href="/book-a-call">Book a Free Consultation<ArrowRight className="w-4 h-4 ml-2" /></a>
-                      </Button>
-                    </MagneticWrapper>
+                      <h3 className="text-2xl font-bold mb-4 group-hover:text-orange-600 transition-colors">{value.title}</h3>
+                      <p className="text-muted-foreground/90 font-medium text-sm lg:text-base">{value.description}</p>
+                    </div>
                   </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Team Section - Cinematic Layer Tunnel */}
+        <div ref={teamContainerRef} className="relative h-[600vh] bg-slate-950">
+          <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] pointer-events-none" />
+
+            <motion.div
+              style={{
+                opacity: useTransform(teamScrollY, [0, 0.1, 0.9, 1], [0, 0.3, 0.3, 0]),
+                scale: useTransform(teamScrollY, [0, 1], [0.8, 1.2]),
+              }}
+              className="absolute inset-0 flex items-center justify-center pointer-events-none z-0"
+            >
+              <h2 className="text-[15vw] font-black text-white/5 tracking-tighter uppercase select-none">
+                THE COLLECTIVE
+              </h2>
+            </motion.div>
+
+            <div className="relative w-full max-w-7xl h-[600px] z-20 hidden md:block">
+              {teamPairs.map((pair, index) => (
+                <TeamPairLayer
+                  key={index}
+                  members={pair}
+                  progress={teamScrollY}
+                  index={index}
+                  total={teamPairs.length}
+                />
+              ))}
+            </div>
+
+            <motion.div
+              style={{
+                opacity: useTransform(teamScrollY, [0.92, 0.98], [0, 1]),
+                y: useTransform(teamScrollY, [0.92, 0.98], [40, 0]),
+              }}
+              className="absolute bottom-16 z-50 text-center px-4"
+            >
+              <span className="text-indigo-400 font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
+              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
+                THE <span className="text-indigo-400">TEAM</span>
+              </h2>
+            </motion.div>
+
+            <div className="md:hidden w-full px-6 py-20 z-50 bg-slate-950">
+              <div className="text-center mb-12">
+                <span className="text-indigo-400 font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
+                <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-indigo-400">Team</span></h2>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {teamMembers.map((member) => (
+                  <div key={member.name} className="flex flex-col items-center text-center p-4 rounded-3xl bg-white/5 border border-white/10">
+                    <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover mb-3" />
+                    <h4 className="text-sm font-bold text-white">{member.name}</h4>
+                    <p className="text-[10px] text-indigo-400 uppercase font-black">{member.role}</p>
+                  </div>
+                ))}
               </div>
             </div>
-          </main>
-          <Footer />
-        </div>
-        );
-};
-
-        const TeamPairLayer = ({members, progress, index, total}: {members: any[], progress: any, index: number, total: number }) => {
-  // Define the normalized scroll range for this specific pair
-  const start = index / total;
-        const end = (index + 1) / total;
-
-        return (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          {members.map((member, mIndex) => (
-            <IndividualMemberCard
-              key={member.name}
-              member={member}
-              progress={progress}
-              // Each member in the pair gets a staggered sub-window
-              // First card starts at the beginning of the pair window, 
-              // second card starts slightly later (15% offset).
-              rangeStart={start + (mIndex * 0.15 / total)}
-              rangeEnd={end - ((1 - mIndex) * 0.05 / total)}
-              mIndex={mIndex}
-            />
-          ))}
-        </div>
-        );
-};
-
-        const IndividualMemberCard = ({member, progress, rangeStart, rangeEnd, mIndex}: {member: any, progress: any, rangeStart: number, rangeEnd: number, mIndex: number }) => {
-  // Define a "Focus Plateau" where the card is crystal clear and stationary at Z=0
-  const duration = rangeEnd - rangeStart;
-        const focusStart = rangeStart + (duration * 0.25); // Spends 25% of time moving from back
-        const focusEnd = rangeEnd - (duration * 0.25);   // Spends 25% of time moving past viewer
-        // Plateau is 50% of the card's active scroll window where it is perfect for reading
-
-        // Z-Axis Depth Movement with Hold at Z=0
-        const zPos = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [-5000, 0, 0, 2000]);
-
-        // Opacity & Blur: Snap into focus at focusStart, hold, then fade out after focusEnd
-        const opacity = useTransform(progress,
-        [rangeStart, rangeStart + 0.05, focusStart, focusEnd, rangeEnd - 0.05, rangeEnd],
-        [0, 1, 1, 1, 1, 0]
-        );
-
-        // Scale: Grows as it gets closer, stable during focus
-        const scale = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [0.3, 1, 1, 2.5]);
-
-        // Blur: Heavy blur in back, sharp in focus, heavy blur as it passes
-        const blur = useTransform(progress,
-        [rangeStart, focusStart, focusEnd, rangeEnd],
-        ["blur(40px)", "blur(0px)", "blur(0px)", "blur(60px)"]
-        );
-
-        return (
-        <motion.div
-          style={{
-            position: "absolute",
-            left: mIndex === 0 ? "28%" : "72%",
-            top: "50%",
-            x: "-50%",
-            y: "-50%",
-            z: zPos,
-            opacity: opacity,
-            scale: scale,
-            filter: blur,
-          }}
-          className="w-[420px] aspect-[4/5] z-10 origin-center pointer-events-auto"
-        >
-          <div className="relative w-full h-full rounded-[4rem] bg-slate-900 border border-white/10 shadow-[0_100px_200px_rgba(0,0,0,0.8)] overflow-hidden group">
-            <img
-              src={member.image}
-              alt={member.name}
-              className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0"
-            />
-
-            {/* Info Box */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-12 flex flex-col justify-end">
-              <h4 className="text-4xl font-black text-white tracking-tighter leading-none mb-2">{member.name}</h4>
-              <p className="text-xs text-indigo-400 font-bold uppercase tracking-[0.3em] mb-4">{member.role}</p>
-              <div className="h-px w-16 bg-indigo-500/50 mb-4" />
-              <p className="text-base text-slate-200 italic leading-relaxed line-clamp-3">"{member.bio}"</p>
-            </div>
-
-            {/* Cinematic Glint */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent pointer-events-none" />
           </div>
-        </motion.div>
-        );
-};
-
-        const TeamPairLayer = ({members, progress, index, total}: {members: any[], progress: any, index: number, total: number }) => {
-  // Define the normalized scroll range for this specific pair
-  const start = index / total;
-        const end = (index + 1) / total;
-
-        return (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          {members.map((member, mIndex) => (
-            <IndividualMemberCard
-              key={member.name}
-              member={member}
-              progress={progress}
-              // Each member in the pair gets a staggered sub-window
-              // First card starts at the beginning of the pair window, 
-              // second card starts slightly later (15% offset).
-              rangeStart={start + (mIndex * 0.15 / total)}
-              rangeEnd={end - ((1 - mIndex) * 0.05 / total)}
-              mIndex={mIndex}
-            />
-          ))}
         </div>
-        );
-};
 
-        const IndividualMemberCard = ({member, progress, rangeStart, rangeEnd, mIndex}: {member: any, progress: any, rangeStart: number, rangeEnd: number, mIndex: number }) => {
-  // Define a "Focus Plateau" where the card is crystal clear and stationary at Z=0
-  const duration = rangeEnd - rangeStart;
-        const focusStart = rangeStart + (duration * 0.25); // Spends 25% of time moving from back
-        const focusEnd = rangeEnd - (duration * 0.25);   // Spends 25% of time moving past viewer
-        // Plateau is 50% of the card's active scroll window where it is perfect for reading
-
-        // Z-Axis Depth Movement with Hold at Z=0
-        const zPos = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [-5000, 0, 0, 2000]);
-
-        // Opacity & Blur: Snap into focus at focusStart, hold, then fade out after focusEnd
-        const opacity = useTransform(progress,
-        [rangeStart, rangeStart + 0.05, focusStart, focusEnd, rangeEnd - 0.05, rangeEnd],
-        [0, 1, 1, 1, 1, 0]
-        );
-
-        // Scale: Grows as it gets closer, stable during focus
-        const scale = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [0.3, 1, 1, 2.5]);
-
-        // Blur: Heavy blur in back, sharp in focus, heavy blur as it passes
-        const blur = useTransform(progress,
-        [rangeStart, focusStart, focusEnd, rangeEnd],
-        ["blur(40px)", "blur(0px)", "blur(0px)", "blur(60px)"]
-        );
-
-        return (
-        <motion.div
-          style={{
-            position: "absolute",
-            left: mIndex === 0 ? "28%" : "72%",
-            top: "50%",
-            x: "-50%",
-            y: "-50%",
-            z: zPos,
-            opacity: opacity,
-            scale: scale,
-            filter: blur,
-          }}
-          className="w-[420px] aspect-[4/5] z-10 origin-center pointer-events-auto"
-        >
-          <div className="relative w-full h-full rounded-[4rem] bg-slate-900 border border-white/10 shadow-[0_100px_200px_rgba(0,0,0,0.8)] overflow-hidden group">
-            <img
-              src={member.image}
-              alt={member.name}
-              className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0"
+        {/* Partnership/CTA */}
+        <div className="py-24 w-full flex items-center justify-center bg-background relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <motion.div
+              className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-50"
+              animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
             />
-
-            {/* Info Box */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-12 flex flex-col justify-end">
-              <h4 className="text-4xl font-black text-white tracking-tighter leading-none mb-2">{member.name}</h4>
-              <p className="text-xs text-indigo-400 font-bold uppercase tracking-[0.3em] mb-4">{member.role}</p>
-              <div className="h-px w-16 bg-indigo-500/50 mb-4" />
-              <p className="text-base text-slate-200 italic leading-relaxed line-clamp-3">"{member.bio}"</p>
-            </div>
-
-            {/* Cinematic Glint */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent pointer-events-none" />
           </div>
-        </motion.div>
-        );
+
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <AnimatedSection direction="up" className="max-w-3xl mx-auto">
+              <h2 className="section-headline mb-6">Partnership, <span className="text-gradient">Not a One‑Off</span></h2>
+              <p className="body-large mb-8">
+                Your success is our success. We stay with you after launch, adjusting your automations and retaining AI employees without you hiring a systems team.
+              </p>
+            </AnimatedSection>
+
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="inline-block">
+              <MagneticWrapper strength={0.25}>
+                <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
+                  <a href="/book-a-call">
+                    Book a Free Consultation
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </a>
+                </Button>
+              </MagneticWrapper>
+            </motion.div>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
 };
 
-        export default WhyCreateAssistants;
+const ProcessItem = ({ item, index }: { item: any; index: number }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const Icon = item.icon;
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="group relative w-full cursor-pointer border-b border-neutral-200 dark:border-neutral-800 py-5"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={handleMouseMove}
+    >
+      <div className="flex items-center justify-between gap-6">
+        <div className="relative overflow-hidden h-[48px] md:h-14 flex-1">
+          <div className="transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-1/2">
+            <div className="h-[48px] md:h-14 flex items-center gap-4">
+              <span className="text-sm font-bold text-primary/60">{item.step}</span>
+              <h3 className="text-xl md:text-3xl font-bold text-neutral-900 dark:text-white uppercase tracking-tighter">
+                {item.title}
+              </h3>
+            </div>
+            <div className="h-[48px] md:h-14 flex items-center gap-4">
+              <span className="text-sm font-bold text-accent">{item.step}</span>
+              <h3 className="text-xl md:text-3xl font-bold uppercase tracking-tighter italic text-accent">
+                {item.title}
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-xl overflow-hidden bg-muted/50 flex items-center justify-center transition-all duration-300 group-hover:bg-accent/10">
+          <Icon className="w-5 h-5 md:w-6 md:h-6 text-accent transition-transform duration-300 group-hover:scale-110" />
+        </div>
+      </div>
+
+      <p className="text-sm text-muted-foreground mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {item.description}
+      </p>
+
+      <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-accent to-accent/50 transition-all duration-500 group-hover:w-full" />
+
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            className="fixed pointer-events-none z-50 w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
+            style={{ left: mousePos.x + 20, top: mousePos.y - 80 }}
+          >
+            <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+const TeamPairLayer = ({ members, progress, index, total }: { members: any[]; progress: any; index: number; total: number }) => {
+  const start = index / total;
+  const end = (index + 1) / total;
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      {members.map((member, mIndex) => (
+        <IndividualMemberCard
+          key={member.name}
+          member={member}
+          progress={progress}
+          rangeStart={start + (mIndex * 0.15 / total)}
+          rangeEnd={end - ((1 - mIndex) * 0.05 / total)}
+          mIndex={mIndex}
+        />
+      ))}
+    </div>
+  );
+};
+
+const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }: { member: any; progress: any; rangeStart: number; rangeEnd: number; mIndex: number }) => {
+  const duration = rangeEnd - rangeStart;
+  const focusStart = rangeStart + (duration * 0.25);
+  const focusEnd = rangeEnd - (duration * 0.25);
+
+  const zPos = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [-5000, 0, 0, 2000]);
+  const opacity = useTransform(progress, [rangeStart, rangeStart + 0.05, focusStart, focusEnd, rangeEnd - 0.05, rangeEnd], [0, 1, 1, 1, 1, 0]);
+  const scale = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [0.3, 1, 1, 2.5]);
+  const blur = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], ["blur(40px)", "blur(0px)", "blur(0px)", "blur(60px)"]);
+
+  return (
+    <motion.div
+      style={{
+        position: "absolute",
+        left: mIndex === 0 ? "28%" : "72%",
+        top: "50%",
+        x: "-50%",
+        y: "-50%",
+        z: zPos,
+        opacity: opacity,
+        scale: scale,
+        filter: blur,
+      }}
+      className="w-[420px] aspect-[4/5] z-10 origin-center pointer-events-auto"
+    >
+      <div className="relative w-full h-full rounded-[4rem] bg-slate-900 border border-white/10 shadow-[0_100px_200px_rgba(0,0,0,0.8)] overflow-hidden group">
+        <img
+          src={member.image}
+          alt={member.name}
+          className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-12 flex flex-col justify-end">
+          <h4 className="text-4xl font-black text-white tracking-tighter leading-none mb-2">{member.name}</h4>
+          <p className="text-xs text-indigo-400 font-bold uppercase tracking-[0.3em] mb-4">{member.role}</p>
+          <div className="h-px w-16 bg-indigo-500/50 mb-4" />
+          <p className="text-base text-slate-200 italic leading-relaxed line-clamp-3">"{member.bio}"</p>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent pointer-events-none" />
+      </div>
+    </motion.div>
+  );
+};
+
+export default WhyCreateAssistants;
