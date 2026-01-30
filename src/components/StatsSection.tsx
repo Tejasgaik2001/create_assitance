@@ -69,7 +69,7 @@ const StatsSection = () => {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-8 max-w-6xl mx-auto">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -85,15 +85,15 @@ const StatsSection = () => {
                 y: -8,
                 transition: { type: "spring", stiffness: 400, damping: 15 }
               }}
-              className="group relative bg-gradient-to-br from-background via-background to-background/80 backdrop-blur-xl rounded-3xl p-8 w-full border border-border/40 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-accent/20 hover:border-accent/50 transition-all duration-500"
+              className="group relative bg-gradient-to-br from-background via-background to-background/80 backdrop-blur-xl rounded-[2rem] p-6 sm:p-8 w-full border border-border/40 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-accent/20 hover:border-accent/50 transition-all duration-500"
             >
               {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative">
                 {/* Top section with icon and tab */}
-                <div className="flex justify-between items-start mb-8">
+                <div className="flex flex-wrap justify-between items-start mb-6 sm:mb-8 gap-4">
                   <motion.div
                     initial={{ opacity: 0, x: -20, rotate: -10 }}
                     animate={isInView ? { opacity: 1, x: 0, rotate: 0 } : { opacity: 0, x: -20, rotate: -10 }}
@@ -110,7 +110,7 @@ const StatsSection = () => {
                     }}
                     className="p-3 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 shadow-lg shadow-primary/10 hover:shadow-2xl hover:shadow-accent/20 hover:border-accent/50 transition-all"
                   >
-                    <stat.icon className="w-6 h-6 text-accent drop-shadow-lg" />
+                    <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-accent drop-shadow-lg" />
                   </motion.div>
                   <div className="flex gap-2">
                     <motion.div
@@ -122,7 +122,7 @@ const StatsSection = () => {
                         stiffness: 200,
                         damping: 15
                       }}
-                      className="bg-gradient-to-r from-primary to-accent text-white px-4 py-1.5 rounded-xl text-sm font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+                      className="bg-gradient-to-r from-primary to-accent text-white px-3 sm:px-4 py-1.5 rounded-xl text-xs sm:text-sm font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
                     >
                       {stat.tabLabel}
                     </motion.div>
@@ -137,10 +137,10 @@ const StatsSection = () => {
                       }}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="bg-muted/80 backdrop-blur-sm text-foreground/80 px-3 py-1.5 rounded-xl text-sm font-semibold flex items-center gap-1.5 hover:bg-muted hover:text-foreground border border-border/40 shadow-md transition-all duration-300"
+                      className="bg-muted/80 backdrop-blur-sm text-foreground/80 px-2 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-1.5 hover:bg-muted hover:text-foreground border border-border/40 shadow-md transition-all duration-300"
                     >
                       <Info size={14} className="text-primary" />
-                      Info
+                      <span className="hidden xs:inline">Info</span>
                     </motion.button>
                   </div>
                 </div>
@@ -155,15 +155,15 @@ const StatsSection = () => {
                     damping: 12,
                     delay: 0.5 + index * 0.15
                   }}
-                  className="text-center mb-8"
+                  className="text-center mb-6 sm:mb-8"
                 >
-                  <div className="text-7xl md:text-8xl font-bold bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent drop-shadow-2xl">
+                  <div className="text-5xl sm:text-7xl md:text-8xl font-bold bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent drop-shadow-2xl">
                     <CountUp value={stat.value} duration={stat.duration} suffix={stat.suffix} isVisible={isInView} />
                   </div>
                 </motion.div>
 
                 {/* Bottom section with buttons */}
-                <div className="flex justify-between items-end gap-3">
+                <div className="flex flex-wrap xs:flex-nowrap justify-between items-end gap-3">
                   <motion.button
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
@@ -179,7 +179,7 @@ const StatsSection = () => {
                       transition: { type: "spring", stiffness: 400, damping: 10 }
                     }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 border border-border/40 shadow-md hover:shadow-lg hover:border-primary/40 transition-all duration-300"
+                    className="w-full xs:w-auto justify-center bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 border border-border/40 shadow-md hover:shadow-lg hover:border-primary/40 transition-all duration-300"
                   >
                     <BarChart3 size={16} className="text-primary" />
                     <span className="text-foreground/90">{stat.label}</span>
@@ -199,7 +199,7 @@ const StatsSection = () => {
                       transition: { type: "spring", stiffness: 400, damping: 10 }
                     }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 border border-border/40 shadow-md hover:shadow-lg hover:border-accent/40 transition-all duration-300"
+                    className="w-full xs:w-auto justify-center bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-2 border border-border/40 shadow-md hover:shadow-lg hover:border-accent/40 transition-all duration-300"
                   >
                     <stat.rightButton.icon size={16} className="text-accent" />
                     <span className="text-foreground/90">{stat.rightButton.text}</span>
