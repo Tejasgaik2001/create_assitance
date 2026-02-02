@@ -65,7 +65,7 @@ const HeroSection = () => {
               className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/30 backdrop-blur-sm shadow-lg shadow-primary/10"
             >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-accent animate-pulse" />
-              <span className="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <span className="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent bg-clip-text text-transparent">
                 AI-Powered Growth Platform
               </span>
             </motion.div>
@@ -153,7 +153,7 @@ const HeroSection = () => {
                 <Button
                   variant="hero"
                   size="xl"
-                  className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-12 h-14 sm:h-16 bg-gradient-to-r from-primary via-accent to-primary text-primary-foreground shadow-2xl shadow-primary/30 hover:shadow-primary/50 active:scale-95 transition-all text-base sm:text-lg font-bold uppercase tracking-tight overflow-hidden border-none group"
+                  className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-12 h-14 sm:h-16 bg-gradient-to-r from-accent via-primary to-accent text-white shadow-2xl shadow-primary/30 hover:shadow-primary/50 active:scale-95 transition-all text-base sm:text-lg font-bold uppercase tracking-tight overflow-hidden border-none group"
                   asChild
                 >
                   <a href="/book-a-call">

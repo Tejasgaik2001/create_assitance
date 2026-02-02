@@ -9,7 +9,7 @@ export const ScrollToTopButton = ({ onClick }: { onClick: () => void }) => (
         exit={{ opacity: 0, scale: 0.8, y: 20 }}
         transition={{ duration: 0.3 }}
         onClick={onClick}
-        className="fixed bottom-8 right-8 z-50 p-3 rounded-full bg-[#ff843c] text-white shadow-lg hover:shadow-xl hover:bg-[#ff843c]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff843c]"
+        className="fixed bottom-8 right-8 z-50 p-3 rounded-full bg-accent text-white shadow-lg hover:shadow-xl hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
         aria-label="Scroll to top"
         whileHover={{ y: -4 }}
         whileTap={{ scale: 0.9 }}

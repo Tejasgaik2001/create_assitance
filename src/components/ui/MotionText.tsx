@@ -12,7 +12,7 @@ export const MotionText = ({ text, className, delay = 0 }: MotionTextProps) => {
         <div className={cn("relative inline-block overflow-hidden", className)}>
             {/* Main Text with forward skew for speed */}
             <motion.span
-                className="block relative z-10 text-[#ff843c] transform origin-center"
+                className="block relative z-10 text-accent transform origin-center"
                 initial={{ x: -40, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 viewport={{ once: true, margin: "-50px" }}

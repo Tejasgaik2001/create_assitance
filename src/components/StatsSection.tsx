@@ -6,7 +6,7 @@ const stats = [
   { value: 500, suffix: "+", label: "Businesses Served", duration: 2, icon: Building, tabLabel: "Growth", rightButton: { icon: TrendingUp, text: "View Growth" } },
   { value: 24, suffix: "/7", label: "AI Coverage", duration: 1.5, icon: Users, tabLabel: "Support", rightButton: { icon: Info, text: "AI Details" } },
   { value: 4, suffix: " weeks", label: "Average Launch Time", duration: 1, icon: Clock, tabLabel: "Speed", rightButton: { icon: Smartphone, text: "Timeline" } },
-  { value: 50, suffix: "%", label: "More Appointments", duration: 1.8, icon: BarChart3, tabLabel: "Results", rightButton: { icon: TrendingUp, text: "Success Rate" } },
+  { value: 100, suffix: "%", label: "More Appointments", duration: 1.8, icon: BarChart3, tabLabel: "Results", rightButton: { icon: TrendingUp, text: "Success Rate" } },
 ];
 
 const CountUp = ({ value, duration, suffix, isVisible }: { value: number; duration: number; suffix: string; isVisible: boolean }) => {
@@ -63,7 +63,7 @@ const StatsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold tracking-tight mb-4 uppercase italic text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent"
+            className="text-4xl md:text-6xl font-bold tracking-tight mb-4 uppercase text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent"
           >
             Numbers That Speak
           </motion.h2>
@@ -108,7 +108,7 @@ const StatsSection = () => {
                       rotate: 10,
                       transition: { type: "spring", stiffness: 400, damping: 10 }
                     }}
-                    className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 shadow-lg shadow-primary/10 hover:shadow-2xl hover:shadow-accent/20 hover:border-accent/50 transition-all"
+                    className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-accent/60 shadow-lg shadow-primary/10 hover:shadow-2xl hover:shadow-accent/20 hover:border-accent/50 transition-all"
                   >
                     <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-accent drop-shadow-lg" />
                   </motion.div>
@@ -157,7 +157,7 @@ const StatsSection = () => {
                   }}
                   className="text-center mb-5 sm:mb-6"
                 >
-                  <div className="text-4xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent drop-shadow-2xl">
+                  <div className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent drop-shadow-2xl">
                     <CountUp value={stat.value} duration={stat.duration} suffix={stat.suffix} isVisible={isInView} />
                   </div>
                 </motion.div>

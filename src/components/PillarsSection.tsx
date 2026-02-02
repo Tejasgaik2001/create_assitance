@@ -148,7 +148,7 @@ const PillarsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent uppercase italic"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent uppercase"
           >
             What We Offer
           </motion.h2>

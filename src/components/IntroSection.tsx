@@ -54,7 +54,7 @@ const IntroSection = () => {
               >
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/20 backdrop-blur-sm">
                   <Sparkles className="w-4 h-4 text-accent" />
-                  <span className="text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <span className="text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent bg-clip-text text-transparent">
                     Enterprise Growth Platform
                   </span>
                 </div>
@@ -81,7 +81,7 @@ const IntroSection = () => {
                   className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl"
                 >
                   An all-in-one CRM system combined with <span className="text-accent font-semibold">24/7 AI voice and chat employees</span>,
-                  backed by hands-on human support. Launch in <span className="text-primary font-semibold">four weeks or less</span>.
+                  backed by hands-on human support. Launch in <span className="text-accent font-semibold">four weeks or less</span>.
                 </motion.p>
               </div>
 
@@ -109,11 +109,11 @@ const IntroSection = () => {
                 transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <button className="group relative h-12 px-8 rounded-xl bg-primary text-primary-foreground font-semibold overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
+                <button className="group relative h-12 px-8 rounded-xl bg-gradient-to-r from-accent via-primary to-accent text-white font-semibold overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
                   <span className="relative z-10">Book a Consultation</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
-                <button className="h-12 px-8 rounded-xl border-2 border-border/60 bg-background/40 backdrop-blur-sm font-semibold hover:border-primary/40 hover:bg-background/60 transition-all">
+                <button className="h-12 px-8 rounded-xl border-2 border-border/60 bg-background/40 backdrop-blur-sm font-semibold hover:border-accent/50 hover:bg-background/60 transition-all">
                   See How It Works
                 </button>
               </motion.div>
@@ -142,7 +142,7 @@ const IntroSection = () => {
                         y: -4,
                         transition: { type: "spring", stiffness: 400, damping: 10 }
                       }}
-                      className="group relative rounded-2xl border border-border/40 bg-gradient-to-br from-background/90 to-background/50 backdrop-blur-md p-5 hover:border-primary/50 transition-all duration-300 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-primary/10"
+                      className="group relative rounded-2xl border border-accent/40 bg-gradient-to-br from-background/90 to-background/50 backdrop-blur-md p-5 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/50 transition-all duration-300 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-primary/10"
                     >
                       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -289,6 +289,7 @@ const AIEmployees = () => {
                 <div className="relative z-10">
                   <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent group-hover:rotate-12 transition-all duration-500 shadow-sm border border-accent/20">
                     <Icon className="w-8 h-8 text-accent group-hover:text-accent-foreground transition-colors duration-500" />
+
                   </div>
 
                   <div className="flex items-center gap-2 mb-3">
@@ -300,7 +301,7 @@ const AIEmployees = () => {
                     {item.description}
                   </p>
 
-                  <div className="mt-6 pt-6 border-t border-slate-50 dark:border-slate-800/50 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className=" pt-6 border-t border-slate-50 dark:border-slate-800/50 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
                     <span className="text-xs font-semibold text-accent">Learn More</span>
                     <ArrowRight className="w-4 h-4 text-accent" />
                   </div>

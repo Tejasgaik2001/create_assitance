@@ -28,7 +28,7 @@ const WhyChooseUs = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-[0.9] sm:leading-[0.85] mb-6 sm:mb-8 uppercase italic"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-[0.9] sm:leading-[0.85] mb-6 sm:mb-8 uppercase"
             >
               Why Choose
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent block drop-shadow-sm">Create Assistants</span>
@@ -82,7 +82,7 @@ const WhyChooseUs = () => {
                           scale: { type: "spring", stiffness: 400, damping: 10 }
                         }
                       }}
-                      className="inline-block p-2.5 sm:p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20 shadow-md shadow-primary/10 mb-3 sm:mb-4 group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-300"
+                      className="inline-block p-2.5 sm:p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-accent/50 shadow-md shadow-primary/10 mb-3 sm:mb-4 group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-300"
                     >
                       <item.icon className={`text-xl sm:text-2xl ${item.color === 'primary' ? 'text-accent' : 'text-accent'} drop-shadow-lg`} />
                     </motion.div>

@@ -277,7 +277,7 @@ const HowItWorks = () => {
             <AnimatedSection direction="up" className="text-center">
               <div className="max-w-3xl mx-auto">
                 <h2 className="section-headline mb-6">
-                  Ready to See This System <MotionText text="In Action?" className="ml-2 inline-block" />
+                  Ready to See This System <MotionText text="In Action?" className="ml-2 inline-block text-accent" />
                 </h2>
                 <p className="body-large mb-10">
                   Book a free consultation and we'll walk you through how Create Assistants can

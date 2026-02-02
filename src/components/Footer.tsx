@@ -113,14 +113,14 @@ const Footer = () => {
               className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy Policy
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-[#ff843c] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </motion.a>
             <motion.a
               href="#"
               className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Terms of Service
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-[#ff843c] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </motion.a>
           </div>
         </motion.div>
