@@ -6,7 +6,6 @@ import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
-import { AnimatedSnapContainer } from "@/components/FullScreenSection";
 import dashboardMockup from "@/assets/dashboard-mockup.png";
 import { ThreeDCard } from "@/components/ui/ThreeDCard";
 import { cn } from "@/lib/utils";
@@ -518,14 +517,32 @@ const CommandCenter = () => {
     // Hero Section
     // Hero Section - Command Center Style
     <section key="hero" className="min-h-screen lg:h-screen w-full flex items-center justify-center relative overflow-hidden pt-24 pb-20 lg:pt-0 lg:pb-0 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-      {/* Background Matrix/Grid Effect */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(219,154,70,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(219,154,70,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(219,154,70,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(219,154,70,0.1)_1px,transparent_1px)] bg-[size:40px_40px] opacity-100" />
-        <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-slate-50 dark:from-slate-950 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-slate-50 dark:from-slate-950 to-transparent" />
-        {/* Glows */}
-        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-accent/5 dark:bg-accent/10 rounded-full blur-[100px] -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent/5 dark:bg-accent/10 rounded-full blur-[120px]" />
+      {/* Enhanced Background decoration from HeroSection */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Animated gradient orbs */}
+        <motion.div
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -40, 0],
+            y: [0, -25, 0],
+            scale: [1, 1.15, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+        />
+
+        {/* Premium grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 w-full">
@@ -601,7 +618,7 @@ const CommandCenter = () => {
           </div>
         </div>
       </div>
-    </section >,
+    </section>,
 
     // Unified CRM & Marketing Hub
     <section key="features" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500">
@@ -907,9 +924,7 @@ const CommandCenter = () => {
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       <main>
-        <AnimatedSnapContainer>
-          {sections}
-        </AnimatedSnapContainer>
+        {sections}
       </main>
     </div>
   );

@@ -6,9 +6,8 @@ import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { AnimatedSnapContainer } from "@/components/FullScreenSection";
-import AuroraBackground from "@/components/AuroraBackground";
 import heroImage from "@/assets/hero-ai-premium.png";
+import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 
 const AIEmployees = () => {
   // Animation variants
@@ -90,20 +89,35 @@ const AIEmployees = () => {
 
   const sections = [
     // Hero Section - Revamped for SaaS Standard
-    <div key="hero" className="min-h-screen lg:h-screen w-full flex items-center justify-center relative bg-white dark:bg-[#020617] pt-32 pb-20 lg:pt-24 lg:pb-0 overflow-hidden">
-      {/* SaaS Standard Background: Grid + Glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Subtle Grid */}
-        <div className="absolute inset-0 opacity-[0.1] dark:opacity-[0.2]"
-          style={{ backgroundImage: 'linear-gradient(hsl(var(--accent)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--accent)) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+    <section key="hero" className="relative overflow-x-hidden pt-24 pb-16 min-h-screen flex items-center bg-white dark:bg-[#020617]">
+      {/* Enhanced Background decoration from HeroSection */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Animated gradient orbs */}
+        <motion.div
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -40, 0],
+            y: [0, -25, 0],
+            scale: [1, 1.15, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+        />
 
-        {/* Cinematic Glows */}
-        <div className="absolute bottom-[-20%] right-[-10%] w-[70%] lg:w-[50%] h-[50%] bg-primary/10 dark:bg-primary/20 blur-[120px] lg:blur-[150px] rounded-full" />
-      </div>
+        {/* Premium grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
 
-      {/* Decorative Tech Elements (Standard SaaS Feel) */}
-      <div className="absolute right-0 top-0 w-full lg:w-1/2 h-full pointer-events-none overflow-hidden">
-        {/* Glowing Data Lines - Visible on larger screens */}
+        {/* Glowing Data Lines */}
         <motion.div
           animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
@@ -114,18 +128,9 @@ const AIEmployees = () => {
           transition={{ duration: 7, repeat: Infinity, ease: "linear", delay: 1 }}
           className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent hidden sm:block"
         />
-
-        {/* Floating Abstract Shapes - Hidden on smallest screens */}
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-[5%] lg:right-[10%] top-[10%] lg:top-[15%] w-32 h-32 lg:w-64 lg:h-64 border border-primary/10 rounded-full flex items-center justify-center opacity-40 lg:opacity-100"
-        >
-          <div className="w-[80%] h-[80%] border border-primary/5 rounded-full" />
-        </motion.div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-8 xl:gap-16 items-center">
           {/* Left Side: Content */}
           <motion.div
@@ -143,7 +148,7 @@ const AIEmployees = () => {
 
             <motion.h1
               variants={itemVariants}
-              className="text-slate-900 dark:text-white text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-7xl font-bold leading-[1.1] tracking-tight"
+              className="text-slate-900 dark:text-white text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight"
             >
               Meet Your <span className="block text-accent dark:text-accent">Hardest‑Working</span>
               <span className="block">Team Members</span>
@@ -157,10 +162,19 @@ const AIEmployees = () => {
             </motion.p>
 
             <motion.div variants={itemVariants} className="mt-4 xl:mt-8 flex flex-wrap gap-3 xl:gap-4">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl shadow-2xl shadow-accent/20 transition-all hover:scale-105 active:scale-95">
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl shadow-2xl shadow-accent/20 transition-all hover:scale-105 active:scale-95"
+                onClick={handleDemoRedirect}
+              >
                 Let's Explore AI
               </Button>
-              <Button variant="outline" size="lg" className="px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl border-accent/20 hover:bg-accent/10 transition-all">
+              <Button
+                variant="outline"
+                size="lg"
+                className="px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl border-accent/20 hover:bg-accent/10 transition-all"
+                onClick={handleBookingRedirect}
+              >
                 See it in Action
               </Button>
             </motion.div>
@@ -187,7 +201,7 @@ const AIEmployees = () => {
                 initial={{ x: 20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 1, duration: 0.8 }}
-                className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 xl:-top-10 xl:-right-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-primary/20 z-30"
+                className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 xl:-top-10 xl:-right-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-accent/20 z-30"
               >
                 <div className="w-8 h-8 xl:w-12 xl:h-12 rounded-lg xl:rounded-2xl bg-primary/10 flex items-center justify-center">
                   <Bot className="w-4 h-4 xl:w-6 xl:h-6 text-accent" />
@@ -203,7 +217,7 @@ const AIEmployees = () => {
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.8 }}
-                className="absolute bottom-6 left-2 lg:bottom-10 lg:left-4 xl:-bottom-10 xl:-left-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-primary/20 z-30"
+                className="absolute bottom-6 left-2 lg:bottom-10 lg:left-4 xl:-bottom-10 xl:-left-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-accent/20 z-30"
               >
                 <div className="w-8 h-8 xl:w-12 xl:h-12 rounded-lg xl:rounded-2xl bg-green-500/10 flex items-center justify-center">
                   <CheckCircle className="w-4 h-4 xl:w-6 xl:h-6 text-green-500" />
@@ -223,101 +237,198 @@ const AIEmployees = () => {
           </motion.div>
         </div>
       </div>
-    </div>,
+    </section>,
 
-    // What Are AI Employees
-    <div key="what" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-950 relative py-10 md:py-20 lg:py-0 overflow-hidden">
+    // What Are AI Employees - Story-Based Journey
+    <div key="what" className="w-full bg-slate-50 dark:bg-slate-950 relative overflow-hidden py-24 lg:py-40">
       {/* Background Decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03]"
-          style={{ backgroundImage: 'radial-gradient(#6366f1 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.02]"
+          style={{ backgroundImage: 'radial-gradient(#6366f1 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         <motion.div
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-accent/20 blur-[120px] rounded-full"
+          animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.25, 0.15] }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute top-[5%] left-[5%] w-[50%] h-[50%] bg-accent/30 blur-[150px] rounded-full"
         />
         <motion.div
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.15, 0.1] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/20 blur-[150px] rounded-full"
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 12, repeat: Infinity }}
+          className="absolute bottom-[5%] right-[5%] w-[40%] h-[40%] bg-primary/25 blur-[130px] rounded-full"
         />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Hero Header */}
+        <div className="text-center max-w-4xl mx-auto mb-24">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="inline-block px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-widest mb-4"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6"
           >
-            Efficiency Redefined
+            <motion.span
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-2 h-2 rounded-full bg-accent"
+            />
+            <span className="text-xs font-bold text-accent uppercase tracking-widest">The Customer Journey</span>
           </motion.div>
+
           <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight"
+          >
+            How <span className="text-accent">AI Employees</span>
+            <br />Transform Every Interaction
+          </motion.h2>
+
+          <motion.p
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="section-headline mb-6 text-slate-900 dark:text-white"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-slate-600 dark:text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto"
           >
-            What Are <span className="text-accent dark:text-accent">AI Employees?</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-slate-600 dark:text-slate-300 text-lg sm:text-xl leading-relaxed"
-          >
-            Our AI voice and chat employees interact with prospects and customers via phone, text and website chat. They are trained on your scripts, FAQs and brand guidelines.
+            Follow the journey of a customer interaction — from first contact to completed transaction
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 -mt-10 gap-6 lg:gap-8">
+        {/* Story Timeline */}
+        <div className="relative max-w-6xl mx-auto">
+          {/* Central Journey Line */}
+          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2">
+            <motion.div
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              className="w-full h-full bg-gradient-to-b from-accent/20 via-accent to-accent/20 origin-top rounded-full"
+            />
+          </div>
+
+          {/* Journey Steps */}
           {capabilities.map((item, index) => {
             const Icon = item.icon;
+            const isLeft = index % 2 === 0;
+            const storyPrefixes = [
+              "When a lead calls...",
+              "As the conversation progresses...",
+              "Ready to book?",
+              "Time to close the deal?",
+              "Need human expertise?"
+            ];
+
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                className="group relative bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-slate-100 dark:border-slate-800 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-[0_20px_60px_-15px_rgba(255,190,0,0.15)] transition-all duration-300"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: index * 0.15 }}
+                className={`relative flex items-center mb-16 lg:mb-24 ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
               >
-                {/* Connection Line Decor */}
-                {index < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-8 w-16 h-[2px] bg-gradient-to-r from-indigo-100 to-transparent z-0 pointer-events-none" />
-                )}
-
-                <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent group-hover:rotate-12 transition-all duration-500 shadow-sm border border-accent/20">
-                    <Icon className="w-8 h-8 text-accent group-hover:text-accent-foreground transition-colors duration-500" />
-
-                  </div>
-
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[10px] font-bold text-primary/40 dark:text-primary/60 uppercase tracking-tighter">0{index + 1}</span>
-                    <h3 className="font-bold text-xl text-slate-900 dark:text-white">{item.title}</h3>
-                  </div>
-
-                  <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm">
-                    {item.description}
-                  </p>
-
-                  <div className=" pt-6 border-t border-slate-50 dark:border-slate-800/50 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="text-xs font-semibold text-accent">Learn More</span>
-                    <ArrowRight className="w-4 h-4 text-accent" />
-                  </div>
+                {/* Timeline Node - Desktop */}
+                <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 z-20">
+                  <motion.div
+                    whileHover={{ scale: 1.2 }}
+                    className="relative"
+                  >
+                    <motion.div
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                      className="absolute inset-0 w-16 h-16 rounded-full bg-accent/30"
+                    />
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-amber-400 flex items-center justify-center shadow-xl shadow-accent/30 border-4 border-white dark:border-slate-900">
+                      <Icon className="w-7 h-7 text-white" />
+                    </div>
+                  </motion.div>
                 </div>
 
-                {/* Corner Glow */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-500/5 to-transparent rounded-tr-3xl" />
+                {/* Content Card */}
+                <div className={`w-full lg:w-[calc(50%-4rem)] ${isLeft ? 'lg:pr-8' : 'lg:pl-8'}`}>
+                  <motion.div
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="relative bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl group"
+                  >
+                    {/* Glow Effect */}
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    {/* Mobile Icon */}
+                    <div className="lg:hidden mb-6 flex items-center gap-4">
+                      <motion.div
+                        animate={{ rotate: [0, 5, -5, 0] }}
+                        transition={{ duration: 4, repeat: Infinity }}
+                        className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-amber-400 flex items-center justify-center shadow-lg"
+                      >
+                        <Icon className="w-7 h-7 text-white" />
+                      </motion.div>
+                      <div className="text-3xl font-black text-accent/20">0{index + 1}</div>
+                    </div>
+
+                    {/* Story Prefix */}
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      className="text-accent font-semibold text-sm mb-2 italic"
+                    >
+                      {storyPrefixes[index]}
+                    </motion.p>
+
+                    {/* Title */}
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3">
+                      {item.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {item.description}
+                    </p>
+
+                    {/* Step Number - Desktop */}
+                    <div className="hidden lg:block absolute top-10 right-8 text-7xl font-black text-accent/10 group-hover:text-accent/40 transition-all duration-700 group-hover:drop-shadow-[0_0_25px_rgba(251,191,36,0.6)] group-hover:scale-110">
+                      0{index + 1}
+                    </div>
+
+                    {/* Connector Arrow */}
+                    <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 ${isLeft ? '-right-8' : '-left-8'}`}>
+                      <motion.div
+                        animate={{ x: isLeft ? [0, 5, 0] : [0, -5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        className={`w-8 h-8 flex items-center justify-center`}
+                      >
+                        <ArrowRight className={`w-5 h-5 text-accent ${isLeft ? '' : 'rotate-180'}`} />
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </div>
               </motion.div>
             );
           })}
+
+          {/* Journey End */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mt-16"
+          >
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent text-accent-foreground font-bold shadow-xl shadow-accent/30"
+            >
+              <CheckCircle className="w-5 h-5" />
+              Customer Converted Successfully
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </div>,
 
     // 24/7 Responses
-    <div key="247" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-50 dark:from-slate-950 to-white dark:to-slate-900 text-slate-900 dark:text-white relative py-10 md:py-20 lg:py-0 overflow-hidden">
+    <div key="247" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-50 dark:from-slate-950 to-white dark:to-slate-900 text-slate-900 dark:text-white relative overflow-x-hidden py-20 lg:py-32">
       {/* Dark theme background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -right-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl opacity-30" />
@@ -376,7 +487,7 @@ const AIEmployees = () => {
     </div>,
 
     // Benefits
-    <div key="benefits" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-950/50 py-10 md:py-20 lg:py-0">
+    <div key="benefits" className="min-h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-950/50 py-20 lg:py-32">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -424,115 +535,209 @@ const AIEmployees = () => {
       </div>
     </div>,
 
-    // Personalised & Consistent
-    <div key="personalised" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-white dark:bg-[#020617] relative py-10 md:py-20 lg:py-0 overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="order-2 lg:order-1">
-            <motion.h2
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="section-headline mb-6 text-slate-900 dark:text-white"
-            >
-              Personalised & <span className="text-accent dark:text-accent">Consistent</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed"
-            >
-              AI employees learn your business rules and FAQs to deliver personalized service. Whether someone calls, texts or chats on your website, they receive the same friendly tone and accurate information. Your brand voice stays consistent across every customer touchpoint.
-            </motion.p>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            className="order-1 lg:order-2 relative h-80 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800"
-          >
-            <img src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80" alt="Consistent Brand Voice" className="w-full h-full object-cover" />
-          </motion.div>
-        </div>
-      </div>
-    </div>,
+    // Why AI Employees - Cinematic Feature Showcase
+    (() => {
+      const [activeFeature, setActiveFeature] = useState(0);
 
-    // Integrated & Seamless
-    <div key="integrated" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-900/20 relative py-10 md:py-20 lg:py-0 overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            className="relative h-64 sm:h-80 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800"
-          >
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Seamless Integration" className="w-full h-full object-cover" />
-          </motion.div>
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="section-headline mb-6 text-slate-900 dark:text-white"
-            >
-              Integrated & <span className="text-accent dark:text-accent">Seamless</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed"
-            >
-              These digital team members plug directly into your command center. Leads captured by AI employees flow into your CRM with tags and notes; appointments sync to your calendar; and payments post to your accounts. No copy‑pasting or manual data entry.
-            </motion.p>
+      const features = [
+        {
+          title: "Personalised & Consistent",
+          highlight: "Consistent",
+          description: "AI employees learn your business rules and FAQs to deliver personalized service. Your brand voice stays consistent across every customer touchpoint.",
+          image: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80",
+          stat: "100%",
+          statLabel: "Brand Consistency"
+        },
+        {
+          title: "Integrated & Seamless",
+          highlight: "Seamless",
+          description: "Leads flow into your CRM with tags and notes. Appointments sync to your calendar. Payments post to your accounts. Zero manual data entry.",
+          image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+          stat: "50+",
+          statLabel: "Integrations"
+        },
+        {
+          title: "Work With Humans",
+          highlight: "Humans",
+          description: "AI employees augment your team, not replace it. They handle repetitive tasks, freeing your people to nurture relationships and close deals.",
+          image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+          stat: "24/7",
+          statLabel: "Human Handoff"
+        }
+      ];
+
+      return (
+        <div key="features-showcase" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden py-24 lg:py-32">
+          {/* Cinematic Background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+              transition={{ duration: 15, repeat: Infinity }}
+              className="absolute top-0 left-0 w-[60%] h-[60%] bg-accent/20 blur-[200px] rounded-full"
+            />
+            <motion.div
+              animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
+              transition={{ duration: 20, repeat: Infinity }}
+              className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-500/20 blur-[180px] rounded-full"
+            />
+            {/* Film grain overlay */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
+              >
+                <motion.span
+                  animate={{ scale: [1, 1.3, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-2 h-2 rounded-full bg-accent"
+                />
+                <span className="text-xs font-bold text-accent uppercase tracking-widest">Why Choose Us</span>
+              </motion.div>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight"
+              >
+                The <span className="text-accent">AI Advantage</span>
+              </motion.h2>
+            </div>
+
+            {/* Feature Showcase */}
+            <div className="max-w-6xl mx-auto">
+              {/* Navigation Pills */}
+              <div className="flex justify-center gap-3 mb-12">
+                {features.map((feature, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => setActiveFeature(index)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-500 ${activeFeature === index
+                      ? 'bg-accent text-slate-900 shadow-lg shadow-accent/30'
+                      : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
+                      }`}
+                  >
+                    {feature.highlight}
+                  </motion.button>
+                ))}
+              </div>
+
+              {/* Stacked Cards Container */}
+              <div className="relative h-[500px] lg:h-[450px]">
+                <AnimatePresence mode="popLayout">
+                  {features.map((feature, index) => {
+                    const isActive = index === activeFeature;
+                    const offset = index - activeFeature;
+
+                    return (
+                      <motion.div
+                        key={feature.title}
+                        initial={{ opacity: 0, scale: 0.8, y: 100 }}
+                        animate={{
+                          opacity: isActive ? 1 : 0.3,
+                          scale: isActive ? 1 : 0.9 - Math.abs(offset) * 0.05,
+                          y: offset * 30,
+                          zIndex: isActive ? 30 : 20 - Math.abs(offset),
+                          rotateX: offset * 5
+                        }}
+                        exit={{ opacity: 0, scale: 0.8, y: -100 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="absolute inset-0"
+                        style={{ perspective: '1000px' }}
+                      >
+                        <div className={`w-full h-full bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl border ${isActive ? 'border-accent/30' : 'border-white/10'} shadow-2xl overflow-hidden transition-all duration-500`}>
+                          <div className="grid lg:grid-cols-2 h-full">
+                            {/* Content Side */}
+                            <div className="p-8 lg:p-12 flex flex-col justify-center relative">
+                              {/* Large Number Background */}
+                              <div className="absolute top-8 right-8 lg:top-12 lg:right-12 text-[120px] lg:text-[180px] font-black text-white/[0.03] leading-none select-none">
+                                0{index + 1}
+                              </div>
+
+                              <motion.div
+                                initial={{ opacity: 0, x: -30 }}
+                                animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -30 }}
+                                transition={{ delay: 0.2 }}
+                              >
+                                <h3 className="text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
+                                  {feature.title.split(feature.highlight)[0]}
+                                  <span className="text-accent">{feature.highlight}</span>
+                                  {feature.title.split(feature.highlight)[1]}
+                                </h3>
+
+                                <p className="text-lg text-slate-400 leading-relaxed mb-8 max-w-md">
+                                  {feature.description}
+                                </p>
+
+                                {/* Stat Badge */}
+                                <div className="inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-accent/10 border border-accent/20">
+                                  <span className="text-3xl font-black text-accent">{feature.stat}</span>
+                                  <span className="text-sm font-medium text-slate-400">{feature.statLabel}</span>
+                                </div>
+                              </motion.div>
+                            </div>
+
+                            {/* Image Side */}
+                            <div className="relative hidden lg:block">
+                              <motion.div
+                                initial={{ opacity: 0, scale: 1.1 }}
+                                animate={{ opacity: isActive ? 1 : 0.5, scale: isActive ? 1 : 1.1 }}
+                                transition={{ delay: 0.3, duration: 0.8 }}
+                                className="absolute inset-0"
+                              >
+                                <img
+                                  src={feature.image}
+                                  alt={feature.title}
+                                  className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/50 to-transparent" />
+                              </motion.div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+
+              {/* Progress Dots */}
+              <div className="flex justify-center gap-2 mt-8">
+                {features.map((_, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => setActiveFeature(index)}
+                    className="relative p-1"
+                  >
+                    <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activeFeature === index ? 'bg-accent' : 'bg-white/20'
+                      }`} />
+                    {activeFeature === index && (
+                      <motion.div
+                        layoutId="activeDot"
+                        className="absolute inset-0 w-4 h-4 -m-1 rounded-full border-2 border-accent"
+                      />
+                    )}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>,
+      );
+    })(),
 
-    // Work With Humans, Not Instead of Them
-    <div key="humans" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-white dark:bg-[#020617] relative py-10 md:py-20 lg:py-0 overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="section-headline mb-6 text-slate-900 dark:text-white"
-            >
-              Work With Humans, <span className="text-accent dark:text-accent">Not Instead</span> of Them
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6"
-            >
-              AI employees augment your team rather than replacing it. They handle the repetitive calls and emails that slow your staff down, freeing your people to nurture relationships and close deals.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-slate-500 dark:text-slate-400 italic"
-            >
-              At any point, your human team can take over a conversation, and you maintain full control.
-            </motion.p>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            className="relative h-48 sm:h-64 lg:h-96 rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl mt-8 lg:mt-0"
-          >
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Team Nurturing" className="w-full h-full object-cover" />
-          </motion.div>
-        </div>
-      </div>
-    </div>,
-
-    // CTA Section & Footer merged
-    <div key="cta-footer" className="min-h-screen lg:h-screen w-full flex flex-col bg-slate-50 dark:bg-[#020617] selection:bg-accent/30">
-      <div className="flex-grow flex items-center justify-center relative overflow-hidden py-12 lg:py-0">
-        {/* Abstract background elements */}
-        <div className="absolute inset-0 pointer-events-none">
+    // CTA Section
+    <div key="cta" className="min-h-screen w-full flex flex-col bg-background lg:bg-slate-50 dark:lg:bg-[#020617] selection:bg-accent/30 overflow-hidden">
+      <div className="flex-grow flex items-center justify-center relative py-24 lg:py-32">
+        {/* Abstract background elements - hidden on mobile to prevent horizontal scroll */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block">
           <div className="absolute top-0 right-0 w-[50%] h-full bg-accent/5 dark:bg-accent/10 skew-x-[-12deg] translate-x-32" />
           <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-primary/10 blur-[100px] rounded-full" />
         </div>
@@ -645,7 +850,6 @@ const AIEmployees = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>,
   ];
 
@@ -653,10 +857,9 @@ const AIEmployees = () => {
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       <main>
-        <AnimatedSnapContainer>
-          {sections}
-        </AnimatedSnapContainer>
+        {sections}
       </main>
+      <Footer />
     </div>
   );
 };

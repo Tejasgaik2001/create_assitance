@@ -11,43 +11,14 @@ import {
 import React, { useRef, useState } from "react";
 
 
-interface NavbarProps {
-  children: React.ReactNode;
-  className?: string;
+// Create a Context to share the 'visible' state (indicates if navbar is shrunk/scrolling)
+interface NavbarContextType {
+  visible: boolean;
 }
 
-interface NavBodyProps {
-  children: React.ReactNode;
-  className?: string;
-  visible?: boolean;
-}
+const NavbarContext = React.createContext<NavbarContextType>({ visible: false });
 
-interface NavItemsProps {
-  items: {
-    name: string;
-    link: string;
-  }[];
-  className?: string;
-  onItemClick?: () => void;
-}
-
-interface MobileNavProps {
-  children: React.ReactNode;
-  className?: string;
-  visible?: boolean;
-}
-
-interface MobileNavHeaderProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-interface MobileNavMenuProps {
-  children: React.ReactNode;
-  className?: string;
-  isOpen: boolean;
-  onClose: () => void;
-}
+export const useNavbarStatus = () => React.useContext(NavbarContext);
 
 export const Navbar = ({ children, className }: NavbarProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -66,20 +37,21 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   });
 
   return (
-    <motion.div
-      ref={ref}
-      // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
-      className={cn("sticky inset-x-0 top-20 z-40 w-full", className)}
-    >
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(
-            child as React.ReactElement<{ visible?: boolean }>,
-            { visible },
-          )
-          : child,
-      )}
-    </motion.div>
+    <NavbarContext.Provider value={{ visible }}>
+      <motion.div
+        ref={ref}
+        className={cn("sticky inset-x-0 top-20 z-40 w-full", className)}
+      >
+        {React.Children.map(children, (child) =>
+          React.isValidElement(child)
+            ? React.cloneElement(
+              child as React.ReactElement<{ visible?: boolean }>,
+              { visible }
+            )
+            : child
+        )}
+      </motion.div>
+    </NavbarContext.Provider>
   );
 };
 
@@ -112,29 +84,42 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   );
 };
 
-export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
+export const NavItems = ({ items, className, onItemClick, activeLink }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "flex-1 hidden flex-row items-center justify-center space-x-1 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-1",
         className,
       )}
     >
-      {items.map((item, idx) => (
-        <a
-          onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
-          className="group relative px-4 py-2 text-neutral-600 dark:text-neutral-300 transition-colors duration-200 hover:text-neutral-900 dark:hover:text-white"
-          key={`link-${idx}`}
-          href={item.link}
-        >
-          <span className="relative z-20">{item.name}</span>
-          <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-        </a>
-      ))}
+      {items.map((item, idx) => {
+        const isActive = activeLink === item.link;
+        return (
+          <a
+            onMouseEnter={() => setHovered(idx)}
+            onClick={onItemClick}
+            className={cn(
+              "group relative px-3 py-2 transition-colors duration-200 whitespace-nowrap",
+              isActive
+                ? "text-neutral-900 dark:text-white"
+                : "text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white"
+            )}
+            key={`link-${idx}`}
+            href={item.link}
+          >
+            <span className="relative z-20">{item.name}</span>
+            <span
+              className={cn(
+                "absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center bg-accent transition-transform duration-300 ease-out",
+                isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+              )}
+            />
+          </a>
+        );
+      })}
     </motion.div>
   );
 };
@@ -176,7 +161,7 @@ export const MobileNavHeader = ({
   return (
     <div
       className={cn(
-        "flex w-full flex-row items-center justify-between",
+        "flex w-full flex-row items-center justify-between px-4",
         className,
       )}
     >
@@ -218,9 +203,9 @@ export const MobileNavToggle = ({
   onClick: () => void;
 }) => {
   return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} />
+    <IconX className="text-black dark:text-white cursor-pointer" onClick={onClick} />
   ) : (
-    <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
+    <IconMenu2 className="text-black dark:text-white cursor-pointer" onClick={onClick} />
   );
 };
 
@@ -259,7 +244,7 @@ export const NavbarButton = ({
     | React.ComponentPropsWithoutRef<"button">
   )) => {
   const baseStyles =
-    "px-4 py-2 rounded-md bg-white button bg-white text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
+    "px-4 py-2 rounded-md bg-white button bg-white text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center whitespace-nowrap";
 
   const variantStyles = {
     primary:

@@ -59,7 +59,7 @@ const AIEmployees = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="hero-headline mb-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white"
+                        className="hero-headline mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white"
                     >
                         <span className="block">Meet Your Hardest‑Working</span>
                         <span className="block text-gradient from-indigo-300 to-purple-400 bg-clip-text text-transparent bg-gradient-to-r">Team Members</span>

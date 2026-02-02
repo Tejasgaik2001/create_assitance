@@ -6,7 +6,6 @@ import StatsSection from "@/components/StatsSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import TestimonialSection from "@/components/TestimonialSection";
 import FAQSection from "@/components/FAQSection";
-import { AnimatedSnapContainer } from "@/components/FullScreenSection";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
 
 const Index = () => {
@@ -25,9 +24,7 @@ const Index = () => {
       <Header />
       <main>
         <CursorSpotlight />
-        <AnimatedSnapContainer>
-          {sections}
-        </AnimatedSnapContainer>
+        {sections}
       </main>
     </div>
   );

@@ -1,14 +1,17 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import aiHero from "@/assets/ai-hero.png";
 import aiVoice from "@/assets/ai-voice.jpg";
 import crmDashboard from "@/assets/crm-dashboard.jpg";
 import automation from "@/assets/automation.jpg";
 import { Sparkles, Zap, TrendingUp } from "lucide-react";
+import { handleBookingRedirect } from "@/utils/navigation";
 
 const IntroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "-10%" });
+  const navigate = useNavigate();
 
   const stats = [
     {
@@ -109,11 +112,17 @@ const IntroSection = () => {
                 transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <button className="group relative h-12 px-8 rounded-xl bg-gradient-to-r from-accent via-primary to-accent text-white font-semibold overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
+                <button
+                  onClick={handleBookingRedirect}
+                  className="group relative h-12 px-8 rounded-xl bg-gradient-to-r from-accent via-primary to-accent text-white font-semibold overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
+                >
                   <span className="relative z-10">Book a Consultation</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
-                <button className="h-12 px-8 rounded-xl border-2 border-border/60 bg-background/40 backdrop-blur-sm font-semibold hover:border-accent/50 hover:bg-background/60 transition-all">
+                <button
+                  onClick={() => navigate("/how-it-works")}
+                  className="h-12 px-8 rounded-xl border-2 border-border/60 bg-background/40 backdrop-blur-sm font-semibold hover:border-accent/50 hover:bg-background/60 transition-all"
+                >
                   See How It Works
                 </button>
               </motion.div>

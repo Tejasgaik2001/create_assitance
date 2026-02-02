@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef } from "react";
 import heroVideo from "@/assets/hero.mp4";
+import { handleBookingRedirect } from "@/utils/navigation";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -77,7 +78,7 @@ const HeroSection = () => {
                 variants={textVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[0.9] uppercase"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[0.9] uppercase"
               >
                 <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient drop-shadow-2xl">
                   Automate
@@ -87,7 +88,7 @@ const HeroSection = () => {
                     initial={{ scaleX: 0 }}
                     animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="text-foreground/10 italic font-light text-3xl sm:text-5xl md:text-6xl lg:text-7xl origin-left"
+                    className="text-foreground/10 italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl origin-left"
                   >
                     &
                   </motion.span>
@@ -154,20 +155,18 @@ const HeroSection = () => {
                   variant="hero"
                   size="xl"
                   className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-12 h-14 sm:h-16 bg-gradient-to-r from-accent via-primary to-accent text-white shadow-2xl shadow-primary/30 hover:shadow-primary/50 active:scale-95 transition-all text-base sm:text-lg font-bold uppercase tracking-tight overflow-hidden border-none group"
-                  asChild
+                  onClick={handleBookingRedirect}
                 >
-                  <a href="/book-a-call">
-                    {/* Shimmer effect */}
-                    <motion.div
-                      animate={{ x: ["-200%", "200%"] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
-                    />
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      Book Consultation
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </a>
+                  {/* Shimmer effect */}
+                  <motion.div
+                    animate={{ x: ["-200%", "200%"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+                  />
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Book Consultation
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Button>
               </div>
 
@@ -217,9 +216,9 @@ const HeroSection = () => {
               damping: 20,
               delay: 0.3
             }}
-            className="relative hidden lg:block"
+            className="relative w-full"
           >
-            <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
+            <div className="relative aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
               {/* Video with enhanced effects */}
               <video
                 src={heroVideo}
@@ -242,7 +241,7 @@ const HeroSection = () => {
                 }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 whileHover={{ scale: 1.05, y: -8 }}
-                className="absolute bottom-8 left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2.5rem] p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all"
+                className="absolute bottom-8 left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2.5rem] p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all hidden sm:block"
               >
                 <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
                 <div className="relative">

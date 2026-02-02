@@ -101,9 +101,7 @@
     @apply border-border;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html {}
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
@@ -183,5 +181,21 @@
 
   .light .chip {
     @apply bg-gray-50/90 text-gray-600 border-gray-200/50;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/40;
   }
 }
