@@ -9,6 +9,51 @@ import { cn } from '../lib/utils';
 import { MagneticWrapper } from '@/components/MagneticWrapper';
 import { handleBookingRedirect } from '@/utils/navigation';
 
+const MobileTeamMember = ({ member }: { member: any }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  return (
+    <motion.div
+      layout
+      onClick={() => setIsExpanded(!isExpanded)}
+      className="flex flex-col items-center text-center p-8 rounded-[3rem] bg-white/5 border border-white/10 transition-all duration-300 w-full mb-6 cursor-pointer"
+    >
+      <div className="relative mb-6">
+        <img src={member.image} alt={member.name} className="w-32 h-32 rounded-full object-cover border-4 border-indigo-500/30" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-indigo-500/20 to-transparent pointer-events-none" />
+      </div>
+
+      <span className="text-[10px] text-indigo-300 uppercase font-black mb-1 tracking-[0.2em]">{member.category}</span>
+      <h4 className="text-2xl font-black text-white tracking-tight leading-tight">{member.name}</h4>
+      <p className="text-xs text-indigo-400 uppercase font-black mb-2 tracking-widest">{member.role}</p>
+
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden mt-6"
+          >
+            <div className="h-px w-16 bg-indigo-500/30 mx-auto mb-6" />
+            <p className="text-sm text-slate-300 italic leading-relaxed text-left">"{member.bio}"</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {!isExpanded && (
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          className="text-[10px] text-indigo-400 mt-6 uppercase font-bold tracking-widest inline-flex items-center gap-2"
+        >
+          Tap to read full bio
+          <ArrowRight className="w-3 h-3 rotate-90" />
+        </motion.span>
+      )}
+    </motion.div>
+  );
+};
+
 const WhyCreateAssistants = () => {
   const reasons = [
     {
@@ -403,8 +448,9 @@ const WhyCreateAssistants = () => {
         </div>
 
         {/* Team Section - Cinematic Layer Tunnel */}
-        <div ref={teamContainerRef} className="relative h-[600vh] bg-slate-950">
-          <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
+        <div ref={teamContainerRef} className="relative h-auto md:h-[600vh] bg-slate-950">
+          {/* Desktop Parallax - Hidden on Mobile */}
+          <div className="hidden md:block sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)] pointer-events-none" />
             <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] pointer-events-none" />
 
@@ -420,7 +466,7 @@ const WhyCreateAssistants = () => {
               </h2>
             </motion.div>
 
-            <div className="relative w-full max-w-7xl h-[600px] z-20 hidden md:block">
+            <div className="relative w-full max-w-7xl h-[600px] z-20">
               {teamPairs.map((pair, index) => (
                 <TeamPairLayer
                   key={index}
@@ -444,23 +490,20 @@ const WhyCreateAssistants = () => {
                 THE <span className="text-indigo-400">TEAM</span>
               </h2>
             </motion.div>
+          </div>
 
-            <div className="md:hidden w-full px-6 py-20 z-50 bg-slate-950">
-              <div className="text-center mb-12">
-                <span className="text-indigo-400 font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
-                <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-indigo-400">Team</span></h2>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {teamMembers.map((member) => (
-                  <div key={member.name} className="flex flex-col items-center text-center p-4 rounded-3xl bg-white/5 border border-white/10">
-                    <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover mb-3" />
-                    <span className="text-[8px] text-indigo-300 uppercase font-black mb-1">{member.category}</span>
-                    <h4 className="text-sm font-bold text-white">{member.name}</h4>
-                    <p className="text-[10px] text-indigo-400 uppercase font-black">{member.role}</p>
-                    <p className="text-[10px] text-slate-400 mt-2 line-clamp-4">{member.bio}</p>
-                  </div>
-                ))}
-              </div>
+          {/* Mobile Team List - Vertical Cards */}
+          <div className="md:hidden w-full px-6 py-24 z-10 bg-slate-950 relative">
+            <div className="text-center mb-16">
+              <span className="text-indigo-400 font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
+              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-indigo-400">Team</span></h2>
+              <div className="h-px w-12 bg-indigo-500/30 mx-auto" />
+            </div>
+
+            <div className="flex flex-col gap-6">
+              {teamMembers.map((member) => (
+                <MobileTeamMember key={member.name} member={member} />
+              ))}
             </div>
           </div>
         </div>

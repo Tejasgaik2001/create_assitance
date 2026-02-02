@@ -90,35 +90,31 @@ const HowItWorks = () => {
         {/* Hero Section */}
         <section className="relative overflow-hidden pt-24 pb-16">
           {/* Background elements with animations */}
-          <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {/* Animated gradient orbs */}
             <motion.div
-              className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
               animate={{
                 x: [0, 50, 0],
-                scale: [1, 1.1, 1],
+                y: [0, 30, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3]
               }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
             />
             <motion.div
-              className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
               animate={{
-                x: [0, -50, 0],
-                scale: [1.1, 1, 1.1],
+                x: [0, -40, 0],
+                y: [0, -25, 0],
+                scale: [1, 1.15, 1],
+                opacity: [0.2, 0.4, 0.2]
               }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
             />
-            {/* Extra floating orb */}
-            <motion.div
-              className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Grid pattern */}
-            {/* <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" /> */}
+
+            {/* Premium grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -278,7 +274,7 @@ const HowItWorks = () => {
             <AnimatedSection direction="up" className="text-center">
               <div className="max-w-3xl mx-auto">
                 <h2 className="section-headline mb-6">
-                  Ready to See This System <MotionText text="In Action?" className="ml-2 inline-block text-accent" />
+                  Ready to See This System <MotionText text="In Action?" className="sm:ml-2 block sm:inline-block text-accent" />
                 </h2>
                 <p className="body-large mb-10">
                   Book a free consultation and we'll walk you through how Create Assistants can

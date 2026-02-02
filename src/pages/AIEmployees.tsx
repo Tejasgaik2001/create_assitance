@@ -543,10 +543,10 @@ const AIEmployees = () => {
     </div>,
 
     // CTA Section
-    <div key="cta" className="min-h-screen w-full flex flex-col bg-slate-50 dark:bg-[#020617] selection:bg-accent/30">
+    <div key="cta" className="min-h-screen w-full flex flex-col bg-background lg:bg-slate-50 dark:lg:bg-[#020617] selection:bg-accent/30 overflow-hidden">
       <div className="flex-grow flex items-center justify-center relative py-24 lg:py-32">
-        {/* Abstract background elements */}
-        <div className="absolute inset-0 pointer-events-none">
+        {/* Abstract background elements - hidden on mobile to prevent horizontal scroll */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block">
           <div className="absolute top-0 right-0 w-[50%] h-full bg-accent/5 dark:bg-accent/10 skew-x-[-12deg] translate-x-32" />
           <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-primary/10 blur-[100px] rounded-full" />
         </div>

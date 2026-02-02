@@ -216,9 +216,9 @@ const HeroSection = () => {
               damping: 20,
               delay: 0.3
             }}
-            className="relative hidden lg:block"
+            className="relative w-full"
           >
-            <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
+            <div className="relative aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
               {/* Video with enhanced effects */}
               <video
                 src={heroVideo}

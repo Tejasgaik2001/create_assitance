@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface ListItem {
-    icon: React.ComponentType<{ className?: string }>;
+    icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
     title: string;
     description: string;
 }
@@ -16,11 +16,11 @@ const RollingTextItem = ({ item }: RollingTextItemProps) => {
     return (
         <div className="group relative w-full cursor-pointer border-b border-neutral-200 dark:border-neutral-800 py-6">
             {/* Rolling text */}
-            <div className="relative overflow-hidden h-[48px] md:h-16">
+            <div className="relative overflow-hidden h-[64px] md:h-16">
                 <div className="transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-1/2">
                     {/* State 1: Normal - Unfilled Icon */}
-                    <div className="h-[48px] md:h-16 flex items-center justify-between gap-4">
-                        <h2 className="text-2xl md:text-4xl font-bold text-neutral-900 dark:text-white uppercase tracking-tighter">
+                    <div className="h-[64px] md:h-16 flex items-center justify-between gap-4">
+                        <h2 className="text-xl md:text-4xl font-bold text-neutral-900 dark:text-white uppercase tracking-tighter leading-tight">
                             {item.title}
                         </h2>
                         <Icon
@@ -30,8 +30,8 @@ const RollingTextItem = ({ item }: RollingTextItemProps) => {
                     </div>
 
                     {/* State 2: Hover - Italic + Color + Filled Icon */}
-                    <div className="h-[48px] md:h-16 flex items-center justify-between gap-4">
-                        <h2 className="text-2xl md:text-4xl font-bold uppercase tracking-tighter italic text-accent">
+                    <div className="h-[64px] md:h-16 flex items-center justify-between gap-4">
+                        <h2 className="text-xl md:text-4xl font-bold uppercase tracking-tighter italic text-accent leading-tight">
                             {item.title}
                         </h2>
                         <Icon
