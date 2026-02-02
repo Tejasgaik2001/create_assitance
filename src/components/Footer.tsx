@@ -8,18 +8,17 @@ const footerLinks = [
   {
     category: "Product",
     links: [
-      { name: "Features", href: "/#features" },
-      { name: "Integrations", href: "/#integrations" },
-      { name: "Pricing", href: "/#pricing" },
-      { name: "Changelog", href: "/changelog" },
+      { name: "Features", href: "/how-it-works" },
+      { name: "Command Center", href: "/command-center" },
+      { name: "AI Employees", href: "/ai-employees" },
+      { name: "What You Get", href: "/what-you-get" },
     ],
   },
   {
     category: "Company",
     links: [
-      { name: "About", href: "/about" },
-      { name: "Blog", href: "/blog" },
-      { name: "Careers", href: "/careers" },
+      { name: "About", href: "/why-create-assistants" },
+      { name: "Book a Call", href: BOOKING_URL },
       { name: "Contact", href: BOOKING_URL },
     ],
   },

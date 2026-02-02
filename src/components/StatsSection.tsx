@@ -112,7 +112,7 @@ const StatsSection = () => {
                   >
                     <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-accent drop-shadow-lg" />
                   </motion.div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 shrink-0">
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
@@ -122,7 +122,7 @@ const StatsSection = () => {
                         stiffness: 200,
                         damping: 15
                       }}
-                      className="bg-gradient-to-r from-primary to-accent text-white px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300"
+                      className="bg-gradient-to-r from-primary to-accent text-white px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg text-[10px] sm:text-xs font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 whitespace-nowrap"
                     >
                       {stat.tabLabel}
                     </motion.div>
@@ -137,10 +137,10 @@ const StatsSection = () => {
                       }}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="bg-muted/80 backdrop-blur-sm text-accent/80 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 hover:bg-muted hover:text-foreground border border-border/40 shadow-md transition-all duration-300"
+                      className="bg-muted/80 backdrop-blur-sm text-accent/80 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-semibold flex items-center gap-1 hover:bg-muted hover:text-foreground border border-border/40 shadow-md transition-all duration-300 whitespace-nowrap"
                     >
-                      <Info size={12} className="text-accent" />
-                      <span className="hidden xs:inline">Info</span>
+                      <Info size={10} className="text-accent sm:w-3 sm:h-3" />
+                      <span>Info</span>
                     </motion.button>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ const StatsSection = () => {
                 </motion.div>
 
                 {/* Bottom section with buttons */}
-                <div className="flex gap-3 w-full items-stretch">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full items-stretch">
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -173,11 +173,11 @@ const StatsSection = () => {
                       stiffness: 200,
                       damping: 15
                     }}
-                    className="flex-1 bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium flex items-center justify-between border border-border/40 shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 group/btn cursor-default"
+                    className="flex-1 bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-[11px] sm:text-sm font-medium flex items-center justify-between border border-border/40 shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 group/btn cursor-default"
                   >
-                    <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="flex items-center gap-2 min-w-0">
                       <div className="p-1 sm:p-1.5 rounded-lg bg-primary/10 text-primary shrink-0">
-                        <BarChart3 size={14} className="sm:w-4 sm:h-4" />
+                        <BarChart3 size={12} className="sm:w-4 sm:h-4" />
                       </div>
                       <span className="text-foreground/80 truncate">{stat.label}</span>
                     </div>
@@ -198,11 +198,11 @@ const StatsSection = () => {
                       transition: { type: "spring", stiffness: 400, damping: 10 }
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium flex items-center justify-between border border-border/40 shadow-sm hover:shadow-md hover:border-accent/40 transition-all duration-300 group/btn"
+                    className="flex-1 bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-[11px] sm:text-sm font-medium flex items-center justify-between border border-border/40 shadow-sm hover:shadow-md hover:border-accent/40 transition-all duration-300 group/btn"
                   >
-                    <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="flex items-center gap-2 min-w-0">
                       <div className="p-1 sm:p-1.5 rounded-lg bg-accent/10 text-accent shrink-0">
-                        <stat.rightButton.icon size={14} className="sm:w-4 sm:h-4" />
+                        <stat.rightButton.icon size={12} className="sm:w-4 sm:h-4" />
                       </div>
                       <span className="text-foreground/80 truncate">{stat.rightButton.text}</span>
                     </div>

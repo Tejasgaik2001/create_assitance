@@ -51,8 +51,8 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
       id="resources"
       className={
         withFooter
-          ? "min-h-screen w-full flex flex-col relative overflow-hidden bg-background pt-24 sm:pt-32 pb-16"
-          : "min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background pt-24 sm:pt-32 pb-16"
+          ? "min-h-screen w-full flex flex-col relative overflow-hidden bg-background pt-24 sm:pt-32"
+          : "min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background pt-24 sm:pt-32"
       }
     >
       {/* Background decoration */}
@@ -165,7 +165,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                     >
                       <AccordionItem
                         value={`item-${index}`}
-                        className="group border border-border/40 rounded-xl px-4 sm:px-6 bg-gradient-to-br from-background via-background/95 to-background/80 backdrop-blur-sm shadow-lg shadow-black/5 data-[state=open]:shadow-xl data-[state=open]:shadow-primary/20 data-[state=open]:border-primary/50 hover:border-primary/30 transition-all duration-500 overflow-hidden"
+                        className="group border border-border/40 rounded-xl px-4 sm:px-6 bg-gradient-to-br from-background via-background/95 to-background/80 backdrop-blur-sm shadow-lg shadow-black/5 data-[state=open]:shadow-xl data-[state=open]:shadow-primary/20 data-[state=open]:border-accent/50 hover:border-accent/30 transition-all duration-500 overflow-hidden"
                       >
                         {/* Gradient overlay on open */}
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-accent/10 opacity-0 data-[state=open]:opacity-100 transition-opacity duration-500" />

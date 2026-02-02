@@ -18,13 +18,13 @@ const MobileTeamMember = ({ member }: { member: any }) => {
       className="flex flex-col items-center text-center p-8 rounded-[3rem] bg-white/5 border border-white/10 transition-all duration-300 w-full mb-6 cursor-pointer"
     >
       <div className="relative mb-6">
-        <img src={member.image} alt={member.name} className="w-32 h-32 rounded-full object-cover border-4 border-indigo-500/30" />
-        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-indigo-500/20 to-transparent pointer-events-none" />
+        <img src={member.image} alt={member.name} className="w-32 h-32 rounded-full object-cover border-4 border-accent/30" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-accent/20 to-transparent pointer-events-none" />
       </div>
 
-      <span className="text-[10px] text-indigo-300 uppercase font-black mb-1 tracking-[0.2em]">{member.category}</span>
+      <span className="text-[10px] text-accent/90 uppercase font-black mb-1 tracking-[0.2em]">{member.category}</span>
       <h4 className="text-2xl font-black text-white tracking-tight leading-tight">{member.name}</h4>
-      <p className="text-xs text-indigo-400 uppercase font-black mb-2 tracking-widest">{member.role}</p>
+      <p className="text-xs text-accent uppercase font-black mb-2 tracking-widest">{member.role}</p>
 
       <AnimatePresence>
         {isExpanded && (
@@ -34,7 +34,7 @@ const MobileTeamMember = ({ member }: { member: any }) => {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden mt-6"
           >
-            <div className="h-px w-16 bg-indigo-500/30 mx-auto mb-6" />
+            <div className="h-px w-16 bg-accent/30 mx-auto mb-6" />
             <p className="text-sm text-slate-300 italic leading-relaxed text-left">"{member.bio}"</p>
           </motion.div>
         )}
@@ -44,7 +44,7 @@ const MobileTeamMember = ({ member }: { member: any }) => {
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
-          className="text-[10px] text-indigo-400 mt-6 uppercase font-bold tracking-widest inline-flex items-center gap-2"
+          className="text-[10px] text-accent mt-6 uppercase font-bold tracking-widest inline-flex items-center gap-2"
         >
           Tap to read full bio
           <ArrowRight className="w-3 h-3 rotate-90" />
@@ -133,35 +133,35 @@ const WhyCreateAssistants = () => {
       role: "Chief Executive Officer (CEO)",
       category: "Leadership Team",
       bio: "Tucker leads Create Assistants' strategic vision, partnerships, and corporate growth to deliver measurable client impact. As CEO, Tucker defines the strategic and financial direction of Create Assistants. He brings experience across private capital, M&A, and automation technology to guide long-term company growth. Tucker also serves as President of his family office, overseeing diversified investments across media, wellness, alcohol, and artificial intelligence. His leadership ensures each system built aligns with business outcomes, driving higher efficiency, profitability, and operational clarity for every client.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=500&q=80",
+      image: "https://framerusercontent.com/images/exjei6fw1412d6PsTGL6AW9ou5g.webp",
     },
     {
       name: "Tyler VanArkel",
       role: "Founder & Chief Systems Officer (CSO)",
       category: "Leadership Team",
       bio: "Tyler leads the design and automation backbone of Create Assistants, transforming business operations through precision-built systems. For nearly a decade, Tyler has engineered systems and automations that have streamlined workflows for small and mid-sized businesses across the Midwest. His deep technical understanding and operational discipline make him the architect behind Create Assistants' core technology infrastructure. Tyler's approach blends practical problem-solving with scalable automation design, ensuring clients achieve measurable gains in efficiency, accuracy, and profitability.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=500&q=80",
+      image: "https://framerusercontent.com/images/vS3FCQx0voThOfGbDF90owF9z0.webp",
     },
     {
       name: "Randy Bern",
       role: "Strategic Advisor",
       category: "Advisory Board",
       bio: "Randy provides strategic oversight and operational insight drawn from decades of executive leadership. Randy Bern has been a vanguard from the ground up, growing it over 20 years into a multi-state enterprise employing more than 1,200 people across 10 states. Under his leadership, Vanguard consistently earned the #1 national quality award in its industry for many consecutive years. His teams ranked among the highest-paid and most respected in the field, a testament to his focus on quality, integrity, and exceeding expectations. After the company's sale, Randy continues to serve as a minority shareholder and acting CEO. His operational insight and commitment to excellence provide Create Assistants with a standard of execution that drives lasting impact.",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=500&q=80",
+      image: "https://framerusercontent.com/images/pg6GCfCNU66ww3taDUzgQ1qfS8.webp",
     },
     {
       name: "Craig Jackman",
       role: "Strategic Advisor",
       category: "Advisory Board",
       bio: "Craig Jackman is co-founder and president of Paragon IT Professionals, leading the organization for nearly 30 years. Craig is a graduate of the University of Iowa with a bachelor's degree in Economics. He is married with three grown sons, two living in Scottsdale and one in New York City. Craig's primary focus is leading Paragon's strategic growth and execution, leading community, and maintaining strategic relationships. Recently, Craig was honored to join the board of the Arizona Technology Council. Paragon's primary focus is IT contract services, project solutions, and leadership development through the IT Leadership Forum that helps develop leaders inside IT departments and organizations.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=500&q=80",
+      image: "https://framerusercontent.com/images/ynhNhN085KKEtMXIeXmhlTII5Ps.png",
     },
     {
       name: "Ryan Gold",
       role: "Strategic Advisor",
       category: "Advisory Board",
       bio: "Ryan leads business development and distribution for the Maeson Group, leveraging his experience which ranges from capital raising and business development to accounting and operations. Prior to co-founding Maeson, Ryan helped build and consult for a number of successful firms and funds at various stages of development. He was previously a Vice President in the Capital Services Group at Credit Suisse Securities, where he worked with over one hundred hedge fund firms to advise and assist in their business development and capital raising efforts. Prior to Credit Suisse, Ryan was a Senior Analyst at Concord Management, a family office, where he sourced investment opportunities and performed investment research and due diligence on hedge funds, private equity funds, and other investment vehicles. Prior to his work at Concord, Ryan was the Controller for Forester Capital. Ryan is a CPA and began his career at PwC. He is a graduate of Franklin & Marshall College and is Series 7, 65, and 63 licensed.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=500&q=80",
+      image: "https://framerusercontent.com/images/tVVKxKYF3HSMbP2ICmyh18tLY.png?width=691&height=691",
     },
   ];
 
@@ -316,7 +316,7 @@ const WhyCreateAssistants = () => {
                           rotateX: index < 2 ? 8 : -8,
                           rotateY: index % 2 === 0 ? 8 : -8,
                         }}
-                        className="glass-card p-5 lg:p-7 rounded-[1.5rem] lg:rounded-[2rem] border border-primary/10 shadow-2xl backdrop-blur-xl group relative overflow-hidden transition-all duration-300 hover:border-primary/40"
+                        className="glass-card p-5 lg:p-7 rounded-[1.5rem] lg:rounded-[2rem] border border-accent/10 shadow-2xl backdrop-blur-xl group relative overflow-hidden transition-all duration-300 hover:border-accent/40"
                       >
                         <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                           <motion.div
@@ -345,24 +345,46 @@ const WhyCreateAssistants = () => {
               })}
             </div>
 
-            <div className="md:hidden flex flex-col items-center">
+            <div className="md:hidden w-full">
               <div className="text-center mb-12">
                 <AnimatedSection direction="up">
-                  <h2 className="text-3xl font-bold mb-3 leading-tight">Why Choose an <br /><span className="text-gradient">AI Growth Agency?</span></h2>
-                  <p className="text-muted-foreground text-sm max-w-xs mx-auto">A partnership built to out-perform DIY tools and software.</p>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 mb-4">
+                    <Zap className="w-3 h-3 text-primary" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Limited Slots Available</span>
+                  </div>
+                  <h2 className="text-3xl font-black mb-4 leading-tight tracking-tighter">
+                    Why Choose an <br />
+                    <span className="text-gradient">AI Growth Agency?</span>
+                  </h2>
+                  <p className="text-muted-foreground text-sm max-w-[280px] mx-auto leading-relaxed">
+                    A comprehensive partnership built to out-perform DIY tools and generic software.
+                  </p>
                 </AnimatedSection>
               </div>
-              <div className="grid gap-6 w-full max-w-sm mx-auto">
-                {reasons.map((reason) => {
+
+              <div className="grid grid-cols-2 gap-4">
+                {reasons.map((reason, index) => {
                   const Icon = reason.icon;
                   return (
-                    <div key={reason.title} className="glass-card p-6 rounded-2xl border border-border/50 flex flex-col items-center text-center">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3 text-primary">
+                    <motion.div
+                      key={reason.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="glass-card p-5 rounded-3xl border border-white/10 flex flex-col items-center text-center relative overflow-hidden group"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4 text-primary relative z-10 group-hover:scale-110 transition-transform duration-300">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <h3 className="text-base font-bold mb-1">{reason.title}</h3>
-                      <p className="text-[12px] text-muted-foreground">{reason.description}</p>
-                    </div>
+
+                      <h3 className="text-[13px] font-black mb-2 leading-tight uppercase tracking-wide relative z-10">{reason.title}</h3>
+                      <p className="text-[11px] text-muted-foreground/80 leading-snug line-clamp-3 relative z-10">
+                        {reason.description}
+                      </p>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -402,17 +424,17 @@ const WhyCreateAssistants = () => {
         {/* Values Section */}
         <div className="py-32 w-full flex items-center justify-center bg-[#FDFCFB] dark:bg-[#030614] relative overflow-hidden transition-colors duration-500">
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] dark:bg-orange-500/10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] dark:bg-accent/10" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-20">
-              <span className="text-orange-500 font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">Our DNA</span>
+              <span className="text-accent font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">OUR DNA</span>
               <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tighter leading-tight">
                 Our <span className="text-gradient">Mission & Values</span>
               </h2>
-              <div className="h-1 w-20 bg-orange-500/20 mx-auto mb-8 rounded-full" />
+              <div className="h-1 w-20 bg-accent/20 mx-auto mb-8 rounded-full" />
               <p className="body-large max-w-2xl mx-auto text-muted-foreground/80 font-medium leading-relaxed">
                 Create Assistants is a family‑owned agency based in Iowa. We believe small businesses deserve enterprise-grade automation.
               </p>
@@ -434,10 +456,10 @@ const WhyCreateAssistants = () => {
                     <div className="glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center">
                       <div className="relative mb-8">
                         <div className="w-20 h-20 rounded-3xl bg-white dark:bg-white/5 shadow-inner border border-white/80 dark:border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110">
-                          <Icon className="w-7 h-7 text-orange-600" />
+                          <Icon className="w-7 h-7 text-accent" />
                         </div>
                       </div>
-                      <h3 className="text-2xl font-bold mb-4 group-hover:text-orange-600 transition-colors">{value.title}</h3>
+                      <h3 className="text-2xl font-bold mb-4 group-hover:text-accent transition-colors">{value.title}</h3>
                       <p className="text-muted-foreground/90 font-medium text-sm lg:text-base">{value.description}</p>
                     </div>
                   </motion.div>
@@ -451,7 +473,7 @@ const WhyCreateAssistants = () => {
         <div ref={teamContainerRef} className="relative h-auto md:h-[600vh] bg-slate-950">
           {/* Desktop Parallax - Hidden on Mobile */}
           <div className="hidden md:block sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.05)_0%,transparent_70%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.05)_0%,transparent_70%)] pointer-events-none" />
             <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] pointer-events-none" />
 
             <motion.div
@@ -466,7 +488,7 @@ const WhyCreateAssistants = () => {
               </h2>
             </motion.div>
 
-            <div className="relative w-full max-w-7xl h-[600px] z-20">
+            <div className="relative w-full max-w-7xl h-[600px] z-20 mx-auto mt-32">
               {teamPairs.map((pair, index) => (
                 <TeamPairLayer
                   key={index}
@@ -483,11 +505,11 @@ const WhyCreateAssistants = () => {
                 opacity: useTransform(teamScrollY, [0.0, 0.08, 0.15], [0, 1, 0]),
                 y: useTransform(teamScrollY, [0.0, 0.08], [40, 0]),
               }}
-              className="absolute top-16 z-50 text-center px-4"
+              className="absolute top-12 inset-x-0 z-50 flex flex-col items-center justify-center text-center px-4"
             >
-              <span className="text-indigo-400 font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
-              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
-                THE <span className="text-indigo-400">TEAM</span>
+              <span className="text-accent font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
+              <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter">
+                THE <span className="text-accent">TEAM</span>
               </h2>
             </motion.div>
           </div>
@@ -495,9 +517,9 @@ const WhyCreateAssistants = () => {
           {/* Mobile Team List - Vertical Cards */}
           <div className="md:hidden w-full px-6 py-24 z-10 bg-slate-950 relative">
             <div className="text-center mb-16">
-              <span className="text-indigo-400 font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
-              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-indigo-400">Team</span></h2>
-              <div className="h-px w-12 bg-indigo-500/30 mx-auto" />
+              <span className="text-accent font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
+              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-accent">Team</span></h2>
+              <div className="h-px w-12 bg-accent/30 mx-auto" />
             </div>
 
             <div className="flex flex-col gap-6">
@@ -603,7 +625,7 @@ const ProcessItem = ({ item, index }: { item: any; index: number }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
-            className="fixed pointer-events-none z-50 w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
+            className="fixed pointer-events-none z-50 hidden md:block w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
             style={{ left: mousePos.x + 20, top: mousePos.y - 80 }}
           >
             <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
@@ -669,14 +691,14 @@ const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }
           src={member.image}
           alt={member.name}
           className={cn(
-            "w-full h-full object-cover transition-all duration-1000 grayscale",
-            isHovered ? "grayscale-0 scale-105" : "group-hover:grayscale-0"
+            "w-full h-full object-cover transition-all duration-1000",
+            isHovered ? "scale-105" : ""
           )}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent p-12 flex flex-col justify-end">
-          <span className="text-xs text-indigo-300 font-black uppercase tracking-[0.2em] mb-2">{member.category}</span>
+          <span className="text-xs text-accent/90 font-black uppercase tracking-[0.2em] mb-2">{member.category}</span>
           <h4 className="text-4xl font-black text-white tracking-tighter leading-tight mb-2">{member.name}</h4>
-          <p className="text-xs text-indigo-400 font-bold uppercase tracking-[0.3em] mb-4">{member.role}</p>
+          <p className="text-xs text-accent font-bold uppercase tracking-[0.3em] mb-4">{member.role}</p>
 
           <motion.div
             initial={{ height: 0, opacity: 0 }}
@@ -687,7 +709,7 @@ const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="overflow-hidden"
           >
-            <div className="h-px w-16 bg-indigo-500/50 mb-4" />
+            <div className="h-px w-16 bg-accent/50 mb-4" />
             <div className="max-h-48 overflow-y-auto custom-scrollbar pr-2">
               <p className="text-sm text-slate-200 italic leading-relaxed">"{member.bio}"</p>
             </div>
