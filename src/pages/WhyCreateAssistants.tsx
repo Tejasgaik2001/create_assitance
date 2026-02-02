@@ -345,24 +345,46 @@ const WhyCreateAssistants = () => {
               })}
             </div>
 
-            <div className="md:hidden flex flex-col items-center">
+            <div className="md:hidden w-full">
               <div className="text-center mb-12">
                 <AnimatedSection direction="up">
-                  <h2 className="text-3xl font-bold mb-3 leading-tight">Why Choose an <br /><span className="text-gradient">AI Growth Agency?</span></h2>
-                  <p className="text-muted-foreground text-sm max-w-xs mx-auto">A partnership built to out-perform DIY tools and software.</p>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 mb-4">
+                    <Zap className="w-3 h-3 text-primary" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Limited Slots Available</span>
+                  </div>
+                  <h2 className="text-3xl font-black mb-4 leading-tight tracking-tighter">
+                    Why Choose an <br />
+                    <span className="text-gradient">AI Growth Agency?</span>
+                  </h2>
+                  <p className="text-muted-foreground text-sm max-w-[280px] mx-auto leading-relaxed">
+                    A comprehensive partnership built to out-perform DIY tools and generic software.
+                  </p>
                 </AnimatedSection>
               </div>
-              <div className="grid gap-6 w-full max-w-sm mx-auto">
-                {reasons.map((reason) => {
+
+              <div className="grid grid-cols-2 gap-4">
+                {reasons.map((reason, index) => {
                   const Icon = reason.icon;
                   return (
-                    <div key={reason.title} className="glass-card p-6 rounded-2xl border border-border/50 flex flex-col items-center text-center">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3 text-primary">
+                    <motion.div
+                      key={reason.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="glass-card p-5 rounded-3xl border border-white/10 flex flex-col items-center text-center relative overflow-hidden group"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4 text-primary relative z-10 group-hover:scale-110 transition-transform duration-300">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <h3 className="text-base font-bold mb-1">{reason.title}</h3>
-                      <p className="text-[12px] text-muted-foreground">{reason.description}</p>
-                    </div>
+
+                      <h3 className="text-[13px] font-black mb-2 leading-tight uppercase tracking-wide relative z-10">{reason.title}</h3>
+                      <p className="text-[11px] text-muted-foreground/80 leading-snug line-clamp-3 relative z-10">
+                        {reason.description}
+                      </p>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -603,7 +625,7 @@ const ProcessItem = ({ item, index }: { item: any; index: number }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
-            className="fixed pointer-events-none z-50 w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
+            className="fixed pointer-events-none z-50 hidden md:block w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
             style={{ left: mousePos.x + 20, top: mousePos.y - 80 }}
           >
             <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
