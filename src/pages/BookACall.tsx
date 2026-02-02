@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
-import { AnimatedSnapContainer } from "@/components/FullScreenSection";
 import { cn } from "@/lib/utils";
 import { useState, useRef } from "react";
 
@@ -599,9 +598,7 @@ const BookACall = () => {
       <Header />
       <main>
         <CursorSpotlight />
-        <AnimatedSnapContainer>
-          {sections}
-        </AnimatedSnapContainer>
+        {sections}
       </main>
     </div>
   );

@@ -6,8 +6,6 @@ import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { AnimatedSnapContainer } from "@/components/FullScreenSection";
-import AuroraBackground from "@/components/AuroraBackground";
 import heroImage from "@/assets/hero-ai-premium.png";
 
 const AIEmployees = () => {
@@ -90,20 +88,35 @@ const AIEmployees = () => {
 
   const sections = [
     // Hero Section - Revamped for SaaS Standard
-    <div key="hero" className="min-h-screen lg:h-screen w-full flex items-center justify-center relative bg-white dark:bg-[#020617] pt-32 pb-20 lg:pt-24 lg:pb-0 overflow-hidden">
-      {/* SaaS Standard Background: Grid + Glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Subtle Grid */}
-        <div className="absolute inset-0 opacity-[0.1] dark:opacity-[0.2]"
-          style={{ backgroundImage: 'linear-gradient(hsl(var(--accent)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--accent)) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+    <section key="hero" className="relative overflow-hidden pt-24 pb-16 min-h-screen flex items-center bg-white dark:bg-[#020617]">
+      {/* Enhanced Background decoration from HeroSection */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Animated gradient orbs */}
+        <motion.div
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -40, 0],
+            y: [0, -25, 0],
+            scale: [1, 1.15, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+        />
 
-        {/* Cinematic Glows */}
-        <div className="absolute bottom-[-20%] right-[-10%] w-[70%] lg:w-[50%] h-[50%] bg-primary/10 dark:bg-primary/20 blur-[120px] lg:blur-[150px] rounded-full" />
-      </div>
+        {/* Premium grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
 
-      {/* Decorative Tech Elements (Standard SaaS Feel) */}
-      <div className="absolute right-0 top-0 w-full lg:w-1/2 h-full pointer-events-none overflow-hidden">
-        {/* Glowing Data Lines - Visible on larger screens */}
+        {/* Glowing Data Lines */}
         <motion.div
           animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
@@ -114,18 +127,9 @@ const AIEmployees = () => {
           transition={{ duration: 7, repeat: Infinity, ease: "linear", delay: 1 }}
           className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent hidden sm:block"
         />
-
-        {/* Floating Abstract Shapes - Hidden on smallest screens */}
-        <motion.div
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute right-[5%] lg:right-[10%] top-[10%] lg:top-[15%] w-32 h-32 lg:w-64 lg:h-64 border border-primary/10 rounded-full flex items-center justify-center opacity-40 lg:opacity-100"
-        >
-          <div className="w-[80%] h-[80%] border border-primary/5 rounded-full" />
-        </motion.div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-8 xl:gap-16 items-center">
           {/* Left Side: Content */}
           <motion.div
@@ -223,10 +227,10 @@ const AIEmployees = () => {
           </motion.div>
         </div>
       </div>
-    </div>,
+    </section>,
 
     // What Are AI Employees
-    <div key="what" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-950 relative py-10 md:py-20 lg:py-0 overflow-hidden">
+    <div key="what" className="min-h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-950 relative py-20 lg:py-32">
       {/* Background Decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03]"
@@ -269,7 +273,7 @@ const AIEmployees = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 -mt-10 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {capabilities.map((item, index) => {
             const Icon = item.icon;
             return (
@@ -317,7 +321,7 @@ const AIEmployees = () => {
     </div>,
 
     // 24/7 Responses
-    <div key="247" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-50 dark:from-slate-950 to-white dark:to-slate-900 text-slate-900 dark:text-white relative py-10 md:py-20 lg:py-0 overflow-hidden">
+    <div key="247" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-50 dark:from-slate-950 to-white dark:to-slate-900 text-slate-900 dark:text-white relative py-20 lg:py-32">
       {/* Dark theme background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 -right-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl opacity-30" />
@@ -376,7 +380,7 @@ const AIEmployees = () => {
     </div>,
 
     // Benefits
-    <div key="benefits" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-950/50 py-10 md:py-20 lg:py-0">
+    <div key="benefits" className="min-h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-950/50 py-20 lg:py-32">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -425,7 +429,7 @@ const AIEmployees = () => {
     </div>,
 
     // Personalised & Consistent
-    <div key="personalised" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-white dark:bg-[#020617] relative py-10 md:py-20 lg:py-0 overflow-hidden">
+    <div key="personalised" className="min-h-screen w-full flex items-center justify-center bg-white dark:bg-[#020617] relative py-20 lg:py-32">
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
@@ -457,7 +461,7 @@ const AIEmployees = () => {
     </div>,
 
     // Integrated & Seamless
-    <div key="integrated" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-900/20 relative py-10 md:py-20 lg:py-0 overflow-hidden">
+    <div key="integrated" className="min-h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-900/20 relative py-20 lg:py-32">
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -489,7 +493,7 @@ const AIEmployees = () => {
     </div>,
 
     // Work With Humans, Not Instead of Them
-    <div key="humans" className="min-h-screen lg:h-screen w-full flex items-center justify-center bg-white dark:bg-[#020617] relative py-10 md:py-20 lg:py-0 overflow-hidden">
+    <div key="humans" className="min-h-screen w-full flex items-center justify-center bg-white dark:bg-[#020617] relative py-20 lg:py-32">
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -528,9 +532,9 @@ const AIEmployees = () => {
       </div>
     </div>,
 
-    // CTA Section & Footer merged
-    <div key="cta-footer" className="min-h-screen lg:h-screen w-full flex flex-col bg-slate-50 dark:bg-[#020617] selection:bg-accent/30">
-      <div className="flex-grow flex items-center justify-center relative overflow-hidden py-12 lg:py-0">
+    // CTA Section
+    <div key="cta" className="min-h-screen w-full flex flex-col bg-slate-50 dark:bg-[#020617] selection:bg-accent/30">
+      <div className="flex-grow flex items-center justify-center relative py-24 lg:py-32">
         {/* Abstract background elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 right-0 w-[50%] h-full bg-accent/5 dark:bg-accent/10 skew-x-[-12deg] translate-x-32" />
@@ -645,7 +649,6 @@ const AIEmployees = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>,
   ];
 
@@ -653,10 +656,9 @@ const AIEmployees = () => {
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       <main>
-        <AnimatedSnapContainer>
-          {sections}
-        </AnimatedSnapContainer>
+        {sections}
       </main>
+      <Footer />
     </div>
   );
 };
