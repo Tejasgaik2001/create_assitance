@@ -402,17 +402,17 @@ const WhyCreateAssistants = () => {
         {/* Values Section */}
         <div className="py-32 w-full flex items-center justify-center bg-[#FDFCFB] dark:bg-[#030614] relative overflow-hidden transition-colors duration-500">
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] dark:bg-orange-500/10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] dark:bg-accent/10" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-20">
-              <span className="text-orange-500 font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">Our DNA</span>
+              <span className="text-accent font-bold tracking-[0.2em] uppercase text-[10px] md:text-xs mb-4 block opacity-80">OUR DNA</span>
               <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tighter leading-tight">
                 Our <span className="text-gradient">Mission & Values</span>
               </h2>
-              <div className="h-1 w-20 bg-orange-500/20 mx-auto mb-8 rounded-full" />
+              <div className="h-1 w-20 bg-accent/20 mx-auto mb-8 rounded-full" />
               <p className="body-large max-w-2xl mx-auto text-muted-foreground/80 font-medium leading-relaxed">
                 Create Assistants is a family‑owned agency based in Iowa. We believe small businesses deserve enterprise-grade automation.
               </p>
@@ -434,10 +434,10 @@ const WhyCreateAssistants = () => {
                     <div className="glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center">
                       <div className="relative mb-8">
                         <div className="w-20 h-20 rounded-3xl bg-white dark:bg-white/5 shadow-inner border border-white/80 dark:border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110">
-                          <Icon className="w-7 h-7 text-orange-600" />
+                          <Icon className="w-7 h-7 text-accent" />
                         </div>
                       </div>
-                      <h3 className="text-2xl font-bold mb-4 group-hover:text-orange-600 transition-colors">{value.title}</h3>
+                      <h3 className="text-2xl font-bold mb-4 group-hover:text-accent transition-colors">{value.title}</h3>
                       <p className="text-muted-foreground/90 font-medium text-sm lg:text-base">{value.description}</p>
                     </div>
                   </motion.div>
