@@ -486,7 +486,7 @@ const WhyCreateAssistants = () => {
               className="absolute top-12 inset-x-0 z-50 flex flex-col items-center justify-center text-center px-4"
             >
               <span className="text-accent font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
-              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
+              <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter">
                 THE <span className="text-accent">TEAM</span>
               </h2>
             </motion.div>
