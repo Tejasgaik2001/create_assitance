@@ -2,13 +2,36 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Twitter, Linkedin, Github, Mail } from "lucide-react";
 import logo from "@/assets/logo.gif";
+import { BOOKING_URL } from "@/utils/navigation";
 
-const footerLinks = {
-  Product: ["Features", "Integrations", "Pricing", "Changelog"],
-  Company: ["About", "Blog", "Careers", "Contact"],
-  Resources: ["Documentation", "Help Center", "Community", "Partners"],
-  Legal: ["Privacy", "Terms", "Security", "Cookies"],
-};
+const footerLinks = [
+  {
+    category: "Product",
+    links: [
+      { name: "Features", href: "/#features" },
+      { name: "Integrations", href: "/#integrations" },
+      { name: "Pricing", href: "/#pricing" },
+      { name: "Changelog", href: "/changelog" },
+    ],
+  },
+  {
+    category: "Company",
+    links: [
+      { name: "About", href: "/about" },
+      { name: "Blog", href: "/blog" },
+      { name: "Careers", href: "/careers" },
+      { name: "Contact", href: BOOKING_URL },
+    ],
+  },
+  {
+    category: "Legal",
+    links: [
+      { name: "Privacy Policy", href: "https://go.createassistants.ai/privacy-policy" },
+      { name: "GDPR Compliance", href: "https://go.createassistants.ai/gdpr-compliance" },
+      { name: "Terms & Conditions", href: "https://go.createassistants.ai/terms-and-conditions" },
+    ],
+  },
+];
 
 const socialLinks = [
   { icon: Twitter, href: "#", label: "Twitter" },
@@ -67,27 +90,27 @@ const Footer = () => {
           </motion.div>
 
           {/* Links */}
-          {Object.entries(footerLinks).map(([category, links], categoryIndex) => (
+          {footerLinks.map((section, categoryIndex) => (
             <motion.div
-              key={category}
+              key={section.category}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + categoryIndex * 0.1 }}
             >
-              <h4 className="font-semibold mb-4">{category}</h4>
+              <h4 className="font-semibold mb-4">{section.category}</h4>
               <ul className="space-y-3">
-                {links.map((link, linkIndex) => (
+                {section.links.map((link, linkIndex) => (
                   <motion.li
-                    key={link}
+                    key={link.name}
                     initial={{ opacity: 0, x: -10 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.3, delay: 0.2 + categoryIndex * 0.05 + linkIndex * 0.05 }}
                   >
                     <motion.a
-                      href="#"
+                      href={link.href}
                       className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
                     >
-                      {link}
+                      {link.name}
                       <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
                     </motion.a>
                   </motion.li>
@@ -109,17 +132,17 @@ const Footer = () => {
           </p>
           <div className="flex items-center gap-6">
             <motion.a
-              href="#"
+              href="https://go.createassistants.ai/privacy-policy"
               className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy Policy
               <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </motion.a>
             <motion.a
-              href="#"
+              href="https://go.createassistants.ai/terms-and-conditions"
               className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              Terms of Service
+              Terms & Conditions
               <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </motion.a>
           </div>

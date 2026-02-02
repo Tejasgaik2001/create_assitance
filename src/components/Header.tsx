@@ -16,6 +16,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.gif";
+import { handleBookingRedirect } from "@/utils/navigation";
 
 const Header = () => {
   const navItems = [
@@ -64,7 +65,7 @@ const Header = () => {
           <NavItems items={navItems} activeLink={location.pathname} />
           <div className="flex items-center gap-4 relative z-30">
             <ThemeToggle />
-            <NavbarButton className="border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-white dark:text-accent dark:hover:text-black font-bold transition-all duration-300 shadow-none hover:shadow-lg hover:shadow-accent/20" onClick={() => { }}>Book a Consultation</NavbarButton>
+            <NavbarButton className="border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-white dark:text-accent dark:hover:text-black font-bold transition-all duration-300 shadow-none hover:shadow-lg hover:shadow-accent/20" onClick={handleBookingRedirect}>Book a Consultation</NavbarButton>
           </div>
         </NavBody>
 
@@ -113,7 +114,10 @@ const Header = () => {
                 <ThemeToggle />
               </div>
               <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleBookingRedirect();
+                }}
                 className="w-full border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-white transition-all duration-300"
               >
                 Book a Consultation

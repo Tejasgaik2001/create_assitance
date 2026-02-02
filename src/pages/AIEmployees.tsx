@@ -7,6 +7,7 @@ import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-ai-premium.png";
+import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 
 const AIEmployees = () => {
   // Animation variants
@@ -161,10 +162,19 @@ const AIEmployees = () => {
             </motion.p>
 
             <motion.div variants={itemVariants} className="mt-4 xl:mt-8 flex flex-wrap gap-3 xl:gap-4">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl shadow-2xl shadow-accent/20 transition-all hover:scale-105 active:scale-95">
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl shadow-2xl shadow-accent/20 transition-all hover:scale-105 active:scale-95"
+                onClick={handleDemoRedirect}
+              >
                 Let's Explore AI
               </Button>
-              <Button variant="outline" size="lg" className="px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl border-accent/20 hover:bg-accent/10 transition-all">
+              <Button
+                variant="outline"
+                size="lg"
+                className="px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl border-accent/20 hover:bg-accent/10 transition-all"
+                onClick={handleBookingRedirect}
+              >
                 See it in Action
               </Button>
             </motion.div>

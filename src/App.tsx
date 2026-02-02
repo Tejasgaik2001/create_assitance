@@ -10,7 +10,7 @@ import WhatYouGet from "./pages/WhatYouGet";
 import AIEmployees from "./pages/AIEmployees";
 import CommandCenter from "./pages/CommandCenter";
 import WhyCreateAssistants from "./pages/WhyCreateAssistants";
-import BookACall from "./pages/BookACall";
+// import BookACall from "./pages/BookACall";
 import NotFound from "./pages/NotFound";
 import { ScrollToTop } from "@/components/ScrollToTop";
 
@@ -31,7 +31,7 @@ const App = () => (
             <Route path="/ai-employees" element={<AIEmployees />} />
             <Route path="/command-center" element={<CommandCenter />} />
             <Route path="/why-create-assistants" element={<WhyCreateAssistants />} />
-            <Route path="/book-a-call" element={<BookACall />} />
+            {/* <Route path="/book-a-call" element={<BookACall />} /> */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

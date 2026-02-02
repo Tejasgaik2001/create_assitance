@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { RollingTextList } from "@/components/ui/RollingTextList";
 import { VerticalTimeline } from "@/components/ui/VerticalTimeline";
+import { handleBookingRedirect } from "@/utils/navigation";
 
 const HowItWorks = () => {
   const steps = [
@@ -127,7 +128,7 @@ const HowItWorks = () => {
                 <span className="text-xs font-medium">5-Step Growth Engine</span>
               </div>
 
-              <h1 className="hero-headline mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+              <h1 className="hero-headline mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-6xl">
                 <span className="block">How It Works –</span>
                 <span className="block w-full text-gradient leading-[1.2]">
                   Your Automated Growth Engine
@@ -285,17 +286,20 @@ const HowItWorks = () => {
                 </p>
 
                 <MagneticWrapper strength={0.25}>
-                  <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
-                    <a href="/book-a-call">
-                      Book a Free Consultation
-                      <motion.span
-                        className="inline-block"
-                        animate={{ x: [0, 4, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.span>
-                    </a>
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    className="group shadow-xl shadow-primary/20"
+                    onClick={handleBookingRedirect}
+                  >
+                    Book a Free Consultation
+                    <motion.span
+                      className="inline-block"
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </motion.span>
                   </Button>
                 </MagneticWrapper>
               </div>

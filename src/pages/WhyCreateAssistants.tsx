@@ -7,6 +7,7 @@ import AnimatedSection from '../components/AnimatedSection';
 import { Button } from '../components/ui/button';
 import { cn } from '../lib/utils';
 import { MagneticWrapper } from '@/components/MagneticWrapper';
+import { handleBookingRedirect } from '@/utils/navigation';
 
 const WhyCreateAssistants = () => {
   const reasons = [
@@ -166,7 +167,7 @@ const WhyCreateAssistants = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="hero-headline mb-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
+                className="hero-headline mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
               >
                 <span className="block">More Than Software,</span>
                 <span className="block text-gradient">A Partner for Growth</span>
@@ -188,11 +189,14 @@ const WhyCreateAssistants = () => {
                 className="inline-block"
               >
                 <MagneticWrapper strength={0.25}>
-                  <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
-                    <a href="/book-a-call">
-                      Book a Free Consultation
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </a>
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    className="group shadow-xl shadow-primary/20"
+                    onClick={handleBookingRedirect}
+                  >
+                    Book a Free Consultation
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </MagneticWrapper>
               </motion.div>
@@ -481,11 +485,14 @@ const WhyCreateAssistants = () => {
 
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="inline-block">
               <MagneticWrapper strength={0.25}>
-                <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
-                  <a href="/book-a-call">
-                    Book a Free Consultation
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </a>
+                <Button
+                  variant="hero"
+                  size="lg"
+                  className="group shadow-xl shadow-primary/20"
+                  onClick={handleBookingRedirect}
+                >
+                  Book a Free Consultation
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </MagneticWrapper>
             </motion.div>

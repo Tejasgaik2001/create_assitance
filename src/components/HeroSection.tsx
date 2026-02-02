@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef } from "react";
 import heroVideo from "@/assets/hero.mp4";
+import { handleBookingRedirect } from "@/utils/navigation";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -154,20 +155,18 @@ const HeroSection = () => {
                   variant="hero"
                   size="xl"
                   className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-12 h-14 sm:h-16 bg-gradient-to-r from-accent via-primary to-accent text-white shadow-2xl shadow-primary/30 hover:shadow-primary/50 active:scale-95 transition-all text-base sm:text-lg font-bold uppercase tracking-tight overflow-hidden border-none group"
-                  asChild
+                  onClick={handleBookingRedirect}
                 >
-                  <a href="/book-a-call">
-                    {/* Shimmer effect */}
-                    <motion.div
-                      animate={{ x: ["-200%", "200%"] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
-                    />
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      Book Consultation
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </a>
+                  {/* Shimmer effect */}
+                  <motion.div
+                    animate={{ x: ["-200%", "200%"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+                  />
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Book Consultation
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Button>
               </div>
 

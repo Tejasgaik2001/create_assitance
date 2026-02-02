@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform, useReducedMotion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BrainCircuit, Headphones, Layers3, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
@@ -217,7 +218,7 @@ const WhatYouGet = () => {
                 <span className="text-xs font-medium">The Complete Create Assistants Solution</span>
               </div>
 
-              <h1 className="hero-headline mb-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+              <h1 className="hero-headline mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                 <span className="block">What You Get –</span>
                 <span className="block text-gradient">A Turnkey Growth Engine</span>
               </h1>
@@ -336,7 +337,28 @@ const WhatYouGet = () => {
                 Why It <span className="text-gradient">Matters</span>
               </h2>
               <p className="body-large text-lg md:text-xl text-muted-foreground leading-relaxed">
-                By combining these three pillars—<span className="text-foreground font-semibold">unified software</span>, <span className="text-foreground font-semibold">AI employees</span> and <span className="text-foreground font-semibold">white-glove service</span>—you get more than a toolkit. You get a complete operating system designed to capture every opportunity and grow with you.
+                By combining these three pillars: <motion.span
+                  whileHover={{ scale: 1.1, color: "hsl(var(--primary))", textShadow: "0 0 20px hsla(var(--primary), 0.4)" }}
+                  className="text-foreground font-bold cursor-default inline-block transition-colors duration-300"
+                >
+                  unified software
+                </motion.span>, <motion.span
+                  whileHover={{
+                    scale: 1.1,
+                    color: "hsl(var(--accent))",
+                    textShadow: "0 0 20px hsla(var(--accent), 0.4)",
+                    y: [0, -2, 0]
+                  }}
+                  transition={{ y: { duration: 0.4, repeat: Infinity, ease: "easeInOut" } }}
+                  className="text-foreground font-bold cursor-default inline-block transition-colors duration-300 ml-1"
+                >
+                  AI employees
+                </motion.span> and <motion.span
+                  whileHover={{ scale: 1.1, color: "hsl(var(--primary))", letterSpacing: "0.02em" }}
+                  className="text-foreground font-bold cursor-default inline-block transition-all duration-300 ml-1"
+                >
+                  white-glove service
+                </motion.span>, you get more than a toolkit. You get a complete operating system designed to capture every opportunity and grow with you.
               </p>
             </motion.div>
           </div>
@@ -369,10 +391,10 @@ const WhatYouGet = () => {
 
               <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20" asChild>
-                  <a href="#">
+                  <Link to="/ai-employees">
                     Explore our AI Employees
                     <ArrowRight className="w-4 h-4 ml-2" />
-                  </a>
+                  </Link>
                 </Button>
               </MagneticWrapper>
             </div>

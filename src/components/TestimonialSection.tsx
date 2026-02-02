@@ -3,6 +3,8 @@ import { useRef } from "react";
 import { Quote, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { handleBookingRedirect } from "@/utils/navigation";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const TestimonialSection = () => {
   const ref = useRef(null);
@@ -71,17 +73,17 @@ const TestimonialSection = () => {
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5, delay: 0.8 }}
           >
-            <Button
-              variant="hero"
-              size="xl"
-              className="w-full sm:w-auto bg-primary text-white hover:scale-105 active:scale-95 py-3 transition-all hover:bg-accent hover:text-white duration-300 rounded-full px-8 sm:px-12 h-14 sm:h-auto whitespace-normal sm:whitespace-nowrap"
-              asChild
-            >
-              <a href="/book-a-call" className="flex items-center justify-center">
+            <MagneticWrapper strength={0.25}>
+              <Button
+                variant="hero"
+                size="xl"
+                className="w-full sm:w-auto bg-primary text-white hover:scale-105 active:scale-95 py-3 transition-all hover:bg-primary hover:text-white duration-300 rounded-full px-8 sm:px-12 h-14 sm:h-auto whitespace-normal sm:whitespace-nowrap"
+                onClick={handleBookingRedirect}
+              >
                 Claim Your Success
                 <ArrowRight className="ml-3 w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-            </Button>
+              </Button>
+            </MagneticWrapper>
           </motion.div>
         </div>
       </div>
