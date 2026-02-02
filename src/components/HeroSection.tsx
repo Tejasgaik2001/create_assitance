@@ -78,7 +78,7 @@ const HeroSection = () => {
                 variants={textVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[0.9] uppercase"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[0.9] uppercase"
               >
                 <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient drop-shadow-2xl">
                   Automate
@@ -88,7 +88,7 @@ const HeroSection = () => {
                     initial={{ scaleX: 0 }}
                     animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="text-foreground/10 italic font-light text-3xl sm:text-5xl md:text-6xl lg:text-7xl origin-left"
+                    className="text-foreground/10 italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl origin-left"
                   >
                     &
                   </motion.span>
@@ -241,7 +241,7 @@ const HeroSection = () => {
                 }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 whileHover={{ scale: 1.05, y: -8 }}
-                className="absolute bottom-8 left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2.5rem] p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all"
+                className="absolute bottom-8 left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2.5rem] p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all hidden sm:block"
               >
                 <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
                 <div className="relative">

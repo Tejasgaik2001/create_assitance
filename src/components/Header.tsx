@@ -16,7 +16,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.gif";
-import { handleBookingRedirect } from "@/utils/navigation";
+import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 
 const Header = () => {
   const navItems = [
@@ -59,13 +59,24 @@ const Header = () => {
                 whileHover={{ rotate: 5 }}
                 transition={{ type: "spring", stiffness: 400 }}
               />
-              <span className="font-semibold text-lg hidden sm:block">Create Assistants</span>
+              <span className="font-bold text-base hidden lg:block whitespace-nowrap">Create Assistants</span>
             </Link>
           </div>
           <NavItems items={navItems} activeLink={location.pathname} />
-          <div className="flex items-center gap-4 relative z-30">
+          <div className="flex items-center gap-2 relative z-30">
             <ThemeToggle />
-            <NavbarButton className="border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-white dark:text-accent dark:hover:text-black font-bold transition-all duration-300 shadow-none hover:shadow-lg hover:shadow-accent/20" onClick={handleBookingRedirect}>Book a Consultation</NavbarButton>
+            <NavbarButton
+              className="bg-accent text-white hover:bg-accent/90 dark:text-black font-bold transition-all duration-300 shadow-lg shadow-accent/20 px-3 py-2 h-9 text-xs"
+              onClick={handleDemoRedirect}
+            >
+              Demo Our AI
+            </NavbarButton>
+            <NavbarButton
+              className="border-2 border-accent bg-transparent text-accent hover:bg-accent/10 font-bold transition-all duration-300 shadow-none px-3 py-2 h-9 text-xs"
+              onClick={handleBookingRedirect}
+            >
+              Book a Consultation
+            </NavbarButton>
           </div>
         </NavBody>
 
@@ -81,6 +92,7 @@ const Header = () => {
                 />
               </Link>
             </div>
+
             <MobileNavToggle
               isOpen={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -105,12 +117,12 @@ const Header = () => {
                       : "text-neutral-600 dark:text-neutral-300"
                   )}
                 >
-                  <span className="block">{item.name}</span>
+                  <span className="block whitespace-nowrap">{item.name}</span>
                 </Link>
               );
             })}
-            <div className="flex w-full flex-col gap-4 mt-4">
-              <div className="flex justify-start">
+            <div className="flex w-full flex-col gap-3 mt-6">
+              <div className="flex justify-start mb-2">
                 <ThemeToggle />
               </div>
               <NavbarButton
@@ -118,9 +130,18 @@ const Header = () => {
                   setIsMobileMenuOpen(false);
                   handleBookingRedirect();
                 }}
-                className="w-full border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-white transition-all duration-300"
+                className="w-full border-2 border-accent bg-transparent text-accent font-bold h-12"
               >
                 Book a Consultation
+              </NavbarButton>
+              <NavbarButton
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleDemoRedirect();
+                }}
+                className="w-full bg-accent text-white font-bold h-12 shadow-lg shadow-accent/20"
+              >
+                Demo Our AI
               </NavbarButton>
             </div>
           </MobileNavMenu>

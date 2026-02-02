@@ -148,7 +148,7 @@ const AIEmployees = () => {
 
             <motion.h1
               variants={itemVariants}
-              className="text-slate-900 dark:text-white text-3xl sm:text-4xl md:text-5xl lg:text-4xl xl:text-7xl font-bold leading-[1.1] tracking-tight"
+              className="text-slate-900 dark:text-white text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight"
             >
               Meet Your <span className="block text-accent dark:text-accent">Hardest‑Working</span>
               <span className="block">Team Members</span>
@@ -620,8 +620,8 @@ const AIEmployees = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className={`px-6 py-3 rounded-full text-sm font-bold transition-all duration-500 ${activeFeature === index
-                        ? 'bg-accent text-slate-900 shadow-lg shadow-accent/30'
-                        : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
+                      ? 'bg-accent text-slate-900 shadow-lg shadow-accent/30'
+                      : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
                       }`}
                   >
                     {feature.highlight}
