@@ -29,6 +29,7 @@ interface NavItemsProps {
   }[];
   className?: string;
   onItemClick?: () => void;
+  activeLink?: string;
 }
 
 interface MobileNavProps {
@@ -112,7 +113,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   );
 };
 
-export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
+export const NavItems = ({ items, className, onItemClick, activeLink }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
@@ -123,18 +124,31 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
         className,
       )}
     >
-      {items.map((item, idx) => (
-        <a
-          onMouseEnter={() => setHovered(idx)}
-          onClick={onItemClick}
-          className="group relative px-4 py-2 text-neutral-600 dark:text-neutral-300 transition-colors duration-200 hover:text-neutral-900 dark:hover:text-white"
-          key={`link-${idx}`}
-          href={item.link}
-        >
-          <span className="relative z-20">{item.name}</span>
-          <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-        </a>
-      ))}
+      {items.map((item, idx) => {
+        const isActive = activeLink === item.link;
+        return (
+          <a
+            onMouseEnter={() => setHovered(idx)}
+            onClick={onItemClick}
+            className={cn(
+              "group relative px-4 py-2 transition-colors duration-200",
+              isActive
+                ? "text-neutral-900 dark:text-white"
+                : "text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white"
+            )}
+            key={`link-${idx}`}
+            href={item.link}
+          >
+            <span className="relative z-20">{item.name}</span>
+            <span
+              className={cn(
+                "absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center bg-accent transition-transform duration-300 ease-out",
+                isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+              )}
+            />
+          </a>
+        );
+      })}
     </motion.div>
   );
 };

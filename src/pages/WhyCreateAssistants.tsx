@@ -83,34 +83,39 @@ const WhyCreateAssistants = () => {
 
   const teamMembers = [
     {
-      name: "Alex Rivera",
-      role: "Founder & CEO",
-      bio: "Visionary leader with 10+ years in AI automation and business strategy.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=400&q=80",
+      name: "Tucker Bern",
+      role: "Chief Executive Officer (CEO)",
+      category: "Leadership Team",
+      bio: "Tucker leads Create Assistants' strategic vision, partnerships, and corporate growth to deliver measurable client impact. As CEO, Tucker defines the strategic and financial direction of Create Assistants. He brings experience across private capital, M&A, and automation technology to guide long-term company growth. Tucker also serves as President of his family office, overseeing diversified investments across media, wellness, alcohol, and artificial intelligence. His leadership ensures each system built aligns with business outcomes, driving higher efficiency, profitability, and operational clarity for every client.",
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=500&q=80",
     },
     {
-      name: "Sarah Chen",
-      role: "Head of AI Implementation",
-      bio: "Master of neural networks and large language model fine-tuning.",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&h=400&q=80",
+      name: "Tyler VanArkel",
+      role: "Founder & Chief Systems Officer (CSO)",
+      category: "Leadership Team",
+      bio: "Tyler leads the design and automation backbone of Create Assistants, transforming business operations through precision-built systems. For nearly a decade, Tyler has engineered systems and automations that have streamlined workflows for small and mid-sized businesses across the Midwest. His deep technical understanding and operational discipline make him the architect behind Create Assistants' core technology infrastructure. Tyler's approach blends practical problem-solving with scalable automation design, ensuring clients achieve measurable gains in efficiency, accuracy, and profitability.",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=500&q=80",
     },
     {
-      name: "David Park",
-      role: "CRM Architect",
-      bio: "Specializes in building complex, high-converson customer journey systems.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=400&q=80",
+      name: "Randy Bern",
+      role: "Strategic Advisor",
+      category: "Advisory Board",
+      bio: "Randy provides strategic oversight and operational insight drawn from decades of executive leadership. Randy Bern has been a vanguard from the ground up, growing it over 20 years into a multi-state enterprise employing more than 1,200 people across 10 states. Under his leadership, Vanguard consistently earned the #1 national quality award in its industry for many consecutive years. His teams ranked among the highest-paid and most respected in the field, a testament to his focus on quality, integrity, and exceeding expectations. After the company's sale, Randy continues to serve as a minority shareholder and acting CEO. His operational insight and commitment to excellence provide Create Assistants with a standard of execution that drives lasting impact.",
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=500&q=80",
     },
     {
-      name: "Elena Rodriguez",
-      role: "Growth Strategist",
-      bio: "Direct-response marketing expert focused on scaling local businesses.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=400&h=400&q=80",
+      name: "Craig Jackman",
+      role: "Strategic Advisor",
+      category: "Advisory Board",
+      bio: "Craig Jackman is co-founder and president of Paragon IT Professionals, leading the organization for nearly 30 years. Craig is a graduate of the University of Iowa with a bachelor's degree in Economics. He is married with three grown sons, two living in Scottsdale and one in New York City. Craig's primary focus is leading Paragon's strategic growth and execution, leading community, and maintaining strategic relationships. Recently, Craig was honored to join the board of the Arizona Technology Council. Paragon's primary focus is IT contract services, project solutions, and leadership development through the IT Leadership Forum that helps develop leaders inside IT departments and organizations.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&h=500&q=80",
     },
     {
-      name: "Marcus Thorne",
-      role: "Technical Director",
-      bio: "Ensures seamless integration between diverse software stacks and AI.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=400&q=80",
+      name: "Ryan Gold",
+      role: "Strategic Advisor",
+      category: "Advisory Board",
+      bio: "Ryan leads business development and distribution for the Maeson Group, leveraging his experience which ranges from capital raising and business development to accounting and operations. Prior to co-founding Maeson, Ryan helped build and consult for a number of successful firms and funds at various stages of development. He was previously a Vice President in the Capital Services Group at Credit Suisse Securities, where he worked with over one hundred hedge fund firms to advise and assist in their business development and capital raising efforts. Prior to Credit Suisse, Ryan was a Senior Analyst at Concord Management, a family office, where he sourced investment opportunities and performed investment research and due diligence on hedge funds, private equity funds, and other investment vehicles. Prior to his work at Concord, Ryan was the Controller for Forester Capital. Ryan is a CPA and began his career at PwC. He is a graduate of Franklin & Marshall College and is Series 7, 65, and 63 licensed.",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&h=500&q=80",
     },
   ];
 
@@ -425,10 +430,10 @@ const WhyCreateAssistants = () => {
 
             <motion.div
               style={{
-                opacity: useTransform(teamScrollY, [0.92, 0.98], [0, 1]),
-                y: useTransform(teamScrollY, [0.92, 0.98], [40, 0]),
+                opacity: useTransform(teamScrollY, [0.0, 0.08, 0.15], [0, 1, 0]),
+                y: useTransform(teamScrollY, [0.0, 0.08], [40, 0]),
               }}
-              className="absolute bottom-16 z-50 text-center px-4"
+              className="absolute top-16 z-50 text-center px-4"
             >
               <span className="text-indigo-400 font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
               <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter italic">
@@ -445,8 +450,10 @@ const WhyCreateAssistants = () => {
                 {teamMembers.map((member) => (
                   <div key={member.name} className="flex flex-col items-center text-center p-4 rounded-3xl bg-white/5 border border-white/10">
                     <img src={member.image} alt={member.name} className="w-16 h-16 rounded-full object-cover mb-3" />
+                    <span className="text-[8px] text-indigo-300 uppercase font-black mb-1">{member.category}</span>
                     <h4 className="text-sm font-bold text-white">{member.name}</h4>
                     <p className="text-[10px] text-indigo-400 uppercase font-black">{member.role}</p>
+                    <p className="text-[10px] text-slate-400 mt-2 line-clamp-4">{member.bio}</p>
                   </div>
                 ))}
               </div>
@@ -582,6 +589,8 @@ const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }
   const focusStart = rangeStart + (duration * 0.25);
   const focusEnd = rangeEnd - (duration * 0.25);
 
+  const [isHovered, setIsHovered] = useState(false);
+
   const zPos = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [-5000, 0, 0, 2000]);
   const opacity = useTransform(progress, [rangeStart, rangeStart + 0.05, focusStart, focusEnd, rangeEnd - 0.05, rangeEnd], [0, 1, 1, 1, 1, 0]);
   const scale = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], [0.3, 1, 1, 2.5]);
@@ -601,18 +610,38 @@ const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }
         filter: blur,
       }}
       className="w-[420px] aspect-[4/5] z-10 origin-center pointer-events-auto"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => setIsHovered(!isHovered)}
     >
       <div className="relative w-full h-full rounded-[4rem] bg-slate-900 border border-white/10 shadow-[0_100px_200px_rgba(0,0,0,0.8)] overflow-hidden group">
         <img
           src={member.image}
           alt={member.name}
-          className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0"
+          className={cn(
+            "w-full h-full object-cover transition-all duration-1000 grayscale",
+            isHovered ? "grayscale-0 scale-105" : "group-hover:grayscale-0"
+          )}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-12 flex flex-col justify-end">
-          <h4 className="text-4xl font-black text-white tracking-tighter leading-none mb-2">{member.name}</h4>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent p-12 flex flex-col justify-end">
+          <span className="text-xs text-indigo-300 font-black uppercase tracking-[0.2em] mb-2">{member.category}</span>
+          <h4 className="text-4xl font-black text-white tracking-tighter leading-tight mb-2">{member.name}</h4>
           <p className="text-xs text-indigo-400 font-bold uppercase tracking-[0.3em] mb-4">{member.role}</p>
-          <div className="h-px w-16 bg-indigo-500/50 mb-4" />
-          <p className="text-base text-slate-200 italic leading-relaxed line-clamp-3">"{member.bio}"</p>
+
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{
+              height: isHovered ? "auto" : 0,
+              opacity: isHovered ? 1 : 0
+            }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="overflow-hidden"
+          >
+            <div className="h-px w-16 bg-indigo-500/50 mb-4" />
+            <div className="max-h-48 overflow-y-auto custom-scrollbar pr-2">
+              <p className="text-sm text-slate-200 italic leading-relaxed">"{member.bio}"</p>
+            </div>
+          </motion.div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent pointer-events-none" />
       </div>
