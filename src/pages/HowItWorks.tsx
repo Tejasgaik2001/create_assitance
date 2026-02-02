@@ -127,9 +127,9 @@ const HowItWorks = () => {
                 <span className="text-xs font-medium">5-Step Growth Engine</span>
               </div>
 
-              <h1 className="hero-headline mb-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+              <h1 className="hero-headline mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                 <span className="block">How It Works –</span>
-                <span className="block w-full text-gradient">
+                <span className="block w-full text-gradient leading-[1.2]">
                   Your Automated Growth Engine
                 </span>
               </h1>

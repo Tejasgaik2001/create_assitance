@@ -55,7 +55,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
       }}
       className="group relative h-full"
     >
-      <div className="relative h-full rounded-2xl bg-gradient-to-br from-background via-background to-background/95 border border-border/40 shadow-lg shadow-black/5 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary/50 transition-all duration-500 overflow-hidden">
+      <div className="relative h-full rounded-2xl bg-gradient-to-br from-background via-background to-background/95 border border-border/40 shadow-lg shadow-black/5 hover:shadow-2xl hover:shadow-primary/20 hover:border-accent/50 transition-all duration-500 overflow-hidden">
 
         {/* Clearer background image with better opacity */}
         <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700">

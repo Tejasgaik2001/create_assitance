@@ -71,7 +71,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-primary/20 backdrop-blur-sm"
+                  className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/60 backdrop-blur-sm"
                 >
                   <span className="text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                     FAQ
@@ -124,7 +124,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                   <motion.a
                     href="#"
                     whileHover={{ x: 5 }}
-                    className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/30 hover:border-primary/50 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-primary/20"
+                    className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-accent/50 hover:border-accent/80 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-primary/20"
                   >
                     <span className="font-bold text-sm bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                       Still have questions?
