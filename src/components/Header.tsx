@@ -4,7 +4,6 @@ import {
   NavBody,
   NavItems,
   MobileNav,
-  NavbarLogo,
   NavbarButton,
   MobileNavHeader,
   MobileNavToggle,
@@ -16,6 +15,8 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.gif";
+import logoWhite from "@/assets/logo_white.png";
+import { useTheme } from "@/hooks/useTheme";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 
 const Header = () => {
@@ -44,6 +45,9 @@ const Header = () => {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { theme } = useTheme();
+
+  const currentLogo = theme === "dark" ? logoWhite : logo;
 
   return (
     <div className="fixed top-0 left-0 w-full z-50">
@@ -53,7 +57,7 @@ const Header = () => {
           <div className="flex items-center gap-2 relative z-30">
             <Link to="/" className="flex items-center gap-2 cursor-pointer">
               <motion.img
-                src={logo}
+                src={currentLogo}
                 alt="Create Assistants Logo"
                 className="w-9 h-9 object-contain p-1"
                 whileHover={{ rotate: 5 }}
@@ -80,7 +84,7 @@ const Header = () => {
             <div className="flex items-center gap-2">
               <Link to="/" className="flex items-center gap-2">
                 <img
-                  src={logo}
+                  src={currentLogo}
                   alt="Create Assistants Logo"
                   className="w-8 h-8 object-contain p-1"
                 />

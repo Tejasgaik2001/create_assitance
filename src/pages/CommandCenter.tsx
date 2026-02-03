@@ -9,6 +9,12 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 import dashboardMockup from "@/assets/dashboard-mockup.png";
 import { ThreeDCard } from "@/components/ui/ThreeDCard";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
+import integrationDashboardImg from "@/assets/external/integration-dashboard.jpg";
+import businessSystemImg from "@/assets/external/scalability.jpg";
+import efficiencyImg from "@/assets/external/efficiency.jpg";
+import consolidatedNexusImg from "@/assets/external/consolidated-nexus.jpg";
+import cubesImg from "@/assets/external/cubes.png";
 import { useRef, useState } from "react";
 import { handleBookingRedirect } from "@/utils/navigation";
 
@@ -284,9 +290,9 @@ const GlossyCard = ({ item, index }: { item: any; index: number }) => {
   };
 
   const images = [
-    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80", // Data Dashboard
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80", // Charts
-    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80", // Consolidated Nexus
+    businessSystemImg, // Data Dashboard
+    efficiencyImg, // Charts
+    consolidatedNexusImg, // Consolidated Nexus
   ];
 
   return (
@@ -907,7 +913,7 @@ const CommandCenter = () => {
           {/* Left Content: 3D Image Card */}
           <AnimatedSection direction="left" className="relative group">
             <ThreeDImageCard
-              src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80"
+              src={integrationDashboardImg}
               alt="AI integration dashboard"
             />
           </AnimatedSection>
@@ -1001,7 +1007,10 @@ const StrategicAdvantageCard = () => {
               />
 
               {/* Internal Mesh Background */}
-              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] dark:opacity-[0.05] pointer-events-none" />
+              <div
+                className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
+                style={{ backgroundImage: `url(${cubesImg})` }}
+              />
 
               <div className="relative z-20 text-center flex flex-col items-center">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-6 transition-transform duration-500 group-hover:scale-105">

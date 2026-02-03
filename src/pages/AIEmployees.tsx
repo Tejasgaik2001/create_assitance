@@ -7,6 +7,15 @@ import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-ai-premium.png";
+import leadCaptureImg from "@/assets/external/lead-capture.jpg";
+import efficiencyImg from "@/assets/external/efficiency.jpg";
+import scalabilityImg from "@/assets/external/scalability.jpg";
+import service247Img from "@/assets/external/24-7-service.jpg";
+import instantResponsesImg from "@/assets/external/instant-responses.jpg";
+import personalisedImg from "@/assets/external/personalised.jpg";
+import seamlessImg from "@/assets/external/seamless.jpg";
+import humanHandoffImg from "@/assets/external/human-handoff.jpg";
+import aiStrategyImg from "@/assets/external/ai-strategy.jpg";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 
 const AIEmployees = () => {
@@ -63,27 +72,27 @@ const AIEmployees = () => {
     {
       title: "Lead Capture",
       description: "Capture every lead and respond instantly, never missing a client call.",
-      image: "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&w=600&q=80",
+      image: leadCaptureImg,
     },
     {
       title: "Efficiency",
       description: "Free your staff from repetitive tasks and focus on growing your business.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+      image: efficiencyImg,
     },
     {
       title: "Conversion",
       description: "Improve conversion rates with consistent, automated follow-up sequences.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+      image: efficiencyImg,
     },
     {
       title: "Scalability",
       description: "Scale without headcount—handle unlimited conversations simultaneously.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+      image: scalabilityImg,
     },
     {
       title: "24/7 Service",
       description: "Deliver better service around the clock with instant responses anytime.",
-      image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=600&q=80",
+      image: service247Img,
     },
   ];
 
@@ -470,7 +479,7 @@ const AIEmployees = () => {
             className="relative h-64 sm:h-80 lg:max-h-[70vh] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl"
           >
             <img
-              src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80"
+              src={instantResponsesImg}
               alt="24/7 AI support"
               className="h-full w-full object-cover"
             />
@@ -544,7 +553,7 @@ const AIEmployees = () => {
           title: "Personalised & Consistent",
           highlight: "Consistent",
           description: "AI employees learn your business rules and FAQs to deliver personalized service. Your brand voice stays consistent across every customer touchpoint.",
-          image: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80",
+          image: personalisedImg,
           stat: "100%",
           statLabel: "Brand Consistency"
         },
@@ -552,7 +561,7 @@ const AIEmployees = () => {
           title: "Integrated & Seamless",
           highlight: "Seamless",
           description: "Leads flow into your CRM with tags and notes. Appointments sync to your calendar. Payments post to your accounts. Zero manual data entry.",
-          image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+          image: seamlessImg,
           stat: "50+",
           statLabel: "Integrations"
         },
@@ -560,7 +569,7 @@ const AIEmployees = () => {
           title: "Work With Humans",
           highlight: "Humans",
           description: "AI employees augment your team, not replace it. They handle repetitive tasks, freeing your people to nurture relationships and close deals.",
-          image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+          image: humanHandoffImg,
           stat: "24/7",
           statLabel: "Human Handoff"
         }
@@ -821,7 +830,7 @@ const AIEmployees = () => {
             >
               <div className="relative rounded-[3rem] overflow-hidden border border-slate-200 dark:border-slate-800 shadow-3xl bg-white dark:bg-slate-900 group">
                 <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
+                  src={aiStrategyImg}
                   alt="AI Strategy"
                   className="w-full h-[350px] object-cover opacity-90 transition-transform duration-1000 group-hover:scale-110"
                 />
