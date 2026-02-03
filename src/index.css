@@ -40,7 +40,7 @@
 
     /* Custom tokens */
     --hero-gradient: linear-gradient(135deg, hsl(50 100% 76%) 0%, hsl(34 67% 57%) 100%);
-    --text-gradient: linear-gradient(90deg, hsla(48, 84%, 57%, 0.925) 0%, hsl(48, 64%, 47%) 100%);
+    --text-gradient: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--primary)) 100%);
     --glow-primary: 0 0 60px hsla(50, 100%, 76%, 0.3);
     --glow-accent: 0 0 60px hsla(34, 67% 57%, 0.3);
 
@@ -111,10 +111,14 @@
 
 @layer components {
   .text-gradient {
-    background: var(--text-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transform: translateZ(0);
+    will-change: transform, background-position;
+    -webkit-font-smoothing: antialiased;
   }
 
   .hero-headline {

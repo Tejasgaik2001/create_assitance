@@ -11,6 +11,47 @@ import {
 import React, { useRef, useState } from "react";
 
 
+// Interfaces for props
+interface NavbarProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+interface NavBodyProps {
+  children?: React.ReactNode;
+  className?: string;
+  visible?: boolean;
+}
+
+interface NavItemsProps {
+  items: {
+    name: string;
+    link: string;
+    icon?: any;
+  }[];
+  className?: string;
+  onItemClick?: () => void;
+  activeLink?: string;
+}
+
+interface MobileNavProps {
+  children?: React.ReactNode;
+  className?: string;
+  visible?: boolean;
+}
+
+interface MobileNavHeaderProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+interface MobileNavMenuProps {
+  children?: React.ReactNode;
+  className?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
 // Create a Context to share the 'visible' state (indicates if navbar is shrunk/scrolling)
 interface NavbarContextType {
   visible: boolean;
@@ -209,22 +250,7 @@ export const MobileNavToggle = ({
   );
 };
 
-export const NavbarLogo = () => {
-  return (
-    <a
-      href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
-    >
-      <img
-        src="https://assets.aceternity.com/logo-dark.png"
-        alt="logo"
-        width={30}
-        height={30}
-      />
-      <span className="font-medium text-black dark:text-white">Startup</span>
-    </a>
-  );
-};
+
 
 export const NavbarButton = ({
   href,
@@ -244,7 +270,7 @@ export const NavbarButton = ({
     | React.ComponentPropsWithoutRef<"button">
   )) => {
   const baseStyles =
-    "px-4 py-2 rounded-md bg-white button bg-white text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center whitespace-nowrap";
+    "px-4 py-2 rounded-full bg-white button bg-white text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center whitespace-nowrap";
 
   const variantStyles = {
     primary:

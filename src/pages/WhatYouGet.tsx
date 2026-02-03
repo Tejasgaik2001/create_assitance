@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useReducedMotion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion, useInView, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BrainCircuit, Headphones, Layers3, CheckCircle } from "lucide-react";
@@ -7,6 +7,9 @@ import Footer from "@/components/Footer";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { useRef, useState } from "react";
 import { AssemblingWord } from "@/components/ui/AssemblingWord";
+import businessSystemImg from "@/assets/external/crm-dashboard-premium.png";
+import smartConversationsImg from "@/assets/external/ai-voice-assistant.png";
+import whiteGloveImg from "@/assets/external/white-glove-service.png";
 
 // Scroll-linked section wrapper
 const ScrollSection = ({
@@ -49,7 +52,7 @@ const RoadmapCard = ({ pillar, index }: { pillar: any; index: number }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div
-        className="relative w-full h-full transition-all duration-700 preserve-3d"
+        className="relative w-full h-full transition-all duration-700 preserve-3d will-change-transform"
         animate={{ rotateY: isHovered ? 180 : 0 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
         style={{ transformStyle: "preserve-3d" }}
@@ -128,10 +131,12 @@ const WhatYouGet = () => {
 
   const pathLength = useTransform(narrativeProgress, [0, 0.8], [0, 1]);
 
-  // Parallax transforms
-  const backgroundY1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
-  const backgroundY2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const backgroundY3 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  // Parallax transforms - smoothed for performance
+  const rawY1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const rawY2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+  const backgroundY1 = useSpring(rawY1, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const backgroundY2 = useSpring(rawY2, { stiffness: 100, damping: 30, restDelta: 0.001 });
   const guidingLineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const guidingLineOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 0.6, 0.6, 0]);
 
@@ -140,7 +145,7 @@ const WhatYouGet = () => {
       title: "Business Operating System",
       subtitle: "Integrated CRM & Marketing",
       icon: Layers3,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      image: businessSystemImg,
       points: [
         "All your tools in one place: Forms, funnels, email/SMS campaigns",
         "Never miss a lead: every call, text, chat and form submission captured",
@@ -152,7 +157,7 @@ const WhatYouGet = () => {
       title: "AI Voice & Chat Employees",
       subtitle: "Human-like coverage, 24/7",
       icon: BrainCircuit,
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+      image: smartConversationsImg,
       points: [
         "24/7 coverage: outbound/inbound calls, texts and chats",
         "Smart conversations: answer FAQs, qualify leads, book appts",
@@ -164,7 +169,7 @@ const WhatYouGet = () => {
       title: "Done-For-You Setup",
       subtitle: "White-glove onboarding + support",
       icon: Headphones,
-      image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28?auto=format&fit=crop&w=1200&q=80",
+      image: whiteGloveImg,
       points: [
         "Launch in weeks: go live in as little as four weeks",
         "Custom configuration: automations tailored to your business",
@@ -203,8 +208,8 @@ const WhatYouGet = () => {
                 opacity: [0.3, 0.5, 0.3]
               }}
               transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
-              style={{ y: backgroundY1 }}
+              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px] backface-hidden"
+              style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
             />
             <motion.div
               animate={{
@@ -214,8 +219,8 @@ const WhatYouGet = () => {
                 opacity: [0.2, 0.4, 0.2]
               }}
               transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
-              style={{ y: backgroundY2 }}
+              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px] backface-hidden"
+              style={{ y: backgroundY2, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
             />
 
             {/* Premium grid pattern */}
@@ -341,8 +346,8 @@ const WhatYouGet = () => {
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
             <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"
-              style={{ y: backgroundY1 }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl backface-hidden"
+              style={{ y: backgroundY1, rotate: 0.01, z: 0, willChange: "transform" }}
             />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
           </div>
@@ -391,12 +396,12 @@ const WhatYouGet = () => {
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
             <motion.div
-              className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
-              style={{ y: backgroundY1 }}
+              className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl backface-hidden"
+              style={{ y: backgroundY1, rotate: 0.01, z: 0, willChange: "transform" }}
             />
             <motion.div
-              className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl"
-              style={{ y: backgroundY2 }}
+              className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl backface-hidden"
+              style={{ y: backgroundY2, rotate: 0.01, z: 0, willChange: "transform" }}
             />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
           </div>
@@ -404,7 +409,7 @@ const WhatYouGet = () => {
           <div className="container mx-auto px-4 relative z-10 text-center">
             <div className="max-w-3xl mx-auto">
               <h2 className="section-headline mb-6">
-                Ready to see how these <AssemblingWord word="pieces" className="text-accent" /> <br className="md:hidden" />
+                Ready to see how these <AssemblingWord word="pieces" className="text-gradient" /> <br className="md:hidden" />
                 fit together?
               </h2>
               <p className="body-large mb-10">

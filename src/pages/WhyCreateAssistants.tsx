@@ -8,6 +8,15 @@ import { Button } from '../components/ui/button';
 import { cn } from '../lib/utils';
 import { MagneticWrapper } from '@/components/MagneticWrapper';
 import { handleBookingRedirect } from '@/utils/navigation';
+import discoveryImg from '@/assets/external/discovery.jpg';
+import buildTrainImg from '@/assets/external/integration-dashboard.jpg';
+import launchImg from '@/assets/external/efficiency.jpg';
+import managementImg from '@/assets/external/ai-strategy.jpg';
+import tuckerBernImg from '@/assets/external/tucker-bern.webp';
+import tylerVanarkelImg from '@/assets/external/tyler-vanarkel.webp';
+import randyBernImg from '@/assets/external/randy-bern.webp';
+import craigJackmanImg from '@/assets/external/craig-jackman.png';
+import ryanGoldImg from '@/assets/external/ryan-gold.png';
 
 const MobileTeamMember = ({ member }: { member: any }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -84,28 +93,28 @@ const WhyCreateAssistants = () => {
       title: "Discovery",
       description: "We map your ideal customer journey and automation opportunities.",
       icon: Target,
-      image: "https://images.unsplash.com/photo-1553484771-371a605b060b?auto=format&fit=crop&w=800&q=80",
+      image: discoveryImg,
     },
     {
       step: "02",
       title: "Build & Train",
       description: "We configure your CRM and train AI employees on your brand guidelines.",
       icon: Settings,
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80",
+      image: buildTrainImg,
     },
     {
       step: "03",
       title: "Launch",
       description: "We migrate data, test workflows and launch your new system.",
       icon: Zap,
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+      image: launchImg,
     },
     {
       step: "04",
       title: "Management",
       description: "Monthly check‑ins, retraining and new features as you grow.",
       icon: Award,
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
+      image: managementImg,
     },
   ];
 
@@ -133,35 +142,35 @@ const WhyCreateAssistants = () => {
       role: "Chief Executive Officer (CEO)",
       category: "Leadership Team",
       bio: "Tucker leads Create Assistants' strategic vision, partnerships, and corporate growth to deliver measurable client impact. As CEO, Tucker defines the strategic and financial direction of Create Assistants. He brings experience across private capital, M&A, and automation technology to guide long-term company growth. Tucker also serves as President of his family office, overseeing diversified investments across media, wellness, alcohol, and artificial intelligence. His leadership ensures each system built aligns with business outcomes, driving higher efficiency, profitability, and operational clarity for every client.",
-      image: "https://framerusercontent.com/images/exjei6fw1412d6PsTGL6AW9ou5g.webp",
+      image: tuckerBernImg,
     },
     {
       name: "Tyler VanArkel",
       role: "Founder & Chief Systems Officer (CSO)",
       category: "Leadership Team",
       bio: "Tyler leads the design and automation backbone of Create Assistants, transforming business operations through precision-built systems. For nearly a decade, Tyler has engineered systems and automations that have streamlined workflows for small and mid-sized businesses across the Midwest. His deep technical understanding and operational discipline make him the architect behind Create Assistants' core technology infrastructure. Tyler's approach blends practical problem-solving with scalable automation design, ensuring clients achieve measurable gains in efficiency, accuracy, and profitability.",
-      image: "https://framerusercontent.com/images/vS3FCQx0voThOfGbDF90owF9z0.webp",
+      image: tylerVanarkelImg,
     },
     {
       name: "Randy Bern",
       role: "Strategic Advisor",
       category: "Advisory Board",
       bio: "Randy provides strategic oversight and operational insight drawn from decades of executive leadership. Randy Bern has been a vanguard from the ground up, growing it over 20 years into a multi-state enterprise employing more than 1,200 people across 10 states. Under his leadership, Vanguard consistently earned the #1 national quality award in its industry for many consecutive years. His teams ranked among the highest-paid and most respected in the field, a testament to his focus on quality, integrity, and exceeding expectations. After the company's sale, Randy continues to serve as a minority shareholder and acting CEO. His operational insight and commitment to excellence provide Create Assistants with a standard of execution that drives lasting impact.",
-      image: "https://framerusercontent.com/images/pg6GCfCNU66ww3taDUzgQ1qfS8.webp",
+      image: randyBernImg,
     },
     {
       name: "Craig Jackman",
       role: "Strategic Advisor",
       category: "Advisory Board",
       bio: "Craig Jackman is co-founder and president of Paragon IT Professionals, leading the organization for nearly 30 years. Craig is a graduate of the University of Iowa with a bachelor's degree in Economics. He is married with three grown sons, two living in Scottsdale and one in New York City. Craig's primary focus is leading Paragon's strategic growth and execution, leading community, and maintaining strategic relationships. Recently, Craig was honored to join the board of the Arizona Technology Council. Paragon's primary focus is IT contract services, project solutions, and leadership development through the IT Leadership Forum that helps develop leaders inside IT departments and organizations.",
-      image: "https://framerusercontent.com/images/ynhNhN085KKEtMXIeXmhlTII5Ps.png",
+      image: craigJackmanImg,
     },
     {
       name: "Ryan Gold",
       role: "Strategic Advisor",
       category: "Advisory Board",
       bio: "Ryan leads business development and distribution for the Maeson Group, leveraging his experience which ranges from capital raising and business development to accounting and operations. Prior to co-founding Maeson, Ryan helped build and consult for a number of successful firms and funds at various stages of development. He was previously a Vice President in the Capital Services Group at Credit Suisse Securities, where he worked with over one hundred hedge fund firms to advise and assist in their business development and capital raising efforts. Prior to Credit Suisse, Ryan was a Senior Analyst at Concord Management, a family office, where he sourced investment opportunities and performed investment research and due diligence on hedge funds, private equity funds, and other investment vehicles. Prior to his work at Concord, Ryan was the Controller for Forester Capital. Ryan is a CPA and began his career at PwC. He is a graduate of Franklin & Marshall College and is Series 7, 65, and 63 licensed.",
-      image: "https://framerusercontent.com/images/tVVKxKYF3HSMbP2ICmyh18tLY.png?width=691&height=691",
+      image: ryanGoldImg,
     },
   ];
 
@@ -519,7 +528,7 @@ const WhyCreateAssistants = () => {
             >
               <span className="text-accent font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
               <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter">
-                THE <span className="text-accent">TEAM</span>
+                THE <span className="text-gradient">TEAM</span>
               </h2>
             </motion.div>
           </div>
@@ -528,7 +537,7 @@ const WhyCreateAssistants = () => {
           <div className="md:hidden w-full px-6 py-24 z-10 bg-slate-950 relative">
             <div className="text-center mb-16">
               <span className="text-accent font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
-              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-accent">Team</span></h2>
+              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-gradient">Team</span></h2>
               <div className="h-px w-12 bg-accent/30 mx-auto" />
             </div>
 

@@ -124,7 +124,7 @@ const HeroSection = () => {
                 animate={isInView ? "visible" : "hidden"}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[0.9] uppercase"
               >
-                <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient drop-shadow-2xl">
+                <span className="block text-gradient uppercase drop-shadow-2xl">
                   Automate
                 </span>
                 <div className="flex items-center gap-2 sm:gap-4 mt-1 sm:mt-2">
@@ -132,11 +132,11 @@ const HeroSection = () => {
                     initial={{ scaleX: 0 }}
                     animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl origin-left opacity-60"
+                    className="text-gradient italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl origin-left opacity-60 uppercase"
                   >
                     &
                   </motion.span>
-                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient drop-shadow-2xl">
+                  <span className="text-gradient uppercase drop-shadow-2xl">
                     Scale
                   </span>
                 </div>
@@ -168,8 +168,8 @@ const HeroSection = () => {
               transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
               className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium"
             >
-              We build your unified <span className="text-foreground font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">AI workforce</span> that captures leads,
-              engages customers, and transforms your business into an <span className="text-accent font-semibold italic">automated powerhouse</span>.
+              We build your unified <span className="text-gradient font-bold">AI workforce</span> that captures leads,
+              engages customers, and transforms your business into an <span className="text-gradient font-semibold italic">automated powerhouse</span>.
             </motion.p>
 
             {/* Enhanced CTA Buttons */}
@@ -350,17 +350,7 @@ const HeroSection = () => {
         </span>
       </motion.div>
 
-      {/* Additional CSS for gradient animation */}
-      <style>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
+
     </section>
   );
 };

@@ -72,7 +72,7 @@ const IntroSection = () => {
                   className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight"
                 >
                   <span className="text-foreground">Transform Your Business with </span>
-                  <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                  <span className="text-gradient">
                     AI-Powered Growth
                   </span>
                 </motion.h1>
@@ -114,14 +114,14 @@ const IntroSection = () => {
               >
                 <button
                   onClick={handleBookingRedirect}
-                  className="group relative h-12 px-8 rounded-xl bg-gradient-to-r from-accent via-primary to-accent text-white font-semibold overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
+                  className="group relative h-12 px-8 rounded-full bg-gradient-to-r from-accent via-primary to-accent text-white font-semibold overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
                 >
                   <span className="relative z-10">Book a Consultation</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
                 <button
                   onClick={() => navigate("/how-it-works")}
-                  className="h-12 px-8 rounded-xl border-2 border-border/60 bg-background/40 backdrop-blur-sm font-semibold hover:border-accent/50 hover:bg-background/60 transition-all"
+                  className="h-12 px-8 rounded-full border-2 border-border/60 bg-background/40 backdrop-blur-sm font-semibold hover:border-accent/50 hover:bg-background/60 transition-all"
                 >
                   See How It Works
                 </button>
@@ -333,17 +333,7 @@ const IntroSection = () => {
         </div>
       </div>
 
-      {/* Additional CSS for gradient animation */}
-      <style>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
+
     </section>
   );
 };

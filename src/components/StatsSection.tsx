@@ -63,7 +63,7 @@ const StatsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold tracking-tight mb-4 uppercase text-transparent bg-clip-text bg-gradient-to-br from-primary via-accent to-accent"
+            className="text-4xl md:text-6xl font-bold tracking-tight mb-4 uppercase text-gradient"
           >
             Numbers That Speak
           </motion.h2>

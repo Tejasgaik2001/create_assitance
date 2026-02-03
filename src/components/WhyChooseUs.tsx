@@ -31,7 +31,7 @@ const WhyChooseUs = () => {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-[0.9] sm:leading-[0.85] mb-6 sm:mb-8 uppercase"
             >
               Why Choose
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent block drop-shadow-sm">Create Assistants</span>
+              <span className="text-gradient block drop-shadow-sm">Create Assistants</span>
             </motion.h2>
 
             <motion.p
