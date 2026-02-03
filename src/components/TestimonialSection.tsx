@@ -77,11 +77,19 @@ const TestimonialSection = () => {
               <Button
                 variant="hero"
                 size="xl"
-                className="w-full sm:w-auto bg-primary text-white hover:scale-105 active:scale-95 py-3 transition-all hover:bg-primary hover:text-white duration-300 rounded-full px-8 sm:px-12 h-14 sm:h-auto whitespace-normal sm:whitespace-nowrap"
+                className="w-full sm:w-auto relative bg-gradient-to-r from-accent via-primary to-accent text-white hover:scale-105 active:scale-95 py-3 transition-all duration-500 rounded-full px-8 sm:px-12 h-14 sm:h-auto whitespace-normal sm:whitespace-nowrap overflow-hidden border-none shadow-xl shadow-primary/20"
                 onClick={handleBookingRedirect}
               >
-                Claim Your Success
-                <ArrowRight className="ml-3 w-5 h-5 sm:w-6 sm:h-6" />
+                {/* Gold Shimmer effect */}
+                <motion.div
+                  animate={{ x: ["-200%", "200%"] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+                />
+                <span className="relative z-10 flex items-center justify-center">
+                  Claim Your Success
+                  <ArrowRight className="ml-3 w-5 h-5 sm:w-6 sm:h-6" />
+                </span>
               </Button>
             </MagneticWrapper>
           </motion.div>

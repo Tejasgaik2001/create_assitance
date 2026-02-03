@@ -80,27 +80,26 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
         {/* Card content */}
         <div className="relative z-10 p-8 h-full flex flex-col">
 
-          {/* Large number badge - more visible */}
-          <div className="flex items-start justify-between mb-6">
+          {/* Number and Icon Header */}
+          <div className="flex sm:flex-col items-center sm:items-start justify-between sm:justify-start mb-6 sm:mb-0">
             <motion.span
               whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-bold text-accent shadow-md backdrop-blur-sm"
+              className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-bold text-accent shadow-md backdrop-blur-sm sm:mb-6"
             >
               {pillar.number}
             </motion.span>
-          </div>
 
-          {/* Icon with enhanced design */}
-          <motion.div
-            whileHover={{
-              scale: 1.1,
-              rotate: 5,
-              transition: { type: "spring", stiffness: 400, damping: 10 }
-            }}
-            className="w-16 h-16 bg-gradient-to-br from-foreground to-foreground/80 rounded-2xl flex items-center justify-center mb-6 shadow-xl shadow-black/20 group-hover:shadow-primary/30 transition-all duration-500"
-          >
-            <pillar.icon className="w-8 h-8 text-background" />
-          </motion.div>
+            <motion.div
+              whileHover={{
+                scale: 1.1,
+                rotate: 5,
+                transition: { type: "spring", stiffness: 400, damping: 10 }
+              }}
+              className="w-16 h-16 bg-gradient-to-br from-foreground to-foreground/80 rounded-2xl flex items-center justify-center mb-0 sm:mb-6 shadow-xl shadow-black/20 group-hover:shadow-primary/30 transition-all duration-500"
+            >
+              <pillar.icon className="w-8 h-8 text-background" />
+            </motion.div>
+          </div>
 
           {/* Title with better contrast */}
           <h3 className="text-xl lg:text-2xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight leading-tight flex items-center gap-2">
