@@ -1,5 +1,6 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Layers, Bot, HeadphonesIcon, ArrowUpRight } from "lucide-react";
 import crmDashboard from "@/assets/crm-dashboard.jpg";
 import aiVoice from "@/assets/ai-voice.jpg";
@@ -12,8 +13,9 @@ const pillars = [
     description:
       "We build a unified CRM, marketing automation and sales platform to capture and manage every lead. Eliminate manual spreadsheets and disjointed tools; see all conversations, pipelines and reports in one dashboard.",
     number: "01",
-    color: "from-blue-500/20 to-cyan-500/20",
+    color: "from-primary/20 to-accent/20",
     image: crmDashboard,
+    href: "/command-center"
   },
   {
     icon: Bot,
@@ -21,8 +23,9 @@ const pillars = [
     description:
       "Deploy AI employees who answer calls, chat with website visitors and text leads back within seconds, 24/7. They learn your business rules and FAQs to book appointments, qualify prospects and nurture follow‑ups.",
     number: "02",
-    color: "from-violet-500/20 to-purple-500/20",
+    color: "from-accent/20 to-primary/20",
     image: aiVoice,
+    href: "/ai-employees"
   },
   {
     icon: HeadphonesIcon,
@@ -32,11 +35,13 @@ const pillars = [
     number: "03",
     color: "from-accent/20 to-accent/20",
     image: automation,
+    href: "/why-create-assistants"
   },
 ];
 
 const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars[0]; index: number; isSectionInView: boolean }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -50,12 +55,14 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
         delay: index * 0.15
       }}
       whileHover={{
-        y: -8,
+        y: -10,
+        scale: 1.02,
         transition: { type: "spring", stiffness: 400, damping: 15 }
       }}
-      className="group relative h-full"
+      className="group relative h-full cursor-pointer"
+      onClick={() => navigate(pillar.href)}
     >
-      <div className="relative h-full rounded-2xl bg-gradient-to-br from-background via-background to-background/95 border border-border/40 shadow-lg shadow-black/5 hover:shadow-2xl hover:shadow-primary/20 hover:border-accent/50 transition-all duration-500 overflow-hidden">
+      <div className="relative h-full rounded-2xl bg-gradient-to-br from-background via-background to-background/95 border border-border/40 shadow-lg shadow-black/5 group-hover:shadow-2xl group-hover:shadow-primary/20 group-hover:border-accent/50 transition-all duration-500 overflow-hidden">
 
         {/* Clearer background image with better opacity */}
         <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700">
@@ -96,15 +103,9 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
           </motion.div>
 
           {/* Title with better contrast */}
-          <h3 className="text-xl lg:text-2xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight leading-tight">
+          <h3 className="text-xl lg:text-2xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight leading-tight flex items-center gap-2">
             {pillar.title}
-            <motion.span
-              initial={{ opacity: 0, x: -5 }}
-              whileHover={{ opacity: 1, x: 0 }}
-              className="inline-block ml-2"
-            >
-              <ArrowUpRight className="w-5 h-5 text-primary inline" />
-            </motion.span>
+            <ArrowUpRight className="w-5 h-5 text-primary opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
           </h3>
 
           {/* Description with improved readability */}
@@ -156,7 +157,7 @@ const PillarsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-medium px-4"
+            className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-2xl mx-auto font-medium px-4"
           >
             Three pillars that transform how you capture, engage, and convert leads.
           </motion.p>

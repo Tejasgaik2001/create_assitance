@@ -38,7 +38,7 @@ const WhyChooseUs = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 sm:mb-10 max-w-xl font-medium"
+              className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed mb-8 sm:mb-10 max-w-xl font-medium"
             >
               We're not just another software vendor. We're your dedicated growth partner,
               combining cutting-edge AI with genuine human expertise.

@@ -66,12 +66,6 @@ const Header = () => {
           <div className="flex items-center gap-2 relative z-30">
             <ThemeToggle />
             <NavbarButton
-              className="bg-accent text-white hover:bg-accent/90 dark:text-black font-bold transition-all duration-300 shadow-lg shadow-accent/20 px-3 py-2 h-9 text-xs"
-              onClick={handleDemoRedirect}
-            >
-              Demo Our AI
-            </NavbarButton>
-            <NavbarButton
               className="border-2 border-accent bg-transparent text-accent hover:bg-accent/10 font-bold transition-all duration-300 shadow-none px-3 py-2 h-9 text-xs"
               onClick={handleBookingRedirect}
             >

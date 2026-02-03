@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Twitter, Linkedin, Github, Mail } from "lucide-react";
+import { Twitter, Linkedin, Facebook, Mail } from "lucide-react";
 import logo from "@/assets/logo.gif";
 import { BOOKING_URL } from "@/utils/navigation";
 
@@ -33,10 +33,10 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Mail, href: "#", label: "Email" },
+  { icon: Twitter, href: "https://x.com/createassistants", label: "Twitter" },
+  { icon: Linkedin, href: "https://linkedin.com/company/createassistants", label: "LinkedIn" },
+  { icon: Facebook, href: "https://facebook.com/createassistants", label: "Facebook" },
+  { icon: Mail, href: "mailto:hello@createassistants.ai", label: "Email" },
 ];
 
 const Footer = () => {

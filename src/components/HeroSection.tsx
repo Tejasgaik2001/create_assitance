@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef } from "react";
 import heroVideo from "@/assets/hero.mp4";
-import { handleBookingRedirect } from "@/utils/navigation";
+import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -54,8 +54,52 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
       </div>
 
+      {/* Floating Demo Invitation - Desktop Only */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1, duration: 0.8 }}
+        className="absolute top-24 right-8 z-30 hidden lg:block"
+      >
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          onClick={handleDemoRedirect}
+          className="group relative cursor-pointer"
+        >
+          {/* Animated Glow Surround */}
+          <div className="absolute -inset-4 bg-gradient-to-r from-accent/20 to-primary/20 rounded-full blur-2xl group-hover:opacity-100 opacity-50 transition-opacity" />
+
+          <div className="relative flex items-center gap-4 bg-background/40 backdrop-blur-xl border border-accent/30 rounded-2xl p-4 shadow-2xl hover:border-accent/60 transition-all duration-300">
+            <div className="relative">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
+                <Play className="w-6 h-6 text-white fill-current" />
+              </div>
+              <motion.div
+                animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-background"
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold text-accent uppercase tracking-[0.2em] leading-none mb-1">
+                Live Demo
+              </span>
+              <span className="text-sm font-bold text-foreground">
+                Demo Our AI
+              </span>
+            </div>
+
+            <div className="ml-2 w-8 h-8 rounded-full border border-border/60 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all">
+              <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-white transition-colors" />
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full flex flex-col justify-center">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center max-w-7xl mx-auto w-full">
+        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-16 items-center max-w-7xl mx-auto w-full">
           {/* Left Column - Content */}
           <div className="text-left space-y-6 sm:space-y-8 max-w-3xl mx-auto lg:mx-0">
             {/* Enhanced Badge */}
@@ -88,7 +132,7 @@ const HeroSection = () => {
                     initial={{ scaleX: 0 }}
                     animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="text-foreground/10 italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl origin-left"
+                    className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl origin-left opacity-60"
                   >
                     &
                   </motion.span>
@@ -153,8 +197,8 @@ const HeroSection = () => {
 
                 <Button
                   variant="hero"
-                  size="xl"
-                  className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-12 h-14 sm:h-16 bg-gradient-to-r from-accent via-primary to-accent text-white shadow-2xl shadow-primary/30 hover:shadow-primary/50 active:scale-95 transition-all text-base sm:text-lg font-bold uppercase tracking-tight overflow-hidden border-none group"
+                  size="lg"
+                  className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-10 h-12 sm:h-14 bg-gradient-to-r from-accent via-primary to-accent text-white shadow-2xl shadow-primary/30 hover:shadow-primary/50 active:scale-95 transition-all text-sm sm:text-base font-bold uppercase tracking-tight overflow-hidden border-none group"
                   onClick={handleBookingRedirect}
                 >
                   {/* Shimmer effect */}
@@ -174,10 +218,11 @@ const HeroSection = () => {
               <motion.button
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative px-8 py-4 rounded-full border-2 border-border/60 bg-background/40 backdrop-blur-sm hover:border-accent/50 hover:bg-background/60 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden w-full sm:w-auto"
+                onClick={handleDemoRedirect}
+                className="group relative px-8 sm:px-10 h-12 sm:h-14 rounded-full border-2 border-border/60 bg-background/40 backdrop-blur-sm hover:border-accent/50 hover:bg-background/60 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden w-full sm:w-auto flex items-center justify-center font-bold uppercase tracking-wider text-foreground/80 group-hover:text-accent text-sm sm:text-base"
               >
-                <span className="relative z-10 flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wider text-foreground/80 group-hover:text-accent">
-                  <Play className="w-4 h-4" />
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  <Play className="w-4 h-4 fill-current" />
                   Watch Demo
                 </span>
                 <motion.div
@@ -195,13 +240,34 @@ const HeroSection = () => {
               transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.6 }}
               className="flex flex-wrap items-center gap-4 pt-4"
             >
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-background" />
+              <div className="flex items-center gap-3">
+                <div className="flex -space-x-2.5">
+                  {[1, 2, 3].map((i) => (
+                    <div
+                      key={i}
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-muted overflow-hidden bg-gradient-to-tr from-accent/20 to-primary/20 flex items-center justify-center"
+                    >
+                      <img
+                        src={`https://i.pravatar.cc/150?u=${i + 10}`}
+                        alt="User"
+                        className="w-full h-full object-cover opacity-80"
+                      />
+                    </div>
                   ))}
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-accent flex items-center justify-center text-[10px] font-bold text-white shadow-lg">
+                    +500
+                  </div>
                 </div>
-                <span className="text-xs font-semibold text-muted-foreground">500+ businesses trust us</span>
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Sparkles key={s} className="w-2.5 h-2.5 text-accent fill-current" />
+                    ))}
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase tracking-tight">
+                    Trusted by 500+ businesses
+                  </span>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -216,9 +282,9 @@ const HeroSection = () => {
               damping: 20,
               delay: 0.3
             }}
-            className="relative w-full"
+            className="relative w-full lg:scale-110 lg:translate-x-4"
           >
-            <div className="relative aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
+            <div className="relative aspect-[16/10] sm:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
               {/* Video with enhanced effects */}
               <video
                 src={heroVideo}
@@ -271,14 +337,15 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Enhanced Scroll Indicator - Hide on short screens */}
+      {/* Enhanced Scroll Indicator */}
       <motion.div
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-70 transition-opacity cursor-pointer select-none hidden sm:flex"
+        onClick={() => document.getElementById("intro")?.scrollIntoView({ behavior: "smooth" })}
+        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none hidden sm:flex z-20 group"
       >
-        <div className="w-px h-16 sm:h-20 bg-gradient-to-b from-primary via-accent to-transparent" />
-        <span className="text-[9px] font-bold uppercase tracking-[0.4em] rotate-180 [writing-mode:vertical-lr] text-muted-foreground">
+        <div className="w-px h-16 sm:h-20 bg-gradient-to-b from-primary via-accent to-transparent group-hover:from-accent group-hover:via-primary transition-colors" />
+        <span className="text-[9px] font-bold uppercase tracking-[0.4em] rotate-180 [writing-mode:vertical-lr] text-muted-foreground group-hover:text-accent font-montserrat">
           Scroll
         </span>
       </motion.div>
