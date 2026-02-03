@@ -10,6 +10,7 @@ import dashboardMockup from "@/assets/dashboard-mockup.png";
 import { ThreeDCard } from "@/components/ui/ThreeDCard";
 import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
+import { handleBookingRedirect } from "@/utils/navigation";
 
 const DropInHoverText = ({ text, trigger, className, highlightClass = "text-accent" }: { text: string; trigger: boolean; className?: string; highlightClass?: string }) => {
   return (
@@ -565,7 +566,7 @@ const CommandCenter = () => {
               </span>
             </h1>
 
-            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-lg leading-relaxed">
+            <p className="text-sm sm:text-base lg:text-xl text-muted-foreground mb-8 max-w-lg leading-relaxed font-medium">
               The central nervous system for your operations. Unify CRM, sales pipelines, marketing automations, and AI feedback loops into a single, real-time command center.
             </p>
 
@@ -592,7 +593,7 @@ const CommandCenter = () => {
               <img
                 src={dashboardMockup}
                 alt="Command Center Dashboard"
-                className="w-full h-auto object-cover rounded-xl"
+                className="w-full h-auto object-contain rounded-xl"
               />
 
               {/* Floating Elements (Optional Decoration) */}
@@ -622,7 +623,31 @@ const CommandCenter = () => {
 
     // Unified CRM & Marketing Hub
     <section key="features" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500">
-      <div className="container mx-auto px-4">
+      {/* Animated gold/Accent Gradient Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <motion.div
+          animate={{
+            x: [0, 30, 0],
+            y: [0, 20, 0],
+            scale: [1, 1.15, 1],
+            opacity: [0.15, 0.25, 0.15]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-[100px]"
+        />
+        <motion.div
+          animate={{
+            x: [0, -25, 0],
+            y: [0, -15, 0],
+            scale: [1.1, 1, 1.1],
+            opacity: [0.1, 0.2, 0.1]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-[120px]"
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection direction="up" className="text-center mb-16">
           <h2 className="section-headline mb-6 flex flex-wrap justify-center gap-x-3 gap-y-1">
             {/* Staggered Letter Animation for Title */}
@@ -994,17 +1019,20 @@ const StrategicAdvantageCard = () => {
 
                 <div className="flex flex-col sm:flex-row gap-6 items-center">
                   <MagneticWrapper strength={0.2}>
-                    <Button className="h-16 px-10 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(219,154,70,0.3)] hover:-translate-y-1 group/btn relative overflow-hidden">
+                    <Button
+                      className="h-16 px-10 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(219,154,70,0.3)] hover:-translate-y-1 group/btn relative overflow-hidden"
+                      onClick={handleBookingRedirect}
+                    >
                       <div className="absolute inset-0 bg-accent translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
                       <span className="relative z-10 flex items-center gap-3">
-                        Discover Assistants <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                        Book a Strategy Call  <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                       </span>
                     </Button>
                   </MagneticWrapper>
 
-                  <button className="text-slate-500 dark:text-slate-400 font-semibold hover:text-accent transition-colors flex items-center gap-2 group/text">
+                  {/* <button className="text-slate-500 dark:text-slate-400 font-semibold hover:text-accent transition-colors flex items-center gap-2 group/text">
                     Book a Strategy Call <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/text:opacity-100 group-hover/text:translate-x-0 transition-all" />
-                  </button>
+                  </button> */}
                 </div>
               </div>
 

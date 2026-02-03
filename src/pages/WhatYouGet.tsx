@@ -245,17 +245,17 @@ const WhatYouGet = () => {
                 <span className="block text-gradient">A Turnkey Growth Engine</span>
               </h1>
 
-              <p className="body-large mb-10 max-w-2xl mx-auto text-sm md:text-base">
+              <p className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium mb-10">
                 You don't need another app; you need a system that works. Create Assistants combines a powerful business
                 operating system, human-like AI employees and hands-on support.
               </p>
 
-              <MagneticWrapper strength={0.25}>
+              {/* <MagneticWrapper strength={0.25}>
                 <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20">
                   Explore The Roadmap
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
-              </MagneticWrapper>
+              </MagneticWrapper> */}
             </motion.div>
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />

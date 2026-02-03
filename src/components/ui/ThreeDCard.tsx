@@ -1,4 +1,4 @@
-import { ExternalLink, Handshake, LucideIcon, Target } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import React, { useRef } from "react";
@@ -57,7 +57,7 @@ export const ThreeDCard = ({ title, description, icon: Icon, className }: ThreeD
                 transformStyle: "preserve-3d",
             }}
             className={cn(
-                "relative h-96 w-full rounded-xl bg-gradient-to-br from-indigo-50 to-white dark:from-slate-900 dark:to-slate-950 border border-slate-200 dark:border-slate-800 p-8 shadow-xl transition-colors duration-500",
+                "relative h-96 w-full rounded-xl bg-gradient-to-br from-accent/10 to-white dark:from-slate-900 dark:to-slate-950 border border-accent/10 dark:border-white/5 p-8 shadow-[0_20px_50px_-20px_rgba(219,154,70,0.15)] transition-colors duration-500",
                 className
             )}
         >
@@ -66,10 +66,10 @@ export const ThreeDCard = ({ title, description, icon: Icon, className }: ThreeD
                     transform: "translateZ(75px)",
                     transformStyle: "preserve-3d",
                 }}
-                className="absolute inset-4 grid place-content-center rounded-xl bg-white dark:bg-slate-900 shadow-lg border border-slate-100 dark:border-slate-800"
+                className="absolute inset-4 grid place-content-center rounded-xl bg-white dark:bg-slate-900 shadow-lg border border-accent/5 dark:border-white/5"
             >
                 <div className="flex flex-col items-center text-center p-6 gap-4">
-                    <div className="p-4 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-2">
+                    <div className="p-4 rounded-full bg-accent/10 dark:bg-accent/20 text-accent mb-2 shadow-[0_0_15px_rgba(219,154,70,0.2)]">
                         <Icon size={32} />
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white translate-z-10">

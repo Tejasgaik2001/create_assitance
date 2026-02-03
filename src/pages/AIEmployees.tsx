@@ -156,7 +156,7 @@ const AIEmployees = () => {
 
             <motion.p
               variants={itemVariants}
-              className="text-slate-600 dark:text-slate-300 text-base sm:text-lg xl:text-xl max-w-xl leading-relaxed mt-2"
+              className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium mt-2"
             >
               Businesses lose thousands in missed calls and slow follow‑ups. Prospects expect answers in seconds, not hours. Create Assistants solves this with AI employees, fully trained voice and chat assistants that work around the clock.
             </motion.p>
@@ -219,11 +219,11 @@ const AIEmployees = () => {
                 transition={{ delay: 1.2, duration: 0.8 }}
                 className="absolute bottom-6 left-2 lg:bottom-10 lg:left-4 xl:-bottom-10 xl:-left-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-accent/20 z-30"
               >
-                <div className="w-8 h-8 xl:w-12 xl:h-12 rounded-lg xl:rounded-2xl bg-green-500/10 flex items-center justify-center">
-                  <CheckCircle className="w-4 h-4 xl:w-6 xl:h-6 text-green-500" />
+                <div className="w-8 h-8 xl:w-12 xl:h-12 rounded-lg xl:rounded-2xl bg-accent/10 flex items-center justify-center">
+                  <CheckCircle className="w-4 h-4 xl:w-6 xl:h-6 text-accent" />
                 </div>
                 <div>
-                  <div className="text-[7px] xl:text-[10px] text-green-500 font-bold uppercase tracking-widest leading-none">Performance</div>
+                  <div className="text-[7px] xl:text-[10px] text-accent font-bold uppercase tracking-widest leading-none">Performance</div>
                   <div className="text-slate-900 dark:text-white font-bold text-xs xl:text-lg leading-none mt-1">99.8% Accuracy</div>
                 </div>
               </motion.div>
@@ -288,7 +288,7 @@ const AIEmployees = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-slate-600 dark:text-slate-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto"
+            className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium"
           >
             Follow the journey of a customer interaction — from first contact to completed transaction
           </motion.p>
@@ -770,11 +770,13 @@ const AIEmployees = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Button size="xl" className="group bg-accent hover:bg-accent/90 text-accent-foreground rounded-2xl shadow-2xl shadow-accent/20 transition-all font-bold px-12" asChild>
-                    <a href="/command-center">
-                      Get Started Now
-                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </a>
+                  <Button
+                    size="xl"
+                    className="group bg-accent hover:bg-accent/90 text-accent-foreground rounded-2xl shadow-2xl shadow-accent/20 transition-all font-bold px-12"
+                    onClick={handleBookingRedirect}
+                  >
+                    Get Started Now
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </motion.div>
 
@@ -782,8 +784,8 @@ const AIEmployees = () => {
                 <div className="absolute bottom-full left-0 mb-4 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 pointer-events-none z-50 hidden sm:block">
                   <div className="bg-white dark:bg-[#0f172a] p-6 rounded-2xl shadow-3xl border border-slate-200 dark:border-slate-800 w-72 backdrop-blur-xl">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
-                        <Shield className="w-5 h-5 text-green-500" />
+                      <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                        <Shield className="w-5 h-5 text-accent" />
                       </div>
                       <div>
                         <div className="text-xs font-bold text-slate-900 dark:text-white">Secure Deployment</div>

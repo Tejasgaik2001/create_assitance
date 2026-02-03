@@ -131,7 +131,7 @@ const HowItWorks = () => {
                 </span>
               </h1>
 
-              <p className="body-large mb-8 max-w-2xl mx-auto text-sm md:text-base">
+              <p className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium mb-8">
                 Most small-business owners juggle too many tools and miss opportunities because they can't respond instantly.
                 Create Assistants replaces that chaos with a single, automated system that takes strangers from first touch
                 to loyal promoters while saving you time and increasing conversion.

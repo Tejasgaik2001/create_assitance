@@ -81,11 +81,7 @@ const StatsSection = () => {
                 damping: 15,
                 delay: index * 0.15
               }}
-              whileHover={{
-                y: -8,
-                transition: { type: "spring", stiffness: 400, damping: 15 }
-              }}
-              className="group relative bg-gradient-to-br from-background via-background to-background/80 backdrop-blur-xl rounded-[2rem] p-6 sm:p-8 w-full border border-border/40 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-accent/20 hover:border-accent/50 transition-all duration-500"
+              className="group relative bg-gradient-to-br from-background via-background to-background/80 backdrop-blur-xl rounded-[2rem] p-6 sm:p-8 w-full border border-border/40 shadow-xl shadow-black/10 transition-all duration-500 cursor-default"
             >
               {/* Gradient overlay on hover */}
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -126,7 +122,7 @@ const StatsSection = () => {
                     >
                       {stat.tabLabel}
                     </motion.div>
-                    <motion.button
+                    <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
                       transition={{
@@ -135,13 +131,11 @@ const StatsSection = () => {
                         stiffness: 200,
                         damping: 15
                       }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="bg-muted/80 backdrop-blur-sm text-accent/80 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-semibold flex items-center gap-1 hover:bg-muted hover:text-foreground border border-border/40 shadow-md transition-all duration-300 whitespace-nowrap"
+                      className="bg-muted/80 backdrop-blur-sm text-accent/80 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-semibold flex items-center gap-1 border border-border/40 shadow-sm transition-all duration-300 whitespace-nowrap cursor-default"
                     >
                       <Info size={10} className="text-accent sm:w-3 sm:h-3" />
                       <span>Info</span>
-                    </motion.button>
+                    </motion.div>
                   </div>
                 </div>
 
@@ -183,7 +177,7 @@ const StatsSection = () => {
                     </div>
                   </motion.div>
 
-                  <motion.button
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                     transition={{
@@ -192,13 +186,7 @@ const StatsSection = () => {
                       stiffness: 200,
                       damping: 15
                     }}
-                    whileHover={{
-                      scale: 1.02,
-                      y: -2,
-                      transition: { type: "spring", stiffness: 400, damping: 10 }
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex-1 bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-[11px] sm:text-sm font-medium flex items-center justify-between border border-border/40 shadow-sm hover:shadow-md hover:border-accent/40 transition-all duration-300 group/btn"
+                    className="flex-1 bg-gradient-to-r from-background to-muted/50 backdrop-blur-sm text-foreground px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-[11px] sm:text-sm font-medium flex items-center justify-between border border-border/40 shadow-sm hover:border-accent/40 transition-all duration-300 group/btn cursor-default"
                   >
                     <div className="flex items-center gap-2 min-w-0">
                       <div className="p-1 sm:p-1.5 rounded-lg bg-accent/10 text-accent shrink-0">
@@ -206,8 +194,7 @@ const StatsSection = () => {
                       </div>
                       <span className="text-foreground/80 truncate">{stat.rightButton.text}</span>
                     </div>
-                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground group-hover/btn:text-accent transition-colors shrink-0" />
-                  </motion.button>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>

@@ -35,7 +35,7 @@ const IntroSection = () => {
   ];
 
   return (
-    <section ref={ref} className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
+    <section id="intro" ref={ref} className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
       {/* Premium Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
 
@@ -81,7 +81,7 @@ const IntroSection = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl"
+                  className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium"
                 >
                   An all-in-one CRM system combined with <span className="text-accent font-semibold">24/7 AI voice and chat employees</span>,
                   backed by hands-on human support. Launch in <span className="text-accent font-semibold">four weeks or less</span>.

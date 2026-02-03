@@ -184,16 +184,26 @@ const WhyCreateAssistants = () => {
         <div className="min-h-[90vh] w-full flex items-center justify-center relative bg-background overflow-hidden pt-20">
           <div className="absolute inset-0 pointer-events-none">
             <motion.div
-              className="absolute top-1/4 -left-24 w-72 h-72 bg-primary/20 rounded-full blur-3xl"
-              animate={{ x: [0, 50, 0], scale: [1, 1.1, 1] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              animate={{
+                x: [0, 50, 0],
+                y: [0, 30, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
             />
             <motion.div
-              className="absolute bottom-1/4 -right-24 w-72 h-72 bg-accent/20 rounded-full blur-3xl"
-              animate={{ x: [0, -50, 0], scale: [1.1, 1, 1.1] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+              animate={{
+                x: [0, -40, 0],
+                y: [0, -25, 0],
+                scale: [1, 1.15, 1],
+                opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.01)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:60px_60px]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -222,7 +232,7 @@ const WhyCreateAssistants = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="body-large mb-10 max-w-2xl mx-auto text-sm md:text-base"
+                className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium mb-10"
               >
                 Most software tools leave you to figure things out on your own. At Create Assistants, we combine a powerful CRM with AI employees and hands‑on service.
               </motion.p>
@@ -453,7 +463,7 @@ const WhyCreateAssistants = () => {
                     whileHover={{ y: -10 }}
                     className="relative group h-full"
                   >
-                    <div className="glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center">
+                    <div className="glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] hover:shadow-lg dark:hover:shadow-accent/10 backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center transition-shadow duration-300">
                       <div className="relative mb-8">
                         <div className="w-20 h-20 rounded-3xl bg-white dark:bg-white/5 shadow-inner border border-white/80 dark:border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110">
                           <Icon className="w-7 h-7 text-accent" />

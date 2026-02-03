@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Footer from "@/components/Footer";
+import { handleBookingRedirect } from "@/utils/navigation";
 
 const faqs = [
   {
@@ -104,7 +105,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                     damping: 20,
                     delay: 0.2
                   }}
-                  className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-md"
+                  className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-md font-medium"
                 >
                   Got questions? We've got answers. Find everything you need to know about our AI-powered growth platform.
                 </motion.p>
@@ -121,8 +122,8 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                   }}
                   className="pt-6"
                 >
-                  <motion.a
-                    href="#"
+                  <motion.button
+                    onClick={handleBookingRedirect}
                     whileHover={{ x: 5 }}
                     className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-accent/50 hover:border-accent/80 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-primary/20"
                   >
@@ -130,7 +131,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                       Still have questions?
                     </span>
                     <ChevronDown className="w-4 h-4 rotate-[-90deg] text-primary group-hover:translate-x-1 transition-transform" />
-                  </motion.a>
+                  </motion.button>
                 </motion.div>
               </div>
 

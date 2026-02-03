@@ -32,7 +32,7 @@ const BookACall = () => {
                 Fit For Your Business
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium">
+            <p className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-medium">
               We design, build and manage an integrated CRM and AI workforce that captures leads, engages customers and scales your business so you can focus on what you do best.
             </p>
           </AnimatedSection>
