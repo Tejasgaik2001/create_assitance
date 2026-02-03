@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface AssemblingWordProps {
     word: string;
@@ -14,7 +15,7 @@ export const AssemblingWord = ({ word, className = "" }: AssemblingWordProps) =>
     });
 
     return (
-        <span ref={ref} className={`inline-flex items-center mx-1.5 whitespace-nowrap ${className}`}>
+        <span ref={ref} className="inline-flex items-center mx-1.5 whitespace-nowrap">
             {word.split("").map((letter, i) => {
                 // Pseudo-random but deterministic offsets based on index
                 const yOffset = i % 2 === 0 ? -15 : 15;
@@ -39,7 +40,7 @@ export const AssemblingWord = ({ word, className = "" }: AssemblingWordProps) =>
                             opacity,
                             filter
                         }}
-                        className="inline-block"
+                        className={cn("inline-block", className)}
                     >
                         {letter}
                     </motion.span>

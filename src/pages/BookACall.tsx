@@ -28,7 +28,7 @@ const BookACall = () => {
           <AnimatedSection direction="up">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-slate-900 dark:text-white">
               Let's See If Create Assistants Is a <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80">
+              <span className="text-gradient">
                 Fit For Your Business
               </span>
             </h1>
@@ -83,7 +83,7 @@ const BookACall = () => {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           className={cn(
-                            "w-full py-4 rounded-2xl border transition-all flex flex-col items-center justify-center gap-1",
+                            "w-full py-4 rounded-full border transition-all flex flex-col items-center justify-center gap-1",
                             idx === 1
                               ? "bg-accent border-accent text-white shadow-xl shadow-accent/40"
                               : "bg-white dark:bg-slate-900 border-slate-100 dark:border-white/5 text-slate-900 dark:text-slate-200 shadow-sm hover:border-accent/30"

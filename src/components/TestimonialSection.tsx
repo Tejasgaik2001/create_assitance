@@ -42,7 +42,7 @@ const TestimonialSection = () => {
           >
             "After implementing the system, we cut our response time from
             hours to seconds and booked{" "}
-            <span className="text-accent relative inline-block">
+            <span className="text-gradient relative inline-block">
               50% more appointments
               <motion.span
                 initial={{ scaleX: 0 }}

@@ -519,7 +519,7 @@ const WhyCreateAssistants = () => {
             >
               <span className="text-accent font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
               <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter">
-                THE <span className="text-accent">TEAM</span>
+                THE <span className="text-gradient">TEAM</span>
               </h2>
             </motion.div>
           </div>
@@ -528,7 +528,7 @@ const WhyCreateAssistants = () => {
           <div className="md:hidden w-full px-6 py-24 z-10 bg-slate-950 relative">
             <div className="text-center mb-16">
               <span className="text-accent font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
-              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-accent">Team</span></h2>
+              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-gradient">Team</span></h2>
               <div className="h-px w-12 bg-accent/30 mx-auto" />
             </div>
 

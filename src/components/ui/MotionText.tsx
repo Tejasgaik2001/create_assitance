@@ -9,10 +9,10 @@ interface MotionTextProps {
 
 export const MotionText = ({ text, className, delay = 0 }: MotionTextProps) => {
     return (
-        <div className={cn("relative inline-block overflow-hidden", className)}>
+        <div className="relative inline-block">
             {/* Main Text with forward skew for speed */}
             <motion.span
-                className="block relative z-10 text-accent transform origin-center"
+                className={cn("block relative z-10 transform origin-center", className || "text-accent")}
                 initial={{ x: -40, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 viewport={{ once: true, margin: "-50px" }}

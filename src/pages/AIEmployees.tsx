@@ -150,7 +150,7 @@ const AIEmployees = () => {
               variants={itemVariants}
               className="text-slate-900 dark:text-white text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight"
             >
-              Meet Your <span className="block text-accent dark:text-accent">Hardest‑Working</span>
+              Meet Your <span className="block text-gradient">Hardest‑Working</span>
               <span className="block">Team Members</span>
             </motion.h1>
 
@@ -164,7 +164,7 @@ const AIEmployees = () => {
             <motion.div variants={itemVariants} className="mt-4 xl:mt-8 flex flex-wrap gap-3 xl:gap-4">
               <Button
                 size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl shadow-2xl shadow-accent/20 transition-all hover:scale-105 active:scale-95"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-full shadow-2xl shadow-accent/20 transition-all hover:scale-105 active:scale-95"
                 onClick={handleDemoRedirect}
               >
                 Let's Explore AI
@@ -172,7 +172,7 @@ const AIEmployees = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-2xl border-accent/20 hover:bg-accent/10 transition-all"
+                className="px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-full border-accent/20 hover:bg-accent/10 transition-all hover:scale-105 active:scale-95 hover:border-accent/50"
                 onClick={handleBookingRedirect}
               >
                 See it in Action
@@ -280,7 +280,7 @@ const AIEmployees = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight"
           >
-            How <span className="text-accent">AI Employees</span>
+            How <span className="text-gradient">AI Employees</span>
             <br />Transform Every Interaction
           </motion.h2>
 
@@ -605,7 +605,7 @@ const AIEmployees = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight"
               >
-                The <span className="text-accent">AI Advantage</span>
+                The <span className="text-gradient">AI Advantage</span>
               </motion.h2>
             </div>
 
@@ -772,7 +772,7 @@ const AIEmployees = () => {
                 >
                   <Button
                     size="xl"
-                    className="group bg-accent hover:bg-accent/90 text-accent-foreground rounded-2xl shadow-2xl shadow-accent/20 transition-all font-bold px-12"
+                    className="group bg-accent hover:bg-accent/90 text-accent-foreground rounded-full shadow-2xl shadow-accent/20 transition-all font-bold px-12"
                     onClick={handleBookingRedirect}
                   >
                     Get Started Now

@@ -74,7 +74,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
                   className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/60 backdrop-blur-sm"
                 >
-                  <span className="text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-gradient">
                     FAQ
                   </span>
                 </motion.span>
@@ -91,7 +91,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                   className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]"
                 >
                   <span className="text-foreground">Frequently Asked </span>
-                  <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                  <span className="block text-gradient">
                     Questions
                   </span>
                 </motion.h2>
@@ -127,7 +127,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                     whileHover={{ x: 5 }}
                     className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-accent/50 hover:border-accent/80 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-primary/20"
                   >
-                    <span className="font-bold text-sm bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    <span className="font-bold text-sm text-gradient">
                       Still have questions?
                     </span>
                     <ChevronDown className="w-4 h-4 rotate-[-90deg] text-primary group-hover:translate-x-1 transition-transform" />
@@ -196,17 +196,7 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
         </div>
       ) : null}
 
-      {/* Additional CSS for gradient animation */}
-      <style>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .animate-gradient {
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
+
     </section>
   );
 };

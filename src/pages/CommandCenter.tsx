@@ -14,7 +14,7 @@ import { handleBookingRedirect } from "@/utils/navigation";
 
 const DropInHoverText = ({ text, trigger, className, highlightClass = "text-accent" }: { text: string; trigger: boolean; className?: string; highlightClass?: string }) => {
   return (
-    <span className={cn("inline-flex flex-wrap transition-colors duration-300", trigger ? highlightClass : "", className)}>
+    <span className={cn("inline-flex flex-wrap", className)}>
       {text.split("").map((char, i) => (
         <motion.span
           key={i}
@@ -28,7 +28,7 @@ const DropInHoverText = ({ text, trigger, className, highlightClass = "text-acce
             duration: 0.3,
             ease: "easeOut"
           }}
-          className="inline-block"
+          className={cn("inline-block transform-gpu will-change-transform", trigger ? highlightClass : "")}
         >
           {char === " " ? "\u00A0" : char}
         </motion.span>
@@ -561,7 +561,7 @@ const CommandCenter = () => {
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 text-slate-900 dark:text-white">
               Control Your Entire Business <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80">
+              <span className="text-gradient">
                 From One Screen
               </span>
             </h1>
@@ -574,7 +574,7 @@ const CommandCenter = () => {
               <Button className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 h-12 text-base shadow-lg shadow-accent/20">
                 Start Monitoring
               </Button>
-              <Button variant="outline" className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full px-8 h-12 text-base">
+              <Button variant="outline" className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full px-8 h-12 text-base transition-all hover:scale-105 active:scale-95 hover:border-accent/40">
                 View Demo
               </Button>
             </div>
@@ -665,7 +665,7 @@ const CommandCenter = () => {
                     }}
                     className={cn(
                       "inline-block",
-                      (word === "CRM" || word === "Marketing") ? "text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80" : ""
+                      (["CRM", "Marketing", "&"].includes(word)) ? "text-gradient" : ""
                     )}
                   >
                     {char}
@@ -703,7 +703,7 @@ const CommandCenter = () => {
               </div>
               <h2 className="section-headline mb-8">
                 Automations That <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80">
+                <span className="text-gradient">
                   Work While You Sleep
                 </span>
               </h2>
@@ -834,7 +834,7 @@ const CommandCenter = () => {
               <span className="text-xs font-semibold tracking-wide uppercase">Financial Ecosystem</span>
             </div>
             <h2 className="section-headline mb-6">
-              Built‑In <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80">Scheduling & Payments</span>
+              Built‑In <span className="text-gradient">Scheduling & Payments</span>
             </h2>
             <p className="body-large text-slate-500 dark:text-slate-400">
               From first hello to final settlement. Manage the entire customer lifecycle without leaving your command center.
@@ -878,7 +878,7 @@ const CommandCenter = () => {
                     }}
                     className={cn(
                       "inline-block",
-                      (word === "Visibility") ? "text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80" : "text-slate-900 dark:text-white"
+                      (word === "Visibility") ? "text-gradient" : "text-slate-900 dark:text-white"
                     )}
                   >
                     {char}
@@ -920,7 +920,7 @@ const CommandCenter = () => {
                 <span className="text-xs font-semibold tracking-wide uppercase">Unified Infrastructure</span>
               </div>
               <h2 className="section-headline mb-4 text-left font-bold">
-                Seamless Integration with <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80">AI Employees</span>
+                Seamless Integration with <span className="text-gradient">AI Employees</span>
               </h2>
               <p className="body-large text-slate-500 dark:text-slate-400 text-left mb-8 max-w-xl">
                 Bridge the gap between artificial intelligence and human operations. Our command center acts as the final destination for all automated interactions.
@@ -979,7 +979,7 @@ const StrategicAdvantageCard = () => {
               ref={containerRef}
               onMouseMove={handleMouseMove}
               whileHover={{ y: -5 }}
-              className="relative p-10 lg:p-16 rounded-[2.5rem] overflow-hidden bg-white/40 dark:bg-slate-900/40 backdrop-blur-2xl border border-slate-200/60 dark:border-white/10 shadow-2xl dark:shadow-none group"
+              className="relative p-10 lg:p-16 rounded-[2.5rem] overflow-hidden bg-white/40 dark:bg-slate-900/40 backdrop-blur-2xl border border-slate-200/60 dark:border-white/10 shadow-2xl dark:shadow-none group transform-gpu"
             >
               {/* Glossy Border Effect */}
               <div
@@ -1009,9 +1009,14 @@ const StrategicAdvantageCard = () => {
                   <span className="text-xs font-bold tracking-widest uppercase">Strategic Advantage</span>
                 </div>
 
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight tracking-tight">
-                  <DropInHoverText text="Why It Matters" trigger={true} highlightClass="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80 dark:from-accent dark:to-accent/80" />
-                </h2>
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-3xl md:text-5xl lg:text-6xl font-bold text-gradient mb-6 leading-tight tracking-tight uppercase"
+                >
+                  Why It Matters
+                </motion.h2>
 
                 <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-2xl leading-relaxed font-medium">
                   The Command Center isn’t just a CRM. It’s your business’s heartbeat. Centralising tools saves time, reduces errors and gives you visibility into what’s working and what’s not. Focus on growth, not juggling apps.
@@ -1020,7 +1025,7 @@ const StrategicAdvantageCard = () => {
                 <div className="flex flex-col sm:flex-row gap-6 items-center">
                   <MagneticWrapper strength={0.2}>
                     <Button
-                      className="h-16 px-10 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(219,154,70,0.3)] hover:-translate-y-1 group/btn relative overflow-hidden"
+                      className="h-16 px-10 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(219,154,70,0.3)] hover:-translate-y-1 group/btn relative overflow-hidden"
                       onClick={handleBookingRedirect}
                     >
                       <div className="absolute inset-0 bg-accent translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />

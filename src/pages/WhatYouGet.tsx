@@ -404,7 +404,7 @@ const WhatYouGet = () => {
           <div className="container mx-auto px-4 relative z-10 text-center">
             <div className="max-w-3xl mx-auto">
               <h2 className="section-headline mb-6">
-                Ready to see how these <AssemblingWord word="pieces" className="text-accent" /> <br className="md:hidden" />
+                Ready to see how these <AssemblingWord word="pieces" className="text-gradient" /> <br className="md:hidden" />
                 fit together?
               </h2>
               <p className="body-large mb-10">
