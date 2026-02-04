@@ -60,7 +60,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1, duration: 0.8 }}
-        className="absolute top-24 right-8 z-30 hidden"
+        className="absolute top-24 right-8 z-30 hidden lg:flex"
       >
         <motion.div
           animate={{ y: [0, -10, 0] }}

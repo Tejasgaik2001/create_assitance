@@ -577,13 +577,14 @@ const CommandCenter = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button
-                className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 sm:px-10 h-12 sm:h-14 text-sm sm:text-base font-bold uppercase tracking-tight shadow-lg shadow-accent/20"
-                onClick={handleBookingRedirect}
-              >
-                Book Your Consultation
-              </Button>
-
+              <MagneticWrapper strength={0.3}>
+                <Button
+                  className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 sm:px-10 h-12 sm:h-14 text-sm sm:text-base font-bold uppercase tracking-tight shadow-lg shadow-accent/20"
+                  onClick={handleBookingRedirect}
+                >
+                  Book Your Consultation
+                </Button>
+              </MagneticWrapper>
             </div>
           </div>
 
