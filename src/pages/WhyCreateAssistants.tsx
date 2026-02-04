@@ -300,7 +300,7 @@ const WhyCreateAssistants = () => {
                 const gridClasses = [
                   "col-start-1 col-end-5 lg:col-end-4 row-start-1 md:mt-[-40px] md:ml-[20px] lg:mt-[-30px] lg:ml-[40px]",
                   "col-start-9 lg:col-start-10 col-end-13 row-start-1 md:mt-[20px] md:mr-[0px] lg:mt-[40px] lg:mr-[20px]",
-                  "col-start-1 col-end-5 lg:col-end-4 row-start-3 md:mb-[30px] md:ml-[-20px] lg:mb-[50px] lg:ml-[-10px]",
+                  "col-start-1 col-end-5 lg:col-end-4 row-start-3 md:mb-[30px] md:ml-[20px] lg:mb-[50px] lg:ml-[-10px]",
                   "col-start-9 lg:col-start-10 col-end-13 row-start-3 md:mb-[-20px] md:mr-[0px] lg:mb-[-10px] lg:mr-[50px]",
                 ];
 
