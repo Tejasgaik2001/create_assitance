@@ -10,7 +10,7 @@ import dashboardMockup from "@/assets/dashboard-mockup.png";
 import { ThreeDCard } from "@/components/ui/ThreeDCard";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
-import integrationDashboardImg from "@/assets/external/integration-dashboard.jpg";
+import integrationDashboardImg from "@/assets/external/integration-nexus.png";
 import businessSystemImg from "@/assets/external/scalability.jpg";
 import efficiencyImg from "@/assets/external/efficiency.jpg";
 import consolidatedNexusImg from "@/assets/external/consolidated-nexus.jpg";
@@ -579,7 +579,8 @@ const CommandCenter = () => {
             <div className="flex flex-wrap gap-4">
               <MagneticWrapper strength={0.3}>
                 <Button
-                  className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 sm:px-10 h-12 sm:h-14 text-sm sm:text-base font-bold uppercase tracking-tight shadow-lg shadow-accent/20"
+                  size="lg"
+                  className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-10 h-12 sm:h-14 bg-gradient-to-r from-accent via-primary to-accent text-accent-foreground shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all text-sm sm:text-base font-bold uppercase tracking-tight overflow-hidden border-none group"
                   onClick={handleBookingRedirect}
                 >
                   Book Your Consultation
