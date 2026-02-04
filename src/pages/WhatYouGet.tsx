@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { useRef, useState } from "react";
 import { AssemblingWord } from "@/components/ui/AssemblingWord";
+import { cn } from "@/lib/utils";
 import businessSystemImg from "@/assets/external/crm-dashboard-premium.png";
 import smartConversationsImg from "@/assets/external/ai-voice-assistant.png";
 import whiteGloveImg from "@/assets/external/white-glove-service.png";
@@ -347,7 +348,7 @@ const WhatYouGet = () => {
           <div className="absolute inset-0 pointer-events-none">
             <motion.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl backface-hidden"
-              style={{ y: backgroundY1, rotate: 0.01, z: 0, willChange: "transform" }}
+              style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
             />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
           </div>
@@ -358,35 +359,71 @@ const WhatYouGet = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-center max-w-4xl mx-auto"
+              className="text-center max-w-5xl mx-auto"
             >
-              <h2 className="section-headline mb-6">
+              <h2 className="section-headline mb-4">
                 Why It <span className="text-gradient">Matters</span>
               </h2>
-              <p className="body-large text-lg md:text-xl text-muted-foreground leading-relaxed">
-                By combining these three pillars: <motion.span
-                  whileHover={{ scale: 1.1, color: "hsl(var(--primary))", textShadow: "0 0 20px hsla(var(--primary), 0.4)" }}
-                  className="text-foreground font-bold cursor-default inline-block transition-colors duration-300"
-                >
-                  unified software
-                </motion.span>, <motion.span
-                  whileHover={{
-                    scale: 1.1,
-                    color: "hsl(var(--accent))",
-                    textShadow: "0 0 20px hsla(var(--accent), 0.4)",
-                    y: [0, -2, 0]
-                  }}
-                  transition={{ y: { duration: 0.4, repeat: Infinity, ease: "easeInOut" } }}
-                  className="text-foreground font-bold cursor-default inline-block transition-colors duration-300 ml-1"
-                >
-                  AI employees
-                </motion.span> and <motion.span
-                  whileHover={{ scale: 1.1, color: "hsl(var(--primary))", letterSpacing: "0.02em" }}
-                  className="text-foreground font-bold cursor-default inline-block transition-all duration-300 ml-1"
-                >
-                  white-glove service
-                </motion.span>, you get more than a toolkit. You get a complete operating system designed to capture every opportunity and grow with you.
+              <p className="body-large text-lg text-muted-foreground mb-16">
+                More than a toolkit. A complete operating system for growth.
               </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                {[
+                  {
+                    title: "Unified Software",
+                    desc: "Consolidate every tool into one central hub.",
+                    icon: Layers3,
+                    color: "primary"
+                  },
+                  {
+                    title: "AI Employees",
+                    desc: "Scale your capacity with 24/7 intelligent agents.",
+                    icon: BrainCircuit,
+                    color: "accent"
+                  },
+                  {
+                    title: "White-Glove Service",
+                    desc: "Hands-on Iowa-based support at every step.",
+                    icon: Headphones,
+                    color: "primary"
+                  }
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ y: -8 }}
+                    className="relative group p-8 rounded-3xl bg-background border border-border/50 shadow-xl dark:shadow-none hover:border-accent/30 transition-all duration-300"
+                  >
+                    <div className={cn(
+                      "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-500 group-hover:scale-110",
+                      item.color === "primary" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
+                    )}>
+                      <item.icon size={32} />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm font-medium leading-relaxed">
+                      {item.desc}
+                    </p>
+                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+                className="p-8 rounded-[2rem] bg-accent/5 border border-accent/20 backdrop-blur-sm"
+              >
+                <p className="text-lg md:text-xl text-foreground font-medium leading-relaxed">
+                  By combining these three pillars, you get <span className="text-accent font-bold">more than a toolkit</span>. You get a complete operating system designed to capture every opportunity and grow with you.
+                </p>
+              </motion.div>
             </motion.div>
           </div>
         </ScrollSection>

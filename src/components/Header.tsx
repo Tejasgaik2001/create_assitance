@@ -18,6 +18,7 @@ import logo from "@/assets/logo.gif";
 import logoWhite from "@/assets/logo_white.png";
 import { useTheme } from "@/hooks/useTheme";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const Header = () => {
   const navItems = [
@@ -69,12 +70,14 @@ const Header = () => {
           <NavItems items={navItems} activeLink={location.pathname} />
           <div className="flex items-center gap-2 relative z-30">
             <ThemeToggle />
-            <NavbarButton
-              className="border-2 border-accent bg-transparent text-accent hover:bg-accent/10 font-bold transition-all duration-300 shadow-none px-3 py-2 h-9 text-xs"
-              onClick={handleBookingRedirect}
-            >
-              Book a Consultation
-            </NavbarButton>
+            <MagneticWrapper strength={0.2}>
+              <NavbarButton
+                className="border-2 border-accent bg-transparent text-accent hover:bg-accent/10 font-bold transition-all duration-300 shadow-none px-3 py-2 h-9 text-xs"
+                onClick={handleBookingRedirect}
+              >
+                Book a Consultation
+              </NavbarButton>
+            </MagneticWrapper>
           </div>
         </NavBody>
 
@@ -119,8 +122,8 @@ const Header = () => {
                 </Link>
               );
             })}
-            <div className="flex w-full flex-col gap-3 mt-6">
-              <div className="flex justify-start mb-2">
+            <div className="flex w-full flex-col gap-4 mt-8 pb-8 items-stretch">
+              <div className="flex justify-center mb-2">
                 <ThemeToggle />
               </div>
               <NavbarButton
@@ -128,7 +131,7 @@ const Header = () => {
                   setIsMobileMenuOpen(false);
                   handleBookingRedirect();
                 }}
-                className="w-full border-2 border-accent bg-transparent text-accent font-bold h-12"
+                className="w-full border-2 border-accent bg-transparent text-accent font-bold h-12 flex items-center justify-center rounded-full"
               >
                 Book a Consultation
               </NavbarButton>
@@ -137,7 +140,7 @@ const Header = () => {
                   setIsMobileMenuOpen(false);
                   handleDemoRedirect();
                 }}
-                className="w-full bg-accent text-white font-bold h-12 shadow-lg shadow-accent/20"
+                className="w-full bg-accent text-white font-bold h-12 shadow-lg shadow-accent/20 flex items-center justify-center rounded-full"
               >
                 Demo Our AI
               </NavbarButton>

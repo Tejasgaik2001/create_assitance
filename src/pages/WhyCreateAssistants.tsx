@@ -10,7 +10,7 @@ import { MagneticWrapper } from '@/components/MagneticWrapper';
 import { handleBookingRedirect } from '@/utils/navigation';
 import discoveryImg from '@/assets/external/discovery.jpg';
 import buildTrainImg from '@/assets/external/integration-dashboard.jpg';
-import launchImg from '@/assets/external/efficiency.jpg';
+import launchImg from '@/assets/generated/launch-success.png';
 import managementImg from '@/assets/external/ai-strategy.jpg';
 import tuckerBernImg from '@/assets/external/tucker-bern.webp';
 import tylerVanarkelImg from '@/assets/external/tyler-vanarkel.webp';
@@ -126,7 +126,7 @@ const WhyCreateAssistants = () => {
     },
     {
       title: "Local Roots",
-      description: "Proud of our Urbandale heritage and U.S.-based support.",
+      description: "Proud of our Iowa roots and U.S based support.",
       icon: MapPin,
     },
     {
@@ -459,7 +459,7 @@ const WhyCreateAssistants = () => {
               </p>
             </AnimatedSection>
 
-            <div className="grid md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
               {valuesData.map((value, index) => {
                 const Icon = value.icon;
                 return (
@@ -470,9 +470,15 @@ const WhyCreateAssistants = () => {
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.8, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
                     whileHover={{ y: -10 }}
-                    className="relative group h-full"
+                    className={cn(
+                      "relative group h-full",
+                      index === 2 ? "md:col-span-2 lg:col-span-1" : ""
+                    )}
                   >
-                    <div className="glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] hover:shadow-lg dark:hover:shadow-accent/10 backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center transition-shadow duration-300">
+                    <div className={cn(
+                      "glass-card h-full rounded-[2.5rem] p-10 md:p-12 border border-white/40 dark:border-white/5 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)] hover:shadow-lg dark:hover:shadow-accent/10 backdrop-blur-3xl relative overflow-hidden flex flex-col items-center text-center transition-shadow duration-300",
+                      index === 2 ? "md:max-w-md md:mx-auto lg:max-w-none" : ""
+                    )}>
                       <div className="relative mb-8">
                         <div className="w-20 h-20 rounded-3xl bg-white dark:bg-white/5 shadow-inner border border-white/80 dark:border-white/10 flex items-center justify-center relative z-10 transition-transform duration-500 group-hover:scale-110">
                           <Icon className="w-7 h-7 text-accent" />
@@ -489,9 +495,9 @@ const WhyCreateAssistants = () => {
         </div>
 
         {/* Team Section - Cinematic Layer Tunnel */}
-        <div ref={teamContainerRef} className="relative h-auto md:h-[600vh] bg-slate-950">
-          {/* Desktop Parallax - Hidden on Mobile */}
-          <div className="hidden md:block sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
+        <div ref={teamContainerRef} className="relative h-auto lg:h-[600vh] bg-slate-950">
+          {/* Desktop Parallax - Hidden on Mobile/Tablet */}
+          <div className="hidden lg:block sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden" style={{ perspective: "1200px" }}>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.05)_0%,transparent_70%)] pointer-events-none" />
             <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] pointer-events-none" />
 
@@ -533,8 +539,8 @@ const WhyCreateAssistants = () => {
             </motion.div>
           </div>
 
-          {/* Mobile Team List - Vertical Cards */}
-          <div className="md:hidden w-full px-6 py-24 z-10 bg-slate-950 relative">
+          {/* Mobile/Tablet Team List - Vertical Cards */}
+          <div className="lg:hidden w-full px-6 py-24 z-10 bg-slate-950 relative">
             <div className="text-center mb-16">
               <span className="text-accent font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
               <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-gradient">Team</span></h2>

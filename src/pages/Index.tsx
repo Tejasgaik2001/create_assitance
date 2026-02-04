@@ -13,7 +13,7 @@ const Index = () => {
     <HeroSection key="hero" />,
     <IntroSection key="intro" />,
     <PillarsSection key="pillars" />,
-    <StatsSection key="stats" />,
+    <WhyChooseUs key="why" />,
     <WhyChooseUs key="why" />,
     <TestimonialSection key="testimonials" />,
     <FAQSection key="faq-footer" withFooter />

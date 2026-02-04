@@ -1,14 +1,14 @@
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Bot, Clock, Users, Shield, CheckCircle } from "lucide-react";
+import { ArrowRight, Clock, Users, Shield, CheckCircle, Headphones } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import heroImage from "@/assets/hero-ai-premium.png";
-import leadCaptureImg from "@/assets/external/lead-capture.jpg";
-import efficiencyImg from "@/assets/external/efficiency.jpg";
+import heroImage from "@/assets/generated/humanized-tech-team.png";
+import leadCaptureImg from "@/assets/generated/lead-capture-v2.png";
+import efficiencyImg from "@/assets/generated/conversion-growth.png";
 import scalabilityImg from "@/assets/external/scalability.jpg";
 import service247Img from "@/assets/external/24-7-service.jpg";
 import instantResponsesImg from "@/assets/external/instant-responses.jpg";
@@ -17,6 +17,7 @@ import seamlessImg from "@/assets/external/seamless.jpg";
 import humanHandoffImg from "@/assets/external/human-handoff.jpg";
 import aiStrategyImg from "@/assets/external/ai-strategy.jpg";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const AIEmployees = () => {
   // Animation variants
@@ -44,7 +45,7 @@ const AIEmployees = () => {
     {
       title: "Answer Questions",
       description: "Common questions about services and pricing",
-      icon: Bot,
+      icon: Headphones,
     },
     {
       title: "Qualify Leads",
@@ -170,22 +171,26 @@ const AIEmployees = () => {
               Businesses lose thousands in missed calls and slow follow‑ups. Prospects expect answers in seconds, not hours. Create Assistants solves this with AI employees, fully trained voice and chat assistants that work around the clock.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="mt-4 xl:mt-8 flex flex-wrap gap-3 xl:gap-4">
-              <Button
-                size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-full shadow-2xl shadow-accent/20 transition-all hover:scale-105 active:scale-95"
-                onClick={handleDemoRedirect}
-              >
-                Let's Explore AI
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-5 py-5 lg:px-6 lg:py-6 xl:px-10 xl:py-8 text-base xl:text-xl rounded-full border-accent/20 hover:bg-accent/10 transition-all hover:scale-105 active:scale-95 hover:border-accent/50"
-                onClick={handleBookingRedirect}
-              >
-                See it in Action
-              </Button>
+            <motion.div variants={itemVariants} className="mt-4 xl:mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center">
+              <MagneticWrapper strength={0.3} className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-10 h-12 sm:h-14 bg-gradient-to-r from-accent via-primary to-accent text-accent-foreground shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all text-sm sm:text-base font-bold uppercase tracking-tight overflow-hidden border-none group"
+                  onClick={handleBookingRedirect}
+                >
+                  Book Your Consultation
+                </Button>
+              </MagneticWrapper>
+              <MagneticWrapper strength={0.2} className="w-full lg:hidden">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full h-12 sm:h-14 px-8 sm:px-10 rounded-full border-accent/20 hover:bg-accent/10 transition-all hover:border-accent/50 text-slate-800 dark:text-white font-bold uppercase tracking-wider text-sm sm:text-base"
+                  onClick={handleDemoRedirect}
+                >
+                  Demo Our AI
+                </Button>
+              </MagneticWrapper>
             </motion.div>
           </motion.div>
 
@@ -201,8 +206,8 @@ const AIEmployees = () => {
 
               <img
                 src={heroImage}
-                alt="AI Professional"
-                className="relative z-10 w-full h-auto object-contain rounded-[40px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_20px_50px_rgba(255,220,100,0.15)] transition-all duration-700 group-hover:scale-[1.02]"
+                alt="AI Specialist Team"
+                className="relative z-10 w-full h-auto max-h-[500px] lg:max-h-[600px] object-cover rounded-[40px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_20px_50px_rgba(255,220,100,0.15)] transition-all duration-700 group-hover:scale-[1.02]"
               />
 
               {/* Status Indicator Card 1 */}
@@ -213,11 +218,11 @@ const AIEmployees = () => {
                 className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 xl:-top-10 xl:-right-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-accent/20 z-30"
               >
                 <div className="w-8 h-8 xl:w-12 xl:h-12 rounded-lg xl:rounded-2xl bg-primary/10 flex items-center justify-center">
-                  <Bot className="w-4 h-4 xl:w-6 xl:h-6 text-accent" />
+                  <Headphones className="w-4 h-4 xl:w-6 xl:h-6 text-accent" />
                 </div>
                 <div>
-                  <div className="text-[7px] xl:text-[10px] text-accent font-bold uppercase tracking-widest leading-none">Active Assistant</div>
-                  <div className="text-slate-900 dark:text-white font-bold text-xs xl:text-lg leading-none mt-1">AI Employee #402</div>
+                  <div className="text-[7px] xl:text-[10px] text-accent font-bold uppercase tracking-widest leading-none">Active Specialist</div>
+                  <div className="text-slate-900 dark:text-white font-bold text-xs xl:text-lg leading-none mt-1">Specialist Team Alpha</div>
                 </div>
               </motion.div>
 
@@ -364,7 +369,7 @@ const AIEmployees = () => {
                     <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     {/* Mobile Icon */}
-                    <div className="lg:hidden mb-6 flex items-center gap-4">
+                    <div className="lg:hidden mb-6 flex items-center justify-between">
                       <motion.div
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity }}
@@ -514,9 +519,9 @@ const AIEmployees = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 + index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="group flex flex-col sm:flex-row bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-xl hover:shadow-accent/20 transition-all min-h-[160px] md:h-full"
+              className="group flex flex-col lg:flex-row bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800 shadow-xl hover:shadow-accent/20 transition-all min-h-[160px] lg:h-full"
             >
-              <div className="w-full sm:w-1/2 h-32 sm:h-auto relative overflow-hidden">
+              <div className="w-full lg:w-1/2 h-48 lg:h-auto relative overflow-hidden">
                 <img
                   src={benefit.image}
                   alt={benefit.title}
@@ -525,7 +530,7 @@ const AIEmployees = () => {
                 <div className="absolute inset-0 bg-accent/5 group-hover:bg-transparent transition-colors duration-500" />
               </div>
 
-              <div className="w-full sm:w-1/2 p-8 flex flex-col justify-center">
+              <div className="w-full lg:w-1/2 p-8 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-xl bg-accent/10 dark:bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-accent-foreground transition-all duration-300">
                     <CheckCircle className="w-5 h-5" />
@@ -775,10 +780,7 @@ const AIEmployees = () => {
               </p>
 
               <div className="relative group w-fit">
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
+                <MagneticWrapper strength={0.25}>
                   <Button
                     size="xl"
                     className="group bg-accent hover:bg-accent/90 text-accent-foreground rounded-full shadow-2xl shadow-accent/20 transition-all font-bold px-12"
@@ -787,7 +789,7 @@ const AIEmployees = () => {
                     Get Started Now
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
-                </motion.div>
+                </MagneticWrapper>
 
                 {/* Enhanced Tooltip - Professional SaaS Content - Hidden on mobile */}
                 <div className="absolute bottom-full left-0 mb-4 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 pointer-events-none z-50 hidden sm:block">

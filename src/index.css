@@ -111,7 +111,7 @@
 
 @layer components {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient;
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient py-1;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-box-decoration-break: clone;
@@ -122,11 +122,11 @@
   }
 
   .hero-headline {
-    @apply text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95];
+    @apply text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.1] sm:leading-[1.05];
   }
 
   .section-headline {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.2] py-1;
   }
 
   .body-large {

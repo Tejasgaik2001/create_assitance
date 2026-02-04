@@ -523,7 +523,7 @@ const CommandCenter = () => {
   const sections = [
     // Hero Section
     // Hero Section - Command Center Style
-    <section key="hero" className="min-h-screen lg:h-screen w-full flex items-center justify-center relative overflow-hidden pt-24 pb-20 lg:pt-0 lg:pb-0 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    <section key="hero" className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-16 pb-12 lg:pt-0 lg:pb-0 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       {/* Enhanced Background decoration from HeroSection */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Animated gradient orbs */}
@@ -553,7 +553,7 @@ const CommandCenter = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
           {/* Left Content */}
           <div className="text-left">
             <motion.div
@@ -577,12 +577,13 @@ const CommandCenter = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 h-12 text-base shadow-lg shadow-accent/20">
-                Start Monitoring
+              <Button
+                className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 sm:px-10 h-12 sm:h-14 text-sm sm:text-base font-bold uppercase tracking-tight shadow-lg shadow-accent/20"
+                onClick={handleBookingRedirect}
+              >
+                Book Your Consultation
               </Button>
-              <Button variant="outline" className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full px-8 h-12 text-base transition-all hover:scale-105 active:scale-95 hover:border-accent/40">
-                View Demo
-              </Button>
+
             </div>
           </div>
 
@@ -592,31 +593,66 @@ const CommandCenter = () => {
               initial={{ opacity: 0, rotateX: 10, rotateY: -10, scale: 0.9 }}
               animate={{ opacity: 1, rotateX: 5, rotateY: -10, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-accent/10 dark:shadow-accent/20 border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm transform-style-3d group"
+              className="relative z-10 rounded-xl shadow-2xl shadow-accent/10 dark:shadow-accent/20 border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm transform-style-3d group"
               style={{ transformStyle: 'preserve-3d' }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-accent/10 dark:from-accent/10 dark:to-accent/10 pointer-events-none group-hover:opacity-75 transition-opacity" />
-              <img
-                src={dashboardMockup}
-                alt="Command Center Dashboard"
-                className="w-full h-auto object-contain rounded-xl"
-              />
+              <div className="rounded-xl overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-accent/10 dark:from-accent/10 dark:to-accent/10 pointer-events-none group-hover:opacity-75 transition-opacity" />
+                <img
+                  src={dashboardMockup}
+                  alt="Command Center Dashboard"
+                  className="w-full h-auto max-h-[450px] lg:max-h-[550px] object-contain"
+                />
+              </div>
 
-              {/* Floating Elements (Optional Decoration) */}
+              {/* Floating Elements (Enhanced Decoration) */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-6 -right-6 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-4 rounded-xl border border-accent/20 dark:border-accent/30 shadow-xl hidden md:block"
+                className="absolute top-2 right-2 lg:-top-12 lg:-right-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-3 lg:p-5 rounded-2xl border border-accent/20 dark:border-accent/40 shadow-[0_20px_50px_-10px_rgba(219,154,70,0.3)] hidden md:block z-30"
+                style={{ transform: 'translateZ(80px)' }}
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent">
-                    <TrendingUp size={20} />
+                <div className="flex items-center gap-2 lg:gap-4">
+                  <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent shadow-lg shadow-accent/20">
+                    <TrendingUp className="w-4 h-4 lg:w-6 lg:h-6" />
                   </div>
                   <div>
-                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Monthly Revenue</div>
-                    <div className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">$124,500 <span className="text-accent text-xs ml-1">+12%</span></div>
+                    <div className="text-[8px] lg:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Growth Vector</div>
+                    <div className="text-sm lg:text-xl font-bold text-slate-900 dark:text-white tracking-tight">$124,500 <span className="text-green-500 text-[10px] lg:text-xs ml-1">+12%</span></div>
                   </div>
                 </div>
+              </motion.div>
+
+              {/* Added Float: Lead Alert */}
+              <motion.div
+                animate={{ y: [0, 15, 0], x: [0, 5, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                className="absolute bottom-2 left-2 lg:-bottom-10 lg:-left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-3 lg:p-4 rounded-2xl border border-primary/20 dark:border-primary/40 shadow-2xl hidden md:block z-30"
+                style={{ transform: 'translateZ(100px)' }}
+              >
+                <div className="flex items-center gap-2 lg:gap-3">
+                  <div className="relative">
+                    <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                      <Users className="w-4 h-4 lg:w-5 lg:h-5" />
+                    </div>
+                    <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-accent rounded-full border-2 border-white dark:border-slate-900 animate-ping" />
+                  </div>
+                  <div>
+                    <div className="text-[8px] lg:text-[9px] text-primary font-bold uppercase tracking-tighter">New Engagement</div>
+                    <div className="text-xs lg:text-sm font-bold text-slate-900 dark:text-white">Lead Qualified</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Added Float: AI Pulse */}
+              <motion.div
+                animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute top-1/4 left-2 lg:-left-12 bg-accent text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded-full font-bold text-[10px] lg:text-xs shadow-2xl shadow-accent/50 hidden lg:flex items-center gap-1.5 lg:gap-2 z-40"
+                style={{ transform: 'translateZ(120px)' }}
+              >
+                <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                AI Specialists Active
               </motion.div>
             </motion.div>
 
@@ -670,7 +706,7 @@ const CommandCenter = () => {
                       ease: "easeOut"
                     }}
                     className={cn(
-                      "inline-block",
+                      "inline-block py-2",
                       (["CRM", "Marketing", "&"].includes(word)) ? "text-gradient" : ""
                     )}
                   >
@@ -682,14 +718,22 @@ const CommandCenter = () => {
           </h2>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {features.map((feature) => (
-            <div key={feature.title} className="flex justify-center">
-              <ThreeDCard
-                title={feature.title}
-                description={feature.description}
-                icon={feature.icon}
-              />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {features.map((feature, index) => (
+            <div
+              key={feature.title}
+              className={cn(
+                "flex justify-center",
+                index === 2 ? "md:col-span-2 lg:col-span-1" : ""
+              )}
+            >
+              <div className={cn("w-full", index === 2 ? "md:max-w-md lg:max-w-none" : "")}>
+                <ThreeDCard
+                  title={feature.title}
+                  description={feature.description}
+                  icon={feature.icon}
+                />
+              </div>
             </div>
           ))}
         </div>

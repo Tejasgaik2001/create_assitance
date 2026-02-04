@@ -38,12 +38,12 @@ const TestimonialSection = () => {
             initial={{ opacity: 0, filter: "blur(10px)", y: 30 }}
             animate={isInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(10px)", y: 30 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.1] sm:leading-[1.05] tracking-tight mb-8 sm:mb-12 uppercase italic"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.3] sm:leading-[1.2] tracking-tight mb-8 sm:mb-12 uppercase italic"
           >
             "After implementing the system, we cut our response time from
             hours to seconds and booked{" "}
-            <span className="text-gradient relative inline-block">
-              50% more appointments
+            <span className="text-gradient relative inline-block py-1 px-1">
+              50+ more appointments
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}

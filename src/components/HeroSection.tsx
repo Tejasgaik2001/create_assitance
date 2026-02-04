@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef } from "react";
 import heroVideo from "@/assets/hero.mp4";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
+import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -54,12 +55,12 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
       </div>
 
-      {/* Floating Demo Invitation - Desktop Only */}
+      {/* Floating Demo Invitation - Hidden per request (Demo is mobile-only) */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1, duration: 0.8 }}
-        className="absolute top-24 right-8 z-30 hidden lg:block"
+        className="absolute top-24 right-8 z-30 hidden"
       >
         <motion.div
           animate={{ y: [0, -10, 0] }}
@@ -101,7 +102,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full flex flex-col justify-center">
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-16 items-center max-w-7xl mx-auto w-full">
           {/* Left Column - Content */}
-          <div className="text-left space-y-6 sm:space-y-8 max-w-3xl mx-auto lg:mx-0">
+          <div className="text-center lg:text-left space-y-6 sm:space-y-8 max-w-3xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
             {/* Enhanced Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
@@ -116,30 +117,23 @@ const HeroSection = () => {
             </motion.div>
 
             {/* Enhanced Headline */}
-            <div className="space-y-2 sm:space-y-4">
+            <div className="space-y-2 sm:space-y-4 flex flex-col items-center lg:items-start w-full">
               <motion.h1
                 custom={0}
                 variants={textVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[0.9] uppercase"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold tracking-tighter leading-tight uppercase flex flex-wrap items-center justify-center lg:justify-start gap-x-2 sm:gap-x-4"
               >
-                <span className="block text-gradient uppercase drop-shadow-2xl">
+                <span className="text-gradient uppercase drop-shadow-2xl">
                   Automate
                 </span>
-                <div className="flex items-center gap-2 sm:gap-4 mt-1 sm:mt-2">
-                  <motion.span
-                    initial={{ scaleX: 0 }}
-                    animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    className="text-gradient italic font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl origin-left opacity-60 uppercase"
-                  >
-                    &
-                  </motion.span>
-                  <span className="text-gradient uppercase drop-shadow-2xl">
-                    Scale
-                  </span>
-                </div>
+                <span className="text-gradient italic font-light opacity-60">
+                  &
+                </span>
+                <span className="text-gradient uppercase drop-shadow-2xl">
+                  Scale
+                </span>
               </motion.h1>
 
               <motion.h2
@@ -166,7 +160,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
-              className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium"
+              className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium mx-auto lg:mx-0"
             >
               We build your unified <span className="text-gradient font-bold">AI workforce</span> that captures leads,
               engages customers, and transforms your business into an <span className="text-gradient font-semibold italic">automated powerhouse</span>.
@@ -180,7 +174,7 @@ const HeroSection = () => {
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4"
             >
               {/* Primary CTA with enhanced effects */}
-              <div className="relative group">
+              <div className="relative group w-full sm:w-auto">
                 {/* Animated glow effect */}
                 <motion.div
                   animate={{
@@ -195,42 +189,46 @@ const HeroSection = () => {
                   className="absolute -inset-2 bg-gradient-to-r from-primary via-accent to-primary rounded-full blur-2xl opacity-60"
                 />
 
-                <Button
-                  variant="hero"
-                  size="lg"
-                  className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-10 h-12 sm:h-14 bg-gradient-to-r from-accent via-primary to-accent text-white shadow-2xl shadow-primary/30 hover:shadow-primary/50 active:scale-95 transition-all text-sm sm:text-base font-bold uppercase tracking-tight overflow-hidden border-none group"
-                  onClick={handleBookingRedirect}
-                >
-                  {/* Shimmer effect */}
-                  <motion.div
-                    animate={{ x: ["-200%", "200%"] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
-                  />
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    Book Consultation
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Button>
+                <MagneticWrapper strength={0.3} className="w-full sm:w-auto">
+                  <Button
+                    variant="hero"
+                    size="lg"
+                    className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-10 h-12 sm:h-14 bg-gradient-to-r from-accent via-primary to-accent text-white shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all text-sm sm:text-base font-bold uppercase tracking-tight overflow-hidden border-none group"
+                    onClick={handleBookingRedirect}
+                  >
+                    {/* Shimmer effect */}
+                    <motion.div
+                      animate={{ x: ["-200%", "200%"] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+                    />
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      Book Consultation
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </Button>
+                </MagneticWrapper>
               </div>
 
-              {/* Secondary CTA with enhanced design */}
-              <motion.button
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleDemoRedirect}
-                className="group relative px-8 sm:px-10 h-12 sm:h-14 rounded-full border-2 border-border/60 bg-background/40 backdrop-blur-sm hover:border-accent/50 hover:bg-background/60 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden w-full sm:w-auto flex items-center justify-center font-bold uppercase tracking-wider text-foreground/80 group-hover:text-accent text-sm sm:text-base"
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  <Play className="w-4 h-4 fill-current" />
-                  Watch Demo
-                </span>
-                <motion.div
-                  initial={{ y: "100%" }}
-                  whileHover={{ y: 0 }}
-                  className="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent"
-                />
-              </motion.button>
+              {/* Secondary CTA with enhanced design - Mobile & Tablet Only */}
+              <MagneticWrapper strength={0.2} className="w-full lg:hidden">
+                <motion.button
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleDemoRedirect}
+                  className="group relative px-8 sm:px-10 h-12 sm:h-14 rounded-full border-2 border-border/60 bg-background/40 backdrop-blur-sm hover:border-accent/50 hover:bg-background/60 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden w-full sm:w-auto flex items-center justify-center font-bold uppercase tracking-wider text-foreground/80 group-hover:text-accent text-sm sm:text-base"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    <Sparkles className="w-4 h-4 text-accent animate-pulse" />
+                    Demo Our AI
+                  </span>
+                  <motion.div
+                    initial={{ y: "100%" }}
+                    whileHover={{ y: 0 }}
+                    className="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent"
+                  />
+                </motion.button>
+              </MagneticWrapper>
             </motion.div>
 
             {/* Trust indicators */}
@@ -342,7 +340,7 @@ const HeroSection = () => {
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         onClick={() => document.getElementById("intro")?.scrollIntoView({ behavior: "smooth" })}
-        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none hidden sm:flex z-20 group"
+        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none hidden lg:flex z-20 group"
       >
         <div className="w-px h-16 sm:h-20 bg-gradient-to-b from-primary via-accent to-transparent group-hover:from-accent group-hover:via-primary transition-colors" />
         <span className="text-[9px] font-bold uppercase tracking-[0.4em] rotate-180 [writing-mode:vertical-lr] text-muted-foreground group-hover:text-accent font-montserrat">
