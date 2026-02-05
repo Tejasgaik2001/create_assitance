@@ -14,7 +14,7 @@ const Index = () => {
     <IntroSection key="intro" />,
     <PillarsSection key="pillars" />,
     <WhyChooseUs key="why" />,
-    <WhyChooseUs key="why" />,
+
     <TestimonialSection key="testimonials" />,
     <FAQSection key="faq-footer" withFooter />
   ];

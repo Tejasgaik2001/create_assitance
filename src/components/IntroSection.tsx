@@ -288,33 +288,7 @@ const IntroSection = () => {
                   </div>
                 </motion.div>
 
-                {/* Floating Card - Automation */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 15,
-                    delay: 0.9
-                  }}
-                  whileHover={{
-                    scale: 1.05,
-                    y: -6,
-                    transition: { type: "spring", stiffness: 300, damping: 15 }
-                  }}
-                  className="absolute left-1/2 -translate-x-1/2 -bottom-8 w-[70%] rounded-2xl border border-border/40 bg-background/90 backdrop-blur-2xl shadow-2xl shadow-black/25 hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)] hover:border-primary/40 overflow-hidden transition-all duration-300"
-                >
-                  <img
-                    src={automation}
-                    alt="Workflow Automation"
-                    className="w-full h-24 sm:h-32 object-cover transition-transform duration-500 hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-2.5 left-3 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 shadow-lg">
-                    <span className="text-white text-xs font-bold drop-shadow-lg">Smart Automation</span>
-                  </div>
-                </motion.div>
+
 
                 {/* Animated Glow Effects */}
                 <motion.div
