@@ -28,24 +28,33 @@ const HeroSection = () => {
 
     // Safari fix: React's muted JSX attribute doesn't always set the DOM property
     video.muted = true;
+    video.defaultMuted = true;
     video.setAttribute("playsinline", "true");
     video.setAttribute("webkit-playsinline", "true");
+    video.setAttribute("muted", "");
+    video.autoplay = true;
+
+    // Set src directly — Safari is unreliable with <source> children for autoplay
+    if (!video.src || !video.src.includes("hero")) {
+      video.src = heroVideo;
+    }
 
     if (isMobile) {
       video.load();
       return; // on mobile, user plays via controls
     }
 
+    let played = false;
     const tryPlay = () => {
+      if (played) return;
       video.muted = true;
       const p = video.play();
       if (p !== undefined) {
-        p.catch(() => {
+        p.then(() => { played = true; }).catch(() => {
           // Safari still blocked — try again on user interaction
           const resumeOnce = () => {
+            video.muted = true;
             video.play().catch(() => {});
-            document.removeEventListener("click", resumeOnce);
-            document.removeEventListener("touchstart", resumeOnce);
           };
           document.addEventListener("click", resumeOnce, { once: true });
           document.addEventListener("touchstart", resumeOnce, { once: true });
@@ -53,16 +62,26 @@ const HeroSection = () => {
       }
     };
 
-    // Register listener BEFORE load() to avoid race condition
+    // Register listeners BEFORE load() to avoid race condition
+    // Safari sometimes fires loadeddata but not canplay
     video.addEventListener("canplay", tryPlay);
+    video.addEventListener("loadeddata", tryPlay);
 
-    // Force the browser to pick up the <source> element
     video.load();
 
     // If already buffered enough, play immediately
-    if (video.readyState >= 3) tryPlay();
+    if (video.readyState >= 2) tryPlay();
 
-    return () => video.removeEventListener("canplay", tryPlay);
+    // Safari fallback: retry after a short delay
+    const safariRetry = setTimeout(() => {
+      if (video.paused) tryPlay();
+    }, 1500);
+
+    return () => {
+      video.removeEventListener("canplay", tryPlay);
+      video.removeEventListener("loadeddata", tryPlay);
+      clearTimeout(safariRetry);
+    };
   }, [isMobile]);
 
   const textVariants = {
@@ -341,6 +360,7 @@ const HeroSection = () => {
               <video
                 ref={videoRef}
                 poster={heroPoster}
+                src={heroVideo}
                 loop
                 muted
                 playsInline
@@ -348,9 +368,7 @@ const HeroSection = () => {
                 autoPlay
                 preload="auto"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-              >
-                <source src={heroVideo} type="video/mp4" />
-              </video>
+              />
 
               {/* Enhanced overlays */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-accent/30 mix-blend-overlay" />
