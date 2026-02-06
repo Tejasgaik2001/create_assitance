@@ -24,7 +24,7 @@ const faqs = [
   {
     question: "Do you integrate with our existing tools?",
     answer:
-      "Yes—where it matters. We integrate essential tools like Stripe and email, Our goal is to eliminate extra subscriptions by replacing multiple tools with one unified platform.",
+      "Yes, where it matters. We integrate essential tools as our goal is to eliminate extra subscriptions by replacing multiple tools with one unified platform.",
   },
   {
     question: "What kind of support do you provide after launch?",

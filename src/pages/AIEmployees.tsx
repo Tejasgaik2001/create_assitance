@@ -60,7 +60,7 @@ const AIEmployees = () => {
     },
     {
       title: "Execute Actions",
-      description: "Automate contact workflows, track deal closure time, trigger system-wide actions seamlessly",
+      description: "Automate contact workflows, track deal closure time and trigger system-wide actions seamlessly",
       icon: Shield,
     },
     {
