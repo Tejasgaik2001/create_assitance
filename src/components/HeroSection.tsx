@@ -40,8 +40,9 @@ const HeroSection = () => {
     }
 
     if (isMobile) {
-      video.load();
-      return; // on mobile, user plays via controls
+      // On iOS Safari, don't call load() — it resets the poster to a black box.
+      // Just ensure muted+playsinline are set and let the user tap to play.
+      return;
     }
 
     let played = false;
@@ -85,11 +86,10 @@ const HeroSection = () => {
   }, [isMobile]);
 
   const textVariants = {
-    hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
+    hidden: { opacity: 0, y: 50 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: {
         type: "spring" as const,
         stiffness: 100,
@@ -365,8 +365,8 @@ const HeroSection = () => {
                 muted
                 playsInline
                 controls={isMobile}
-                autoPlay
-                preload="auto"
+                autoPlay={!isMobile}
+                preload={isMobile ? "none" : "auto"}
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
 
