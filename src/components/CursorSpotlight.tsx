@@ -20,13 +20,27 @@ export const CursorSpotlight = ({
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
+        let rafId: number | null = null;
+        let lastX = -100;
+        let lastY = -100;
+
         const moveCursor = (e: MouseEvent) => {
-            cursorX.set(e.clientX);
-            cursorY.set(e.clientY);
+            lastX = e.clientX;
+            lastY = e.clientY;
+
+            if (rafId != null) return;
+            rafId = window.requestAnimationFrame(() => {
+                cursorX.set(lastX);
+                cursorY.set(lastY);
+                rafId = null;
+            });
         };
 
-        window.addEventListener("mousemove", moveCursor);
-        return () => window.removeEventListener("mousemove", moveCursor);
+        window.addEventListener("mousemove", moveCursor, { passive: true });
+        return () => {
+            window.removeEventListener("mousemove", moveCursor);
+            if (rafId != null) window.cancelAnimationFrame(rafId);
+        };
     }, [cursorX, cursorY]);
 
     return (

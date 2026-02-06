@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef } from "react";
 import heroVideo from "@/assets/hero.mp4";
+import heroPoster from "@/assets/hero-visual.jpg";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 
@@ -286,10 +287,12 @@ const HeroSection = () => {
               {/* Video with enhanced effects */}
               <video
                 src={heroVideo}
+                poster={heroPoster}
                 autoPlay
                 loop
                 muted
                 playsInline
+                preload="metadata"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
 
