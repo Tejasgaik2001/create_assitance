@@ -68,7 +68,7 @@ const Footer = () => {
               whileHover={{ x: 5 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <img src={currentLogo} alt="Create Assistants Logo" className="w-9 h-9 object-cover" />
+              <img src={currentLogo} alt="Create Assistants Logo" loading="lazy" className="w-9 h-9 object-cover" />
               <span className="font-semibold">Create Assistants</span>
             </motion.div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">

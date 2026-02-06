@@ -169,6 +169,7 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
             <img
               src={src}
               alt={alt}
+              loading="lazy"
               className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-1000"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
@@ -312,6 +313,7 @@ const GlossyCard = ({ item, index }: { item: any; index: number }) => {
         <img
           src={images[index % images.length]}
           alt={item.title}
+          loading="lazy"
           className="w-full h-full object-cover opacity-10 dark:opacity-20 group-hover:opacity-30 dark:group-hover:opacity-40 transition-opacity duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-950 via-white/90 dark:via-slate-950/80 to-transparent" />
@@ -603,6 +605,7 @@ const CommandCenter = () => {
                 <img
                   src={dashboardMockup}
                   alt="Command Center Dashboard"
+                  loading="lazy"
                   className="w-full h-auto max-h-[450px] lg:max-h-[550px] object-contain"
                 />
               </div>

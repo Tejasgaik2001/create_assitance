@@ -20,14 +20,21 @@ const HeroSection = () => {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
+  const isInView = useInView(ref, { once: false, margin: "-10%" });
+
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || isMobile) return;
+    if (!video) return;
 
     // Safari fix: React's muted JSX attribute doesn't always set the DOM property
     video.muted = true;
     video.setAttribute("playsinline", "true");
     video.setAttribute("webkit-playsinline", "true");
+
+    if (isMobile) {
+      video.load();
+      return; // on mobile, user plays via controls
+    }
 
     const tryPlay = () => {
       video.muted = true;
@@ -46,13 +53,17 @@ const HeroSection = () => {
       }
     };
 
+    // Register listener BEFORE load() to avoid race condition
     video.addEventListener("canplay", tryPlay);
-    // Also try immediately in case already loaded
+
+    // Force the browser to pick up the <source> element
+    video.load();
+
+    // If already buffered enough, play immediately
     if (video.readyState >= 3) tryPlay();
 
     return () => video.removeEventListener("canplay", tryPlay);
   }, [isMobile]);
-  const isInView = useInView(ref, { once: false, margin: "-10%" });
 
   const textVariants = {
     hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
@@ -324,30 +335,22 @@ const HeroSection = () => {
               damping: 20,
               delay: 0.3
             }}
-            className="relative w-full lg:scale-110 lg:translate-x-4"
+            className="relative w-full max-w-full lg:scale-105 lg:translate-x-2"
           >
-            <div className="relative aspect-[16/10] sm:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
-              {/* Video on desktop, static image on mobile */}
-              {isMobile ? (
-                <img
-                  src={heroPoster}
-                  alt="AI-powered business automation"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <video
-                  ref={videoRef}
-                  poster={heroPoster}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                >
-                  <source src={heroVideo} type="video/mp4" />
-                </video>
-              )}
+            <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
+              <video
+                ref={videoRef}
+                poster={heroPoster}
+                loop
+                muted
+                playsInline
+                controls={isMobile}
+                autoPlay
+                preload="auto"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+              >
+                <source src={heroVideo} type="video/mp4" />
+              </video>
 
               {/* Enhanced overlays */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-accent/30 mix-blend-overlay" />

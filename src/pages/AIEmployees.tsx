@@ -208,6 +208,7 @@ const AIEmployees = () => {
               <img
                 src={heroImage}
                 alt="AI Specialist Team"
+                loading="lazy"
                 className="relative z-10 w-full h-auto max-h-[500px] lg:max-h-[600px] object-cover rounded-[40px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_20px_50px_rgba(255,220,100,0.15)] transition-all duration-700 group-hover:scale-[1.02]"
               />
 
@@ -487,6 +488,7 @@ const AIEmployees = () => {
             <img
               src={instantResponsesImg}
               alt="24/7 AI support"
+              loading="lazy"
               className="h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-white/80 dark:from-slate-950/80 via-transparent to-transparent" />
@@ -526,6 +528,7 @@ const AIEmployees = () => {
                 <img
                   src={benefit.image}
                   alt={benefit.title}
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-accent/5 group-hover:bg-transparent transition-colors duration-500" />
@@ -710,6 +713,7 @@ const AIEmployees = () => {
                                 <img
                                   src={feature.image}
                                   alt={feature.title}
+                                  loading="lazy"
                                   className="w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/50 to-transparent" />
@@ -835,6 +839,7 @@ const AIEmployees = () => {
                 <img
                   src={aiStrategyImg}
                   alt="AI Strategy"
+                  loading="lazy"
                   className="w-full h-[350px] object-cover opacity-90 transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 via-transparent to-transparent" />

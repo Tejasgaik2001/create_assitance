@@ -27,7 +27,7 @@ const MobileTeamMember = ({ member }: { member: any }) => {
       className="flex flex-col items-center text-center p-8 rounded-[3rem] bg-white/5 border border-white/10 transition-all duration-300 w-full mb-6 cursor-pointer"
     >
       <div className="relative mb-6">
-        <img src={member.image} alt={member.name} className="w-32 h-32 rounded-full object-cover border-4 border-accent/30" />
+        <img src={member.image} alt={member.name} loading="lazy" className="w-32 h-32 rounded-full object-cover border-4 border-accent/30" />
         <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-accent/20 to-transparent pointer-events-none" />
       </div>
 
@@ -653,7 +653,7 @@ const ProcessItem = ({ item, index }: { item: any; index: number }) => {
             className="fixed pointer-events-none z-50 hidden md:block w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
             style={{ left: mousePos.x + 20, top: mousePos.y - 80 }}
           >
-            <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+            <img src={item.image} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -715,6 +715,7 @@ const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }
         <img
           src={member.image}
           alt={member.name}
+          loading="lazy"
           className={cn(
             "w-full h-full object-cover transition-all duration-1000",
             isHovered ? "scale-105" : ""
