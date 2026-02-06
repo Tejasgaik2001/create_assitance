@@ -69,6 +69,8 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
           <img
             src={pillar.image}
             alt=""
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover scale-110 group-hover:scale-105 transition-transform duration-1000"
           />
         </div>
