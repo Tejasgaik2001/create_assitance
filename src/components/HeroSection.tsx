@@ -23,12 +23,34 @@ const HeroSection = () => {
   useEffect(() => {
     const video = videoRef.current;
     if (!video || isMobile) return;
+
+    // Safari fix: React's muted JSX attribute doesn't always set the DOM property
+    video.muted = true;
+    video.setAttribute("playsinline", "true");
+    video.setAttribute("webkit-playsinline", "true");
+
     const tryPlay = () => {
-      video.play().catch(() => {});
+      video.muted = true;
+      const p = video.play();
+      if (p !== undefined) {
+        p.catch(() => {
+          // Safari still blocked — try again on user interaction
+          const resumeOnce = () => {
+            video.play().catch(() => {});
+            document.removeEventListener("click", resumeOnce);
+            document.removeEventListener("touchstart", resumeOnce);
+          };
+          document.addEventListener("click", resumeOnce, { once: true });
+          document.addEventListener("touchstart", resumeOnce, { once: true });
+        });
+      }
     };
-    video.addEventListener("loadeddata", tryPlay);
-    tryPlay();
-    return () => video.removeEventListener("loadeddata", tryPlay);
+
+    video.addEventListener("canplay", tryPlay);
+    // Also try immediately in case already loaded
+    if (video.readyState >= 3) tryPlay();
+
+    return () => video.removeEventListener("canplay", tryPlay);
   }, [isMobile]);
   const isInView = useInView(ref, { once: false, margin: "-10%" });
 
@@ -315,17 +337,16 @@ const HeroSection = () => {
               ) : (
                 <video
                   ref={videoRef}
-                  src={heroVideo}
                   poster={heroPoster}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  // @ts-ignore — needed for older iOS Safari
-                  webkit-playsinline="true"
                   preload="auto"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                />
+                >
+                  <source src={heroVideo} type="video/mp4" />
+                </video>
               )}
 
               {/* Enhanced overlays */}
