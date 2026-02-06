@@ -9,8 +9,8 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1024px)");
@@ -22,74 +22,43 @@ const HeroSection = () => {
 
   const isInView = useInView(ref, { once: false, margin: "-10%" });
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+  // Safari Helper: Use callback ref to ensure attributes are set before insertion/paint
+  const setVideoRef = (element: HTMLVideoElement | null) => {
+    videoRef.current = element;
 
-    // Safari fix: React's muted JSX attribute doesn't always set the DOM property
-    video.muted = true;
-    video.defaultMuted = true;
-    video.setAttribute("playsinline", "true");
-    video.setAttribute("webkit-playsinline", "true");
-    video.setAttribute("muted", "");
-    video.autoplay = true;
+    if (element && !isMobile) {
+      // Force mute attributes immediately
+      element.muted = true;
+      element.defaultMuted = true;
+      element.setAttribute("playsinline", "true");
+      element.setAttribute("webkit-playsinline", "true");
 
-    // Set src directly — Safari is unreliable with <source> children for autoplay
-    if (!video.src || !video.src.includes("hero")) {
-      video.src = heroVideo;
+      const tryPlay = () => {
+        if (element.paused) {
+          element.muted = true; // Ensure muted again before play
+          const p = element.play();
+          if (p !== undefined) {
+            p.catch((err) => {
+              console.log("Autoplay blocked, attempting fallback", err);
+            });
+          }
+        }
+      };
+
+      // Try immediately
+      tryPlay();
+
+      // Also on 'canplay'
+      element.addEventListener("canplay", tryPlay, { once: true });
     }
-
-    if (isMobile) {
-      // On iOS Safari, don't call load() — it resets the poster to a black box.
-      // Just ensure muted+playsinline are set and let the user tap to play.
-      return;
-    }
-
-    let played = false;
-    const tryPlay = () => {
-      if (played) return;
-      video.muted = true;
-      const p = video.play();
-      if (p !== undefined) {
-        p.then(() => { played = true; }).catch(() => {
-          // Safari still blocked — try again on user interaction
-          const resumeOnce = () => {
-            video.muted = true;
-            video.play().catch(() => {});
-          };
-          document.addEventListener("click", resumeOnce, { once: true });
-          document.addEventListener("touchstart", resumeOnce, { once: true });
-        });
-      }
-    };
-
-    // Register listeners BEFORE load() to avoid race condition
-    // Safari sometimes fires loadeddata but not canplay
-    video.addEventListener("canplay", tryPlay);
-    video.addEventListener("loadeddata", tryPlay);
-
-    video.load();
-
-    // If already buffered enough, play immediately
-    if (video.readyState >= 2) tryPlay();
-
-    // Safari fallback: retry after a short delay
-    const safariRetry = setTimeout(() => {
-      if (video.paused) tryPlay();
-    }, 1500);
-
-    return () => {
-      video.removeEventListener("canplay", tryPlay);
-      video.removeEventListener("loadeddata", tryPlay);
-      clearTimeout(safariRetry);
-    };
-  }, [isMobile]);
+  };
 
   const textVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 50, filter: "blur(10px)" },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
+      filter: "blur(0px)",
       transition: {
         type: "spring" as const,
         stiffness: 100,
@@ -358,15 +327,15 @@ const HeroSection = () => {
           >
             <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
               <video
-                ref={videoRef}
-                poster={heroPoster}
+                ref={setVideoRef}
                 src={heroVideo}
+                poster={heroPoster}
+                controls={isMobile}
+                autoPlay
                 loop
                 muted
                 playsInline
-                controls={isMobile}
-                autoPlay={!isMobile}
-                preload={isMobile ? "none" : "auto"}
+                preload="auto"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
 
