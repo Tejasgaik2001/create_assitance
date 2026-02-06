@@ -6,17 +6,13 @@ module.exports = {
 
       name: "createassistant-website",
 
-      script: "serve",
+      script: "./server.cjs",
 
       env: {
 
-        PM2_SERVE_PATH: "./dist",
+        NODE_ENV: "production",
 
-        PM2_SERVE_PORT: 8080,
-
-        PM2_SERVE_SPA: "true",
-
-        PM2_SERVE_HOMEPAGE: "/index.html"
+        PORT: 8080,
 
       }
 
@@ -25,5 +21,3 @@ module.exports = {
   ]
 
 }
-
- 
