@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 // Interfaces for props
@@ -139,7 +140,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
       {items.map((item, idx) => {
         const isActive = activeLink === item.link;
         return (
-          <a
+          <Link
             onMouseEnter={() => setHovered(idx)}
             onClick={onItemClick}
             className={cn(
@@ -149,7 +150,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
                 : "text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white"
             )}
             key={`link-${idx}`}
-            href={item.link}
+            to={item.link}
           >
             <span className="relative z-20">{item.name}</span>
             <span
@@ -158,7 +159,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
                 isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               )}
             />
-          </a>
+          </Link>
         );
       })}
     </motion.div>

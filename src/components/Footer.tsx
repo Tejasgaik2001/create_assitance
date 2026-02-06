@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Facebook, Mail, Phone, Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.gif";
 import logoWhite from "@/assets/logo_white.png";
 import { useTheme } from "@/hooks/useTheme";
@@ -110,13 +111,25 @@ const Footer = () => {
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.3, delay: 0.2 + categoryIndex * 0.05 + linkIndex * 0.05 }}
                   >
-                    <motion.a
-                      href={link.href}
-                      className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
-                    >
-                      {link.name}
-                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-                    </motion.a>
+                    {link.href.startsWith("/") ? (
+                      <Link
+                        to={link.href}
+                        className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
+                      >
+                        {link.name}
+                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                      </Link>
+                    ) : (
+                      <motion.a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
+                      >
+                        {link.name}
+                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                      </motion.a>
+                    )}
                   </motion.li>
                 ))}
               </ul>

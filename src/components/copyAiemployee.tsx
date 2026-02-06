@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Bot, Clock, Users, Shield, CheckCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import AnimatedSection from "@/components/AnimatedSection";
 import StaggeredChildren from "@/components/StaggeredChildren";
 import Header from "@/components/Header";
@@ -243,10 +244,10 @@ const AIEmployees = () => {
                     className="inline-block"
                 >
                     <Button variant="hero" size="lg" className="group shadow-xl shadow-indigo-500/20 bg-white text-indigo-950 hover:bg-gray-100" asChild>
-                        <a href="/command-center">
+                        <Link to="/command-center">
                             Explore the Command Center
                             <ArrowRight className="w-4 h-4 ml-2" />
-                        </a>
+                        </Link>
                     </Button>
                 </motion.div>
             </div>

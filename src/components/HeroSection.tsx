@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import heroVideo from "@/assets/hero.mp4";
 import heroPoster from "@/assets/hero-visual.jpg";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
@@ -9,6 +9,27 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1024px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || isMobile) return;
+    const tryPlay = () => {
+      video.play().catch(() => {});
+    };
+    video.addEventListener("loadeddata", tryPlay);
+    tryPlay();
+    return () => video.removeEventListener("loadeddata", tryPlay);
+  }, [isMobile]);
   const isInView = useInView(ref, { once: false, margin: "-10%" });
 
   const textVariants = {
@@ -284,17 +305,28 @@ const HeroSection = () => {
             className="relative w-full lg:scale-110 lg:translate-x-4"
           >
             <div className="relative aspect-[16/10] sm:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
-              {/* Video with enhanced effects */}
-              <video
-                src={heroVideo}
-                poster={heroPoster}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-              />
+              {/* Video on desktop, static image on mobile */}
+              {isMobile ? (
+                <img
+                  src={heroPoster}
+                  alt="AI-powered business automation"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <video
+                  ref={videoRef}
+                  src={heroVideo}
+                  poster={heroPoster}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  // @ts-ignore — needed for older iOS Safari
+                  webkit-playsinline="true"
+                  preload="auto"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+              )}
 
               {/* Enhanced overlays */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-accent/30 mix-blend-overlay" />
