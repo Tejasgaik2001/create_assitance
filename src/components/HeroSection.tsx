@@ -33,15 +33,6 @@ const HeroSection = () => {
     video.setAttribute("webkit-playsinline", "true");
     video.setAttribute("muted", "");
 
-    if (isMobile) {
-      // On iOS Safari, load metadata so the poster/first-frame shows.
-      // Don't autoplay — let the user tap the native controls to play.
-      if (video.readyState === 0) {
-        video.load();
-      }
-      return;
-    }
-
     video.autoplay = true;
 
     let played = false;
@@ -51,7 +42,7 @@ const HeroSection = () => {
       const p = video.play();
       if (p !== undefined) {
         p.then(() => { played = true; }).catch(() => {
-          // Safari still blocked — try again on user interaction
+          // Autoplay blocked — try again on first user interaction
           const resumeOnce = () => {
             video.muted = true;
             video.play().catch(() => {});
@@ -72,7 +63,7 @@ const HeroSection = () => {
     // If already buffered enough, play immediately
     if (video.readyState >= 2) tryPlay();
 
-    // Safari fallback: retry after a short delay
+    // Safari/mobile fallback: retry after a short delay
     const safariRetry = setTimeout(() => {
       if (video.paused) tryPlay();
     }, 1500);
@@ -367,8 +358,8 @@ const HeroSection = () => {
                 // @ts-ignore – webkit vendor attribute for older iOS Safari
                 webkit-playsinline="true"
                 controls={isMobile}
-                autoPlay={!isMobile}
-                preload={isMobile ? "metadata" : "auto"}
+                autoPlay
+                preload="auto"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
 
