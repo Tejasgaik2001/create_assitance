@@ -32,18 +32,17 @@ const HeroSection = () => {
     video.setAttribute("playsinline", "true");
     video.setAttribute("webkit-playsinline", "true");
     video.setAttribute("muted", "");
-    video.autoplay = true;
-
-    // Set src directly — Safari is unreliable with <source> children for autoplay
-    if (!video.src || !video.src.includes("hero")) {
-      video.src = heroVideo;
-    }
 
     if (isMobile) {
-      // On iOS Safari, don't call load() — it resets the poster to a black box.
-      // Just ensure muted+playsinline are set and let the user tap to play.
+      // On iOS Safari, load metadata so the poster/first-frame shows.
+      // Don't autoplay — let the user tap the native controls to play.
+      if (video.readyState === 0) {
+        video.load();
+      }
       return;
     }
+
+    video.autoplay = true;
 
     let played = false;
     const tryPlay = () => {
@@ -357,6 +356,7 @@ const HeroSection = () => {
             className="relative w-full max-w-full lg:scale-105 lg:translate-x-2"
           >
             <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
+              {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
               <video
                 ref={videoRef}
                 poster={heroPoster}
@@ -364,9 +364,11 @@ const HeroSection = () => {
                 loop
                 muted
                 playsInline
+                // @ts-ignore – webkit vendor attribute for older iOS Safari
+                webkit-playsinline="true"
                 controls={isMobile}
                 autoPlay={!isMobile}
-                preload={isMobile ? "none" : "auto"}
+                preload={isMobile ? "metadata" : "auto"}
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
 
