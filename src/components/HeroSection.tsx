@@ -357,7 +357,6 @@ const HeroSection = () => {
                 playsInline
                 // @ts-ignore – webkit vendor attribute for older iOS Safari
                 webkit-playsinline="true"
-                controls={isMobile}
                 autoPlay
                 preload="auto"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
