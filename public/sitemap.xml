@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://createassistants.vercel.app/</loc>
+    <loc>https://createassistants.ai/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://createassistants.vercel.app/how-it-works</loc>
+    <loc>https://createassistants.ai/how-it-works</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://createassistants.vercel.app/what-you-get</loc>
+    <loc>https://createassistants.ai/what-you-get</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://createassistants.vercel.app/ai-employees</loc>
+    <loc>https://createassistants.ai/ai-employees</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://createassistants.vercel.app/command-center</loc>
+    <loc>https://createassistants.ai/command-center</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://createassistants.vercel.app/why-create-assistants</loc>
+    <loc>https://createassistants.ai/why-create-assistants</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

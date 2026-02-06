@@ -24,7 +24,7 @@ const faqs = [
   {
     question: "Do you integrate with our existing tools?",
     answer:
-      "Absolutely. We specialize in integrating with your existing tech stack—CRMs, email platforms, calendars, and more. Our goal is to eliminate silos, not create new ones.",
+      "Yes—where it matters. We integrate essential tools like Stripe and email, Our goal is to eliminate extra subscriptions by replacing multiple tools with one unified platform.",
   },
   {
     question: "What kind of support do you provide after launch?",

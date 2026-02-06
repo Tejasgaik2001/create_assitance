@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import heroImage from "@/assets/generated/humanized-tech-team.png";
 import leadCaptureImg from "@/assets/generated/lead-capture-v2.png";
 import efficiencyImg from "@/assets/generated/conversion-growth.png";
+import effiImg from "@/assets/generated/eficciancy.jpg";
 import scalabilityImg from "@/assets/external/scalability.jpg";
 import service247Img from "@/assets/external/24-7-service.jpg";
 import instantResponsesImg from "@/assets/external/instant-responses.jpg";
@@ -58,8 +59,8 @@ const AIEmployees = () => {
       icon: Clock,
     },
     {
-      title: "Take Payments",
-      description: "Take payments when appropriate, integrating seamlessly with your CRM.",
+      title: "Execute Actions",
+      description: "Automate contact workflows, track deal closure time, trigger system-wide actions seamlessly",
       icon: Shield,
     },
     {
@@ -78,7 +79,7 @@ const AIEmployees = () => {
     {
       title: "Efficiency",
       description: "Free your staff from repetitive tasks and focus on growing your business.",
-      image: efficiencyImg,
+      image: effiImg,
     },
     {
       title: "Conversion",
