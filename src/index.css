@@ -218,12 +218,6 @@
   .h-screen {
     height: -webkit-fill-available !important;
   }
-
-  /* Safari: overflow hidden + border-radius clipping on transformed elements */
-  .overflow-hidden {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-  }
 }
 
 /* Ensure -webkit-mask-image is always applied alongside mask-image */

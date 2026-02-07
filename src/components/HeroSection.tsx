@@ -37,7 +37,7 @@ const HeroSection = () => {
     return () => clearTimeout(id);
   }, [isMobile, videoSrc]);
 
-  const isInView = useInView(ref, { once: false, margin: "-10%" });
+  const isInView = useInView(ref, { once: true });
 
   useEffect(() => {
     const video = videoRef.current;
@@ -358,7 +358,7 @@ const HeroSection = () => {
             }}
             className="relative w-full max-w-full lg:scale-105 lg:translate-x-2"
           >
-            <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group" style={{ isolation: 'isolate', WebkitTransform: 'translateZ(0)' }}>
+            <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group" style={{ isolation: 'isolate' }}>
               {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
               <video
                 ref={videoRef}
