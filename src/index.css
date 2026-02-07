@@ -101,11 +101,16 @@
     @apply border-border;
   }
 
-  html {}
+  html {
+    /* Fix iOS Safari 100vh — includes address bar height */
+    height: -webkit-fill-available;
+  }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
   }
 }
 
@@ -201,5 +206,29 @@
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     @apply bg-white/40;
+  }
+}
+
+/* ── Safari Responsive Fixes ── */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari: fix 100vh including address bar */
+  .min-h-screen {
+    min-height: -webkit-fill-available !important;
+  }
+  .h-screen {
+    height: -webkit-fill-available !important;
+  }
+
+  /* Safari: overflow hidden + border-radius clipping on transformed elements */
+  .overflow-hidden {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+/* Ensure -webkit-mask-image is always applied alongside mask-image */
+@layer utilities {
+  [style*="mask-image"] {
+    -webkit-mask-image: var(--tw-mask-image, inherit);
   }
 }

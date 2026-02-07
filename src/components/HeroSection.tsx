@@ -28,13 +28,14 @@ const HeroSection = () => {
       return;
     }
     // On mobile, wait until page is interactive to avoid blocking first paint
-    const id = requestIdleCallback
-      ? requestIdleCallback(() => setVideoSrc(heroVideo), { timeout: 2000 })
-      : setTimeout(() => setVideoSrc(heroVideo), 1500) as unknown as number;
-    return () => {
-      if (requestIdleCallback) cancelIdleCallback(id);
-      else clearTimeout(id);
-    };
+    // Safari does not support requestIdleCallback — use setTimeout fallback
+    const hasRIC = typeof window.requestIdleCallback === 'function';
+    if (hasRIC) {
+      const id = window.requestIdleCallback(() => setVideoSrc(heroVideo), { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(() => setVideoSrc(heroVideo), 1500);
+    return () => clearTimeout(id);
   }, [isMobile]);
 
   const isInView = useInView(ref, { once: false, margin: "-10%" });
@@ -132,7 +133,7 @@ const HeroSection = () => {
         />
 
         {/* Premium grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" style={{ WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, #000 70%, transparent 110%)', maskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, #000 70%, transparent 110%)' }} />
       </div>
 
       {/* Floating Demo Invitation - Hidden per request (Demo is mobile-only) */}
@@ -362,7 +363,7 @@ const HeroSection = () => {
             }}
             className="relative w-full max-w-full lg:scale-105 lg:translate-x-2"
           >
-            <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
+            <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group" style={{ isolation: 'isolate', WebkitTransform: 'translateZ(0)' }}>
               {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
               <video
                 ref={videoRef}
