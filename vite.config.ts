@@ -17,17 +17,16 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    dedupe: ["three", "react", "react-dom"],
+    dedupe: ["react", "react-dom"],
   },
   optimizeDeps: {
-    include: ["three", "framer-motion"],
+    include: ["framer-motion"],
   },
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
           'vendor-react': ['react', 'react-dom', 'react-router-dom', 'scheduler'],
-          'vendor-three': ['three', '@react-three/fiber', '@react-three/drei'],
           'vendor-motion': ['framer-motion'],
           'vendor-radix': [
             '@radix-ui/react-accordion',
@@ -39,8 +38,7 @@ export default defineConfig(({ mode }) => ({
             '@radix-ui/react-toast',
             '@radix-ui/react-tooltip',
           ],
-          'vendor-icons': ['lucide-react', 'react-icons'],
-          'vendor-charts': ['recharts'],
+          'vendor-icons': ['lucide-react'],
         },
       },
     },
