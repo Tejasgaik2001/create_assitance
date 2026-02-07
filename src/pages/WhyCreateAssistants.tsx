@@ -9,14 +9,14 @@ import { cn } from '../lib/utils';
 import { MagneticWrapper } from '@/components/MagneticWrapper';
 import { handleBookingRedirect } from '@/utils/navigation';
 import discoveryImg from '@/assets/external/discovery.jpg';
-import buildTrainImg from '@/assets/external/integration-dashboard.jpg';
-import launchImg from '@/assets/generated/launch-success.png';
+import buildTrainImg from '@/assets/external/integration-dashboard.webp';
+import launchImg from '@/assets/generated/launch-success.webp';
 import managementImg from '@/assets/external/ai-strategy.jpg';
 import tuckerBernImg from '@/assets/external/tucker-bern.webp';
 import tylerVanarkelImg from '@/assets/external/tyler-vanarkel.webp';
 import randyBernImg from '@/assets/external/randy-bern.webp';
-import craigJackmanImg from '@/assets/external/craig-jackman.png';
-import ryanGoldImg from '@/assets/external/ryan-gold.png';
+import craigJackmanImg from '@/assets/external/craig-jackman.webp';
+import ryanGoldImg from '@/assets/external/ryan-gold.webp';
 
 const MobileTeamMember = ({ member }: { member: any }) => {
   const [isExpanded, setIsExpanded] = useState(false);

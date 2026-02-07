@@ -4,7 +4,7 @@ import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import heroVideo from "@/assets/hero.mp4";
 // Use public/ URL to match the <link rel="preload"> in index.html
-const heroPoster = "/hero-visual.jpg";
+const heroPoster = "/hero-visual.webp";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 
@@ -369,6 +369,8 @@ const HeroSection = () => {
                 ref={videoRef}
                 poster={heroPoster}
                 src={videoSrc}
+                width={1280}
+                height={720}
                 loop
                 muted
                 playsInline

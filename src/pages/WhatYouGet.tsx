@@ -8,9 +8,9 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { useRef, useState } from "react";
 import { AssemblingWord } from "@/components/ui/AssemblingWord";
 import { cn } from "@/lib/utils";
-import businessSystemImg from "@/assets/external/crm-dashboard-premium.png";
-import smartConversationsImg from "@/assets/external/ai-voice-assistant.png";
-import whiteGloveImg from "@/assets/external/white-glove-service.png";
+import businessSystemImg from "@/assets/external/crm-dashboard-premium.webp";
+import smartConversationsImg from "@/assets/external/ai-voice-assistant.webp";
+import whiteGloveImg from "@/assets/external/white-glove-service.webp";
 
 // Scroll-linked section wrapper
 const ScrollSection = ({

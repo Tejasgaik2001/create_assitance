@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import aiHero from "@/assets/ai-hero.png";
+import aiHero from "@/assets/ai-hero.webp";
 import aiVoice from "@/assets/ai-voice.jpg";
 import crmDashboard from "@/assets/crm-dashboard.jpg";
 import automation from "@/assets/automation.jpg";

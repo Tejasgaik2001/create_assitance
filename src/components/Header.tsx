@@ -60,6 +60,8 @@ const Header = () => {
               <motion.img
                 src={currentLogo}
                 alt="Create Assistants Logo"
+                width={36}
+                height={36}
                 className="w-9 h-9 object-contain p-1"
                 whileHover={{ rotate: 5 }}
                 transition={{ type: "spring", stiffness: 400 }}
@@ -89,6 +91,8 @@ const Header = () => {
                 <img
                   src={currentLogo}
                   alt="Create Assistants Logo"
+                  width={32}
+                  height={32}
                   className="w-8 h-8 object-contain p-1"
                 />
               </Link>
