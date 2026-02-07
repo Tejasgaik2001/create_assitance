@@ -86,6 +86,30 @@
 
   <body>
     <div id="root"></div>
+    <!-- Safari: polyfill requestIdleCallback (React scheduler needs it) -->
+    <script>
+      if (!window.requestIdleCallback) {
+        window.requestIdleCallback = function (cb, options) {
+          var timeout = (options && options.timeout) || 50;
+          return setTimeout(function () {
+            var start = Date.now();
+            cb({
+              didTimeout: false,
+              timeRemaining: function () {
+                return Math.max(0, timeout - (Date.now() - start));
+              }
+            });
+          }, timeout);
+        };
+      }
+      if (!window.cancelIdleCallback) {
+        window.cancelIdleCallback = function (id) {
+          clearTimeout(id);
+        };
+      }
+      // Safari: prevent scroll blocking during JS execution
+      document.addEventListener('touchstart', function () {}, { passive: true });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
