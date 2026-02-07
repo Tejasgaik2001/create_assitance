@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import heroVideo from "@/assets/hero.mp4";
-import heroPoster from "@/assets/hero-visual.jpg";
+// Use public/ URL to match the <link rel="preload"> in index.html
+const heroPoster = "/hero-visual.jpg";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 
@@ -12,10 +13,11 @@ const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isMobileRef = useRef(window.matchMedia("(max-width: 1024px)").matches);
   const [isMobile, setIsMobile] = useState(isMobileRef.current);
-  // Desktop: set src immediately on first render (no delay). Mobile: defer to avoid blocking first paint.
+  // Mobile: no video src at all (poster only). Desktop: load immediately.
   const [videoSrc, setVideoSrc] = useState<string | undefined>(() =>
     isMobileRef.current ? undefined : heroVideo
   );
+  const [mobileVideoStarted, setMobileVideoStarted] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1024px)");
@@ -24,24 +26,12 @@ const HeroSection = () => {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  // Mobile only: defer video src until page is interactive
-  useEffect(() => {
-    if (!isMobile || videoSrc) return;
-    // Safari does not support requestIdleCallback — use setTimeout fallback
-    const hasRIC = typeof window.requestIdleCallback === 'function';
-    if (hasRIC) {
-      const id = window.requestIdleCallback(() => setVideoSrc(heroVideo), { timeout: 2000 });
-      return () => window.cancelIdleCallback(id);
-    }
-    const id = setTimeout(() => setVideoSrc(heroVideo), 1500);
-    return () => clearTimeout(id);
-  }, [isMobile, videoSrc]);
-
   const isInView = useInView(ref, { once: true });
 
+  // Desktop only: autoplay video
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !videoSrc) return;
+    if (!video || !videoSrc || isMobile) return;
 
     // Safari fix: React's muted JSX attribute doesn't always set the DOM property
     video.muted = true;
@@ -58,7 +48,6 @@ const HeroSection = () => {
       const p = video.play();
       if (p !== undefined) {
         p.then(() => { played = true; }).catch(() => {
-          // Autoplay blocked — try again on first user interaction
           const resumeOnce = () => {
             video.muted = true;
             video.play().catch(() => {});
@@ -71,11 +60,8 @@ const HeroSection = () => {
 
     video.addEventListener("canplay", tryPlay);
     video.addEventListener("loadeddata", tryPlay);
-
-    // If already buffered enough, play immediately
     if (video.readyState >= 2) tryPlay();
 
-    // Safari fallback: retry after a short delay
     const safariRetry = setTimeout(() => {
       if (video.paused) tryPlay();
     }, 1500);
@@ -85,7 +71,24 @@ const HeroSection = () => {
       video.removeEventListener("loadeddata", tryPlay);
       clearTimeout(safariRetry);
     };
-  }, [videoSrc]);
+  }, [videoSrc, isMobile]);
+
+  // Mobile: load + play video only when user taps play
+  const handleMobilePlay = () => {
+    if (!isMobile) return;
+    setVideoSrc(heroVideo);
+    setMobileVideoStarted(true);
+    // Wait for src to be set, then play
+    requestAnimationFrame(() => {
+      const video = videoRef.current;
+      if (!video) return;
+      video.muted = true;
+      video.setAttribute("playsinline", "true");
+      video.setAttribute("webkit-playsinline", "true");
+      video.load();
+      video.play().catch(() => {});
+    });
+  };
 
   const textVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -324,6 +327,8 @@ const HeroSection = () => {
                       <img
                         src={`https://i.pravatar.cc/150?u=${i + 10}`}
                         alt="User"
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover opacity-80"
                       />
                     </div>
@@ -369,10 +374,23 @@ const HeroSection = () => {
                 playsInline
                 // @ts-ignore – webkit vendor attribute for older iOS Safari
                 webkit-playsinline="true"
-                autoPlay
-                preload={isMobile ? "metadata" : "auto"}
+                autoPlay={!isMobile}
+                preload={isMobile ? "none" : "auto"}
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
+
+              {/* Mobile: play button overlay (no autoplay to save CPU) */}
+              {isMobile && !mobileVideoStarted && (
+                <button
+                  onClick={handleMobilePlay}
+                  aria-label="Play video"
+                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/20 backdrop-blur-[2px] transition-opacity"
+                >
+                  <div className="w-16 h-16 rounded-full bg-white/90 shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform">
+                    <Play className="w-7 h-7 text-foreground ml-1" fill="currentColor" />
+                  </div>
+                </button>
+              )}
 
               {/* Enhanced overlays */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-accent/30 mix-blend-overlay" />

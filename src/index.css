@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -218,6 +216,12 @@
   .h-screen {
     height: -webkit-fill-available !important;
   }
+}
+
+/* Skip rendering for off-screen sections until near viewport — reduces TBT on mobile */
+section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
 
 /* Ensure -webkit-mask-image is always applied alongside mask-image */

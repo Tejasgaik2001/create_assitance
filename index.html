@@ -12,20 +12,13 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="theme-color" content="#0B0B0F" />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S6BDQZ7Q22"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
-      gtag('config', 'G-S6BDQZ7Q22');
-    </script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://i.pravatar.cc" />
+    <link rel="preload" as="image" href="/hero-visual.jpg" fetchpriority="high" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" /></noscript>
     <link rel="icon" href="/favicon.ico" />
     <link rel="canonical" href="https://createassistants.ai" />
 
@@ -88,19 +81,31 @@
     <div id="root"></div>
     <!-- Safari: polyfill requestIdleCallback (React scheduler needs it) -->
     <script>
+      var isMobileDevice = /iphone|ipad|ipod|android/i.test(navigator.userAgent);
+
       if (!window.requestIdleCallback) {
-        window.requestIdleCallback = function (cb, options) {
-          var timeout = (options && options.timeout) || 50;
-          return setTimeout(function () {
-            var start = Date.now();
-            cb({
-              didTimeout: false,
-              timeRemaining: function () {
-                return Math.max(0, timeout - (Date.now() - start));
-              }
-            });
-          }, timeout);
-        };
+        if (isMobileDevice) {
+          // Mobile: skip idle scheduling entirely — synchronous is faster on limited CPU
+          window.requestIdleCallback = function (cb) {
+            return setTimeout(function () {
+              cb({ didTimeout: true, timeRemaining: function () { return 0; } });
+            }, 0);
+          };
+        } else {
+          // Desktop Safari: throttled polyfill
+          window.requestIdleCallback = function (cb, options) {
+            var timeout = (options && options.timeout) || 50;
+            return setTimeout(function () {
+              var start = Date.now();
+              cb({
+                didTimeout: false,
+                timeRemaining: function () {
+                  return Math.max(0, timeout - (Date.now() - start));
+                }
+              });
+            }, timeout);
+          };
+        }
       }
       if (!window.cancelIdleCallback) {
         window.cancelIdleCallback = function (id) {
@@ -111,5 +116,20 @@
       document.addEventListener('touchstart', function () {}, { passive: true });
     </script>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Defer Google Analytics to after page load -->
+    <script>
+      window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-S6BDQZ7Q22';
+        s.async = true;
+        document.head.appendChild(s);
+        s.onload = function () {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', 'G-S6BDQZ7Q22');
+        };
+      });
+    </script>
   </body>
 </html>
