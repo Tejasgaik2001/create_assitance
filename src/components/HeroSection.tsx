@@ -10,24 +10,23 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [videoSrc, setVideoSrc] = useState<string | undefined>(undefined);
+  const isMobileRef = useRef(window.matchMedia("(max-width: 1024px)").matches);
+  const [isMobile, setIsMobile] = useState(isMobileRef.current);
+  // Desktop: set src immediately on first render (no delay). Mobile: defer to avoid blocking first paint.
+  const [videoSrc, setVideoSrc] = useState<string | undefined>(() =>
+    isMobileRef.current ? undefined : heroVideo
+  );
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1024px)");
-    setIsMobile(mq.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  // Lazy-load video: on desktop set src immediately; on mobile defer until page is idle
+  // Mobile only: defer video src until page is interactive
   useEffect(() => {
-    if (!isMobile) {
-      setVideoSrc(heroVideo);
-      return;
-    }
-    // On mobile, wait until page is interactive to avoid blocking first paint
+    if (!isMobile || videoSrc) return;
     // Safari does not support requestIdleCallback — use setTimeout fallback
     const hasRIC = typeof window.requestIdleCallback === 'function';
     if (hasRIC) {
@@ -36,7 +35,7 @@ const HeroSection = () => {
     }
     const id = setTimeout(() => setVideoSrc(heroVideo), 1500);
     return () => clearTimeout(id);
-  }, [isMobile]);
+  }, [isMobile, videoSrc]);
 
   const isInView = useInView(ref, { once: false, margin: "-10%" });
 
@@ -70,17 +69,13 @@ const HeroSection = () => {
       }
     };
 
-    // Register listeners BEFORE load() to avoid race condition
-    // Safari sometimes fires loadeddata but not canplay
     video.addEventListener("canplay", tryPlay);
     video.addEventListener("loadeddata", tryPlay);
-
-    video.load();
 
     // If already buffered enough, play immediately
     if (video.readyState >= 2) tryPlay();
 
-    // Safari/mobile fallback: retry after a short delay
+    // Safari fallback: retry after a short delay
     const safariRetry = setTimeout(() => {
       if (video.paused) tryPlay();
     }, 1500);
