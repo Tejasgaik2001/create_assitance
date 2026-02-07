@@ -11,6 +11,7 @@ const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [videoSrc, setVideoSrc] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1024px)");
@@ -20,11 +21,27 @@ const HeroSection = () => {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
+  // Lazy-load video: on desktop set src immediately; on mobile defer until page is idle
+  useEffect(() => {
+    if (!isMobile) {
+      setVideoSrc(heroVideo);
+      return;
+    }
+    // On mobile, wait until page is interactive to avoid blocking first paint
+    const id = requestIdleCallback
+      ? requestIdleCallback(() => setVideoSrc(heroVideo), { timeout: 2000 })
+      : setTimeout(() => setVideoSrc(heroVideo), 1500) as unknown as number;
+    return () => {
+      if (requestIdleCallback) cancelIdleCallback(id);
+      else clearTimeout(id);
+    };
+  }, [isMobile]);
+
   const isInView = useInView(ref, { once: false, margin: "-10%" });
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !videoSrc) return;
 
     // Safari fix: React's muted JSX attribute doesn't always set the DOM property
     video.muted = true;
@@ -32,7 +49,6 @@ const HeroSection = () => {
     video.setAttribute("playsinline", "true");
     video.setAttribute("webkit-playsinline", "true");
     video.setAttribute("muted", "");
-
     video.autoplay = true;
 
     let played = false;
@@ -73,7 +89,7 @@ const HeroSection = () => {
       video.removeEventListener("loadeddata", tryPlay);
       clearTimeout(safariRetry);
     };
-  }, [isMobile]);
+  }, [videoSrc]);
 
   const textVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -351,14 +367,14 @@ const HeroSection = () => {
               <video
                 ref={videoRef}
                 poster={heroPoster}
-                src={heroVideo}
+                src={videoSrc}
                 loop
                 muted
                 playsInline
                 // @ts-ignore – webkit vendor attribute for older iOS Safari
                 webkit-playsinline="true"
                 autoPlay
-                preload="auto"
+                preload={isMobile ? "metadata" : "auto"}
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
 
