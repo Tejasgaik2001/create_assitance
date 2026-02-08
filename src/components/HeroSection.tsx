@@ -7,12 +7,15 @@ import heroVideo from "@/assets/hero.mp4";
 const heroPoster = "/hero-visual.webp";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
+import { shouldEnableAnimations } from "@/utils/safariDetection";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const isMobileRef = useRef(window.matchMedia("(max-width: 1024px)").matches);
   const [isMobile, setIsMobile] = useState(isMobileRef.current);
+  // Safari mobile: disable heavy animations to prevent render blocking
+  const shouldAnimate = shouldEnableAnimations();
   // Mobile: no video src at all (poster only). Desktop: load immediately.
   const [videoSrc, setVideoSrc] = useState<string | undefined>(() =>
     isMobileRef.current ? undefined : heroVideo
@@ -50,7 +53,7 @@ const HeroSection = () => {
         p.then(() => { played = true; }).catch(() => {
           const resumeOnce = () => {
             video.muted = true;
-            video.play().catch(() => {});
+            video.play().catch(() => { });
           };
           document.addEventListener("click", resumeOnce, { once: true });
           document.addEventListener("touchstart", resumeOnce, { once: true });
@@ -86,7 +89,7 @@ const HeroSection = () => {
       video.setAttribute("playsinline", "true");
       video.setAttribute("webkit-playsinline", "true");
       video.load();
-      video.play().catch(() => {});
+      video.play().catch(() => { });
     });
   };
 
@@ -108,25 +111,25 @@ const HeroSection = () => {
     <section ref={ref} className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-20">
       {/* Enhanced Background decoration */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Animated gradient orbs */}
+        {/* Animated gradient orbs - disabled on Safari mobile */}
         <motion.div
-          animate={{
+          animate={shouldAnimate ? {
             x: [0, 50, 0],
             y: [0, 30, 0],
             scale: [1, 1.2, 1],
             opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          } : {}}
+          transition={shouldAnimate ? { duration: 15, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
           className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
         />
         <motion.div
-          animate={{
+          animate={shouldAnimate ? {
             x: [0, -40, 0],
             y: [0, -25, 0],
             scale: [1, 1.15, 1],
             opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          } : {}}
+          transition={shouldAnimate ? { duration: 18, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
           className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
         />
 
@@ -275,10 +278,10 @@ const HeroSection = () => {
                     className="w-full sm:w-auto relative z-10 rounded-full px-8 sm:px-10 h-12 sm:h-14 bg-gradient-to-r from-accent via-primary to-accent text-white shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all text-sm sm:text-base font-bold uppercase tracking-tight overflow-hidden border-none group"
                     onClick={handleBookingRedirect}
                   >
-                    {/* Shimmer effect */}
+                    {/* Shimmer effect - disabled on Safari mobile */}
                     <motion.div
-                      animate={{ x: ["-200%", "200%"] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                      animate={shouldAnimate ? { x: ["-200%", "200%"] } : {}}
+                      transition={shouldAnimate ? { duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 } : { duration: 0 }}
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
                     />
                     <span className="relative z-10 flex items-center justify-center gap-2">
@@ -400,11 +403,11 @@ const HeroSection = () => {
 
               {/* Floating Stats Card - Enhanced */}
               <motion.div
-                animate={{
+                animate={shouldAnimate ? {
                   y: [0, -12, 0],
                   rotate: [-1, 1, -1]
-                }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                } : {}}
+                transition={shouldAnimate ? { duration: 5, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
                 whileHover={{ scale: 1.05, y: -8 }}
                 className="absolute bottom-8 left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2.5rem] p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all hidden sm:block"
               >
@@ -425,11 +428,11 @@ const HeroSection = () => {
 
             {/* Floating particles effect */}
             <motion.div
-              animate={{
+              animate={shouldAnimate ? {
                 scale: [1, 1.3, 1],
                 opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              } : {}}
+              transition={shouldAnimate ? { duration: 4, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
               className="absolute -top-10 -right-10 w-40 h-40 bg-primary/30 rounded-full blur-3xl"
             />
           </motion.div>
