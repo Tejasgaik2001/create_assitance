@@ -1,6 +1,6 @@
 import { motion, HTMLMotionProps } from "framer-motion";
 import { useMagneticEffect } from "@/hooks/useMagneticEffect";
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 interface MagneticWrapperProps extends HTMLMotionProps<"div"> {
@@ -15,6 +15,22 @@ export const MagneticWrapper = ({
     style,
     ...props
 }: MagneticWrapperProps) => {
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    // Check if screen is desktop (lg breakpoint: 1024px and above)
+    useEffect(() => {
+        const checkIsDesktop = () => {
+            setIsDesktop(window.innerWidth >= 1024);
+        };
+
+        // Initial check
+        checkIsDesktop();
+
+        // Listen for resize
+        window.addEventListener('resize', checkIsDesktop);
+        return () => window.removeEventListener('resize', checkIsDesktop);
+    }, []);
+
     const magnetic = useMagneticEffect({ strength });
 
     return (
@@ -23,11 +39,12 @@ export const MagneticWrapper = ({
             {...props}
             style={{
                 ...style,
-                x: magnetic.x,
-                y: magnetic.y
+                // Only apply magnetic effect on desktop
+                x: isDesktop ? magnetic.x : 0,
+                y: isDesktop ? magnetic.y : 0
             }}
-            onMouseMove={magnetic.handleMouseMove}
-            onMouseLeave={magnetic.handleMouseLeave}
+            onMouseMove={isDesktop ? magnetic.handleMouseMove : undefined}
+            onMouseLeave={isDesktop ? magnetic.handleMouseLeave : undefined}
         >
             {children}
         </motion.div>
