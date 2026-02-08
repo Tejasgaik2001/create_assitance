@@ -218,6 +218,28 @@
   }
 }
 
+/* ── Backdrop-Filter Fallback for Safari ── */
+@supports not (backdrop-filter: blur(10px)) {
+  /* Provide solid background when backdrop-filter is unsupported */
+  .backdrop-blur-xl,
+  .backdrop-blur-3xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-md,
+  .backdrop-blur-sm,
+  .backdrop-blur {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: hsl(var(--background) / 0.95) !important;
+  }
+  
+  /* Glass card fallback */
+  .glass-card {
+    background-color: hsl(var(--card) / 0.95) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
 /* Skip rendering for off-screen sections until near viewport — reduces TBT on mobile */
 section:not(:first-of-type) {
   content-visibility: auto;

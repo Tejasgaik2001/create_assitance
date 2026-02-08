@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => ({
     include: ["framer-motion"],
   },
   build: {
-    target: 'es2020',
+    target: ['es2015', 'safari11'],
     cssCodeSplit: true,
     minify: 'terser',
     terserOptions: {
