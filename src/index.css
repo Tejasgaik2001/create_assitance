@@ -15,7 +15,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 8%;
 
-    --primary: 48, 85%, 40%;
+    --primary: 48 85% 40%;
     --primary-foreground: 0 0% 8%;
 
     --secondary: 0 0% 96%;
@@ -114,7 +114,10 @@
 
 @layer components {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient py-1;
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text bg-[length:200%_auto] animate-gradient py-1;
+    color: hsl(var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-box-decoration-break: clone;
@@ -122,6 +125,23 @@
     transform: translateZ(0);
     will-change: transform, background-position;
     -webkit-font-smoothing: antialiased;
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .text-gradient {
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    .text-gradient {
+      background-image: none !important;
+      -webkit-background-clip: border-box !important;
+      background-clip: border-box !important;
+      color: hsl(var(--foreground)) !important;
+      -webkit-text-fill-color: currentColor !important;
+    }
   }
 
   .hero-headline {

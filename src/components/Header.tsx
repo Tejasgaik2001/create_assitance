@@ -14,8 +14,8 @@ import ThemeToggle from "./ThemeToggle";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo.gif";
-import logoWhite from "@/assets/logo_white.png";
+import logoBlack from "@/assets/logo_black.webp";
+import logoWhite from "@/assets/logo_white.webp";
 import { useTheme } from "@/hooks/useTheme";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
@@ -48,7 +48,7 @@ const Header = () => {
   const location = useLocation();
   const { theme } = useTheme();
 
-  const currentLogo = theme === "dark" ? logoWhite : logo;
+  const currentLogo = theme === "dark" ? logoWhite : logoBlack;
 
   return (
     <div className="fixed top-0 left-0 w-full z-50">

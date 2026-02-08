@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo.gif";
+import logo from "@/assets/logo_black.webp";
 
 const BookACall = () => {
   return (

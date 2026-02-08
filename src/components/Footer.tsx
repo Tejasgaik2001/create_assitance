@@ -2,8 +2,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Facebook, Mail, Phone, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "@/assets/logo.gif";
-import logoWhite from "@/assets/logo_white.png";
+import logoBlack from "@/assets/logo_black.webp";
+import logoWhite from "@/assets/logo_white.webp";
 import { useTheme } from "@/hooks/useTheme";
 import { BOOKING_URL } from "@/utils/navigation";
 
@@ -47,7 +47,7 @@ const Footer = () => {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const { theme } = useTheme();
 
-  const currentLogo = theme === "dark" ? logoWhite : logo;
+  const currentLogo = theme === "dark" ? logoWhite : logoBlack;
 
   return (
     <footer ref={ref} className="py-12 lg:py-20 border-t border-border relative overflow-hidden">

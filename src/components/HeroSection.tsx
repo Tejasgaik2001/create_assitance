@@ -4,7 +4,7 @@ import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import heroVideo from "@/assets/hero.mp4";
 // Use public/ URL to match the <link rel="preload"> in index.html
-const heroPoster = "/hero-visual.webp";
+const heroPoster = "/hero-visual-small.webp";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { shouldEnableAnimations } from "@/utils/safariDetection";
