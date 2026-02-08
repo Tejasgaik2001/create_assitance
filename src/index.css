@@ -266,6 +266,14 @@ section:not(:first-of-type) {
   contain-intrinsic-size: auto 800px;
 }
 
+@media (max-width: 1024px) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
+}
+
 /* Ensure -webkit-mask-image is always applied alongside mask-image */
 @layer utilities {
   [style*="mask-image"] {

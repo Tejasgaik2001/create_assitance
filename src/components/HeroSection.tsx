@@ -7,7 +7,7 @@ import heroVideo from "@/assets/hero.mp4";
 const heroPoster = "/hero-visual-small.webp";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
-import { shouldEnableAnimations } from "@/utils/safariDetection";
+import { isSafari, shouldEnableAnimations } from "@/utils/safariDetection";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -446,7 +446,7 @@ const HeroSection = () => {
       <motion.div
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-        onClick={() => document.getElementById("intro")?.scrollIntoView({ behavior: "smooth" })}
+        onClick={() => document.getElementById("intro")?.scrollIntoView({ behavior: isSafari() ? "auto" : "smooth" })}
         className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none hidden lg:flex z-20 group"
       >
         <div className="w-px h-16 sm:h-20 bg-gradient-to-b from-primary via-accent to-transparent group-hover:from-accent group-hover:via-primary transition-colors" />

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { isSafari } from "@/utils/safariDetection";
 
 export const ScrollToTopButton = ({ onClick }: { onClick: () => void }) => (
     <motion.button
@@ -46,7 +47,7 @@ export const ScrollToTop = () => {
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
-            behavior: "smooth",
+            behavior: isSafari() ? "auto" : "smooth",
         });
     };
 

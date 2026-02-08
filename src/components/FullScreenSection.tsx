@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ReactNode, useEffect, useState, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { ScrollToTopButton } from "./ScrollToTop";
+import { isSafari } from "@/utils/safariDetection";
 
 interface SnapSectionProps {
     children: ReactNode;
@@ -34,10 +35,10 @@ export const SnapContainer = ({ children, className }: SnapContainerProps) => {
     return (
         <div
             className={cn(
-                "h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth",
+                "h-screen overflow-y-scroll snap-y snap-mandatory",
                 className
             )}
-            style={{ scrollBehavior: "smooth" }}
+            style={{ scrollBehavior: isSafari() ? "auto" : "smooth" }}
         >
             {children}
         </div>
