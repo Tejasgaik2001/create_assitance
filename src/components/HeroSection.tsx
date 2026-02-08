@@ -16,11 +16,10 @@ const HeroSection = () => {
   const [isMobile, setIsMobile] = useState(isMobileRef.current);
   // Safari mobile: disable heavy animations to prevent render blocking
   const shouldAnimate = shouldEnableAnimations();
-  // Mobile: no video src at all (poster only). Desktop: load immediately.
-  const [videoSrc, setVideoSrc] = useState<string | undefined>(() =>
-    isMobileRef.current ? undefined : heroVideo
-  );
-  const [mobileVideoStarted, setMobileVideoStarted] = useState(false);
+  // Always set src so we can attempt autoplay on all devices (iOS Safari allows muted+inline autoplay).
+  // If autoplay is blocked, we show a tap-to-play overlay as a fallback.
+  const [videoSrc, setVideoSrc] = useState<string | undefined>(() => heroVideo);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1024px)");
@@ -31,10 +30,10 @@ const HeroSection = () => {
 
   const isInView = useInView(ref, { once: true });
 
-  // Desktop only: autoplay video
+  // Autoplay video (desktop + mobile). On iOS, this requires muted + playsInline.
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !videoSrc || isMobile) return;
+    if (!video || !videoSrc) return;
 
     // Safari fix: React's muted JSX attribute doesn't always set the DOM property
     video.muted = true;
@@ -50,7 +49,11 @@ const HeroSection = () => {
       video.muted = true;
       const p = video.play();
       if (p !== undefined) {
-        p.then(() => { played = true; }).catch(() => {
+        p.then(() => {
+          played = true;
+          setAutoplayBlocked(false);
+        }).catch(() => {
+          setAutoplayBlocked(true);
           const resumeOnce = () => {
             video.muted = true;
             video.play().catch(() => { });
@@ -74,13 +77,13 @@ const HeroSection = () => {
       video.removeEventListener("loadeddata", tryPlay);
       clearTimeout(safariRetry);
     };
-  }, [videoSrc, isMobile]);
+  }, [videoSrc]);
 
   // Mobile: load + play video only when user taps play
   const handleMobilePlay = () => {
     if (!isMobile) return;
     setVideoSrc(heroVideo);
-    setMobileVideoStarted(true);
+    setAutoplayBlocked(false);
     // Wait for src to be set, then play
     requestAnimationFrame(() => {
       const video = videoRef.current;
@@ -379,13 +382,13 @@ const HeroSection = () => {
                 playsInline
                 // @ts-ignore – webkit vendor attribute for older iOS Safari
                 webkit-playsinline="true"
-                autoPlay={!isMobile}
-                preload={isMobile ? "none" : "auto"}
+                autoPlay
+                preload="auto"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
 
               {/* Mobile: play button overlay (no autoplay to save CPU) */}
-              {isMobile && !mobileVideoStarted && (
+              {isMobile && autoplayBlocked && (
                 <button
                   onClick={handleMobilePlay}
                   aria-label="Play video"
