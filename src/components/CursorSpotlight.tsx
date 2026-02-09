@@ -48,7 +48,7 @@ export const CursorSpotlight = ({
             className={`pointer-events-none fixed inset-0 z-0 ${className}`}
             style={{
                 background: `radial-gradient(${size}px circle at var(--mouse-x) var(--mouse-y), hsl(var(--primary) / ${opacity}), transparent 40%)`,
-                // @ts-ignore - CSS custom properties
+                // @ts-expect-error - CSS custom properties
                 "--mouse-x": cursorXSpring,
                 "--mouse-y": cursorYSpring,
             }}
