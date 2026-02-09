@@ -681,56 +681,75 @@ const CommandCenter = () => {
 
     // Unified CRM & Marketing Hub
     <section key="features" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500">
-      {/* Animated gold/Accent Gradient Background */}
+      {/* Gradient Background - animated on desktop, static on mobile */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <m.div
-          animate={{
-            x: [0, 30, 0],
-            y: [0, 20, 0],
-            scale: [1, 1.15, 1],
-            opacity: [0.15, 0.25, 0.15]
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-[100px]"
-        />
-        <m.div
-          animate={{
-            x: [0, -25, 0],
-            y: [0, -15, 0],
-            scale: [1.1, 1, 1.1],
-            opacity: [0.1, 0.2, 0.1]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-[120px]"
-        />
+        {!isMobile ? (
+          <>
+            <m.div
+              animate={{
+                x: [0, 30, 0],
+                y: [0, 20, 0],
+                scale: [1, 1.15, 1],
+                opacity: [0.15, 0.25, 0.15]
+              }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-[100px]"
+            />
+            <m.div
+              animate={{
+                x: [0, -25, 0],
+                y: [0, -15, 0],
+                scale: [1.1, 1, 1.1],
+                opacity: [0.1, 0.2, 0.1]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-[120px]"
+            />
+          </>
+        ) : (
+          <>
+            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-3xl opacity-10" />
+            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-3xl opacity-5" />
+          </>
+        )}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection direction="up" className="text-center mb-16">
           <h2 className="section-headline mb-6 flex flex-wrap justify-center gap-x-3 gap-y-1">
-            {/* Staggered Letter Animation for Title */}
-            {"Unified CRM & Marketing Hub".split(" ").map((word, wordIndex) => (
-              <span key={wordIndex} className="inline-block whitespace-nowrap">
-                {word.split("").map((char, charIndex) => (
-                  <m.span
-                    key={charIndex}
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: (wordIndex * 0.1) + (charIndex * 0.03),
-                      ease: "easeOut"
-                    }}
-                    className={cn(
-                      "inline-block py-2",
-                      (["CRM", "Marketing", "&"].includes(word)) ? "text-gradient" : ""
-                    )}
-                  >
-                    {char}
-                  </m.span>
-                ))}
-              </span>
-            ))}
+            {/* Simplified on mobile, staggered animation on desktop */}
+            {!isMobile ? (
+              // Desktop: Staggered letter animation
+              "Unified CRM & Marketing Hub".split(" ").map((word, wordIndex) => (
+                <span key={wordIndex} className="inline-block whitespace-nowrap">
+                  {word.split("").map((char, charIndex) => (
+                    <m.span
+                      key={charIndex}
+                      initial={{ opacity: 0, y: -20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.3,
+                        delay: (wordIndex * 0.1) + (charIndex * 0.03),
+                        ease: "easeOut"
+                      }}
+                      className={cn(
+                        "inline-block py-2",
+                        (["CRM", "Marketing", "&"].includes(word)) ? "text-gradient" : ""
+                      )}
+                    >
+                      {char}
+                    </m.span>
+                  ))}
+                </span>
+              ))
+            ) : (
+              // Mobile: Simple text without animation
+              <>
+                <span>Unified </span>
+                <span className="text-gradient">CRM & Marketing</span>
+                <span> Hub</span>
+              </>
+            )}
           </h2>
         </AnimatedSection>
 

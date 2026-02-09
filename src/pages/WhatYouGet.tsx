@@ -268,7 +268,7 @@ const WhatYouGet = () => {
               </h1>
 
               <p className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium mb-10">
-                You don't need another app; you need a system that works. Create Assistants combines a powerful business
+                You don't need another app, you need a system that works. Create Assistants combines a powerful business
                 operating system, human-like AI employees and hands-on support.
               </p>
             </m.div>
