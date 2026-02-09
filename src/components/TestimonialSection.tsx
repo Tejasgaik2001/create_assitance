@@ -1,15 +1,15 @@
 import { m, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { Quote, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { handleBookingRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 const TestimonialSection = () => {
-  const ref = useRef(null);
   const isMobile = useIsMobile();
+  const ref = useRef(null);
   const isInView = useInView(ref, { once: isMobile, margin: "-20%" });
 
   return (
@@ -37,8 +37,8 @@ const TestimonialSection = () => {
 
           {/* Testimonial Quote */}
           <m.blockquote
-            initial={{ opacity: 0, filter: "blur(10px)", y: 30 }}
-            animate={isInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(10px)", y: 30 }}
+            initial={{ opacity: 0, filter: isMobile ? "blur(0px)" : "blur(10px)", y: 30 }}
+            animate={isInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: isMobile ? "blur(0px)" : "blur(10px)", y: 30 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.3] sm:leading-[1.2] tracking-tight mb-8 sm:mb-12 uppercase italic"
           >

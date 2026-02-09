@@ -17,6 +17,7 @@ import consolidatedNexusImg from "@/assets/external/consolidated-nexus.jpg";
 import cubesImg from "@/assets/external/cubes.png";
 import { useRef, useState } from "react";
 import { handleBookingRedirect } from "@/utils/navigation";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const DropInHoverText = ({ text, trigger, className, highlightClass = "text-accent" }: { text: string; trigger: boolean; className?: string; highlightClass?: string }) => {
   return (
@@ -444,6 +445,7 @@ const JourneyStep = ({ item, index }: { item: any; index: number }) => {
 };
 
 const CommandCenter = () => {
+  const isMobile = useIsMobile();
   const features = [
     {
       title: "Capture & Manage Leads",
@@ -528,30 +530,39 @@ const CommandCenter = () => {
     <section key="hero" className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-16 pb-12 lg:pt-0 lg:pb-0 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       {/* Enhanced Background decoration from HeroSection */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Animated gradient orbs */}
-        <m.div
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
-        />
-        <m.div
-          animate={{
-            x: [0, -40, 0],
-            y: [0, -25, 0],
-            scale: [1, 1.15, 1],
-            opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
-        />
+        {/* Gradient orbs - animated on desktop, static on mobile */}
+        {!isMobile ? (
+          <>
+            <m.div
+              animate={{
+                x: [0, 50, 0],
+                y: [0, 30, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+            />
+            <m.div
+              animate={{
+                x: [0, -40, 0],
+                y: [0, -25, 0],
+                scale: [1, 1.15, 1],
+                opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+            />
+          </>
+        ) : (
+          <>
+            <div className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-20" />
+            <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl opacity-15" />
+          </>
+        )}
 
         {/* Premium grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 w-full">
@@ -591,8 +602,8 @@ const CommandCenter = () => {
             </div>
           </div>
 
-          {/* Right Image (3D Dashboard) */}
-          <div className="relative w-full" style={{ perspective: '1000px' }}>
+          {/* Right Image (3D Dashboard) - Hidden on mobile */}
+          <div className={`relative w-full hidden lg:block`} style={{ perspective: '1000px' }}>
             <m.div
               initial={{ opacity: 0, rotateX: 10, rotateY: -10, scale: 0.9 }}
               animate={{ opacity: 1, rotateX: 5, rotateY: -10, scale: 1 }}
@@ -670,56 +681,75 @@ const CommandCenter = () => {
 
     // Unified CRM & Marketing Hub
     <section key="features" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500">
-      {/* Animated gold/Accent Gradient Background */}
+      {/* Gradient Background - animated on desktop, static on mobile */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <m.div
-          animate={{
-            x: [0, 30, 0],
-            y: [0, 20, 0],
-            scale: [1, 1.15, 1],
-            opacity: [0.15, 0.25, 0.15]
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-[100px]"
-        />
-        <m.div
-          animate={{
-            x: [0, -25, 0],
-            y: [0, -15, 0],
-            scale: [1.1, 1, 1.1],
-            opacity: [0.1, 0.2, 0.1]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-[120px]"
-        />
+        {!isMobile ? (
+          <>
+            <m.div
+              animate={{
+                x: [0, 30, 0],
+                y: [0, 20, 0],
+                scale: [1, 1.15, 1],
+                opacity: [0.15, 0.25, 0.15]
+              }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-[100px]"
+            />
+            <m.div
+              animate={{
+                x: [0, -25, 0],
+                y: [0, -15, 0],
+                scale: [1.1, 1, 1.1],
+                opacity: [0.1, 0.2, 0.1]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-[120px]"
+            />
+          </>
+        ) : (
+          <>
+            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-3xl opacity-10" />
+            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-3xl opacity-5" />
+          </>
+        )}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection direction="up" className="text-center mb-16">
           <h2 className="section-headline mb-6 flex flex-wrap justify-center gap-x-3 gap-y-1">
-            {/* Staggered Letter Animation for Title */}
-            {"Unified CRM & Marketing Hub".split(" ").map((word, wordIndex) => (
-              <span key={wordIndex} className="inline-block whitespace-nowrap">
-                {word.split("").map((char, charIndex) => (
-                  <m.span
-                    key={charIndex}
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: (wordIndex * 0.1) + (charIndex * 0.03),
-                      ease: "easeOut"
-                    }}
-                    className={cn(
-                      "inline-block py-2",
-                      (["CRM", "Marketing", "&"].includes(word)) ? "text-gradient" : ""
-                    )}
-                  >
-                    {char}
-                  </m.span>
-                ))}
-              </span>
-            ))}
+            {/* Simplified on mobile, staggered animation on desktop */}
+            {!isMobile ? (
+              // Desktop: Staggered letter animation
+              "Unified CRM & Marketing Hub".split(" ").map((word, wordIndex) => (
+                <span key={wordIndex} className="inline-block whitespace-nowrap">
+                  {word.split("").map((char, charIndex) => (
+                    <m.span
+                      key={charIndex}
+                      initial={{ opacity: 0, y: -20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.3,
+                        delay: (wordIndex * 0.1) + (charIndex * 0.03),
+                        ease: "easeOut"
+                      }}
+                      className={cn(
+                        "inline-block py-2",
+                        (["CRM", "Marketing", "&"].includes(word)) ? "text-gradient" : ""
+                      )}
+                    >
+                      {char}
+                    </m.span>
+                  ))}
+                </span>
+              ))
+            ) : (
+              // Mobile: Simple text without animation
+              <>
+                <span>Unified </span>
+                <span className="text-gradient">CRM & Marketing</span>
+                <span> Hub</span>
+              </>
+            )}
           </h2>
         </AnimatedSection>
 
@@ -746,7 +776,7 @@ const CommandCenter = () => {
     </section>,
 
     // Automations
-     <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
+    <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content: Logic Flow */}
@@ -791,7 +821,7 @@ const CommandCenter = () => {
               </div>
 
               {/* Canvas Area */}
-              <div className="flex-1 p-6 relative bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px]">
+              <div className="flex-1 p-6 relative bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] mobile-hide-bg">
                 {/* Animated Nodes */}
                 <div className="flex flex-col gap-8 relative z-10 h-full justify-center">
 
@@ -904,9 +934,9 @@ const CommandCenter = () => {
         </div>
       </div>
     </section>,
-  <section key="visibility" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+    <section key="visibility" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       {/* Background Grid Decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(219,154,70,0.1)_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-40 dark:opacity-20" />
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(219,154,70,0.1)_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-40 dark:opacity-20 mobile-hide-bg" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 dark:via-accent/50 to-transparent" />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -952,10 +982,10 @@ const CommandCenter = () => {
         </div>
       </div>
     </section>,
-   
+
 
     // Integration
-     <section key="integrations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-20 lg:py-24 relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+    <section key="integrations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-20 lg:py-24 relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content: 3D Image Card */}

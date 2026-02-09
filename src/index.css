@@ -336,5 +336,15 @@ section:not(:first-of-type) {
     transition: none !important;
   }
 
+  /* Hide decorative background grid patterns on mobile for performance */
+  .mobile-hide-bg {
+    background-image: none !important;
+  }
+
+  /* Hide large blur effects on mobile */
+  .mobile-hide-blur {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
 
 }

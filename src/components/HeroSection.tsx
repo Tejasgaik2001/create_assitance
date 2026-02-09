@@ -188,7 +188,7 @@ const HeroSection = () => {
               className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium mx-auto lg:mx-0"
             >
               We build your unified <span className="text-gradient font-bold">AI workforce</span> that captures leads,
-              engages customers, and transforms your business into an <span className="text-gradient font-semibold italic">automated powerhouse</span>.
+              engages customers, and transforms your business into an <span className="text-gradient font-semibold ">automated powerhouse</span>.
             </m.p>
 
             {/* Enhanced CTA Buttons */}
