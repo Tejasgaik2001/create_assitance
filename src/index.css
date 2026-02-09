@@ -325,3 +325,23 @@ section:not(:first-of-type) {
     -webkit-mask-image: var(--tw-mask-image, inherit);
   }
 }
+
+@media (max-width: 1024px) {
+ 
+  /* Disable all CSS animations and transitions on mobile */
+  *:not(.animate-pulse):not(.animate-spin):not([class*="animate-pulse"]):not([class*="animate-spin"]),
+  *:not(.animate-pulse):not(.animate-spin):not([class*="animate-pulse"]):not([class*="animate-spin"])::before,
+  *:not(.animate-pulse):not(.animate-spin):not([class*="animate-pulse"]):not([class*="animate-spin"])::after {
+    animation: none !important;
+    transition: none !important;
+  }
+ 
+  /* Force Framer Motion elements to be visible - only override opacity */
+  /* Don't override transform as it breaks layout positioning */
+  section,
+  section * {
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}
+ 
