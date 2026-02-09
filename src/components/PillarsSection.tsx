@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layers, Bot, HeadphonesIcon, ArrowUpRight } from "lucide-react";
@@ -46,7 +46,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
   const isMobile = useIsMobile();
 
   return (
-    <motion.div
+    <m.div
       ref={cardRef}
       initial={{ opacity: 0, y: 60, scale: 0.95 }}
       animate={isSectionInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 60, scale: 0.95 }}
@@ -86,7 +86,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
 
           {/* Number and Icon Header */}
           <div className="flex sm:flex-col items-center sm:items-start justify-between sm:justify-start mb-6 sm:mb-0">
-            <motion.span
+            <m.span
               whileHover={{ scale: 1.05 }}
               className={isMobile
                 ? "inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-bold text-accent shadow-md sm:mb-6"
@@ -94,9 +94,9 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
               }
             >
               {pillar.number}
-            </motion.span>
+            </m.span>
 
-            <motion.div
+            <m.div
               whileHover={{
                 scale: 1.1,
                 rotate: 5,
@@ -105,7 +105,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
               className="w-16 h-16 bg-gradient-to-br from-foreground to-foreground/80 rounded-2xl flex items-center justify-center mb-0 sm:mb-6 shadow-xl shadow-black/20 group-hover:shadow-primary/30 transition-all duration-500"
             >
               <pillar.icon className="w-8 h-8 text-background" />
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Title with better contrast */}
@@ -120,14 +120,14 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
           </p>
 
           {/* Bottom accent line */}
-          <motion.div
+          <m.div
             initial={{ scaleX: 0 }}
             whileHover={{ scaleX: 1 }}
             className="mt-6 h-1 bg-gradient-to-r from-primary to-accent rounded-full origin-left"
           />
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -144,30 +144,30 @@ const PillarsSection = () => {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16 md:mb-20">
-          <motion.span
+          <m.span
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5 }}
             className="inline-block px-3 sm:px-4 py-1.5 rounded-full bg-primary/10 text-accent border border-primary text-xs sm:text-sm font-medium mb-4 sm:mb-6"
           >
             Our Services
-          </motion.span>
-          <motion.h2
+          </m.span>
+          <m.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6 text-gradient uppercase"
           >
             What We Offer
-          </motion.h2>
-          <motion.p
+          </m.h2>
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-sm sm:text-base lg:text-xl text-muted-foreground max-w-2xl mx-auto font-medium px-4"
           >
             Three pillars that transform how you capture, engage, and convert leads.
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Pillars Grid */}

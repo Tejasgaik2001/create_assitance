@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, useReducedMotion, useInView, useSpring } from "framer-motion";
+import { m, useScroll, useTransform, useReducedMotion, useInView, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BrainCircuit, Headphones, Layers3, CheckCircle } from "lucide-react";
@@ -27,7 +27,7 @@ const ScrollSection = ({
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <motion.section
+    <m.section
       ref={sectionRef}
       id={id}
       initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
@@ -36,7 +36,7 @@ const ScrollSection = ({
       className={className}
     >
       {children}
-    </motion.section>
+    </m.section>
   );
 };
 
@@ -52,7 +52,7 @@ const RoadmapCard = ({ pillar, index }: { pillar: any; index: number }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <motion.div
+      <m.div
         className="relative w-full h-full transition-all duration-700 preserve-3d will-change-transform"
         animate={{ rotateY: isHovered ? 180 : 0 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -104,7 +104,7 @@ const RoadmapCard = ({ pillar, index }: { pillar: any; index: number }) => {
             ))}
           </ul>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Connector Dot for Desktop */}
       <div className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background shadow-lg z-20 hidden md:block
@@ -187,7 +187,7 @@ const WhatYouGet = () => {
 
       {/* Guiding gradient line for page flow */}
       {!prefersReducedMotion && (
-        <motion.div
+        <m.div
           className="fixed left-8 top-0 w-px bg-gradient-to-b from-transparent via-primary/40 to-transparent pointer-events-none z-40 hidden lg:block"
           style={{
             height: guidingLineHeight,
@@ -202,7 +202,7 @@ const WhatYouGet = () => {
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {/* Animated gradient orbs */}
-            <motion.div
+            <m.div
               animate={{
                 x: [0, 50, 0],
                 y: [0, 30, 0],
@@ -213,7 +213,7 @@ const WhatYouGet = () => {
               className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px] backface-hidden"
               style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
             />
-            <motion.div
+            <m.div
               animate={{
                 x: [0, -40, 0],
                 y: [0, -25, 0],
@@ -229,7 +229,7 @@ const WhatYouGet = () => {
             <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
 
             {/* Glowing Data Lines - subtle for this page */}
-            <motion.div
+            <m.div
               animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
               className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent hidden sm:block"
@@ -237,7 +237,7 @@ const WhatYouGet = () => {
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -256,14 +256,7 @@ const WhatYouGet = () => {
                 You don't need another app; you need a system that works. Create Assistants combines a powerful business
                 operating system, human-like AI employees and hands-on support.
               </p>
-
-              {/* <MagneticWrapper strength={0.25}>
-                <Button variant="hero" size="lg" className="group shadow-xl shadow-primary/20">
-                  Explore The Roadmap
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </MagneticWrapper> */}
-            </motion.div>
+            </m.div>
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
         </ScrollSection>
@@ -296,7 +289,7 @@ const WhatYouGet = () => {
                     style={{ strokeDasharray: "4 4" }}
                   />
                   {/* Filling Animation Track - Bright */}
-                  <motion.path
+                  <m.path
                     d="M 25 10 C 25 25, 75 25, 75 50 C 75 75, 25 75, 25 90"
                     fill="none"
                     stroke="url(#snake-gradient)"
@@ -326,7 +319,7 @@ const WhatYouGet = () => {
                       key={pillar.title}
                       className={`md:flex ${isEven ? 'md:justify-start' : 'md:justify-end'} relative md:py-16`}
                     >
-                      <motion.div
+                      <m.div
                         className="md:w-[45%]"
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -334,7 +327,7 @@ const WhatYouGet = () => {
                         transition={{ duration: 0.6, delay: 0.1 }}
                       >
                         <RoadmapCard pillar={pillar} index={index} />
-                      </motion.div>
+                      </m.div>
                     </div>
                   );
                 })}
@@ -347,7 +340,7 @@ const WhatYouGet = () => {
         <ScrollSection className="py-24 relative bg-muted/30 overflow-hidden border-y border-border/40">
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            <motion.div
+            <m.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl backface-hidden"
               style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
             />
@@ -355,7 +348,7 @@ const WhatYouGet = () => {
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -390,7 +383,7 @@ const WhatYouGet = () => {
                     color: "primary"
                   }
                 ].map((item, i) => (
-                  <motion.div
+                  <m.div
                     key={item.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -410,11 +403,11 @@ const WhatYouGet = () => {
                       {item.desc}
                     </p>
                     <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
 
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -424,8 +417,8 @@ const WhatYouGet = () => {
                 <p className="text-lg md:text-xl text-foreground font-medium leading-relaxed">
                   By combining these three pillars, you get <span className="text-accent font-bold">more than a toolkit</span>. You get a complete operating system designed to capture every opportunity and grow with you.
                 </p>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           </div>
         </ScrollSection>
 
@@ -433,11 +426,11 @@ const WhatYouGet = () => {
         <ScrollSection className="py-24 relative overflow-hidden">
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            <motion.div
+            <m.div
               className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl backface-hidden"
               style={{ y: backgroundY1, rotate: 0.01, z: 0, willChange: "transform" }}
             />
-            <motion.div
+            <m.div
               className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl backface-hidden"
               style={{ y: backgroundY2, rotate: 0.01, z: 0, willChange: "transform" }}
             />

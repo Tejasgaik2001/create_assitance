@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { isSafari } from "@/utils/safariDetection";
 
 export const ScrollToTopButton = ({ onClick }: { onClick: () => void }) => (
-    <motion.button
+    <m.button
         initial={{ opacity: 0, scale: 0.8, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -17,7 +17,7 @@ export const ScrollToTopButton = ({ onClick }: { onClick: () => void }) => (
         whileTap={{ scale: 0.9 }}
     >
         <ArrowUp className="w-6 h-6" />
-    </motion.button>
+    </m.button>
 );
 
 export const ScrollToTop = () => {

@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import {
     useMotionTemplate,
     useMotionValue,
-    motion,
+    m,
     animate,
 } from "framer-motion";
 
@@ -33,7 +33,7 @@ export const AuroraBackground = ({ children, className }: { children: React.Reac
     const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, ${baseColor} 50%, ${color})`;
 
     return (
-        <motion.section
+        <m.section
             style={{
                 backgroundImage,
             }}
@@ -55,7 +55,7 @@ export const AuroraBackground = ({ children, className }: { children: React.Reac
                     />
                 </Canvas>
             </div>
-        </motion.section>
+        </m.section>
     );
 };
 

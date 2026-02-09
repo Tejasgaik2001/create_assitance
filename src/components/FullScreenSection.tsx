@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { ReactNode, useEffect, useState, useRef, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { ScrollToTopButton } from "./ScrollToTop";
@@ -162,7 +162,7 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
             className={cn("h-screen w-full overflow-hidden relative", className)}
         >
             <AnimatePresence initial={false} custom={direction}>
-                <motion.div
+                <m.div
                     key={currentIndex}
                     custom={direction}
                     variants={slideVariants}
@@ -178,7 +178,7 @@ export const AnimatedSnapContainer = ({ children, className }: AnimatedSnapConta
                     <div className="h-full w-full flex items-center justify-center relative overscroll-contain">
                         {children[currentIndex]}
                     </div>
-                </motion.div>
+                </m.div>
             </AnimatePresence>
             <AnimatePresence>
                 {currentIndex > 0 && (

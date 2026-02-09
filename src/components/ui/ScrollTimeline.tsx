@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 interface ScrollTimelineStep {
@@ -73,7 +73,7 @@ export const ScrollTimeline = ({ steps }: ScrollTimelineProps) => {
                         );
 
                         return (
-                            <motion.div
+                            <m.div
                                 key={step.number}
                                 style={{
                                     opacity,
@@ -87,11 +87,11 @@ export const ScrollTimeline = ({ steps }: ScrollTimelineProps) => {
                                 <div className="glass-card rounded-2xl p-6 md:p-8 shadow-2xl border border-accent/40 bg-background/80 backdrop-blur-xl w-full">
                                     {/* Step Number Badge */}
                                     <div className="flex items-center justify-between mb-6">
-                                        <motion.div
+                                        <m.div
                                             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-accent/30"
                                         >
                                             <span className="text-sm font-bold text-accent">Step {step.number}</span>
-                                        </motion.div>
+                                        </m.div>
                                         <div className="w-14 h-14 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 flex items-center justify-center shadow-lg">
                                             <Icon className="w-7 h-7 text-accent" />
                                         </div>
@@ -108,7 +108,7 @@ export const ScrollTimeline = ({ steps }: ScrollTimelineProps) => {
                                         {/* Features List */}
                                         <ul className="space-y-3">
                                             {step.features.map((feature, idx) => (
-                                                <motion.li
+                                                <m.li
                                                     key={idx}
                                                     initial={{ opacity: 0, x: -20 }}
                                                     animate={{ opacity: 1, x: 0 }}
@@ -119,7 +119,7 @@ export const ScrollTimeline = ({ steps }: ScrollTimelineProps) => {
                                                         <div className="w-2 h-2 rounded-full bg-green-500" />
                                                     </div>
                                                     <span className="text-sm md:text-base text-muted-foreground">{feature}</span>
-                                                </motion.li>
+                                                </m.li>
                                             ))}
                                         </ul>
                                     </div>
@@ -137,7 +137,7 @@ export const ScrollTimeline = ({ steps }: ScrollTimelineProps) => {
                                         ))}
                                     </div>
                                 </div>
-                            </motion.div>
+                            </m.div>
                         );
                     })}
                 </div>

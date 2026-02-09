@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { m, useScroll, useTransform, MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface AssemblingWordProps {
@@ -31,7 +31,7 @@ export const AssemblingWord = ({ word, className = "" }: AssemblingWordProps) =>
                 const filter = useTransform(scrollYProgress, [0, 0.8], ["blur(8px)", "blur(0px)"]);
 
                 return (
-                    <motion.span
+                    <m.span
                         key={i}
                         style={{
                             y,
@@ -43,7 +43,7 @@ export const AssemblingWord = ({ word, className = "" }: AssemblingWordProps) =>
                         className={cn("inline-block", className)}
                     >
                         {letter}
-                    </motion.span>
+                    </m.span>
                 );
             })}
         </span>

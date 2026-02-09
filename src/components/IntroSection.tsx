@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import aiHero from "@/assets/ai-hero.webp";
@@ -54,7 +54,7 @@ const IntroSection = () => {
             {/* Left Content - Enhanced Professional Layout */}
             <div className="space-y-8">
               {/* Badge */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -69,11 +69,11 @@ const IntroSection = () => {
                     Enterprise Growth Platform
                   </span>
                 </div>
-              </motion.div>
+              </m.div>
 
               {/* Main Headline */}
               <div className="space-y-4">
-                <motion.h1
+                <m.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -83,9 +83,9 @@ const IntroSection = () => {
                   <span className="text-gradient">
                     AI-Powered Growth
                   </span>
-                </motion.h1>
+                </m.h1>
 
-                <motion.p
+                <m.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -93,11 +93,11 @@ const IntroSection = () => {
                 >
                   An all-in-one CRM system combined with <span className="text-accent font-semibold">24/7 AI voice and chat employees</span>,
                   backed by hands-on human support. Launch in <span className="text-accent font-semibold">four weeks or less</span>.
-                </motion.p>
+                </m.p>
               </div>
 
               {/* Feature Pills */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -111,10 +111,10 @@ const IntroSection = () => {
                     {feature}
                   </div>
                 ))}
-              </motion.div>
+              </m.div>
 
               {/* CTA Buttons */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -141,10 +141,10 @@ const IntroSection = () => {
                     </button>
                   </MagneticWrapper>
                 </div>
-              </motion.div>
+              </m.div>
 
               {/* Stats Grid - Enhanced */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -153,7 +153,7 @@ const IntroSection = () => {
                 {stats.map((stat, index) => {
                   const Icon = stat.icon;
                   return (
-                    <motion.div
+                    <m.div
                       key={index}
                       initial={{ opacity: 0, scale: 0.8, y: 20 }}
                       animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 20 }}
@@ -172,12 +172,12 @@ const IntroSection = () => {
                       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <div className="relative space-y-2.5">
-                        <motion.div
+                        <m.div
                           whileHover={{ scale: 1.1, rotate: 5 }}
                           transition={{ type: "spring", stiffness: 400, damping: 10 }}
                         >
                           <Icon className={`w-6 h-6 ${stat.color === 'primary' ? 'text-primary' : 'text-accent'} drop-shadow-lg`} />
-                        </motion.div>
+                        </m.div>
                         <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
                           {stat.value}
                         </div>
@@ -185,14 +185,14 @@ const IntroSection = () => {
                           {stat.label}
                         </div>
                       </div>
-                    </motion.div>
+                    </m.div>
                   );
                 })}
-              </motion.div>
+              </m.div>
             </div>
 
             {/* Right Content - Professional Image Showcase */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 40 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -200,7 +200,7 @@ const IntroSection = () => {
             >
               <div className="relative aspect-square max-w-2xl mx-auto">
                 {/* Main Hero Card */}
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                   transition={{
@@ -225,7 +225,7 @@ const IntroSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
                   {/* Overlay Content */}
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
@@ -239,11 +239,11 @@ const IntroSection = () => {
                         Real-time Analytics
                       </div>
                     </div>
-                  </motion.div>
-                </motion.div>
+                  </m.div>
+                </m.div>
 
                 {/* Floating Card - AI Voice */}
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, x: -30, y: 20 }}
                   animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: -30, y: 20 }}
                   transition={{
@@ -271,10 +271,10 @@ const IntroSection = () => {
                   <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 shadow-lg">
                     <span className="text-white text-xs font-bold drop-shadow-lg">AI Voice</span>
                   </div>
-                </motion.div>
+                </m.div>
 
                 {/* Floating Card - CRM Dashboard */}
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, x: 30, y: -20 }}
                   animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: 30, y: -20 }}
                   transition={{
@@ -302,14 +302,12 @@ const IntroSection = () => {
                   <div className="absolute bottom-3 left-3 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 shadow-lg">
                     <span className="text-white text-xs font-bold drop-shadow-lg">CRM Dashboard</span>
                   </div>
-                </motion.div>
-
-
+                </m.div>
 
                 {/* Animated Glow Effects - Desktop Only (infinite animations + heavy blur) */}
                 {!isMobile && (
                   <>
-                    <motion.div
+                    <m.div
                       animate={{
                         scale: [1, 1.2, 1],
                         opacity: [0.3, 0.5, 0.3]
@@ -317,7 +315,7 @@ const IntroSection = () => {
                       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                       className="absolute -top-8 -right-8 w-32 h-32 bg-primary/40 rounded-full blur-3xl"
                     />
-                    <motion.div
+                    <m.div
                       animate={{
                         scale: [1, 1.3, 1],
                         opacity: [0.3, 0.5, 0.3]
@@ -328,15 +326,12 @@ const IntroSection = () => {
                   </>
                 )}
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>
-
-
     </section>
   );
 };
 
 export default IntroSection;
-

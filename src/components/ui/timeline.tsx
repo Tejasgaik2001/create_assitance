@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { m, useScroll, useTransform, useInView } from "framer-motion";
 
 export type TimelineItem = {
   title: React.ReactNode;
@@ -20,7 +20,7 @@ export function Timeline({ data }: { data: TimelineItem[] }) {
       <div className="mx-auto w-full max-w-5xl px-4 md:px-6">
         <div className="relative">
           <div className="pointer-events-none absolute left-4 top-0 h-full w-px bg-border/30 md:left-40" />
-          <motion.div
+          <m.div
             className="pointer-events-none absolute left-4 top-0 h-full w-px bg-gradient-to-b from-primary to-accent md:left-40"
             style={{
               scaleY: lineScale,
@@ -47,7 +47,7 @@ function TimelineRow({ item, index }: { item: TimelineItem; index: number }) {
   });
 
   return (
-    <motion.div
+    <m.div
       ref={rowRef}
       initial={{ opacity: 0.4, y: 24 }}
       animate={{
@@ -60,7 +60,7 @@ function TimelineRow({ item, index }: { item: TimelineItem; index: number }) {
     >
       <div className="grid gap-6 md:grid-cols-[10rem_1fr] md:gap-10">
         <div className="relative pl-10 md:pl-0">
-          <motion.div
+          <m.div
             className="text-sm font-semibold text-foreground md:pt-0.5"
             animate={{
               scale: isInView ? 1.05 : 1,
@@ -69,11 +69,11 @@ function TimelineRow({ item, index }: { item: TimelineItem; index: number }) {
             transition={{ duration: 0.3 }}
           >
             {item.title}
-          </motion.div>
+          </m.div>
         </div>
 
         <div className="relative">
-          <motion.div
+          <m.div
             className="absolute left-4 top-2 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-primary bg-background shadow-sm md:hidden"
             animate={{
               scale: isInView ? 1.3 : 1,
@@ -82,14 +82,14 @@ function TimelineRow({ item, index }: { item: TimelineItem; index: number }) {
             transition={{ duration: 0.3 }}
           />
           <div className="absolute left-4 top-2 h-px w-6 bg-gradient-to-r from-primary to-accent md:hidden" />
-          <motion.div
+          <m.div
             className="pl-10 md:pl-0"
             animate={{
               filter: isInView ? "none" : "grayscale(30%)"
             }}
             transition={{ duration: 0.3 }}
           >
-            <motion.div
+            <m.div
               animate={{
                 boxShadow: isInView
                   ? "0 0 30px rgba(var(--primary-rgb, 99, 102, 241), 0.15), 0 4px 20px rgba(0,0,0,0.1)"
@@ -101,10 +101,10 @@ function TimelineRow({ item, index }: { item: TimelineItem; index: number }) {
               style={{ borderWidth: "1px", borderStyle: "solid" }}
             >
               {item.content}
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FiBriefcase, FiHeart, FiUsers, FiZap } from "react-icons/fi";
 import crmDashboard from "@/assets/crm-dashboard.jpg";
@@ -18,15 +18,15 @@ const WhyChooseUs = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
           {/* Left Column - Content */}
           <div className="text-left">
-            <motion.span
+            <m.span
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
               className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-primary/10 text-accent border border-accent text-xs sm:text-sm font-bold uppercase tracking-widest mb-4 sm:mb-6"
             >
               Why Us
-            </motion.span>
+            </m.span>
 
-            <motion.h2
+            <m.h2
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -34,9 +34,9 @@ const WhyChooseUs = () => {
             >
               Why Choose
               <span className="text-gradient block drop-shadow-sm">Create Assistants</span>
-            </motion.h2>
+            </m.h2>
 
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -44,7 +44,7 @@ const WhyChooseUs = () => {
             >
               We're not just another software vendor. We're your dedicated growth partner,
               combining cutting-edge AI with genuine human expertise.
-            </motion.p>
+            </m.p>
 
             <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2">
               {[
@@ -53,7 +53,7 @@ const WhyChooseUs = () => {
                 { title: "Quick Launch", subtitle: "Go live in four weeks or less.", icon: FiZap, color: "primary" },
                 { title: "Managed Service", subtitle: "We are your internal systems team.", icon: FiBriefcase, color: "accent" }
               ].map((item, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, y: 30, scale: 0.9 }}
                   animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.9 }}
@@ -78,7 +78,7 @@ const WhyChooseUs = () => {
 
                   <div className="relative">
                     {/* Icon with animation */}
-                    <motion.div
+                    <m.div
                       whileHover={{
                         scale: 1.15,
                         rotate: [0, -10, 10, -10, 0],
@@ -90,7 +90,7 @@ const WhyChooseUs = () => {
                       className="inline-block p-2.5 sm:p-3 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-accent/50 shadow-md shadow-primary/10 mb-3 sm:mb-4 group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-300"
                     >
                       <item.icon className={`text-xl sm:text-2xl ${item.color === 'primary' ? 'text-accent' : 'text-accent'} drop-shadow-lg`} />
-                    </motion.div>
+                    </m.div>
 
                     <h3 className="font-bold text-lg sm:text-xl bg-gradient-to-br from-foreground to-foreground/80 bg-clip-text text-transparent uppercase tracking-tight italic mb-1.5 sm:mb-2 transition-all duration-500">
                       {item.title}
@@ -99,14 +99,14 @@ const WhyChooseUs = () => {
                       {item.subtitle}
                     </p>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
 
           {/* Right Column - Visual */}
           <div className="relative lg:pl-8 lg:block hidden">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 100, scale: 0.8, rotate: 5 }}
               animate={isInView ? { opacity: 1, x: 0, scale: 1, rotate: 0 } : { opacity: 0, x: 100, scale: 0.8, rotate: 5 }}
               transition={{
@@ -135,7 +135,7 @@ const WhyChooseUs = () => {
               </div>
 
               {/* Floating Stat Card */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 50, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.8 }}
                 transition={{
@@ -159,8 +159,8 @@ const WhyChooseUs = () => {
                   <p className="text-4xl lg:text-6xl font-bold bg-gradient-to-br from-primary via-accent to-accent bg-clip-text text-transparent tracking-tighter mb-1 lg:mb-2 drop-shadow-lg whitespace-nowrap">4 WEEKS</p>
                   <p className="text-[10px] lg:text-xs font-bold text-muted-foreground/80 uppercase tracking-widest leading-tight">Average Launch Time</p>
                 </div>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
 
             {/* Atmospheric Glow - Desktop Only (heavy blur-[120px]) */}
             {!isMobile && (

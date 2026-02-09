@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { m, useMotionValue, useSpring } from "framer-motion";
 import { useEffect } from "react";
 
 interface CursorSpotlightProps {
@@ -44,7 +44,7 @@ export const CursorSpotlight = ({
     }, [cursorX, cursorY]);
 
     return (
-        <motion.div
+        <m.div
             className={`pointer-events-none fixed inset-0 z-0 ${className}`}
             style={{
                 background: `radial-gradient(${size}px circle at var(--mouse-x) var(--mouse-y), hsl(var(--primary) / ${opacity}), transparent 40%)`,

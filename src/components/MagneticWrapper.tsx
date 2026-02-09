@@ -1,4 +1,4 @@
-import { motion, HTMLMotionProps } from "framer-motion";
+import { m, HTMLMotionProps } from "framer-motion";
 import { useMagneticEffect } from "@/hooks/useMagneticEffect";
 import { ReactNode, useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -34,7 +34,7 @@ export const MagneticWrapper = ({
     const magnetic = useMagneticEffect({ strength });
 
     return (
-        <motion.div
+        <m.div
             className={cn("inline-block", className)}
             {...props}
             style={{
@@ -47,6 +47,6 @@ export const MagneticWrapper = ({
             onMouseLeave={isDesktop ? magnetic.handleMouseLeave : undefined}
         >
             {children}
-        </motion.div>
+        </m.div>
     );
 };

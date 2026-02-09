@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 interface StackedCardsStep {
@@ -103,7 +103,7 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                         const zIndex = steps.length - index;
 
                         return (
-                            <motion.div
+                            <m.div
                                 key={step.number}
                                 style={{
                                     y,
@@ -118,18 +118,18 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                 <div className="glass-card rounded-2xl p-6 md:p-8 shadow-2xl border border-accent/40 bg-background/95 backdrop-blur-xl w-full">
                                     {/* Step Number Badge */}
                                     <div className="flex items-center justify-between mb-6">
-                                        <motion.div
+                                        <m.div
                                             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-accent/30"
                                         >
                                             <span className="text-sm font-bold text-accent">Step {step.number}</span>
-                                        </motion.div>
+                                        </m.div>
                                         <div className="w-14 h-14 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 flex items-center justify-center shadow-lg">
                                             <Icon className="w-7 h-7 text-accent" />
                                         </div>
                                     </div>
 
                                     {/* Content with staggered animations */}
-                                    <motion.div
+                                    <m.div
                                         initial="hidden"
                                         animate="visible"
                                         variants={{
@@ -143,7 +143,7 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                             }
                                         }}
                                     >
-                                        <motion.h3
+                                        <m.h3
                                             className="text-3xl md:text-4xl font-bold mb-2"
                                             variants={{
                                                 hidden: { opacity: 0, y: 20 },
@@ -159,10 +159,10 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                             }}
                                         >
                                             {step.title}
-                                        </motion.h3>
+                                        </m.h3>
 
                                         {step.subtitle && (
-                                            <motion.p
+                                            <m.p
                                                 className="text-lg text-accent font-medium mb-4"
                                                 variants={{
                                                     hidden: { opacity: 0, y: 20 },
@@ -178,10 +178,10 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                                 }}
                                             >
                                                 {step.subtitle}
-                                            </motion.p>
+                                            </m.p>
                                         )}
 
-                                        <motion.p
+                                        <m.p
                                             className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6"
                                             variants={{
                                                 hidden: { opacity: 0, y: 20 },
@@ -197,11 +197,11 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                             }}
                                         >
                                             {step.description}
-                                        </motion.p>
+                                        </m.p>
 
                                         {/* Features List with stagger */}
                                         {step.features.length > 0 && (
-                                            <motion.ul
+                                            <m.ul
                                                 className="space-y-3"
                                                 variants={{
                                                     hidden: { opacity: 0 },
@@ -214,7 +214,7 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                                 }}
                                             >
                                                 {step.features.map((feature, idx) => (
-                                                    <motion.li
+                                                    <m.li
                                                         key={idx}
                                                         className="flex items-start gap-3"
                                                         variants={{
@@ -234,11 +234,11 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                                             <div className="w-2 h-2 rounded-full bg-green-500" />
                                                         </div>
                                                         <span className="text-sm md:text-base text-muted-foreground">{feature}</span>
-                                                    </motion.li>
+                                                    </m.li>
                                                 ))}
-                                            </motion.ul>
+                                            </m.ul>
                                         )}
-                                    </motion.div>
+                                    </m.div>
 
                                     {/* Progress Indicator */}
                                     <div className="mt-8 flex items-center gap-2">
@@ -253,7 +253,7 @@ export const StackedCardsTimeline = ({ steps }: StackedCardsTimelineProps) => {
                                         ))}
                                     </div>
                                 </div>
-                            </motion.div>
+                            </m.div>
                         );
                     })}
                 </div>

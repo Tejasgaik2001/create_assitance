@@ -1,160 +1,144 @@
-"use client";
-import {
-  Navbar,
-  NavBody,
-  NavItems,
-  MobileNav,
-  NavbarButton,
-  MobileNavHeader,
-  MobileNavToggle,
-  MobileNavMenu,
-} from "@/components/ui/resizable-navbar";
-import { useState } from "react";
-import ThemeToggle from "./ThemeToggle";
+import { useState, useEffect } from "react";
+import { m, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Menu, X, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import logoBlack from "@/assets/logo_black.webp";
-import logoWhite from "@/assets/logo_white.webp";
-import { useTheme } from "@/hooks/useTheme";
-import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
-import { MagneticWrapper } from "@/components/MagneticWrapper";
+import logo from "@/assets/logo.webp";
+import { handleBookingRedirect } from "@/utils/navigation";
 
 const Header = () => {
-  const navItems = [
-    {
-      name: "How It Works",
-      link: "/how-it-works",
-    },
-    {
-      name: "What You Get",
-      link: "/what-you-get",
-    },
-    {
-      name: "AI Employees",
-      link: "/ai-employees",
-    },
-    {
-      name: "Command Center",
-      link: "/command-center",
-    },
-    {
-      name: "Why Create Assistants",
-      link: "/why-create-assistants",
-    },
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+
+  const navLinks = [
+    { name: "How It Works", href: "/how-it-works" },
+    { name: "What You Get", href: "/what-you-get" },
+    { name: "AI Employees", href: "/ai-employees" },
+    { name: "Support", href: "/why-create-assistants" },
   ];
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
-  const { theme } = useTheme();
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const currentLogo = theme === "dark" ? logoWhite : logoBlack;
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50">
-      <Navbar>
-        {/* Desktop Navigation */}
-        <NavBody>
-          <div className="flex items-center gap-2 relative z-30">
-            <Link to="/" className="flex items-center gap-2 cursor-pointer">
-              <motion.img
-                src={currentLogo}
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled
+          ? "py-3 bg-background/80 backdrop-blur-md border-b border-white/5"
+          : "py-6 bg-transparent"
+      )}
+    >
+      <div className="container mx-auto px-4 md:px-6">
+        <nav className="flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="relative w-10 h-10 overflow-hidden rounded-xl bg-background/10 backdrop-blur-md border border-white/10 group-hover:border-accent/50 transition-all duration-500">
+              <img
+                src={logo}
                 alt="Create Assistants Logo"
-                width={36}
-                height={36}
-                className="w-9 h-9 object-contain p-1"
-                whileHover={{ rotate: 5 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                className="w-full h-full object-contain p-1 group-hover:scale-110 transition-transform duration-500"
               />
-              <span className="font-bold text-base hidden lg:block whitespace-nowrap">Create Assistants</span>
-            </Link>
-          </div>
-          <NavItems items={navItems} activeLink={location.pathname} />
-          <div className="flex items-center gap-2 relative z-30">
-            <ThemeToggle />
-            <MagneticWrapper strength={0.2}>
-              <NavbarButton
-                className="border-2 border-accent bg-transparent text-accent hover:bg-accent/10 font-bold transition-all duration-300 shadow-none px-3 py-2 h-9 text-xs"
-                onClick={handleBookingRedirect}
-              >
-                Book a Consultation
-              </NavbarButton>
-            </MagneticWrapper>
-          </div>
-        </NavBody>
+            </div>
+            <span className="text-xl font-bold tracking-tighter uppercase italic bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent group-hover:text-accent transition-colors duration-500">
+              Create Assistants
+            </span>
+          </Link>
 
-        {/* Mobile Navigation */}
-        <MobileNav>
-          <MobileNavHeader>
-            <div className="flex items-center gap-2">
-              <Link to="/" className="flex items-center gap-2">
-                <img
-                  src={currentLogo}
-                  alt="Create Assistants Logo"
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 object-contain p-1"
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="relative group text-sm font-bold uppercase tracking-widest italic text-foreground/80 hover:text-accent transition-colors duration-300"
+              >
+                {link.name}
+                <m.span
+                  className="absolute -bottom-1 left-0 w-full h-0.5 bg-accent origin-left"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
                 />
               </Link>
-            </div>
+            ))}
+            <Button
+              variant="hero"
+              size="sm"
+              className="bg-gradient-to-r from-primary to-accent text-white font-bold rounded-full px-6 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 group h-10"
+              onClick={handleBookingRedirect}
+            >
+              Book Now
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
 
-            <MobileNavToggle
-              isOpen={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            />
-          </MobileNavHeader>
-
-          <MobileNavMenu
-            isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden p-2 text-foreground/80 hover:text-accent transition-colors"
+            onClick={() => setIsOpen(!isOpen)}
           >
-            {navItems.map((item, idx) => {
-              const isActive = location.pathname === item.link;
-              return (
-                <Link
-                  key={`mobile-link-${idx}`}
-                  to={item.link}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={cn(
-                    "relative py-2 block font-medium transition-colors duration-200",
-                    isActive
-                      ? "text-accent"
-                      : "text-neutral-600 dark:text-neutral-300"
-                  )}
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </nav>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <m.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "100vh" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="fixed inset-0 top-[73px] bg-background/95 backdrop-blur-xl z-40 md:hidden overflow-hidden"
+          >
+            <div className="flex flex-col items-center justify-center h-full gap-8 p-4 bg-transparent">
+              {navLinks.map((link, i) => (
+                <m.div
+                  key={link.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
                 >
-                  <span className="block whitespace-nowrap">{item.name}</span>
-                </Link>
-              );
-            })}
-            <div className="flex w-full flex-col gap-4 mt-8 pb-8 items-stretch">
-              <div className="flex justify-center mb-2">
-                <ThemeToggle />
-              </div>
-              <NavbarButton
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  handleBookingRedirect();
-                }}
-                className="w-full border-2 border-accent bg-transparent text-accent font-bold h-12 flex items-center justify-center rounded-full"
+                  <Link
+                    to={link.href}
+                    className="text-2xl font-bold uppercase tracking-tighter italic text-foreground hover:text-accent transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </m.div>
+              ))}
+              <m.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 }}
+                className="w-full max-w-xs mt-4"
               >
-                Book a Consultation
-              </NavbarButton>
-              <NavbarButton
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  handleDemoRedirect();
-                }}
-                className="w-full bg-accent text-white font-bold h-12 shadow-lg shadow-accent/20 flex items-center justify-center rounded-full"
-              >
-                Demo Our AI
-              </NavbarButton>
+                <Button
+                  className="w-full bg-gradient-to-r from-primary to-accent text-white font-bold rounded-full py-6 text-xl shadow-xl shadow-primary/20"
+                  onClick={handleBookingRedirect}
+                >
+                  Book Consultation
+                </Button>
+              </m.div>
             </div>
-          </MobileNavMenu>
-        </MobileNav>
-      </Navbar>
-    </div>
+          </m.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };
 
 export default Header;
-

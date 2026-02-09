@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -58,7 +58,7 @@ const TimelineCard = ({
     };
 
     return (
-        <motion.div
+        <m.div
             ref={cardRef}
             initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: isLeft ? -80 : 80 }}
             animate={isMobile ? { opacity: 1, x: 0 } : (isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isLeft ? -80 : 80 })}
@@ -72,7 +72,7 @@ const TimelineCard = ({
             className="relative perspective-1000"
             style={{ perspective: "1000px" }}
         >
-            <motion.div
+            <m.div
                 className="glass-card rounded-2xl p-6 md:p-8 shadow-2xl border border-accent/30 bg-background/95 backdrop-blur-xl w-full cursor-pointer"
                 animate={isMobile ? {} : {
                     rotateX,
@@ -83,7 +83,7 @@ const TimelineCard = ({
                 style={{ transformStyle: isMobile ? "flat" : "preserve-3d" }}
             >
                 {/* Glow effect on hover */}
-                <motion.div
+                <m.div
                     className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 via-accent/10 to-transparent opacity-0 pointer-events-none"
                     animate={{ opacity: rotateX !== 0 || rotateY !== 0 ? 1 : 0 }}
                     transition={{ duration: 0.3 }}
@@ -91,12 +91,12 @@ const TimelineCard = ({
 
                 {/* Step Number Badge */}
                 <div className="flex items-center justify-between mb-6 relative z-10">
-                    <motion.div
+                    <m.div
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-accent/30"
                         style={{ transform: "translateZ(20px)" }}
                     >
                         <span className="text-sm font-bold text-accent">Step {step.number}</span>
-                    </motion.div>
+                    </m.div>
                     <div
                         className="w-14 h-14 rounded-xl bg-gradient-to-r from-primary/20 to-accent/20 flex items-center justify-center shadow-lg"
                         style={{ transform: "translateZ(30px)" }}
@@ -106,7 +106,7 @@ const TimelineCard = ({
                 </div>
 
                 {/* Content with staggered animations */}
-                <motion.div
+                <m.div
                     initial="hidden"
                     animate={isMobile ? "visible" : (isInView ? "visible" : "hidden")}
                     variants={{
@@ -121,7 +121,7 @@ const TimelineCard = ({
                     }}
                     style={{ transform: isMobile ? "none" : "translateZ(10px)" }}
                 >
-                    <motion.h3
+                    <m.h3
                         className="text-2xl md:text-3xl font-bold mb-2"
                         variants={{
                             hidden: { opacity: 0, y: 20 },
@@ -137,10 +137,10 @@ const TimelineCard = ({
                         }}
                     >
                         {step.title}
-                    </motion.h3>
+                    </m.h3>
 
                     {step.subtitle && (
-                        <motion.p
+                        <m.p
                             className="text-base text-accent font-medium mb-3"
                             variants={{
                                 hidden: { opacity: 0, y: 20 },
@@ -156,10 +156,10 @@ const TimelineCard = ({
                             }}
                         >
                             {step.subtitle}
-                        </motion.p>
+                        </m.p>
                     )}
 
-                    <motion.p
+                    <m.p
                         className="text-sm md:text-base text-muted-foreground leading-relaxed mb-5"
                         variants={{
                             hidden: { opacity: 0, y: 20 },
@@ -175,11 +175,11 @@ const TimelineCard = ({
                         }}
                     >
                         {step.description}
-                    </motion.p>
+                    </m.p>
 
                     {/* Features List with stagger */}
                     {step.features.length > 0 && (
-                        <motion.ul
+                        <m.button
                             className="space-y-2"
                             variants={{
                                 hidden: { opacity: 0 },
@@ -192,7 +192,7 @@ const TimelineCard = ({
                             }}
                         >
                             {step.features.map((feature, idx) => (
-                                <motion.li
+                                <m.li
                                     key={idx}
                                     className="flex items-start gap-2"
                                     variants={{
@@ -212,13 +212,13 @@ const TimelineCard = ({
                                         <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
                                     </div>
                                     <span className="text-sm text-muted-foreground">{feature}</span>
-                                </motion.li>
+                                </m.li>
                             ))}
-                        </motion.ul>
+                        </m.button>
                     )}
-                </motion.div>
-            </motion.div>
-        </motion.div>
+                </m.div>
+            </m.div>
+        </m.div>
     );
 };
 
@@ -229,7 +229,7 @@ export const VerticalTimeline = ({ steps }: VerticalTimelineProps) => {
             <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-accent/50 to-transparent transform -translate-x-1/2" />
 
             {/* Animated glowing dot - hidden on mobile */}
-            <motion.div
+            <m.div
                 className="hidden md:block absolute left-1/2 top-0 w-3 h-3 bg-accent rounded-full transform -translate-x-1/2 shadow-lg shadow-accent/50"
                 animate={{
                     boxShadow: [
@@ -260,7 +260,7 @@ export const VerticalTimeline = ({ steps }: VerticalTimelineProps) => {
 
                                 {/* Center dot */}
                                 <div className="flex justify-center relative">
-                                    <motion.div
+                                    <m.div
                                         initial={{ scale: 0 }}
                                         whileInView={{ scale: 1 }}
                                         viewport={{ once: false, margin: "-100px" }}
@@ -273,7 +273,7 @@ export const VerticalTimeline = ({ steps }: VerticalTimelineProps) => {
                                         className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-accent/30 z-10"
                                     >
                                         <span className="text-lg font-bold text-white">{step.number}</span>
-                                    </motion.div>
+                                    </m.div>
                                 </div>
 
                                 {/* Right side content */}

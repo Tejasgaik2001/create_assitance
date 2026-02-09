@@ -1,169 +1,131 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Facebook, Mail, Phone, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
-import logoBlack from "@/assets/logo_black.webp";
-import logoWhite from "@/assets/logo_white.webp";
-import { useTheme } from "@/hooks/useTheme";
-import { BOOKING_URL } from "@/utils/navigation";
-
-const footerLinks = [
-  {
-    category: "Product",
-    links: [
-      { name: "Features", href: "/how-it-works" },
-      { name: "Command Center", href: "/command-center" },
-      { name: "AI Employees", href: "/ai-employees" },
-      { name: "What You Get", href: "/what-you-get" },
-    ],
-  },
-  {
-    category: "Company",
-    links: [
-      { name: "About", href: "/why-create-assistants" },
-      { name: "Book a Call", href: BOOKING_URL },
-      { name: "Contact", href: BOOKING_URL },
-    ],
-  },
-  {
-    category: "Legal",
-    links: [
-      { name: "Privacy Policy", href: "https://go.createassistants.ai/privacy-policy" },
-      { name: "GDPR Compliance", href: "https://go.createassistants.ai/gdpr-compliance" },
-      { name: "Terms & Conditions", href: "https://go.createassistants.ai/terms-and-conditions" },
-    ],
-  },
-];
-
-const socialLinks = [
-  { icon: Facebook, href: "https://www.facebook.com/share/g/1E457TVa3o/", label: "Facebook" },
-  { icon: Instagram, href: "https://www.instagram.com/createassistants/", label: "Instagram" },
-  { icon: Phone, href: "tel:+15155002224", label: "Phone" },
-  { icon: Mail, href: "mailto:support@createassistants.ai", label: "Email" },
-];
+import { m, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import logo from "@/assets/logo.webp";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const Footer = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const { theme } = useTheme();
+  const isMobile = useIsMobile();
+  const isInView = useInView(ref, { once: isMobile, margin: "-10%" });
 
-  const currentLogo = theme === "dark" ? logoWhite : logoBlack;
+  const footerLinks = {
+    Solutions: [
+      { name: "Command Center", href: "/command-center" },
+      { name: "AI Employees", href: "/ai-employees" },
+      { name: "Automation", href: "/what-you-get" },
+      { name: "Managed Service", href: "/why-create-assistants" },
+    ],
+    Company: [
+      { name: "About Us", href: "/why-create-assistants" },
+      { name: "How It Works", href: "/how-it-works" },
+      { name: "Success Stories", href: "/#success" },
+      { name: "Book a Call", href: "/book-a-call" },
+    ],
+    Connect: [
+      { name: "LinkedIn", href: "https://linkedin.com" },
+      { name: "Facebook", href: "https://facebook.com" },
+      { name: "Instagram", href: "https://instagram.com" },
+      { name: "Twitter", href: "https://twitter.com" },
+    ],
+  };
 
   return (
-    <footer ref={ref} className="py-12 lg:py-20 border-t border-border relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-muted/50 to-transparent pointer-events-none" />
+    <footer ref={ref} className="bg-background pt-20 pb-10 border-t border-border/40 overflow-hidden relative">
+      {/* Decorative background orbs */}
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-12 lg:gap-12 mb-16">
-          {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="col-span-2 md:col-span-3 lg:col-span-2 xl:col-span-1"
-          >
-            <motion.div
-              className="flex items-center gap-2 mb-4"
-              whileHover={{ x: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <img src={currentLogo} alt="Create Assistants Logo" loading="lazy" width={36} height={36} className="w-9 h-9 object-cover" />
-              <span className="font-semibold">Create Assistants</span>
-            </motion.div>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              Automate and grow your business with custom CRM and AI solutions.
-            </p>
-
-            {/* Social links */}
-            <div className="flex items-center gap-3">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-9 h-9 rounded-lg bg-muted hover:bg-foreground hover:text-background flex items-center justify-center transition-all duration-300"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
-                  whileHover={{ y: -3 }}
-                >
-                  <social.icon className="w-4 h-4" />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Links */}
-          {footerLinks.map((section, categoryIndex) => (
-            <motion.div
-              key={section.category}
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Brand Info */}
+          <div className="space-y-6">
+            <m.div
               initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 + categoryIndex * 0.1 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5 }}
             >
-              <h4 className="font-semibold mb-4">{section.category}</h4>
-              <ul className="space-y-3">
-                {section.links.map((link, linkIndex) => (
-                  <motion.li
+              <Link to="/" className="flex items-center gap-3">
+                <img src={logo} alt="Logo" className="w-10 h-10 object-contain p-1 bg-white/5 rounded-xl border border-white/10" />
+                <span className="text-xl font-bold tracking-tighter uppercase italic">Create Assistants</span>
+              </Link>
+            </m.div>
+            <m.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-muted-foreground font-medium leading-relaxed"
+            >
+              Transforming small businesses with enterprise-grade AI employees and unified growth systems.
+            </m.p>
+            <m.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex gap-4"
+            >
+              {[Facebook, Instagram, Linkedin, Twitter].map((Icon, i) => (
+                <m.a
+                  key={i}
+                  href="#"
+                  whileHover={{ y: -4, scale: 1.1 }}
+                  className="p-2.5 rounded-xl bg-muted/50 border border-border/40 hover:border-accent/40 text-muted-foreground hover:text-accent transition-all duration-300"
+                >
+                  <Icon size={18} />
+                </m.a>
+              ))}
+            </m.div>
+          </div>
+
+          {/* Links Sections */}
+          {Object.entries(footerLinks).map(([title, links], sectionIndex) => (
+            <div key={title} className="space-y-6">
+              <m.h4
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: 0.1 * (sectionIndex + 1) }}
+                className="font-bold uppercase tracking-widest text-sm text-accent"
+              >
+                {title}
+              </m.h4>
+              <ul className="space-y-4">
+                {links.map((link, i) => (
+                  <m.li
                     key={link.name}
                     initial={{ opacity: 0, x: -10 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.3, delay: 0.2 + categoryIndex * 0.05 + linkIndex * 0.05 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                    transition={{ duration: 0.4, delay: 0.1 * (sectionIndex + 1) + (i * 0.05) }}
                   >
-                    {link.href.startsWith("/") ? (
-                      <Link
-                        to={link.href}
-                        className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
-                      >
-                        {link.name}
-                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-                      </Link>
-                    ) : (
-                      <motion.a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors inline-block"
-                      >
-                        {link.name}
-                        <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-                      </motion.a>
-                    )}
-                  </motion.li>
+                    <Link
+                      to={link.href}
+                      className="text-muted-foreground hover:text-foreground font-medium transition-colors flex items-center group"
+                    >
+                      <ArrowRight size={14} className="mr-0 w-0 opacity-0 group-hover:mr-2 group-hover:w-3.5 group-hover:opacity-100 transition-all duration-300" />
+                      {link.name}
+                    </Link>
+                  </m.li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        {/* Bottom */}
-        <motion.div
+        {/* Bottom Bar */}
+        <m.div
           initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border gap-6 md:gap-4"
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="pt-10 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-6"
         >
-          <p className="text-sm text-muted-foreground">
-            © 2026 Create Assistants. All rights reserved.
+          <p className="text-sm text-muted-foreground font-medium order-2 md:order-1">
+            © {new Date().getFullYear()} Create Assistants. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <motion.a
-              href="https://go.createassistants.ai/privacy-policy"
-              className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Privacy Policy
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-            </motion.a>
-            <motion.a
-              href="https://go.createassistants.ai/terms-and-conditions"
-              className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Terms & Conditions
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-            </motion.a>
+          <div className="flex gap-8 order-1 md:order-2">
+            <Link to="/privacy" className="text-sm text-muted-foreground hover:text-foreground font-medium transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-sm text-muted-foreground hover:text-foreground font-medium transition-colors">Terms of Service</Link>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </footer>
   );
