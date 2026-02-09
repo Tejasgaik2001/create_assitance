@@ -857,7 +857,6 @@ const AIEmployees = () => {
         {sections}
       </main>
       <Footer />
-      <Footer />
     </div>
   );
 };
