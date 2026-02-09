@@ -1,4 +1,4 @@
-import { m, Variants } from "framer-motion";
+import { m, motion, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Calendar, CreditCard, BarChart3, Users, Mail, Phone, MessageSquare, FileText, Settings, CheckCircle, TrendingUp, Shield } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -961,25 +961,83 @@ const CommandCenter = () => {
     </section>,
 
     <section key="cta" className="py-24 bg-white dark:bg-[#020617] relative overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10 text-center">
-        <AnimatedSection direction="up">
-          <h2 className="section-headline mb-8">
-            Ready to Take <span className="text-gradient italic">Command</span>?
-          </h2>
-          <p className="body-large mb-12 max-w-2xl mx-auto">
-            See how our Command Center can centralize your operations and drive growth.
-          </p>
-          <MagneticWrapper strength={0.4}>
-            <Button
-              size="xl"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full px-12 py-8 text-xl font-black shadow-2xl shadow-accent/20 transition-all hover:scale-105 active:scale-95"
-              onClick={handleBookingRedirect}
+      <div className="flex-grow flex items-center justify-center py-12 lg:py-16">
+        <div className="container mx-auto px-4 max-w-5xl">
+          <AnimatedSection direction="up">
+            <m.div
+
+              whileHover={{ y: -5 }}
+              className="relative p-10 lg:p-16 rounded-[2.5rem] overflow-hidden bg-white/40 dark:bg-slate-900/40 backdrop-blur-2xl border border-slate-200/60 dark:border-white/10 shadow-2xl dark:shadow-none group transform-gpu"
             >
-              Book Your Free Strategy Call
-              <ArrowRight className="ml-2 w-6 h-6" />
-            </Button>
-          </MagneticWrapper>
-        </AnimatedSection>
+              {/* Glossy Border Effect */}
+              <div
+                className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[2.5rem]"
+                style={{
+                  background: `radial-gradient(400px circle, hsla(34, 67%, 57%, 0.4), transparent 40%)`,
+                  padding: '2px',
+                  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  WebkitMaskComposite: 'destination-out',
+                }}
+              />
+
+              {/* Dynamic Gloss Fade Background */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                style={{
+                  background: `radial-gradient(800px circle, hsla(34, 67%, 57%, 0.08), transparent 80%)`,
+                }}
+              />
+
+              {/* Internal Mesh Background */}
+              <div
+                className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
+                style={{ backgroundImage: `url(${cubesImg})` }}
+              />
+
+              <div className="relative z-20 text-center flex flex-col items-center">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-6 transition-transform duration-500 group-hover:scale-105">
+                  <Shield className="w-3.5 h-3.5" />
+                  <span className="text-xs font-bold tracking-widest uppercase">Strategic Advantage</span>
+                </div>
+
+                <m.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-3xl md:text-5xl lg:text-6xl font-bold text-gradient mb-6 leading-tight tracking-tight uppercase"
+                >
+                  Why It Matters
+                </m.h2>
+
+                <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-2xl leading-relaxed font-medium">
+                  The Command Center isn’t just a CRM. It’s your business’s heartbeat. Centralising tools saves time, reduces errors and gives you visibility into what’s working and what’s not. Focus on growth, not juggling apps.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-6 items-center">
+                  <MagneticWrapper strength={0.2}>
+                    <Button
+                      className="h-16 px-10 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(219,154,70,0.3)] hover:-translate-y-1 group/btn relative overflow-hidden"
+                      onClick={handleBookingRedirect}
+                    >
+                      <div className="absolute inset-0 bg-accent translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
+                      <span className="relative z-10 flex items-center gap-3">
+                        Book a Strategy Call  <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                      </span>
+                    </Button>
+                  </MagneticWrapper>
+
+                  {/* <button className="text-slate-500 dark:text-slate-400 font-semibold hover:text-accent transition-colors flex items-center gap-2 group/text">
+                    Book a Strategy Call <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/text:opacity-100 group-hover/text:translate-x-0 transition-all" />
+                  </button> */}
+                </div>
+              </div>
+
+              {/* Decorative Corner Glows */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 blur-[60px] rounded-full" />
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent/10 blur-[60px] rounded-full" />
+            </m.div>
+          </AnimatedSection>
+        </div>
       </div>
     </section>
   ];
