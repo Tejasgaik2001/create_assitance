@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Cloud, Info, BarChart3, Smartphone, Building, Clock, TrendingUp, Users, ArrowUpRight } from "lucide-react";
 
@@ -52,26 +52,26 @@ const StatsSection = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16 px-4">
-          <motion.span
+          <m.span
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-accent/80 border border-primary text-sm font-bold uppercase tracking-widest mb-6"
           >
             Our Impact
-          </motion.span>
-          <motion.h2
+          </m.span>
+          <m.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold tracking-tight mb-4 uppercase text-gradient"
           >
             Numbers That Speak
-          </motion.h2>
+          </m.h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-8 max-w-6xl mx-auto">
           {stats.map((stat, index) => (
-            <motion.div
+            <m.div
               key={stat.label}
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: 30 }}
@@ -90,7 +90,7 @@ const StatsSection = () => {
               <div className="relative">
                 {/* Top section with icon and tab */}
                 <div className="flex flex-wrap justify-between items-start mb-4 sm:mb-6 gap-3">
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, x: -20, rotate: -10 }}
                     animate={isInView ? { opacity: 1, x: 0, rotate: 0 } : { opacity: 0, x: -20, rotate: -10 }}
                     transition={{
@@ -107,9 +107,9 @@ const StatsSection = () => {
                     className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border border-accent/60 shadow-lg shadow-primary/10 hover:shadow-2xl hover:shadow-accent/20 hover:border-accent/50 transition-all"
                   >
                     <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-accent drop-shadow-lg" />
-                  </motion.div>
+                  </m.div>
                   <div className="flex gap-2 shrink-0">
-                    <motion.div
+                    <m.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
                       transition={{
@@ -121,8 +121,8 @@ const StatsSection = () => {
                       className="bg-gradient-to-r from-primary to-accent text-white px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg text-[10px] sm:text-xs font-bold shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 whitespace-nowrap"
                     >
                       {stat.tabLabel}
-                    </motion.div>
-                    <motion.div
+                    </m.div>
+                    <m.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
                       transition={{
@@ -135,12 +135,12 @@ const StatsSection = () => {
                     >
                       <Info size={10} className="text-accent sm:w-3 sm:h-3" />
                       <span>Info</span>
-                    </motion.div>
+                    </m.div>
                   </div>
                 </div>
 
                 {/* Main number display with gradient */}
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
                   transition={{
@@ -154,11 +154,11 @@ const StatsSection = () => {
                   <div className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-br from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent drop-shadow-2xl">
                     <CountUp value={stat.value} duration={stat.duration} suffix={stat.suffix} isVisible={isInView} />
                   </div>
-                </motion.div>
+                </m.div>
 
                 {/* Bottom section with buttons */}
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full items-stretch">
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                     transition={{
@@ -175,9 +175,9 @@ const StatsSection = () => {
                       </div>
                       <span className="text-foreground/80 truncate">{stat.label}</span>
                     </div>
-                  </motion.div>
+                  </m.div>
 
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                     transition={{
@@ -194,16 +194,16 @@ const StatsSection = () => {
                       </div>
                       <span className="text-foreground/80 truncate">{stat.rightButton.text}</span>
                     </div>
-                  </motion.div>
+                  </m.div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>
 
       {/* Decorative Orbs */}
-      <motion.div
+      <m.div
         animate={isInView ? { opacity: 0.1, scale: 1 } : { opacity: 0, scale: 0.8 }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--primary-rgb),0.15)_0%,transparent_70%)] -z-10"
       />

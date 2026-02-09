@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import { Menu as IconMenu2, X as IconX } from "lucide-react";
 import {
-  motion,
+  m,
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
@@ -80,7 +80,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 
   return (
     <NavbarContext.Provider value={{ visible }}>
-      <motion.div
+      <m.div
         ref={ref}
         className={cn("sticky inset-x-0 top-20 z-40 w-full", className)}
       >
@@ -92,7 +92,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
             )
             : child
         )}
-      </motion.div>
+      </m.div>
     </NavbarContext.Provider>
   );
 };
@@ -101,7 +101,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   const canUseBackdropFilter = supportsBackdropFilter() && !isSafari();
 
   return (
-    <motion.div
+    <m.div
       animate={{
         backdropFilter: visible && canUseBackdropFilter ? "blur(10px)" : "none",
         boxShadow: visible
@@ -110,7 +110,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         y: visible ? 20 : 0,
         paddingLeft: visible ? "2rem" : "1rem",
         paddingRight: visible ? "2rem" : "1rem",
-        borderRadius: visible ? "9999px" : "0px",
+        borderRadius: "1.5rem",
       }}
       transition={{
         type: "spring",
@@ -124,7 +124,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       )}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -132,10 +132,10 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <motion.div
+    <m.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "flex-1 hidden flex-row items-center justify-center space-x-1 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-1",
+        "flex-1 hidden flex-row items-center justify-center space-x-1 text-sm font-semibold text-neutral-600 dark:text-neutral-400 transition duration-200 lg:flex lg:space-x-1",
         className,
       )}
     >
@@ -146,10 +146,10 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
             onMouseEnter={() => setHovered(idx)}
             onClick={onItemClick}
             className={cn(
-              "group relative px-3 py-2 transition-colors duration-200 whitespace-nowrap",
+              "group relative px-4 py-2 transition-colors duration-200 whitespace-nowrap",
               isActive
                 ? "text-neutral-900 dark:text-white"
-                : "text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white"
+                : "text-neutral-500 hover:text-neutral-900 dark:hover:text-white font-medium"
             )}
             key={`link-${idx}`}
             to={item.link}
@@ -164,7 +164,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
           </Link>
         );
       })}
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -172,7 +172,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   const canUseBackdropFilter = supportsBackdropFilter() && !isSafari();
 
   return (
-    <motion.div
+    <m.div
       animate={{
         backdropFilter: visible && canUseBackdropFilter ? "blur(10px)" : "none",
         boxShadow: visible
@@ -196,7 +196,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
       )}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -225,7 +225,7 @@ export const MobileNavMenu = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -235,7 +235,7 @@ export const MobileNavMenu = ({
           )}
         >
           {children}
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

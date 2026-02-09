@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
@@ -98,7 +98,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {props.children}
         <AnimatePresence>
           {ripples.map(ripple => (
-            <motion.span
+            <m.span
               key={ripple.id}
               className="absolute rounded-full bg-white/30 pointer-events-none"
               style={{

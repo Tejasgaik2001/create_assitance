@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Play } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
@@ -15,28 +15,13 @@ const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
-  // Track if user explicitly clicked to watch the video (defaults to true for desktop)
-  const isMobileInitially = useRef(window.matchMedia("(max-width: 1024px)").matches).current;
-  const [userRequestedVideo, setUserRequestedVideo] = useState(!isMobileInitially);
-
-  // Lazy load video to prevent blocking initial page load checking
+  // Lazy load video to prevent blocking initial page load
   const { videoRef, isLoaded, isPlaying, play } = useLazyVideo({
     autoplay: true,
     rootMargin: '100px' // Load when 100px from viewport
   });
 
-  // useIsMobile hook handles the event listener internally
-
   const isInView = useInView(ref, { once: isMobile });
-
-  // Mobile & Safari: play video/show video when user taps
-  const handlePlayVideo = () => {
-    setUserRequestedVideo(true);
-    // Use requestAnimationFrame to ensure the video element is rendered before calling play
-    requestAnimationFrame(() => {
-      play();
-    });
-  };
 
   // Disable animations on mobile for performance
   const shouldAnimate = !isMobile && shouldEnableAnimations();
@@ -61,7 +46,7 @@ const HeroSection = () => {
         {/* Animated gradient orbs - Desktop Only (heavy blur + infinite animation) */}
         {!isMobile && (
           <>
-            <motion.div
+            <m.div
               animate={{
                 x: [0, 50, 0],
                 y: [0, 30, 0],
@@ -71,7 +56,7 @@ const HeroSection = () => {
               transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
             />
-            <motion.div
+            <m.div
               animate={{
                 x: [0, -40, 0],
                 y: [0, -25, 0],
@@ -92,13 +77,13 @@ const HeroSection = () => {
 
       {/* Floating Demo Invitation - Desktop Only (infinite animation) */}
       {!isMobile && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="absolute top-24 right-8 z-30 hidden lg:flex"
+          className="absolute top-16 right-4 sm:top-24 sm:right-8 z-30 flex"
         >
-          <motion.div
+          <m.div
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             onClick={handleDemoRedirect}
@@ -112,7 +97,7 @@ const HeroSection = () => {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
                   <Play className="w-6 h-6 text-white fill-current" />
                 </div>
-                <motion.div
+                <m.div
                   animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                   className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-background"
@@ -132,8 +117,8 @@ const HeroSection = () => {
                 <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-white transition-colors" />
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full flex flex-col justify-center">
@@ -141,7 +126,7 @@ const HeroSection = () => {
           {/* Left Column - Content */}
           <div className="text-center lg:text-left space-y-6 sm:space-y-8 max-w-3xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
             {/* Enhanced Badge */}
-            <motion.div
+            <m.div
               initial={isMobile ? { opacity: 0, y: 10 } : { opacity: 0, y: 20, scale: 0.9 }}
               animate={isInView ? (isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, scale: 1 }) : (isMobile ? { opacity: 0, y: 10 } : { opacity: 0, y: 20, scale: 0.9 })}
               transition={isMobile ? { duration: 0.3 } : { type: "spring", stiffness: 200, damping: 20 }}
@@ -154,11 +139,11 @@ const HeroSection = () => {
               <span className="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent bg-clip-text text-transparent">
                 AI-Powered Growth Platform
               </span>
-            </motion.div>
+            </m.div>
 
             {/* Enhanced Headline */}
             <div className="space-y-2 sm:space-y-4 flex flex-col items-center lg:items-start w-full">
-              <motion.h1
+              <m.h1
                 custom={0}
                 variants={textVariants}
                 initial="hidden"
@@ -174,9 +159,9 @@ const HeroSection = () => {
                 <span className="text-gradient uppercase drop-shadow-2xl">
                   Scale
                 </span>
-              </motion.h1>
+              </m.h1>
 
-              <motion.h2
+              <m.h2
                 custom={1}
                 variants={textVariants}
                 initial="hidden"
@@ -186,17 +171,17 @@ const HeroSection = () => {
                 <span className="bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent">
                   Your Business
                 </span>
-                <motion.span
+                <m.span
                   className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-1 sm:h-2 bg-gradient-to-r from-primary to-accent rounded-full"
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ duration: 1, delay: 0.8 }}
                 />
-              </motion.h2>
+              </m.h2>
             </div>
 
             {/* Enhanced Description */}
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.4 }}
@@ -204,10 +189,10 @@ const HeroSection = () => {
             >
               We build your unified <span className="text-gradient font-bold">AI workforce</span> that captures leads,
               engages customers, and transforms your business into an <span className="text-gradient font-semibold italic">automated powerhouse</span>.
-            </motion.p>
+            </m.p>
 
             {/* Enhanced CTA Buttons */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.5 }}
@@ -216,7 +201,7 @@ const HeroSection = () => {
               {/* Primary CTA with enhanced effects */}
               <div className="relative group w-full sm:w-auto">
                 {/* Animated glow effect */}
-                <motion.div
+                <m.div
                   animate={{
                     scale: [1, 1.1, 1],
                     opacity: [0.4, 0.7, 0.4]
@@ -237,7 +222,7 @@ const HeroSection = () => {
                     onClick={handleBookingRedirect}
                   >
                     {/* Shimmer effect - disabled on Safari mobile */}
-                    <motion.div
+                    <m.div
                       animate={shouldAnimate ? { x: ["-200%", "200%"] } : {}}
                       transition={shouldAnimate ? { duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 } : { duration: 0 }}
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
@@ -252,7 +237,7 @@ const HeroSection = () => {
 
               {/* Secondary CTA with enhanced design - Mobile & Tablet Only */}
               <MagneticWrapper strength={0.2} className="w-full lg:hidden">
-                <motion.button
+                <m.button
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleDemoRedirect}
@@ -262,17 +247,17 @@ const HeroSection = () => {
                     <Sparkles className="w-4 h-4 text-accent animate-pulse" />
                     Demo Our AI
                   </span>
-                  <motion.div
+                  <m.div
                     initial={{ y: "100%" }}
                     whileHover={{ y: 0 }}
                     className="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent"
                   />
-                </motion.button>
+                </m.button>
               </MagneticWrapper>
-            </motion.div>
+            </m.div>
 
             {/* Trust indicators */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.6 }}
@@ -309,11 +294,11 @@ const HeroSection = () => {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Right Column - Enhanced Visual */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.85, x: 60, rotate: 3 }}
             animate={isInView ? { opacity: 1, scale: 1, x: 0, rotate: 0 } : { opacity: 0, scale: 0.85, x: 60, rotate: 3 }}
             transition={{
@@ -325,85 +310,49 @@ const HeroSection = () => {
             className="relative w-full max-w-full lg:scale-105 lg:translate-x-2"
           >
             <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group" style={{ isolation: 'isolate' }}>
-              {(userRequestedVideo || !isMobile) ? (
-                <video
-                  ref={videoRef}
-                  data-src={heroVideo}
-                  poster={heroPoster}
-                  muted
-                  loop
-                  playsInline
-                  webkit-playsinline="true"
-                  preload="none"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                />
-              ) : (
-                <div
-                  className="relative w-full h-full cursor-pointer group/image"
-                  onClick={handlePlayVideo}
-                >
-                  <img
-                    src={heroPoster}
-                    alt="Hero Visual"
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover/image:scale-110"
-                    // High priority for the largest contentful paint
-                    fetchPriority="high"
-                    loading="eager"
-                    decoding="sync"
-                  />
-                  {/* High-quality overlay to make image look like video frame */}
-                  <div className="absolute inset-0 bg-black/5 group-hover/image:bg-transparent transition-colors duration-500" />
-                </div>
-              )}
-
-              {/* Play button overlay - visible if video hasn't started or on image state (Mobile Only) */}
-              {isMobile && !isPlaying && (
-                <button
-                  onClick={handlePlayVideo}
-                  aria-label="Play video"
-                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/10 backdrop-blur-[1px] hover:bg-black/20 transition-all group/play"
-                >
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 shadow-[0_0_30px_rgba(0,0,0,0.2)] flex items-center justify-center group-hover/play:scale-110 active:scale-95 transition-transform">
-                    <Play className="w-7 h-7 sm:w-8 sm:h-8 text-foreground ml-1" fill="currentColor" />
-                  </div>
-                  {/* Label to encourage click */}
-                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-widest opacity-0 group-hover/play:opacity-100 transition-opacity duration-300">
-                    Watch Demo
-                  </div>
-                </button>
-              )}
+              <video
+                ref={videoRef}
+                data-src={heroVideo}
+                poster={heroPoster}
+                muted
+                loop
+                playsInline
+                webkit-playsinline="true"
+                preload="none"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+              />
 
               {/* Enhanced overlays */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-accent/30 mix-blend-overlay" />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
 
               {/* Floating Stats Card - Enhanced */}
-              <motion.div
+              <m.div
                 animate={shouldAnimate ? {
                   y: [0, -12, 0],
                   rotate: [-1, 1, -1]
                 } : {}}
                 transition={shouldAnimate ? { duration: 5, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
                 whileHover={{ scale: 1.05, y: -8 }}
-                className="absolute bottom-8 left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2.5rem] p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all hidden sm:block"
+                className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all flex"
               >
                 <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
                 <div className="relative">
-                  <p className="text-5xl lg:text-6xl font-bold text-accent tracking-tighter mb-1 drop-shadow-lg">
+                  <p className="text-3xl sm:text-5xl lg:text-6xl font-bold text-accent tracking-tighter mb-1 drop-shadow-lg">
                     24/7
                   </p>
                   <p className="text-xs font-bold text-foreground/70 uppercase tracking-widest leading-none">
                     COVERAGE
                   </p>
                 </div>
-              </motion.div>
+              </m.div>
 
               {/* Glowing corner accent */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/30 to-transparent rounded-[3rem] blur-xl" />
             </div>
 
             {/* Floating particles effect */}
-            <motion.div
+            <m.div
               animate={shouldAnimate ? {
                 scale: [1, 1.3, 1],
                 opacity: [0.3, 0.6, 0.3]
@@ -411,22 +360,22 @@ const HeroSection = () => {
               transition={shouldAnimate ? { duration: 4, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
               className="absolute -top-10 -right-10 w-40 h-40 bg-primary/30 rounded-full blur-3xl"
             />
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
       {/* Enhanced Scroll Indicator */}
-      <motion.div
+      <m.div
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         onClick={() => document.getElementById("intro")?.scrollIntoView({ behavior: isSafari() ? "auto" : "smooth" })}
-        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none hidden lg:flex z-20 group"
+        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none z-20 group"
       >
         <div className="w-px h-16 sm:h-20 bg-gradient-to-b from-primary via-accent to-transparent group-hover:from-accent group-hover:via-primary transition-colors" />
         <span className="text-[9px] font-bold uppercase tracking-[0.4em] rotate-180 [writing-mode:vertical-lr] text-muted-foreground group-hover:text-accent font-montserrat">
           Scroll
         </span>
-      </motion.div>
+      </m.div>
 
 
     </section>

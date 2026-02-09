@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface MotionTextProps {
@@ -11,7 +11,7 @@ export const MotionText = ({ text, className, delay = 0 }: MotionTextProps) => {
     return (
         <div className="relative inline-block">
             {/* Main Text with forward skew for speed */}
-            <motion.span
+            <m.span
                 className={cn("block relative z-10 transform origin-center", className || "text-accent")}
                 initial={{ x: -40, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
@@ -23,10 +23,10 @@ export const MotionText = ({ text, className, delay = 0 }: MotionTextProps) => {
                 }}
             >
                 {text}
-            </motion.span>
+            </m.span>
 
             {/* Speed Trail / Highlight Pass */}
-            <motion.div
+            <m.div
                 className="absolute inset-0 z-20 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-12deg]"
                 initial={{ x: "-150%" }}
                 animate={{ x: "150%" }}

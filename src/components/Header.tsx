@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import logoBlack from "@/assets/logo_black.webp";
 import logoWhite from "@/assets/logo_white.webp";
@@ -57,7 +57,7 @@ const Header = () => {
         <NavBody>
           <div className="flex items-center gap-2 relative z-30">
             <Link to="/" className="flex items-center gap-2 cursor-pointer">
-              <motion.img
+              <m.img
                 src={currentLogo}
                 alt="Create Assistants Logo"
                 width={36}
@@ -157,4 +157,3 @@ const Header = () => {
 };
 
 export default Header;
-

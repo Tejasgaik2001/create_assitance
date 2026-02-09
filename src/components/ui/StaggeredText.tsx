@@ -1,4 +1,4 @@
-import { motion, Variants } from "framer-motion";
+import { m, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface StaggeredTextProps {
@@ -37,7 +37,7 @@ export const StaggeredText = ({ text, className, delay = 0 }: StaggeredTextProps
     };
 
     return (
-        <motion.span
+        <m.span
             className={cn("contents", className)}
             variants={container}
             initial="hidden"
@@ -45,10 +45,10 @@ export const StaggeredText = ({ text, className, delay = 0 }: StaggeredTextProps
             viewport={{ once: true, margin: "-50px" }}
         >
             {letters.map((letter, index) => (
-                <motion.span variants={child} key={index} className="inline-block relative">
+                <m.span variants={child} key={index} className="inline-block relative">
                     {letter}
-                </motion.span>
+                </m.span>
             ))}
-        </motion.span>
+        </m.span>
     );
 };

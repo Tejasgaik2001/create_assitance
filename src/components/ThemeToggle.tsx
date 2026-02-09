@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -6,7 +6,7 @@ const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <motion.button
+    <m.button
       onClick={toggleTheme}
       className="relative w-9 h-9 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 group"
       whileTap={{ scale: 0.9 }}
@@ -14,7 +14,7 @@ const ThemeToggle = () => {
       aria-label="Toggle theme"
     >
       <AnimatePresence mode="wait">
-        <motion.div
+        <m.div
           key={theme}
           initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
           animate={{ rotate: 0, opacity: 1, scale: 1 }}
@@ -26,9 +26,9 @@ const ThemeToggle = () => {
           ) : (
             <Moon className="w-4 h-4 text-indigo-400" />
           )}
-        </motion.div>
+        </m.div>
       </AnimatePresence>
-    </motion.button>
+    </m.button>
   );
 };
 

@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Quote, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,19 +24,19 @@ const TestimonialSection = () => {
           {/* Rating stars */}
           <div className="flex items-center justify-center gap-2 mb-8 sm:mb-10">
             {[...Array(5)].map((_, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, scale: 0, rotate: -20 }}
                 animate={isInView ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0, rotate: -20 }}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.1, type: "spring" }}
               >
                 <Star className="w-6 h-6 sm:w-8 sm:h-8 fill-primary text-primary" />
-              </motion.div>
+              </m.div>
             ))}
           </div>
 
           {/* Testimonial Quote */}
-          <motion.blockquote
+          <m.blockquote
             initial={{ opacity: 0, filter: "blur(10px)", y: 30 }}
             animate={isInView ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(10px)", y: 30 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -46,7 +46,7 @@ const TestimonialSection = () => {
             hours to seconds and booked{" "}
             <span className="text-gradient relative inline-block py-1 px-1">
               50+ more appointments
-              <motion.span
+              <m.span
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
                 transition={{ duration: 1, delay: 1, ease: "circOut" }}
@@ -54,10 +54,10 @@ const TestimonialSection = () => {
               />
             </span>
             {" "}within the month."
-          </motion.blockquote>
+          </m.blockquote>
 
           {/* Attribution */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -68,9 +68,9 @@ const TestimonialSection = () => {
             </div>
             <p className="text-xl sm:text-2xl font-bold uppercase tracking-tight italic">Sarah Mitchell</p>
             <p className="text-background/50 font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs mt-1">CEO, Midwest Realty Group</p>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5, delay: 0.8 }}
@@ -84,7 +84,7 @@ const TestimonialSection = () => {
               >
                 {/* Gold Shimmer effect - Desktop Only (infinite animation) */}
                 {!isMobile && (
-                  <motion.div
+                  <m.div
                     animate={{ x: ["-200%", "200%"] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
@@ -96,18 +96,18 @@ const TestimonialSection = () => {
                 </span>
               </Button>
             </MagneticWrapper>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
       {/* Decorative large quotes */}
-      <motion.div
+      <m.div
         animate={isInView ? { opacity: 0.05, x: 0 } : { opacity: 0, x: -100 }}
         transition={{ duration: 1.5, ease: "circOut" }}
         className="absolute top-10 sm:top-20 left-4 sm:left-10 text-background pointer-events-none"
       >
         <Quote className="w-32 h-32 sm:w-64 sm:h-64 rotate-12" />
-      </motion.div>
+      </m.div>
     </section>
   );
 };

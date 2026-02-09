@@ -1,4 +1,4 @@
-import { motion, useInView, Variants } from "framer-motion";
+import { m, useInView, Variants } from "framer-motion";
 import { useRef, ReactNode } from "react";
 
 interface StaggeredChildrenProps {
@@ -20,8 +20,8 @@ const containerVariants: Variants = {
 };
 
 export const itemVariants: Variants = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 30,
     scale: 0.95,
   },
@@ -36,8 +36,8 @@ export const itemVariants: Variants = {
   },
 };
 
-const StaggeredChildren = ({ 
-  children, 
+const StaggeredChildren = ({
+  children,
   className = "",
   staggerDelay = 0.1,
   initialDelay = 0.1,
@@ -57,7 +57,7 @@ const StaggeredChildren = ({
   };
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={className}
       variants={customContainerVariants}

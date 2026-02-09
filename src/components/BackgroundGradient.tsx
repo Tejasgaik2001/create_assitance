@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const BackgroundGradient = () => {
     return (
         <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
             {/* Animated gradient orbs */}
-            <motion.div
+            <m.div
                 className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 rounded-full blur-3xl opacity-50 dark:opacity-30"
                 animate={{
                     x: [0, 50, 0],
@@ -12,7 +12,7 @@ const BackgroundGradient = () => {
                 }}
                 transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div
+            <m.div
                 className="absolute bottom-1/4 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl opacity-50 dark:opacity-30"
                 animate={{
                     x: [0, -50, 0],
@@ -20,7 +20,7 @@ const BackgroundGradient = () => {
                 }}
                 transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.div
+            <m.div
                 className="absolute top-1/2 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl opacity-50 dark:opacity-20"
                 animate={{
                     y: [0, -30, 0],

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { m } from "framer-motion";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface ListItem {
@@ -21,8 +22,8 @@ const RollingTextItem = ({ item }: RollingTextItemProps) => {
             isMobile ? "pointer-events-none" : ""
         )}>
             {/* Rolling text */}
-            <div className="relative overflow-hidden h-[64px] md:h-16">
-                <div className={cn(
+            <m.div className="relative overflow-hidden h-[64px] md:h-16">
+                <m.div className={cn(
                     "transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]",
                     !isMobile && "group-hover:-translate-y-1/2"
                 )}>
@@ -49,8 +50,8 @@ const RollingTextItem = ({ item }: RollingTextItemProps) => {
                             />
                         </div>
                     )}
-                </div>
-            </div>
+                </m.div>
+            </m.div>
 
             {/* Description */}
             <p className={cn(

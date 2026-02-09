@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m, motion, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Calendar, CreditCard, BarChart3, Users, Mail, Phone, MessageSquare, FileText, Settings, CheckCircle, TrendingUp, Shield } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -22,7 +22,7 @@ const DropInHoverText = ({ text, trigger, className, highlightClass = "text-acce
   return (
     <span className={cn("inline-flex flex-wrap", className)}>
       {text.split("").map((char, i) => (
-        <motion.span
+        <m.span
           key={i}
           initial={false}
           animate={trigger ? {
@@ -37,7 +37,7 @@ const DropInHoverText = ({ text, trigger, className, highlightClass = "text-acce
           className={cn("inline-block transform-gpu will-change-transform", trigger ? highlightClass : "")}
         >
           {char === " " ? "\u00A0" : char}
-        </motion.span>
+        </m.span>
       ))}
     </span>
   );
@@ -48,7 +48,7 @@ const AutomationCard = ({ item, index }: { item: any, index: number }) => {
   const Icon = item.icon;
 
   return (
-    <motion.div
+    <m.div
       key={item.title}
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
@@ -77,7 +77,7 @@ const AutomationCard = ({ item, index }: { item: any, index: number }) => {
           {item.description}
         </p>
       </div>
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -92,7 +92,7 @@ const IntegrationNode = ({ text, index }: { text: string; index: number }) => {
   const Icon = icons[index % icons.length];
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
@@ -130,7 +130,7 @@ const IntegrationNode = ({ text, index }: { text: string; index: number }) => {
         "absolute right-0 top-0 bottom-0 w-1 bg-accent transition-transform duration-500 origin-bottom",
         isHovered ? "scale-y-100" : "scale-y-0"
       )} />
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -154,7 +154,7 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
       className="relative w-full aspect-square md:aspect-video lg:aspect-[4/3] max-h-[500px] cursor-pointer"
       style={{ perspective: '1200px' }}
     >
-      <motion.div
+      <m.div
         animate={{ rotateX: rotate.y, rotateY: rotate.x, scale: rotate.x !== 0 ? 1.05 : 1 }}
         transition={{ type: "spring", stiffness: 150, damping: 20 }}
         className="w-full h-full relative"
@@ -177,7 +177,7 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
         </div>
 
         {/* Floating Top Elements */}
-        <motion.div
+        <m.div
           style={{ transform: 'translateZ(60px)' }} // Lift it up
           className="absolute -top-12 -left-12 p-6 rounded-3xl bg-white/10 dark:bg-slate-900/10 backdrop-blur-2xl border border-white/20 shadow-2xl hidden lg:block"
         >
@@ -190,9 +190,9 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
               <div className="text-sm font-bold text-white">Endpoints Synced</div>
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           style={{ transform: 'translateZ(40px)' }}
           className="absolute -bottom-10 -right-10 p-6 rounded-3xl bg-slate-900/80 backdrop-blur-xl border border-accent/30 shadow-2xl max-w-[240px] hidden lg:block"
         >
@@ -202,7 +202,7 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
               <span className="text-[10px] text-green-400 font-bold">99.9%</span>
             </div>
             <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-              <motion.div
+              <m.div
                 initial={{ width: 0 }}
                 whileInView={{ width: '99%' }}
                 transition={{ duration: 1.5, delay: 0.5 }}
@@ -210,7 +210,7 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
               />
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Gloss Overlay */}
         <div
@@ -220,7 +220,7 @@ const ThreeDImageCard = ({ src, alt }: { src: string; alt: string }) => {
             transform: 'translateZ(20px)'
           }}
         />
-      </motion.div>
+      </m.div>
     </div>
   );
 };
@@ -231,7 +231,7 @@ const ToolCard = ({ item, index }: { item: any; index: number }) => {
   const Icon = item.icon;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -270,7 +270,7 @@ const ToolCard = ({ item, index }: { item: any; index: number }) => {
       <div className="mt-8 flex items-center text-xs font-semibold text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         Learn more <ArrowRight className="ml-1 w-3 h-3" />
       </div>
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -297,7 +297,7 @@ const GlossyCard = ({ item, index }: { item: any; index: number }) => {
   ];
 
   return (
-    <motion.div
+    <m.div
       ref={cardRef}
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
@@ -357,7 +357,7 @@ const GlossyCard = ({ item, index }: { item: any; index: number }) => {
           Live Data Stream <TrendingUp className="ml-2 w-3 h-3" />
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -366,7 +366,7 @@ const JourneyStep = ({ item, index }: { item: any; index: number }) => {
   const Icon = item.icon;
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -417,7 +417,7 @@ const JourneyStep = ({ item, index }: { item: any; index: number }) => {
         {index === 1 && (
           <div className="relative h-full flex items-center justify-center">
             <div className="w-full h-1 bg-slate-200 dark:bg-slate-800 rounded-full relative">
-              <motion.div
+              <m.div
                 initial={{ width: 0 }}
                 whileInView={{ width: '100%' }}
                 transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
@@ -439,7 +439,7 @@ const JourneyStep = ({ item, index }: { item: any; index: number }) => {
           </div>
         )}
       </div>
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -529,7 +529,7 @@ const CommandCenter = () => {
       {/* Enhanced Background decoration from HeroSection */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Animated gradient orbs */}
-        <motion.div
+        <m.div
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -539,7 +539,7 @@ const CommandCenter = () => {
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
         />
-        <motion.div
+        <m.div
           animate={{
             x: [0, -40, 0],
             y: [0, -25, 0],
@@ -558,14 +558,14 @@ const CommandCenter = () => {
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
           {/* Left Content */}
           <div className="text-left">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-6"
             >
               <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <span className="text-xs font-semibold tracking-wide uppercase">Operational Control</span>
-            </motion.div>
+            </m.div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-6 text-slate-900 dark:text-white">
               Control Your Entire Business <br />
@@ -593,7 +593,7 @@ const CommandCenter = () => {
 
           {/* Right Image (3D Dashboard) */}
           <div className="relative w-full" style={{ perspective: '1000px' }}>
-            <motion.div
+            <m.div
               initial={{ opacity: 0, rotateX: 10, rotateY: -10, scale: 0.9 }}
               animate={{ opacity: 1, rotateX: 5, rotateY: -10, scale: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
@@ -611,7 +611,7 @@ const CommandCenter = () => {
               </div>
 
               {/* Floating Elements (Enhanced Decoration) */}
-              <motion.div
+              <m.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute top-2 right-2 lg:-top-12 lg:-right-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-3 lg:p-5 rounded-2xl border border-accent/20 dark:border-accent/40 shadow-[0_20px_50px_-10px_rgba(219,154,70,0.3)] hidden md:block z-30"
@@ -626,10 +626,10 @@ const CommandCenter = () => {
                     <div className="text-sm lg:text-xl font-bold text-slate-900 dark:text-white tracking-tight">$124,500 <span className="text-green-500 text-[10px] lg:text-xs ml-1">+12%</span></div>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
 
               {/* Added Float: Lead Alert */}
-              <motion.div
+              <m.div
                 animate={{ y: [0, 15, 0], x: [0, 5, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
                 className="absolute bottom-2 left-2 lg:-bottom-10 lg:-left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-3 lg:p-4 rounded-2xl border border-primary/20 dark:border-primary/40 shadow-2xl hidden md:block z-30"
@@ -647,10 +647,10 @@ const CommandCenter = () => {
                     <div className="text-xs lg:text-sm font-bold text-slate-900 dark:text-white">Lead Qualified</div>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
 
               {/* Added Float: AI Pulse */}
-              <motion.div
+              <m.div
                 animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute top-1/4 left-2 lg:-left-12 bg-accent text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded-full font-bold text-[10px] lg:text-xs shadow-2xl shadow-accent/50 hidden lg:flex items-center gap-1.5 lg:gap-2 z-40"
@@ -658,8 +658,8 @@ const CommandCenter = () => {
               >
                 <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 AI Specialists Active
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
 
             {/* Back Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-accent/10 dark:bg-accent/20 blur-[100px] -z-10" />
@@ -672,7 +672,7 @@ const CommandCenter = () => {
     <section key="features" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500">
       {/* Animated gold/Accent Gradient Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
+        <m.div
           animate={{
             x: [0, 30, 0],
             y: [0, 20, 0],
@@ -682,7 +682,7 @@ const CommandCenter = () => {
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-[100px]"
         />
-        <motion.div
+        <m.div
           animate={{
             x: [0, -25, 0],
             y: [0, -15, 0],
@@ -701,7 +701,7 @@ const CommandCenter = () => {
             {"Unified CRM & Marketing Hub".split(" ").map((word, wordIndex) => (
               <span key={wordIndex} className="inline-block whitespace-nowrap">
                 {word.split("").map((char, charIndex) => (
-                  <motion.span
+                  <m.span
                     key={charIndex}
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -716,7 +716,7 @@ const CommandCenter = () => {
                     )}
                   >
                     {char}
-                  </motion.span>
+                  </m.span>
                 ))}
               </span>
             ))}
@@ -746,7 +746,7 @@ const CommandCenter = () => {
     </section>,
 
     // Automations
-    <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
+     <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content: Logic Flow */}
@@ -796,7 +796,7 @@ const CommandCenter = () => {
                 <div className="flex flex-col gap-8 relative z-10 h-full justify-center">
 
                   {/* Trigger Node */}
-                  <motion.div
+                  <m.div
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     className="bg-white dark:bg-slate-800 border border-accent/20 dark:border-accent/30 p-4 rounded-xl shadow-lg relative"
@@ -811,16 +811,16 @@ const CommandCenter = () => {
                     </div>
                     {/* Connector Line Down */}
                     <div className="absolute left-8 bottom-0 translate-y-full h-8 w-0.5 bg-slate-200 dark:bg-slate-700">
-                      <motion.div
+                      <m.div
                         animate={{ height: ["0%", "100%"], opacity: [0, 1, 0] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                         className="w-full bg-accent"
                       />
                     </div>
-                  </motion.div>
+                  </m.div>
 
                   {/* Action Node 1 */}
-                  <motion.div
+                  <m.div
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
@@ -837,10 +837,10 @@ const CommandCenter = () => {
                         <div className="text-sm font-medium text-slate-900 dark:text-white">Send Welcome Email</div>
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
 
                   {/* Delay Node */}
-                  <motion.div
+                  <m.div
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4 }}
@@ -852,10 +852,10 @@ const CommandCenter = () => {
                     </div>
                     {/* Connector Line Down */}
                     <div className="absolute left-1/2 bottom-0 translate-y-full h-8 w-0.5 bg-slate-200 dark:bg-slate-700 -translate-x-1/2" />
-                  </motion.div>
+                  </m.div>
 
                   {/* Action Node 2 */}
-                  <motion.div
+                  <m.div
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6 }}
@@ -869,7 +869,7 @@ const CommandCenter = () => {
                         <div className="text-sm font-medium text-slate-900 dark:text-white">SMS Check-in</div>
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
 
                 </div>
               </div>
@@ -879,7 +879,7 @@ const CommandCenter = () => {
       </div>
     </section>,
 
-    // Scheduling & Payments - Three Step Journey
+    // Tools
     <section key="tools" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center mb-16">
@@ -904,9 +904,7 @@ const CommandCenter = () => {
         </div>
       </div>
     </section>,
-
-    // Real-Time Visibility
-    <section key="visibility" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+  <section key="visibility" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       {/* Background Grid Decoration */}
       <div className="absolute inset-0 bg-[radial-gradient(rgba(219,154,70,0.1)_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-40 dark:opacity-20" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 dark:via-accent/50 to-transparent" />
@@ -922,7 +920,7 @@ const CommandCenter = () => {
             {"Real‑Time Visibility".split(" ").map((word, wordIndex) => (
               <span key={wordIndex} className="inline-block whitespace-nowrap">
                 {word.split("").map((char, charIndex) => (
-                  <motion.span
+                  <m.span
                     key={charIndex}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -937,7 +935,7 @@ const CommandCenter = () => {
                     )}
                   >
                     {char}
-                  </motion.span>
+                  </m.span>
                 ))}
               </span>
             ))}
@@ -954,9 +952,10 @@ const CommandCenter = () => {
         </div>
       </div>
     </section>,
+   
 
-    // Seamless Integration
-    <section key="integrations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-20 lg:py-24 relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+    // Integration
+     <section key="integrations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-20 lg:py-24 relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content: 3D Image Card */}
@@ -996,43 +995,14 @@ const CommandCenter = () => {
       </div>
     </section>,
 
-    // Why It Matters (Strategic Advantage Card)
-    <StrategicAdvantageCard key="cta-footer" />
-  ];
 
-  return (
-    <div className="min-h-screen bg-background transition-colors duration-300">
-      <Header />
-      <main>
-        {sections}
-      </main>
-    </div>
-  );
-};
 
-const StrategicAdvantageCard = () => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
-  return (
-    <section className="min-h-screen lg:min-h-screen w-full flex flex-col relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(219,154,70,0.05)_0%,transparent_70%)]" />
-      </div>
-
+    <section key="cta" className="py-24 bg-white dark:bg-[#020617] relative overflow-hidden">
       <div className="flex-grow flex items-center justify-center py-12 lg:py-16">
         <div className="container mx-auto px-4 max-w-5xl">
           <AnimatedSection direction="up">
-            <motion.div
-              ref={containerRef}
-              onMouseMove={handleMouseMove}
+            <m.div
+
               whileHover={{ y: -5 }}
               className="relative p-10 lg:p-16 rounded-[2.5rem] overflow-hidden bg-white/40 dark:bg-slate-900/40 backdrop-blur-2xl border border-slate-200/60 dark:border-white/10 shadow-2xl dark:shadow-none group transform-gpu"
             >
@@ -1040,7 +1010,7 @@ const StrategicAdvantageCard = () => {
               <div
                 className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[2.5rem]"
                 style={{
-                  background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, hsla(34, 67%, 57%, 0.4), transparent 40%)`,
+                  background: `radial-gradient(400px circle, hsla(var(--accent), 0.4), transparent 40%)`,
                   padding: '2px',
                   WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                   WebkitMaskComposite: 'destination-out',
@@ -1051,7 +1021,7 @@ const StrategicAdvantageCard = () => {
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                 style={{
-                  background: `radial-gradient(800px circle at ${mousePos.x}px ${mousePos.y}px, hsla(34, 67%, 57%, 0.08), transparent 80%)`,
+                  background: `radial-gradient(800px circle, hsla(var(--accent), 0.08), transparent 80%)`,
                 }}
               />
 
@@ -1067,14 +1037,14 @@ const StrategicAdvantageCard = () => {
                   <span className="text-xs font-bold tracking-widest uppercase">Strategic Advantage</span>
                 </div>
 
-                <motion.h2
+                <m.h2
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   className="text-3xl md:text-5xl lg:text-6xl font-bold text-gradient mb-6 leading-tight tracking-tight uppercase"
                 >
                   Why It Matters
-                </motion.h2>
+                </m.h2>
 
                 <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-2xl leading-relaxed font-medium">
                   The Command Center isn’t just a CRM. It’s your business’s heartbeat. Centralising tools saves time, reduces errors and gives you visibility into what’s working and what’s not. Focus on growth, not juggling apps.
@@ -1083,7 +1053,7 @@ const StrategicAdvantageCard = () => {
                 <div className="flex flex-col sm:flex-row gap-6 items-center">
                   <MagneticWrapper strength={0.2}>
                     <Button
-                      className="h-16 px-10 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(219,154,70,0.3)] hover:-translate-y-1 group/btn relative overflow-hidden"
+                      className="h-16 px-10 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_hsla(var(--accent),0.3)] hover:-translate-y-1 group/btn relative overflow-hidden"
                       onClick={handleBookingRedirect}
                     >
                       <div className="absolute inset-0 bg-accent translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
@@ -1102,12 +1072,21 @@ const StrategicAdvantageCard = () => {
               {/* Decorative Corner Glows */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-accent/10 blur-[60px] rounded-full" />
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-accent/10 blur-[60px] rounded-full" />
-            </motion.div>
+            </m.div>
           </AnimatedSection>
         </div>
       </div>
-      <Footer />
     </section>
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+      <Header />
+      <main>
+        {sections}
+      </main>
+      <Footer />
+    </div>
   );
 };
 

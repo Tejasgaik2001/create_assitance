@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import Footer from "@/components/Footer";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
 
 // Lazy-load below-the-fold sections so their images/assets only download when needed
@@ -44,9 +45,10 @@ const Index = () => {
           <PillarsSection />
           <WhyChooseUs />
           <TestimonialSection />
-          <FAQSection withFooter />
+          <FAQSection />
         </Suspense>
       </main>
+      <Footer />
     </div>
   );
 };

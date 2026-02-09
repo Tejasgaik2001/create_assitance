@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/hooks/useTheme";
-import { MotionConfig } from "framer-motion";
+import { MotionConfig, LazyMotion, domMax } from "framer-motion";
 const Index = lazy(() => import("./pages/Index"));
 const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 const WhatYouGet = lazy(() => import("./pages/WhatYouGet"));
@@ -33,34 +33,36 @@ const App = () => {
 
   return (
     <MotionConfig reducedMotion={disableMotion ? "always" : "never"}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <ScrollToTop />
-              <Suspense fallback={
-                <div className="min-h-screen flex items-center justify-center bg-background">
-                  <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
-                </div>
-              }>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/how-it-works" element={<HowItWorks />} />
-                  <Route path="/what-you-get" element={<WhatYouGet />} />
-                  <Route path="/ai-employees" element={<AIEmployees />} />
-                  <Route path="/command-center" element={<CommandCenter />} />
-                  <Route path="/why-create-assistants" element={<WhyCreateAssistants />} />
-                  {/* <Route path="/book-a-call" element={<BookACall />} /> */}
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </BrowserRouter>
-          </TooltipProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
+      <LazyMotion features={domMax} strict>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <ScrollToTop />
+                <Suspense fallback={
+                  <div className="min-h-screen flex items-center justify-center bg-background">
+                    <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+                  </div>
+                }>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/how-it-works" element={<HowItWorks />} />
+                    <Route path="/what-you-get" element={<WhatYouGet />} />
+                    <Route path="/ai-employees" element={<AIEmployees />} />
+                    <Route path="/command-center" element={<CommandCenter />} />
+                    <Route path="/why-create-assistants" element={<WhyCreateAssistants />} />
+                    {/* <Route path="/book-a-call" element={<BookACall />} /> */}
+                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Suspense>
+              </BrowserRouter>
+            </TooltipProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </LazyMotion>
     </MotionConfig>
   );
 };

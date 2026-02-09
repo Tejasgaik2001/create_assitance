@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { MotionText } from "@/components/ui/MotionText";
 
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,6 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { RollingTextList } from "@/components/ui/RollingTextList";
 import { VerticalTimeline } from "@/components/ui/VerticalTimeline";
 import { handleBookingRedirect } from "@/utils/navigation";
-import { useEffect, useState } from "react";
 
 const HowItWorks = () => {
   const steps = [
@@ -77,16 +76,12 @@ const HowItWorks = () => {
     }
   ];
 
-
-
   const benefits = [
     { icon: FiZap, title: "Lightning Fast Responses", description: "AI responds instantly, 24/7" },
     { icon: FiShield, title: "Never Lose a Lead", description: "Automated follow-ups ensure no gaps" },
     { icon: FiTrendingUp, title: "Increase Conversion", description: "Streamlined process boosts sales" },
     { icon: FiCheckCircle, title: "Hands-Off Growth", description: "Fully automated system" }
   ];
-
-
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
@@ -97,7 +92,7 @@ const HowItWorks = () => {
           {/* Background elements with animations */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             {/* Animated gradient orbs */}
-            <motion.div
+            <m.div
               animate={{
                 x: [0, 50, 0],
                 y: [0, 30, 0],
@@ -107,7 +102,7 @@ const HowItWorks = () => {
               transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
             />
-            <motion.div
+            <m.div
               animate={{
                 x: [0, -40, 0],
                 y: [0, -25, 0],
@@ -150,7 +145,7 @@ const HowItWorks = () => {
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Left floating orb */}
-            <motion.div
+            <m.div
               className="absolute top-20 -left-20 w-80 h-80 bg-accent/15 rounded-full blur-3xl"
               animate={{
                 y: [0, 40, 0],
@@ -159,7 +154,7 @@ const HowItWorks = () => {
               transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
             />
             {/* Right floating orb */}
-            <motion.div
+            <m.div
               className="absolute bottom-40 -right-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl"
               animate={{
                 y: [0, -40, 0],
@@ -168,7 +163,7 @@ const HowItWorks = () => {
               transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
             />
             {/* Center accent */}
-            <motion.div
+            <m.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
               animate={{
                 scale: [1, 1.3, 1],
@@ -199,7 +194,7 @@ const HowItWorks = () => {
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Central pulsing orb */}
-            <motion.div
+            <m.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
               animate={{
                 scale: [1, 1.2, 1],
@@ -207,7 +202,7 @@ const HowItWorks = () => {
               transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
             />
             {/* Top left orb */}
-            <motion.div
+            <m.div
               className="absolute -top-20 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
               animate={{
                 x: [0, 30, 0],
@@ -216,7 +211,7 @@ const HowItWorks = () => {
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
             {/* Bottom right orb */}
-            <motion.div
+            <m.div
               className="absolute -bottom-10 right-1/4 w-72 h-72 bg-accent/8 rounded-full blur-3xl"
               animate={{
                 x: [0, -20, 0],
@@ -246,7 +241,7 @@ const HowItWorks = () => {
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
             {/* Left glow */}
-            <motion.div
+            <m.div
               className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
               animate={{
                 x: [0, 40, 0],
@@ -255,7 +250,7 @@ const HowItWorks = () => {
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
             />
             {/* Right glow */}
-            <motion.div
+            <m.div
               className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl"
               animate={{
                 x: [0, -40, 0],
@@ -264,7 +259,7 @@ const HowItWorks = () => {
               transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
             />
             {/* Center subtle orb */}
-            <motion.div
+            <m.div
               className="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl"
               animate={{
                 y: [0, 20, 0],
@@ -294,13 +289,13 @@ const HowItWorks = () => {
                     onClick={handleBookingRedirect}
                   >
                     Book a Free Consultation
-                    <motion.span
+                    <m.span
                       className="inline-block"
                       animate={{ x: [0, 4, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     >
                       <ArrowRight className="w-4 h-4" />
-                    </motion.span>
+                    </m.span>
                   </Button>
                 </MagneticWrapper>
               </div>
@@ -311,7 +306,6 @@ const HowItWorks = () => {
       <Footer />
     </div>
   );
-
 };
 
 export default HowItWorks;

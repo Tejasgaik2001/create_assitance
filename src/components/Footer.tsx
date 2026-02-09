@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Facebook, Mail, Phone, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -57,20 +57,20 @@ const Footer = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-12 lg:gap-12 mb-16">
           {/* Brand */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
             className="col-span-2 md:col-span-3 lg:col-span-2 xl:col-span-1"
           >
-            <motion.div
+            <m.div
               className="flex items-center gap-2 mb-4"
               whileHover={{ x: 5 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <img src={currentLogo} alt="Create Assistants Logo" loading="lazy" width={36} height={36} className="w-9 h-9 object-cover" />
               <span className="font-semibold">Create Assistants</span>
-            </motion.div>
+            </m.div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
               Automate and grow your business with custom CRM and AI solutions.
             </p>
@@ -78,7 +78,7 @@ const Footer = () => {
             {/* Social links */}
             <div className="flex items-center gap-3">
               {socialLinks.map((social, index) => (
-                <motion.a
+                <m.a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
@@ -89,14 +89,14 @@ const Footer = () => {
                   whileHover={{ y: -3 }}
                 >
                   <social.icon className="w-4 h-4" />
-                </motion.a>
+                </m.a>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Links */}
           {footerLinks.map((section, categoryIndex) => (
-            <motion.div
+            <m.div
               key={section.category}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -105,7 +105,7 @@ const Footer = () => {
               <h4 className="font-semibold mb-4">{section.category}</h4>
               <ul className="space-y-3">
                 {section.links.map((link, linkIndex) => (
-                  <motion.li
+                  <m.li
                     key={link.name}
                     initial={{ opacity: 0, x: -10 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -120,7 +120,7 @@ const Footer = () => {
                         <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
                       </Link>
                     ) : (
-                      <motion.a
+                      <m.a
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -128,42 +128,42 @@ const Footer = () => {
                       >
                         {link.name}
                         <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-                      </motion.a>
+                      </m.a>
                     )}
-                  </motion.li>
+                  </m.li>
                 ))}
               </ul>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* Bottom */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
           className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border gap-6 md:gap-4"
         >
           <p className="text-sm text-muted-foreground">
-            © 2026 Create Assistants. All rights reserved.
+            © {new Date().getFullYear()} Create Assistants. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <motion.a
+            <m.a
               href="https://go.createassistants.ai/privacy-policy"
               className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Privacy Policy
               <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-            </motion.a>
-            <motion.a
+            </m.a>
+            <m.a
               href="https://go.createassistants.ai/terms-and-conditions"
               className="group relative text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Terms & Conditions
               <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
-            </motion.a>
+            </m.a>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </footer>
   );

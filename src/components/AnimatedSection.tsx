@@ -1,4 +1,4 @@
-import { motion, useInView, Variants } from "framer-motion";
+import { m, useInView, Variants } from "framer-motion";
 import { useRef, ReactNode, useState, useEffect } from "react";
 
 interface AnimatedSectionProps {
@@ -64,9 +64,8 @@ const AnimatedSection = ({
     );
   }
 
-  // On desktop: use Framer Motion animations
   return (
-    <motion.div
+    <m.div
       ref={ref}
       className={className}
       variants={variants}
@@ -74,7 +73,7 @@ const AnimatedSection = ({
       animate={isInView ? "visible" : "hidden"}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 

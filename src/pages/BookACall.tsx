@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Calendar as CalendarIcon, Clock, Target, Shield } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -17,13 +17,13 @@ const BookACall = () => {
 
         {/* Simple Header Area */}
         <div className="container max-w-5xl mx-auto text-center mb-16">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex justify-center mb-10"
           >
             <img src={logo} alt="Create Assistants" className="h-12 w-auto" />
-          </motion.div>
+          </m.div>
 
           <AnimatedSection direction="up">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.1] mb-6 text-slate-900 dark:text-white">
@@ -78,7 +78,7 @@ const BookACall = () => {
                     {/* Time Slots Layout */}
                     <div className="space-y-3">
                       {["09:00 AM", "11:30 AM", "02:00 PM", "04:30 PM", "06:00 PM"].map((time, idx) => (
-                        <motion.button
+                        <m.button
                           key={time}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
@@ -93,7 +93,7 @@ const BookACall = () => {
                           <span className={cn(idx === 1 ? "text-white/80" : "text-slate-500", "text-[10px] font-bold uppercase tracking-[0.1em]")}>
                             {idx === 1 ? "Selected" : "Available"}
                           </span>
-                        </motion.button>
+                        </m.button>
                       ))}
                       <div className="text-[10px] font-bold text-slate-400 dark:text-slate-600 text-center mt-6 uppercase tracking-wider">
                         All times in (GMT+05:30) Asia/Calcutta

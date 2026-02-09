@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
@@ -50,7 +50,7 @@ export const ThreeDCard = ({ title, description, icon: Icon, className }: ThreeD
     };
 
     return (
-        <motion.div
+        <m.div
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
@@ -83,6 +83,6 @@ export const ThreeDCard = ({ title, description, icon: Icon, className }: ThreeD
                     </p>
                 </div>
             </div>
-        </motion.div>
+        </m.div>
     );
 };

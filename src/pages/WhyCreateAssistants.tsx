@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { m, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Shield, Clock, Lightbulb, Users, Target, Settings, Zap, Award, Heart, MapPin, MessageSquare, ArrowRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -21,7 +21,7 @@ import ryanGoldImg from '@/assets/external/ryan-gold.webp';
 const MobileTeamMember = ({ member }: { member: any }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
-    <motion.div
+    <m.div
       layout
       onClick={() => setIsExpanded(!isExpanded)}
       className="flex flex-col items-center text-center p-8 rounded-[3rem] bg-white/5 border border-white/10 transition-all duration-300 w-full mb-6 cursor-pointer"
@@ -37,7 +37,7 @@ const MobileTeamMember = ({ member }: { member: any }) => {
 
       <AnimatePresence>
         {isExpanded && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -45,21 +45,21 @@ const MobileTeamMember = ({ member }: { member: any }) => {
           >
             <div className="h-px w-16 bg-accent/30 mx-auto mb-6" />
             <p className="text-sm text-slate-300 italic leading-relaxed text-left">"{member.bio}"</p>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {!isExpanded && (
-        <motion.span
+        <m.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.5 }}
           className="text-[10px] text-accent mt-6 uppercase font-bold tracking-widest inline-flex items-center gap-2"
         >
           Tap to read full bio
           <ArrowRight className="w-3 h-3 rotate-90" />
-        </motion.span>
+        </m.span>
       )}
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -192,7 +192,7 @@ const WhyCreateAssistants = () => {
         {/* Hero Section */}
         <div className="min-h-[90vh] w-full flex items-center justify-center relative bg-background overflow-hidden pt-20">
           <div className="absolute inset-0 pointer-events-none">
-            <motion.div
+            <m.div
               animate={{
                 x: [0, 50, 0],
                 y: [0, 30, 0],
@@ -202,7 +202,7 @@ const WhyCreateAssistants = () => {
               transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
             />
-            <motion.div
+            <m.div
               animate={{
                 x: [0, -40, 0],
                 y: [0, -25, 0],
@@ -217,7 +217,7 @@ const WhyCreateAssistants = () => {
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -225,9 +225,9 @@ const WhyCreateAssistants = () => {
               >
                 <Users className="w-3 h-3 text-primary" />
                 <span className="text-xs font-medium">Why Create Assistants</span>
-              </motion.div>
+              </m.div>
 
-              <motion.h1
+              <m.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
@@ -235,18 +235,18 @@ const WhyCreateAssistants = () => {
               >
                 <span className="block">More Than Software,</span>
                 <span className="block text-gradient">A Partner for Growth</span>
-              </motion.h1>
+              </m.h1>
 
-              <motion.p
+              <m.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
                 className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium mb-10"
               >
                 Most software tools leave you to figure things out on your own. At Create Assistants, we combine a powerful CRM with AI employees and hands‑on service.
-              </motion.p>
+              </m.p>
 
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 }}
@@ -263,7 +263,7 @@ const WhyCreateAssistants = () => {
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </MagneticWrapper>
-              </motion.div>
+              </m.div>
             </div>
           </div>
         </div>
@@ -271,7 +271,7 @@ const WhyCreateAssistants = () => {
         {/* Why Choose Section (Orbital Satellite Grid) */}
         <div className="py-16 w-full bg-background relative overflow-hidden min-h-[700px] flex items-center justify-center">
           <div className="absolute inset-0 pointer-events-none">
-            <motion.div
+            <m.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-[140px]"
               animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
               transition={{ duration: 15, repeat: Infinity }}
@@ -308,7 +308,7 @@ const WhyCreateAssistants = () => {
                 const spawnY = [100, 100, -100, -100];
 
                 return (
-                  <motion.div
+                  <m.div
                     key={reason.title}
                     className={cn("w-full max-w-[240px] lg:max-w-xs mx-auto", gridClasses[index])}
                     initial={{ opacity: 0, scale: 0.6, x: spawnX[index], y: spawnY[index] }}
@@ -317,7 +317,7 @@ const WhyCreateAssistants = () => {
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
                     style={{ perspective: 1000 }}
                   >
-                    <motion.div
+                    <m.div
                       animate={{
                         y: [0, -12, 0, 12, 0],
                         x: index % 2 === 0 ? [0, 8, 0, -8, 0] : [0, -8, 0, 8, 0],
@@ -329,7 +329,7 @@ const WhyCreateAssistants = () => {
                         ease: "linear"
                       }}
                     >
-                      <motion.div
+                      <m.div
                         whileHover={{
                           scale: 1.04,
                           rotateX: index < 2 ? 8 : -8,
@@ -338,7 +338,7 @@ const WhyCreateAssistants = () => {
                         className="glass-card p-5 lg:p-7 rounded-[1.5rem] lg:rounded-[2rem] border border-accent/10 shadow-2xl backdrop-blur-xl group relative overflow-hidden transition-all duration-300 hover:border-accent/40"
                       >
                         <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                          <motion.div
+                          <m.div
                             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary/20 rounded-full blur-3xl"
                             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
                             transition={{ duration: 4, repeat: Infinity }}
@@ -357,9 +357,9 @@ const WhyCreateAssistants = () => {
                           </p>
                         </div>
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
-                      </motion.div>
-                    </motion.div>
-                  </motion.div>
+                      </m.div>
+                    </m.div>
+                  </m.div>
                 );
               })}
             </div>
@@ -385,7 +385,7 @@ const WhyCreateAssistants = () => {
                 {reasons.map((reason, index) => {
                   const Icon = reason.icon;
                   return (
-                    <motion.div
+                    <m.div
                       key={reason.title}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -403,7 +403,7 @@ const WhyCreateAssistants = () => {
                       <p className="text-[11px] text-muted-foreground/80 leading-snug line-clamp-3 relative z-10">
                         {reason.description}
                       </p>
-                    </motion.div>
+                    </m.div>
                   );
                 })}
               </div>
@@ -414,7 +414,7 @@ const WhyCreateAssistants = () => {
         {/* Process Section */}
         <div className="py-24 w-full flex items-center justify-center bg-background relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none">
-            <motion.div
+            <m.div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/15 rounded-full blur-3xl"
               animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
@@ -463,7 +463,7 @@ const WhyCreateAssistants = () => {
               {valuesData.map((value, index) => {
                 const Icon = value.icon;
                 return (
-                  <motion.div
+                  <m.div
                     key={value.title}
                     initial={{ opacity: 0, scale: 0.9, y: 40 }}
                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -487,7 +487,7 @@ const WhyCreateAssistants = () => {
                       <h3 className="text-2xl font-bold mb-4 group-hover:text-accent transition-colors">{value.title}</h3>
                       <p className="text-muted-foreground/90 font-medium text-sm lg:text-base">{value.description}</p>
                     </div>
-                  </motion.div>
+                  </m.div>
                 );
               })}
             </div>
@@ -501,7 +501,7 @@ const WhyCreateAssistants = () => {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.05)_0%,transparent_70%)] pointer-events-none" />
             <div className="absolute inset-0 bg-slate-950/20 backdrop-blur-[1px] pointer-events-none" />
 
-            <motion.div
+            <m.div
               style={{
                 opacity: useTransform(teamScrollY, [0, 0.1, 0.9, 1], [0, 0.3, 0.3, 0]),
                 scale: useTransform(teamScrollY, [0, 1], [0.8, 1.2]),
@@ -511,7 +511,7 @@ const WhyCreateAssistants = () => {
               <h2 className="text-[15vw] font-black text-white/5 tracking-tighter uppercase select-none">
                 THE COLLECTIVE
               </h2>
-            </motion.div>
+            </m.div>
 
             <div className="relative w-full max-w-7xl h-[600px] z-20 mx-auto mt-32">
               {teamPairs.map((pair, index) => (
@@ -525,7 +525,7 @@ const WhyCreateAssistants = () => {
               ))}
             </div>
 
-            <motion.div
+            <m.div
               style={{
                 opacity: useTransform(teamScrollY, [0.0, 0.08, 0.15], [0, 1, 0]),
                 y: useTransform(teamScrollY, [0.0, 0.08], [40, 0]),
@@ -536,7 +536,7 @@ const WhyCreateAssistants = () => {
               <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter">
                 THE <span className="text-gradient">TEAM</span>
               </h2>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Mobile/Tablet Team List - Vertical Cards */}
@@ -558,7 +558,7 @@ const WhyCreateAssistants = () => {
         {/* Partnership/CTA */}
         <div className="py-24 w-full flex items-center justify-center bg-background relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none">
-            <motion.div
+            <m.div
               className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-50"
               animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
@@ -573,7 +573,7 @@ const WhyCreateAssistants = () => {
               </p>
             </AnimatedSection>
 
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="inline-block">
+            <m.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="inline-block">
               <MagneticWrapper strength={0.25}>
                 <Button
                   variant="hero"
@@ -585,7 +585,7 @@ const WhyCreateAssistants = () => {
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </MagneticWrapper>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </main>
@@ -604,7 +604,7 @@ const ProcessItem = ({ item, index }: { item: any; index: number }) => {
   };
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -645,7 +645,7 @@ const ProcessItem = ({ item, index }: { item: any; index: number }) => {
 
       <AnimatePresence>
         {isHovered && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
@@ -654,10 +654,10 @@ const ProcessItem = ({ item, index }: { item: any; index: number }) => {
             style={{ left: mousePos.x + 20, top: mousePos.y - 80 }}
           >
             <img src={item.image} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -694,7 +694,7 @@ const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }
   const blur = useTransform(progress, [rangeStart, focusStart, focusEnd, rangeEnd], ["blur(40px)", "blur(0px)", "blur(0px)", "blur(60px)"]);
 
   return (
-    <motion.div
+    <m.div
       style={{
         position: "absolute",
         left: mIndex === 0 ? "28%" : "72%",
@@ -726,7 +726,7 @@ const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }
           <h4 className="text-4xl font-black text-white tracking-tighter leading-tight mb-2">{member.name}</h4>
           <p className="text-xs text-accent font-bold uppercase tracking-[0.3em] mb-4">{member.role}</p>
 
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{
               height: isHovered ? "auto" : 0,
@@ -739,11 +739,11 @@ const IndividualMemberCard = ({ member, progress, rangeStart, rangeEnd, mIndex }
             <div className="max-h-48 overflow-y-auto custom-scrollbar pr-2">
               <p className="text-sm text-slate-200 italic leading-relaxed">"{member.bio}"</p>
             </div>
-          </motion.div>
+          </m.div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent pointer-events-none" />
       </div>
-    </motion.div>
+    </m.div>
   );
 };
 

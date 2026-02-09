@@ -1,4 +1,4 @@
-import { motion, Variants, AnimatePresence } from "framer-motion";
+import { m, useInView, AnimatePresence, Variants } from "framer-motion";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock, Users, Shield, CheckCircle, Headphones } from "lucide-react";
@@ -104,7 +104,7 @@ const AIEmployees = () => {
       {/* Enhanced Background decoration from HeroSection */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Animated gradient orbs */}
-        <motion.div
+        <m.div
           animate={{
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -114,7 +114,7 @@ const AIEmployees = () => {
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
         />
-        <motion.div
+        <m.div
           animate={{
             x: [0, -40, 0],
             y: [0, -25, 0],
@@ -129,12 +129,12 @@ const AIEmployees = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
 
         {/* Glowing Data Lines */}
-        <motion.div
+        <m.div
           animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
           className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent hidden sm:block"
         />
-        <motion.div
+        <m.div
           animate={{ x: [100, -100], opacity: [0, 1, 0] }}
           transition={{ duration: 7, repeat: Infinity, ease: "linear", delay: 1 }}
           className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent hidden sm:block"
@@ -144,35 +144,35 @@ const AIEmployees = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-8 xl:gap-16 items-center">
           {/* Left Side: Content */}
-          <motion.div
+          <m.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             className="flex flex-col gap-6"
           >
-            <motion.span
+            <m.span
               variants={itemVariants}
               className="text-accent font-bold tracking-[0.2em] uppercase text-sm sm:text-base"
             >
               The Future of Business Efficiency
-            </motion.span>
+            </m.span>
 
-            <motion.h1
+            <m.h1
               variants={itemVariants}
               className="text-slate-900 dark:text-white text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight"
             >
               Meet Your <span className="block text-gradient">Hardest‑Working</span>
               <span className="block">Team Members</span>
-            </motion.h1>
+            </m.h1>
 
-            <motion.p
+            <m.p
               variants={itemVariants}
               className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-xl font-medium mt-2"
             >
               Businesses lose thousands in missed calls and slow follow‑ups. Prospects expect answers in seconds, not hours. Create Assistants solves this with AI employees, fully trained voice and chat assistants that work around the clock.
-            </motion.p>
+            </m.p>
 
-            <motion.div variants={itemVariants} className="mt-4 xl:mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center">
+            <m.div variants={itemVariants} className="mt-4 xl:mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6 items-stretch sm:items-center">
               <MagneticWrapper strength={0.3} className="w-full sm:w-auto">
                 <Button
                   size="lg"
@@ -192,10 +192,10 @@ const AIEmployees = () => {
                   Demo Our AI
                 </Button>
               </MagneticWrapper>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8, x: 50 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
@@ -213,7 +213,7 @@ const AIEmployees = () => {
               />
 
               {/* Status Indicator Card 1 */}
-              <motion.div
+              <m.div
                 initial={{ x: 20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 1, duration: 0.8 }}
@@ -226,10 +226,10 @@ const AIEmployees = () => {
                   <div className="text-[7px] xl:text-[10px] text-accent font-bold uppercase tracking-widest leading-none">Active Specialist</div>
                   <div className="text-slate-900 dark:text-white font-bold text-xs xl:text-lg leading-none mt-1">Specialist Team Alpha</div>
                 </div>
-              </motion.div>
+              </m.div>
 
               {/* Status Indicator Card 2 */}
-              <motion.div
+              <m.div
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.8 }}
@@ -242,7 +242,7 @@ const AIEmployees = () => {
                   <div className="text-[7px] xl:text-[10px] text-accent font-bold uppercase tracking-widest leading-none">Performance</div>
                   <div className="text-slate-900 dark:text-white font-bold text-xs xl:text-lg leading-none mt-1">99.8% Accuracy</div>
                 </div>
-              </motion.div>
+              </m.div>
 
               {/* Live Tag */}
               <div className="absolute top-8 left-8 z-30 flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground rounded-full text-xs font-bold shadow-lg">
@@ -250,10 +250,10 @@ const AIEmployees = () => {
                 LIVE PROCESSING
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
-    </section>,
+    </section >,
 
     // What Are AI Employees - Story-Based Journey
     <div key="what" className="w-full bg-slate-50 dark:bg-slate-950 relative overflow-hidden py-24 lg:py-40">
@@ -261,12 +261,12 @@ const AIEmployees = () => {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.02]"
           style={{ backgroundImage: 'radial-gradient(#6366f1 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-        <motion.div
+        <m.div
           animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.25, 0.15] }}
           transition={{ duration: 10, repeat: Infinity }}
           className="absolute top-[5%] left-[5%] w-[50%] h-[50%] bg-accent/30 blur-[150px] rounded-full"
         />
-        <motion.div
+        <m.div
           animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 12, repeat: Infinity }}
           className="absolute bottom-[5%] right-[5%] w-[40%] h-[40%] bg-primary/25 blur-[130px] rounded-full"
@@ -276,21 +276,21 @@ const AIEmployees = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Hero Header */}
         <div className="text-center max-w-4xl mx-auto mb-24">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6"
           >
-            <motion.span
+            <m.span
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="w-2 h-2 rounded-full bg-accent"
             />
             <span className="text-xs font-bold text-accent uppercase tracking-widest">The Customer Journey</span>
-          </motion.div>
+          </m.div>
 
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -298,23 +298,23 @@ const AIEmployees = () => {
           >
             How <span className="text-gradient">AI Employees</span>
             <br />Transform Every Interaction
-          </motion.h2>
+          </m.h2>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium"
           >
             Follow the journey of a customer interaction — from first contact to completed transaction
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Story Timeline */}
         <div className="relative max-w-6xl mx-auto">
           {/* Central Journey Line */}
           <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2">
-            <motion.div
+            <m.div
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
@@ -335,7 +335,7 @@ const AIEmployees = () => {
             ];
 
             return (
-              <motion.div
+              <m.div
                 key={item.title}
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -345,11 +345,11 @@ const AIEmployees = () => {
               >
                 {/* Timeline Node - Desktop */}
                 <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 z-20">
-                  <motion.div
+                  <m.div
                     whileHover={{ scale: 1.2 }}
                     className="relative"
                   >
-                    <motion.div
+                    <m.div
                       animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
                       transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
                       className="absolute inset-0 w-16 h-16 rounded-full bg-accent/30"
@@ -357,12 +357,12 @@ const AIEmployees = () => {
                     <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-amber-400 flex items-center justify-center shadow-xl shadow-accent/30 border-4 border-white dark:border-slate-900">
                       <Icon className="w-7 h-7 text-white" />
                     </div>
-                  </motion.div>
+                  </m.div>
                 </div>
 
                 {/* Content Card */}
                 <div className={`w-full lg:w-[calc(50%-4rem)] ${isLeft ? 'lg:pr-8' : 'lg:pl-8'}`}>
-                  <motion.div
+                  <m.div
                     whileHover={{ y: -8, scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                     className="relative bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl group"
@@ -372,25 +372,25 @@ const AIEmployees = () => {
 
                     {/* Mobile Icon */}
                     <div className="lg:hidden mb-6 flex items-center justify-between">
-                      <motion.div
+                      <m.div
                         animate={{ rotate: [0, 5, -5, 0] }}
                         transition={{ duration: 4, repeat: Infinity }}
                         className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-amber-400 flex items-center justify-center shadow-lg"
                       >
                         <Icon className="w-7 h-7 text-white" />
-                      </motion.div>
+                      </m.div>
                       <div className="text-3xl font-black text-accent/20">0{index + 1}</div>
                     </div>
 
                     {/* Story Prefix */}
-                    <motion.p
+                    <m.p
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ delay: 0.3 + index * 0.1 }}
                       className="text-accent font-semibold text-sm mb-2 italic"
                     >
                       {storyPrefixes[index]}
-                    </motion.p>
+                    </m.p>
 
                     {/* Title */}
                     <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3">
@@ -409,36 +409,36 @@ const AIEmployees = () => {
 
                     {/* Connector Arrow */}
                     <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 ${isLeft ? '-right-8' : '-left-8'}`}>
-                      <motion.div
+                      <m.div
                         animate={{ x: isLeft ? [0, 5, 0] : [0, -5, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                         className={`w-8 h-8 flex items-center justify-center`}
                       >
                         <ArrowRight className={`w-5 h-5 text-accent ${isLeft ? '' : 'rotate-180'}`} />
-                      </motion.div>
+                      </m.div>
                     </div>
-                  </motion.div>
+                  </m.div>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
 
           {/* Journey End */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
             className="text-center mt-16"
           >
-            <motion.div
+            <m.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
               className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent text-accent-foreground font-bold shadow-xl shadow-accent/30"
             >
               <CheckCircle className="w-5 h-5" />
               Customer Converted Successfully
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         </div>
       </div>
     </div>,
@@ -454,32 +454,32 @@ const AIEmployees = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <motion.h2
+            <m.h2
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               className="section-headline mb-6 text-slate-900 dark:text-white"
             >
               Instant Responses <span className="text-accent dark:text-accent">24/7</span>
-            </motion.h2>
-            <motion.p
+            </m.h2>
+            <m.p
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
               className="body-large mb-4 text-slate-600 dark:text-slate-300"
             >
               Unlike traditional staff, AI employees never sleep. They answer calls, texts and chats within seconds, even at 2 AM. This immediate engagement reduces lead drop‑off and increases conversion rates.
-            </motion.p>
-            <motion.p
+            </m.p>
+            <m.p
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
               className="text-sm text-slate-400"
             >
               Every interaction is logged in your system so nothing falls through the cracks.
-            </motion.p>
+            </m.p>
           </div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 30, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ delay: 0.2 }}
@@ -498,7 +498,7 @@ const AIEmployees = () => {
                 <span className="text-xs font-medium text-slate-900 dark:text-slate-200">Always Available</span>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </div>,
@@ -506,17 +506,17 @@ const AIEmployees = () => {
     // Benefits
     <div key="benefits" className="min-h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-950/50 py-20 lg:py-32">
       <div className="container mx-auto px-4">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           className="section-headline mb-12 text-center text-slate-900 dark:text-white"
         >
           Benefits at a <span className="text-gradient">Glance</span>
-        </motion.h2>
+        </m.h2>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {benefits.map((benefit, index) => (
-            <motion.div
+            <m.div
               key={benefit.title}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -547,7 +547,7 @@ const AIEmployees = () => {
                   {benefit.description}
                 </p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>
@@ -588,12 +588,12 @@ const AIEmployees = () => {
         <div key="features-showcase" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden py-24 lg:py-32">
           {/* Cinematic Background */}
           <div className="absolute inset-0 pointer-events-none">
-            <motion.div
+            <m.div
               animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
               transition={{ duration: 15, repeat: Infinity }}
               className="absolute top-0 left-0 w-[60%] h-[60%] bg-accent/20 blur-[200px] rounded-full"
             />
-            <motion.div
+            <m.div
               animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
               transition={{ duration: 20, repeat: Infinity }}
               className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-500/20 blur-[180px] rounded-full"
@@ -605,26 +605,26 @@ const AIEmployees = () => {
           <div className="container mx-auto px-4 relative z-10">
             {/* Header */}
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
               >
-                <motion.span
+                <m.span
                   animate={{ scale: [1, 1.3, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                   className="w-2 h-2 rounded-full bg-accent"
                 />
                 <span className="text-xs font-bold text-accent uppercase tracking-widest">Why Choose Us</span>
-              </motion.div>
+              </m.div>
 
-              <motion.h2
+              <m.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight"
               >
                 The <span className="text-gradient">AI Advantage</span>
-              </motion.h2>
+              </m.h2>
             </div>
 
             {/* Feature Showcase */}
@@ -632,7 +632,7 @@ const AIEmployees = () => {
               {/* Navigation Pills */}
               <div className="flex justify-center gap-3 mb-12">
                 {features.map((feature, index) => (
-                  <motion.button
+                  <m.button
                     key={index}
                     onClick={() => setActiveFeature(index)}
                     whileHover={{ scale: 1.05 }}
@@ -643,7 +643,7 @@ const AIEmployees = () => {
                       }`}
                   >
                     {feature.highlight}
-                  </motion.button>
+                  </m.button>
                 ))}
               </div>
 
@@ -655,7 +655,7 @@ const AIEmployees = () => {
                     const offset = index - activeFeature;
 
                     return (
-                      <motion.div
+                      <m.div
                         key={feature.title}
                         initial={{ opacity: 0, scale: 0.8, y: 100 }}
                         animate={{
@@ -679,7 +679,7 @@ const AIEmployees = () => {
                                 0{index + 1}
                               </div>
 
-                              <motion.div
+                              <m.div
                                 initial={{ opacity: 0, x: -30 }}
                                 animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -30 }}
                                 transition={{ delay: 0.2 }}
@@ -699,12 +699,12 @@ const AIEmployees = () => {
                                   <span className="text-3xl font-black text-accent">{feature.stat}</span>
                                   <span className="text-sm font-medium text-slate-400">{feature.statLabel}</span>
                                 </div>
-                              </motion.div>
+                              </m.div>
                             </div>
 
                             {/* Image Side */}
                             <div className="relative hidden lg:block">
-                              <motion.div
+                              <m.div
                                 initial={{ opacity: 0, scale: 1.1 }}
                                 animate={{ opacity: isActive ? 1 : 0.5, scale: isActive ? 1 : 1.1 }}
                                 transition={{ delay: 0.3, duration: 0.8 }}
@@ -717,11 +717,11 @@ const AIEmployees = () => {
                                   className="w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/50 to-transparent" />
-                              </motion.div>
+                              </m.div>
                             </div>
                           </div>
                         </div>
-                      </motion.div>
+                      </m.div>
                     );
                   })}
                 </AnimatePresence>
@@ -730,7 +730,7 @@ const AIEmployees = () => {
               {/* Progress Dots */}
               <div className="flex justify-center gap-2 mt-8">
                 {features.map((_, index) => (
-                  <motion.button
+                  <m.button
                     key={index}
                     onClick={() => setActiveFeature(index)}
                     className="relative p-1"
@@ -738,12 +738,12 @@ const AIEmployees = () => {
                     <div className={`w-2 h-2 rounded-full transition-all duration-300 ${activeFeature === index ? 'bg-accent' : 'bg-white/20'
                       }`} />
                     {activeFeature === index && (
-                      <motion.div
+                      <m.div
                         layoutId="activeDot"
                         className="absolute inset-0 w-4 h-4 -m-1 rounded-full border-2 border-accent"
                       />
                     )}
-                  </motion.button>
+                  </m.button>
                 ))}
               </div>
             </div>
@@ -763,7 +763,7 @@ const AIEmployees = () => {
 
         <div className="container mx-auto px-6 relative z-10 mt-12">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -774,11 +774,11 @@ const AIEmployees = () => {
                 <span className="text-xs font-bold text-accent uppercase tracking-widest">Growth Engine</span>
               </div>
 
-              <motion.h2
+              <m.h2
                 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-slate-900 dark:text-white"
               >
                 Ready to <span className="text-accent dark:text-accent">Transform</span> Your Business?
-              </motion.h2>
+              </m.h2>
 
               <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl">
                 Want to see how AI employees can transform your customer interactions?
@@ -795,85 +795,63 @@ const AIEmployees = () => {
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </MagneticWrapper>
-
-                {/* Enhanced Tooltip - Professional SaaS Content - Hidden on mobile */}
-                <div className="absolute bottom-full left-0 mb-4 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 pointer-events-none z-50 hidden sm:block">
-                  <div className="bg-white dark:bg-[#0f172a] p-6 rounded-2xl shadow-3xl border border-slate-200 dark:border-slate-800 w-72 backdrop-blur-xl">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                        <Shield className="w-5 h-5 text-accent" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold text-slate-900 dark:text-white">Secure Deployment</div>
-                        <div className="text-[10px] text-slate-500">SOC2 Type II Compliant</div>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2 text-[11px] text-slate-600 dark:text-slate-400">
-                        <CheckCircle className="w-3 h-3 text-accent" />
-                        <span>Instant CRM Sync</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-[11px] text-slate-600 dark:text-slate-400">
-                        <Users className="w-3 h-3 text-accent" />
-                        <span>Dedicated Onboarding</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-[11px] text-slate-600 dark:text-slate-400">
-                        <Clock className="w-3 h-3 text-accent" />
-                        <span>24/7 Performance Monitoring</span>
-                      </div>
-                    </div>
-                    {/* Tooltip Corner */}
-                    <div className="absolute bottom-[-6px] left-10 w-3 h-3 bg-white dark:bg-[#0f172a] border-r border-b border-slate-200 dark:border-slate-800 rotate-45" />
-                  </div>
-                </div>
               </div>
-            </motion.div>
+            </m.div>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="relative hidden lg:block"
+              className="relative pr-8 pb-8"
             >
-              <div className="relative rounded-[3rem] overflow-hidden border border-slate-200 dark:border-slate-800 shadow-3xl bg-white dark:bg-slate-900 group">
-                <img
-                  src={aiStrategyImg}
-                  alt="AI Strategy"
-                  loading="lazy"
-                  className="w-full h-[350px] object-cover opacity-90 transition-transform duration-1000 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 via-transparent to-transparent" />
+              <m.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative lg:max-w-[110%] xl:max-w-none"
+              >
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
+                  <img
+                    src={aiStrategyImg}
+                    alt="AI Strategy"
+                    className="w-full h-[320px] md:h-[400px] object-cover"
+                  />
+                </div>
 
-                {/* Floating UI Elements over image - Hidden on mobile/tablet */}
-                <motion.div
-                  animate={{ y: [0, -15, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-8 left-8 p-4 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl hidden xl:block"
+                {/* Floating Badge */}
+                <m.div
+                  animate={{ y: [0, 5, 0], x: [0, -3, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-6 left-6"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                    <span className="text-xs font-bold dark:text-white">API Integration Active</span>
+                  <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl flex items-center gap-3 border border-slate-200 shadow-xl">
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+                    <span className="text-sm font-semibold text-slate-900">API Integration Active</span>
                   </div>
-                </motion.div>
+                </m.div>
 
-                <motion.div
-                  animate={{ y: [0, 15, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="absolute bottom-8 right-8 p-6 bg-accent rounded-3xl shadow-2xl text-accent-foreground max-w-[200px] hidden xl:block"
-                >
-                  <div className="text-3xl font-bold mb-1">94%</div>
-                  <div className="text-[10px] uppercase font-bold tracking-widest opacity-80 leading-tight">Reduction in Response Latency</div>
-                </motion.div>
-              </div>
-            </motion.div>
+                {/* Stat Box */}
+                <div className="absolute -bottom-4 -right-4 md:bottom-6 md:-right-8 lg:-right-12 lg:bottom-12">
+                  <m.div
+                    animate={{ y: [0, -10, 0], x: [0, 3, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="bg-accent p-5 md:p-6 rounded-2xl shadow-2xl shadow-accent/20 border border-white/20 w-44 md:w-56"
+                  >
+                    <div className="text-3xl md:text-4xl font-black text-white mb-1">94%</div>
+                    <div className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider leading-tight">
+                      Reduction In <br /> Response Latency
+                    </div>
+                  </m.div>
+                </div>
+              </m.div>
+            </m.div>
           </div>
         </div>
       </div>
-    </div>,
+    </div>
   ];
 
   return (
-    <div className="min-h-screen bg-background transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-[#020617] transition-colors duration-300">
       <Header />
       <main>
         {sections}

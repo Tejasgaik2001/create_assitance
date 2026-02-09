@@ -1,212 +1,140 @@
-import { motion, useInView } from "framer-motion";
-import { useRef, type FC } from "react";
-import { ChevronDown } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import Footer from "@/components/Footer";
-import { handleBookingRedirect } from "@/utils/navigation";
+import { m, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const faqs = [
   {
-    question: "How quickly can we get started?",
-    answer:
-      "Our proven onboarding process gets you up and running in four weeks or less. We handle everything from initial setup to training your team, so you can start seeing results fast.",
+    question: "HOW QUICKLY CAN WE GET STARTED?",
+    answer: "Most of our clients go live in four weeks or less. This includes CRM setup, AI assistant training, and full team onboarding. We handle the heavy lifting so you can focus on your business."
   },
   {
-    question: "What happens if the AI can't answer a question?",
-    answer:
-      "Our AI assistants are trained on your specific business rules and FAQs. When they encounter something outside their knowledge base, they seamlessly hand off to your human team with full context of the conversation.",
+    question: "WHAT HAPPENS IF THE AI CAN'T ANSWER A QUESTION?",
+    answer: "If the AI encounters a query it's not trained for, it can gracefully route the conversation to a human team member or collect details for a follow-up. Every interaction is logged for continuous improvement."
   },
   {
-    question: "Do you integrate with our existing tools?",
-    answer:
-      "Yes, where it matters. We integrate essential tools as our goal is to eliminate extra subscriptions by replacing multiple tools with one unified platform.",
+    question: "DO YOU INTEGRATE WITH OUR EXISTING TOOLS?",
+    answer: "Yes. Our system act as your main CRM or integrates with many existing platforms like GHL, Salesforce, or custom internal tools. We'll audit your current stack and recommend the most efficient path forward."
   },
   {
-    question: "What kind of support do you provide after launch?",
-    answer:
-      "We become your ongoing systems team. This includes continuous optimization, regular strategy sessions, technical support, and updates to keep your growth engine running at peak performance.",
+    question: "WHAT KIND OF SUPPORT DO YOU PROVIDE AFTER LAUNCH?",
+    answer: "We provide ongoing monthly support including performance audits, AI retraining to handle new scenarios, and dedicated account management. We aren't just a software provider; we're your internal systems team."
   },
   {
-    question: "Is this suitable for small businesses?",
-    answer:
-      "Yes! Our solutions scale to fit businesses of all sizes. Whether you're a solo entrepreneur or a growing team, we'll customize the system to match your needs and budget.",
-  },
+    question: "IS THIS SUITABLE FOR SMALL BUSINESSES?",
+    answer: "Absolutely. We designed our systems specifically for small and medium businesses that need enterprise-grade automation to scale without increasing headcount. Our goal is to free you from manual tasks so you can focus on growth."
+  }
 ];
 
-type FAQSectionProps = {
-  withFooter?: boolean;
+const FAQItem = ({ faq, index, isSectionInView }: { faq: typeof faqs[0]; index: number; isSectionInView: boolean }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useIsMobile();
+
+  return (
+    <m.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={isSectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="mb-4"
+    >
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={cn(
+          "w-full text-left p-6 rounded-xl transition-all duration-300 group shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-border/40 hover:border-accent/40",
+          isOpen ? "bg-white dark:bg-neutral-900" : "bg-white dark:bg-black/40"
+        )}
+      >
+        <div className="flex items-center justify-between gap-4">
+          <h3 className="text-base font-bold uppercase tracking-tight transition-colors group-hover:text-accent italic">
+            {faq.question}
+          </h3>
+          <div className={`transition-all duration-300 ${isOpen ? 'rotate-180 text-accent' : 'text-neutral-400'}`}>
+            <ChevronDown className="w-5 h-5 transition-transform duration-300" />
+          </div>
+        </div>
+        <AnimatePresence>
+          {isOpen && (
+            <m.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="overflow-hidden"
+            >
+              <p className="pt-6 text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
+                {faq.answer}
+              </p>
+            </m.div>
+          )}
+        </AnimatePresence>
+      </button>
+    </m.div>
+  );
 };
 
-const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
-  const ref = useRef(null);
+const FAQSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const isInView = useInView(ref, { once: isMobile, margin: "-10%" });
 
   return (
-    <section
-      ref={ref}
-      id="resources"
-      className={
-        withFooter
-          ? "min-h-screen w-full flex flex-col relative overflow-hidden bg-background pt-24 sm:pt-32"
-          : "min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background pt-24 sm:pt-32"
-      }
-    >
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-accent/5 pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-10" />
+    <section ref={ref} id="faq" className="w-full flex items-center justify-center relative overflow-hidden bg-background py-24 sm:py-32">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 max-w-7xl mx-auto">
+          {/* Left Side: Header Content */}
+          <div className="flex flex-col justify-center text-left">
+            <m.span
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+              className="inline-block px-4 py-1.5 rounded-full bg-accent/5 text-accent border border-accent/20 text-xs font-bold uppercase tracking-widest mb-6 w-fit"
+            >
+              FAQ
+            </m.span>
+            <m.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-5xl sm:text-6xl font-bold tracking-tight mb-6 text-neutral-900 dark:text-white leading-[1.05]"
+            >
+              Frequently Asked <br />
+              <span className="text-accent">Questions</span>
+            </m.h2>
+            <m.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg text-neutral-600 dark:text-neutral-400 font-medium mb-10 max-w-sm"
+            >
+              Got questions? We've got answers. Find everything you need to know about our AI-powered growth platform.
+            </m.p>
 
-      <div className={withFooter ? "flex-1 w-full" : "w-full"}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-7xl mx-auto">
-            {/* Two Column Layout */}
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-
-              {/* Left Column - Header (Sticky on desktop) */}
-              <div className="lg:sticky lg:top-24 space-y-6">
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className={isMobile
-                    ? "inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/60"
-                    : "inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/60 backdrop-blur-sm"
-                  }
-                >
-                  <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-gradient">
-                    FAQ
-                  </span>
-                </motion.span>
-
-                <motion.h2
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 20,
-                    delay: 0.1
-                  }}
-                  className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]"
-                >
-                  <span className="text-foreground">Frequently Asked </span>
-                  <span className="block text-gradient">
-                    Questions
-                  </span>
-                </motion.h2>
-
-                <motion.p
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 20,
-                    delay: 0.2
-                  }}
-                  className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-md font-medium"
-                >
-                  Got questions? We've got answers. Find everything you need to know about our AI-powered growth platform.
-                </motion.p>
-
-                {/* Contact CTA */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 20,
-                    delay: 0.3
-                  }}
-                  className="pt-6"
-                >
-                  <motion.button
-                    onClick={handleBookingRedirect}
-                    whileHover={{ x: 5 }}
-                    className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-accent/50 hover:border-accent/80 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-primary/20"
-                  >
-                    <span className="font-bold text-sm text-gradient">
-                      Still have questions?
-                    </span>
-                    <ChevronDown className="w-4 h-4 rotate-[-90deg] text-primary group-hover:translate-x-1 transition-transform" />
-                  </motion.button>
-                </motion.div>
-              </div>
-
-              {/* Right Column - FAQ Accordion */}
-              <motion.div
-                initial={{ opacity: 0, x: 50, filter: "blur(10px)" }}
-                animate={isInView ? { opacity: 1, x: 0, filter: "blur(0px)" } : { opacity: 0, x: 50, filter: "blur(10px)" }}
-                transition={{
-                  type: "spring",
-                  stiffness: 80,
-                  damping: 20,
-                  delay: 0.2
-                }}
-                className="w-full"
+            <m.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <button
+                onClick={() => window.open('https://calendly.com/createassistants', '_blank')}
+                className="px-6 py-3 rounded-xl bg-accent/5 border border-accent/20 text-accent font-bold hover:bg-accent/10 transition-all flex items-center gap-2 w-fit text-sm"
               >
-                <Accordion
-                  type="single"
-                  collapsible
-                  className="space-y-3"
-                >
-                  {faqs.map((faq, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 100,
-                        damping: 20,
-                        delay: 0.3 + index * 0.05
-                      }}
-                    >
-                      <AccordionItem
-                        value={`item-${index}`}
-                        className={isMobile
-                          ? "group border border-border/40 rounded-xl px-4 sm:px-6 bg-gradient-to-br from-background via-background/95 to-background/80 shadow-lg shadow-black/5 data-[state=open]:shadow-xl data-[state=open]:shadow-primary/20 data-[state=open]:border-accent/50 hover:border-accent/30 transition-all duration-500 overflow-hidden"
-                          : "group border border-border/40 rounded-xl px-4 sm:px-6 bg-gradient-to-br from-background via-background/95 to-background/80 backdrop-blur-sm shadow-lg shadow-black/5 data-[state=open]:shadow-xl data-[state=open]:shadow-primary/20 data-[state=open]:border-accent/50 hover:border-accent/30 transition-all duration-500 overflow-hidden"
-                        }
-                      >
-                        {/* Gradient overlay on open */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-accent/10 opacity-0 data-[state=open]:opacity-100 transition-opacity duration-500" />
+                Still have questions? <ArrowRight size={16} />
+              </button>
+            </m.div>
+          </div>
 
-                        <AccordionTrigger className="relative text-left py-4 hover:no-underline">
-                          <span className="text-sm sm:text-base lg:text-lg font-bold uppercase tracking-tight italic group-hover:text-primary transition-colors flex-1 pr-3 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent group-data-[state=open]:from-primary group-data-[state=open]:to-accent">
-                            {faq.question}
-                          </span>
-                        </AccordionTrigger>
-
-                        <AccordionContent className="relative text-muted-foreground/90 pb-4 text-xs sm:text-sm lg:text-base leading-relaxed font-medium">
-                          {faq.answer}
-                        </AccordionContent>
-                      </AccordionItem>
-                    </motion.div>
-                  ))}
-                </Accordion>
-              </motion.div>
-            </div>
+          {/* Right Side: FAQ List */}
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <FAQItem key={index} faq={faq} index={index} isSectionInView={isInView} />
+            ))}
           </div>
         </div>
       </div>
-
-      {withFooter ? (
-        <div className="relative z-10 w-full mt-20">
-          <Footer />
-        </div>
-      ) : null}
-
-
     </section>
   );
 };
+
+import { cn } from "@/lib/utils";
 
 export default FAQSection;

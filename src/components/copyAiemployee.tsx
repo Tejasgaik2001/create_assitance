@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Bot, Clock, Users, Shield, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -46,7 +46,7 @@ const AIEmployees = () => {
         <AuroraBackground key="hero">
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center max-w-3xl mx-auto">
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
@@ -54,9 +54,9 @@ const AIEmployees = () => {
                     >
                         <Bot className="w-3 h-3 text-indigo-400" />
                         <span className="text-xs font-medium">AI Employees</span>
-                    </motion.div>
+                    </m.div>
 
-                    <motion.h1
+                    <m.h1
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
@@ -64,18 +64,18 @@ const AIEmployees = () => {
                     >
                         <span className="block">Meet Your Hardest‑Working</span>
                         <span className="block text-gradient from-indigo-300 to-purple-400 bg-clip-text text-transparent bg-gradient-to-r">Team Members</span>
-                    </motion.h1>
+                    </m.h1>
 
-                    <motion.p
+                    <m.p
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
                         className="body-large mb-10 max-w-2xl mx-auto text-sm md:text-base text-gray-300"
                     >
                         Businesses lose thousands in missed calls and slow follow‑ups. Create Assistants solves this with AI employees.
-                    </motion.p>
+                    </m.p>
 
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5 }}
@@ -87,7 +87,7 @@ const AIEmployees = () => {
                             See AI in Action
                             <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
-                    </motion.div>
+                    </m.div>
                 </div>
             </div>
         </AuroraBackground>,
@@ -95,27 +95,27 @@ const AIEmployees = () => {
         // What Are AI Employees
         <AuroraBackground key="what">
             <div className="container mx-auto px-4">
-                <motion.h2
+                <m.h2
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="section-headline mb-6 text-center text-white"
                 >
                     What Are <span className="text-indigo-400">AI Employees?</span>
-                </motion.h2>
-                <motion.p
+                </m.h2>
+                <m.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                     className="body-large max-w-3xl mx-auto text-center mb-12 text-gray-300"
                 >
                     Our AI voice and chat employees interact with prospects and customers via phone, text and website chat.
-                </motion.p>
+                </m.p>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {capabilities.map((item, index) => {
                         const Icon = item.icon;
                         return (
-                            <motion.div
+                            <m.div
                                 key={item.title}
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -128,7 +128,7 @@ const AIEmployees = () => {
                                 </div>
                                 <h3 className="font-semibold mb-2 text-white">{item.title}</h3>
                                 <p className="text-sm text-gray-400">{item.description}</p>
-                            </motion.div>
+                            </m.div>
                         );
                     })}
                 </div>
@@ -146,14 +146,14 @@ const AIEmployees = () => {
             <div className="container mx-auto px-4 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div>
-                        <motion.h2
+                        <m.h2
                             initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
                             className="section-headline mb-6 text-accent"
                         >
                             Instant Responses <span className="text-indigo-600">24/7</span>
-                        </motion.h2>
-                        <motion.p
+                        </m.h2>
+                        <m.p
                             initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.2 }}
@@ -161,18 +161,18 @@ const AIEmployees = () => {
                         >
                             Unlike traditional staff, AI employees never sleep. They answer calls, texts and chats within seconds,
                             even at 2 AM.
-                        </motion.p>
-                        <motion.p
+                        </m.p>
+                        <m.p
                             initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 }}
                             className="text-sm text-slate-500"
                         >
                             Every interaction is logged in your system so nothing falls through the cracks.
-                        </motion.p>
+                        </m.p>
                     </div>
 
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, x: 30, scale: 0.9 }}
                         animate={{ opacity: 1, x: 0, scale: 1 }}
                         transition={{ delay: 0.2 }}
@@ -190,7 +190,7 @@ const AIEmployees = () => {
                                 <span className="text-xs font-medium text-slate-800">Always Available</span>
                             </div>
                         </div>
-                    </motion.div>
+                    </m.div>
                 </div>
             </div>
         </div>,
@@ -198,17 +198,17 @@ const AIEmployees = () => {
         // Benefits
         <AuroraBackground key="benefits">
             <div className="container mx-auto px-4">
-                <motion.h2
+                <m.h2
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="section-headline mb-12 text-center text-white"
                 >
                     Benefits at a <span className="text-indigo-400">Glance</span>
-                </motion.h2>
+                </m.h2>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
                     {benefits.map((benefit, index) => (
-                        <motion.div
+                        <m.div
                             key={benefit}
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -218,7 +218,7 @@ const AIEmployees = () => {
                         >
                             <CheckCircle className="w-6 h-6 text-green-400 mb-3" />
                             <p className="text-sm text-gray-300">{benefit}</p>
-                        </motion.div>
+                        </m.div>
                     ))}
                 </div>
             </div>
@@ -227,15 +227,15 @@ const AIEmployees = () => {
         // CTA
         <AuroraBackground key="cta">
             <div className="container mx-auto px-4 text-center">
-                <motion.h2
+                <m.h2
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="section-headline mb-6 max-w-3xl mx-auto text-white"
                 >
                     Want to see how AI employees can <span className="text-indigo-400">transform</span> your customer interactions?
-                </motion.h2>
+                </m.h2>
 
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.3 }}
@@ -249,7 +249,7 @@ const AIEmployees = () => {
                             <ArrowRight className="w-4 h-4 ml-2" />
                         </Link>
                     </Button>
-                </motion.div>
+                </m.div>
             </div>
         </AuroraBackground>,
 
