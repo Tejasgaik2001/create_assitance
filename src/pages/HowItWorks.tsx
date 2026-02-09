@@ -11,6 +11,7 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { RollingTextList } from "@/components/ui/RollingTextList";
 import { VerticalTimeline } from "@/components/ui/VerticalTimeline";
 import { handleBookingRedirect } from "@/utils/navigation";
+import { useState, useEffect } from "react";
 
 const HowItWorks = () => {
   const steps = [
@@ -76,12 +77,40 @@ const HowItWorks = () => {
     }
   ];
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
   const benefits = [
     { icon: FiZap, title: "Lightning Fast Responses", description: "AI responds instantly, 24/7" },
     { icon: FiShield, title: "Never Lose a Lead", description: "Automated follow-ups ensure no gaps" },
     { icon: FiTrendingUp, title: "Increase Conversion", description: "Streamlined process boosts sales" },
     { icon: FiCheckCircle, title: "Hands-Off Growth", description: "Fully automated system" }
   ];
+
+  if (isMobile) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-24 pb-16 px-4 text-center">
+          <h1 className="text-3xl font-bold">How It Works</h1>
+          <p className="text-muted-foreground mt-4">
+            Discover how our automated system captures and converts leads.
+          </p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">
@@ -306,6 +335,7 @@ const HowItWorks = () => {
       <Footer />
     </div>
   );
+
 };
 
 export default HowItWorks;
