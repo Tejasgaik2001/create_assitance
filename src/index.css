@@ -336,12 +336,6 @@ section:not(:first-of-type) {
     transition: none !important;
   }
  
-  /* Force Framer Motion elements to be visible - only override opacity */
-  /* Don't override transform as it breaks layout positioning */
-  section,
-  section * {
-    opacity: 1 !important;
-    filter: none !important;
-  }
+ 
 }
  
