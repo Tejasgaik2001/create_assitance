@@ -904,7 +904,54 @@ const CommandCenter = () => {
         </div>
       </div>
     </section>,
+  <section key="visibility" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+      {/* Background Grid Decoration */}
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(219,154,70,0.1)_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-40 dark:opacity-20" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 dark:via-accent/50 to-transparent" />
 
+      <div className="container mx-auto px-4 relative z-10">
+        <AnimatedSection direction="up" className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-6 font-medium">
+            <BarChart3 className="w-3 h-3" />
+            <span className="text-xs tracking-wide uppercase">Performance Insights</span>
+          </div>
+          <h2 className="section-headline mb-6 flex flex-wrap justify-center gap-x-3 gap-y-1">
+            {/* Staggered Letter Animation for Title */}
+            {"Real‑Time Visibility".split(" ").map((word, wordIndex) => (
+              <span key={wordIndex} className="inline-block whitespace-nowrap">
+                {word.split("").map((char, charIndex) => (
+                  <m.span
+                    key={charIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: (wordIndex * 0.1) + (charIndex * 0.03),
+                      ease: [0.215, 0.61, 0.355, 1]
+                    }}
+                    className={cn(
+                      "inline-block",
+                      (word === "Visibility") ? "text-gradient" : "text-slate-900 dark:text-white"
+                    )}
+                  >
+                    {char}
+                  </m.span>
+                ))}
+              </span>
+            ))}
+          </h2>
+          <p className="body-large text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Complete transparency into your operations. Monitor every lead, deal, and dollar in real-time through high-performance dashboards.
+          </p>
+        </AnimatedSection>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {visibility.map((item, index) => (
+            <GlossyCard key={item.title} item={item} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>,
     // Visibility
     <section key="visibility" className="py-24 bg-slate-50 dark:bg-slate-950/50 relative overflow-hidden">
       <div className="container mx-auto px-4">
