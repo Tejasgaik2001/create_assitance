@@ -8,18 +8,21 @@ const heroPoster = "/hero-visual-small.webp";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { isSafari, shouldEnableAnimations } from "@/utils/safariDetection";
+import { useLazyVideo } from "@/hooks/useLazyVideo";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const isMobileRef = useRef(window.matchMedia("(max-width: 1024px)").matches);
   const [isMobile, setIsMobile] = useState(isMobileRef.current);
+
   // Safari mobile: disable heavy animations to prevent render blocking
   const shouldAnimate = shouldEnableAnimations();
-  // Always set src so we can attempt autoplay on all devices (iOS Safari allows muted+inline autoplay).
-  // If autoplay is blocked, we show a tap-to-play overlay as a fallback.
-  const [videoSrc, setVideoSrc] = useState<string | undefined>(() => heroVideo);
-  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+
+  // Lazy load video to prevent blocking initial page load
+  const { videoRef, isLoaded, isPlaying, play } = useLazyVideo({
+    autoplay: true,
+    rootMargin: '100px' // Load when 100px from viewport
+  });
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 1024px)");
@@ -30,70 +33,10 @@ const HeroSection = () => {
 
   const isInView = useInView(ref, { once: true });
 
-  // Autoplay video (desktop + mobile). On iOS, this requires muted + playsInline.
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !videoSrc) return;
-
-    // Safari fix: React's muted JSX attribute doesn't always set the DOM property
-    video.muted = true;
-    video.defaultMuted = true;
-    video.setAttribute("playsinline", "true");
-    video.setAttribute("webkit-playsinline", "true");
-    video.setAttribute("muted", "");
-    video.autoplay = true;
-
-    let played = false;
-    const tryPlay = () => {
-      if (played) return;
-      video.muted = true;
-      const p = video.play();
-      if (p !== undefined) {
-        p.then(() => {
-          played = true;
-          setAutoplayBlocked(false);
-        }).catch(() => {
-          setAutoplayBlocked(true);
-          const resumeOnce = () => {
-            video.muted = true;
-            video.play().catch(() => { });
-          };
-          document.addEventListener("click", resumeOnce, { once: true });
-          document.addEventListener("touchstart", resumeOnce, { once: true });
-        });
-      }
-    };
-
-    video.addEventListener("canplay", tryPlay);
-    video.addEventListener("loadeddata", tryPlay);
-    if (video.readyState >= 2) tryPlay();
-
-    const safariRetry = setTimeout(() => {
-      if (video.paused) tryPlay();
-    }, 1500);
-
-    return () => {
-      video.removeEventListener("canplay", tryPlay);
-      video.removeEventListener("loadeddata", tryPlay);
-      clearTimeout(safariRetry);
-    };
-  }, [videoSrc]);
-
-  // Mobile: load + play video only when user taps play
+  // Mobile: play video when user taps play button
   const handleMobilePlay = () => {
     if (!isMobile) return;
-    setVideoSrc(heroVideo);
-    setAutoplayBlocked(false);
-    // Wait for src to be set, then play
-    requestAnimationFrame(() => {
-      const video = videoRef.current;
-      if (!video) return;
-      video.muted = true;
-      video.setAttribute("playsinline", "true");
-      video.setAttribute("webkit-playsinline", "true");
-      video.load();
-      video.play().catch(() => { });
-    });
+    play();
   };
 
   const textVariants = {
@@ -370,25 +313,20 @@ const HeroSection = () => {
             className="relative w-full max-w-full lg:scale-105 lg:translate-x-2"
           >
             <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group" style={{ isolation: 'isolate' }}>
-              {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
               <video
                 ref={videoRef}
+                data-src={heroVideo}
                 poster={heroPoster}
-                src={videoSrc}
-                width={1280}
-                height={720}
-                loop
                 muted
+                loop
                 playsInline
-                // @ts-ignore – webkit vendor attribute for older iOS Safari
                 webkit-playsinline="true"
-                autoPlay
-                preload="auto"
+                preload="none"
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
 
               {/* Mobile: play button overlay (no autoplay to save CPU) */}
-              {isMobile && autoplayBlocked && (
+              {isMobile && !isPlaying && (
                 <button
                   onClick={handleMobilePlay}
                   aria-label="Play video"
