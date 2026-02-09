@@ -100,9 +100,9 @@ export default defineConfig(({ mode }) => ({
             return 'vendor-radix';
           }
 
-          // Other third-party vendors
-          if (id.includes('node_modules')) {
-            return 'vendor-others';
+          // Radix UI Components
+          if (id.includes('node_modules/@radix-ui')) {
+            return 'vendor-radix';
           }
 
           // Everything else stays in main bundle
