@@ -11,7 +11,7 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { RollingTextList } from "@/components/ui/RollingTextList";
 import { VerticalTimeline } from "@/components/ui/VerticalTimeline";
 import { handleBookingRedirect } from "@/utils/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const HowItWorks = () => {
   const steps = [
