@@ -880,21 +880,26 @@ const CommandCenter = () => {
     </section>,
 
     // Tools
-    <section key="tools" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
+    <section key="tools" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4">
-        <AnimatedSection direction="up" className="text-center mb-16">
-          <h2 className="section-headline mb-4 font-bold">
-            Everything You Need <br />
-            <span className="text-gradient">To Scale Efficiency</span>
-          </h2>
-          <p className="body-large max-w-2xl mx-auto">
-            Integrated tools that save your team hours of manual work every single day.
-          </p>
-        </AnimatedSection>
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <AnimatedSection direction="up">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-6">
+              <CreditCard className="w-3 h-3 text-accent" />
+              <span className="text-xs font-semibold tracking-wide uppercase">Financial Ecosystem</span>
+            </div>
+            <h2 className="section-headline mb-6">
+              Built‑In <span className="text-gradient">Scheduling & Payments</span>
+            </h2>
+            <p className="body-large text-slate-500 dark:text-slate-400">
+              From first hello to final settlement. Manage the entire customer lifecycle without leaving your command center.
+            </p>
+          </AnimatedSection>
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-8 items-stretch max-w-7xl mx-auto">
           {tools.map((item, index) => (
-            <ToolCard key={item.title} item={item} index={index} />
+            <JourneyStep key={item.title} item={item} index={index} />
           ))}
         </div>
       </div>
