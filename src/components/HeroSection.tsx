@@ -19,7 +19,7 @@ const HeroSection = () => {
   const isMobileInitially = useRef(window.matchMedia("(max-width: 1024px)").matches).current;
   const [userRequestedVideo, setUserRequestedVideo] = useState(!isMobileInitially);
 
-  // Lazy load video to prevent blocking initial page load
+  // Lazy load video to prevent blocking initial page load checking
   const { videoRef, isLoaded, isPlaying, play } = useLazyVideo({
     autoplay: true,
     rootMargin: '100px' // Load when 100px from viewport
