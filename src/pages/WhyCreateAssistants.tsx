@@ -8,6 +8,7 @@ import { Button } from '../components/ui/button';
 import { cn } from '../lib/utils';
 import { MagneticWrapper } from '@/components/MagneticWrapper';
 import { handleBookingRedirect } from '@/utils/navigation';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import discoveryImg from '@/assets/external/discovery.jpg';
 import buildTrainImg from '@/assets/external/integration-dashboard.webp';
 import launchImg from '@/assets/generated/launch-success.webp';
@@ -64,6 +65,7 @@ const MobileTeamMember = ({ member }: { member: any }) => {
 };
 
 const WhyCreateAssistants = () => {
+  const isMobile = useIsMobile();
   const reasons = [
     {
       title: "Software alone isn’t enough",
@@ -192,27 +194,37 @@ const WhyCreateAssistants = () => {
         {/* Hero Section */}
         <div className="min-h-[90vh] w-full flex items-center justify-center relative bg-background overflow-hidden pt-20">
           <div className="absolute inset-0 pointer-events-none">
-            <m.div
-              animate={{
-                x: [0, 50, 0],
-                y: [0, 30, 0],
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3]
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
-            />
-            <m.div
-              animate={{
-                x: [0, -40, 0],
-                y: [0, -25, 0],
-                scale: [1, 1.15, 1],
-                opacity: [0.2, 0.4, 0.2]
-              }}
-              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
+            {/* Gradient orbs - animated on desktop, static on mobile */}
+            {!isMobile ? (
+              <>
+                <m.div
+                  animate={{
+                    x: [0, 50, 0],
+                    y: [0, 30, 0],
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                  }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+                />
+                <m.div
+                  animate={{
+                    x: [0, -40, 0],
+                    y: [0, -25, 0],
+                    scale: [1, 1.15, 1],
+                    opacity: [0.2, 0.4, 0.2]
+                  }}
+                  transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+                />
+              </>
+            ) : (
+              <>
+                <div className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-20" />
+                <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl opacity-15" />
+              </>
+            )}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -271,11 +283,16 @@ const WhyCreateAssistants = () => {
         {/* Why Choose Section (Orbital Satellite Grid) */}
         <div className="py-16 w-full bg-background relative overflow-hidden min-h-[700px] flex items-center justify-center">
           <div className="absolute inset-0 pointer-events-none">
-            <m.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-[140px]"
-              animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
-              transition={{ duration: 15, repeat: Infinity }}
-            />
+            {/* Orbital blur - animated on desktop, static on mobile */}
+            {!isMobile ? (
+              <m.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-[140px]"
+                animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
+                transition={{ duration: 15, repeat: Infinity }}
+              />
+            ) : (
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-3xl opacity-15" />
+            )}
           </div>
 
           <div className="container mx-auto px-4 relative z-10 w-full max-w-7xl">
@@ -419,7 +436,7 @@ const WhyCreateAssistants = () => {
               animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
             />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] mobile-hide-bg" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -444,7 +461,7 @@ const WhyCreateAssistants = () => {
         <div className="py-32 w-full flex items-center justify-center bg-[#FDFCFB] dark:bg-[#030614] relative overflow-hidden transition-colors duration-500">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] dark:bg-accent/10" />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40 mobile-hide-bg" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">

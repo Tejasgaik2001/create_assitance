@@ -17,6 +17,7 @@ import consolidatedNexusImg from "@/assets/external/consolidated-nexus.jpg";
 import cubesImg from "@/assets/external/cubes.png";
 import { useRef, useState } from "react";
 import { handleBookingRedirect } from "@/utils/navigation";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const DropInHoverText = ({ text, trigger, className, highlightClass = "text-accent" }: { text: string; trigger: boolean; className?: string; highlightClass?: string }) => {
   return (
@@ -444,6 +445,7 @@ const JourneyStep = ({ item, index }: { item: any; index: number }) => {
 };
 
 const CommandCenter = () => {
+  const isMobile = useIsMobile();
   const features = [
     {
       title: "Capture & Manage Leads",
@@ -528,30 +530,39 @@ const CommandCenter = () => {
     <section key="hero" className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-16 pb-12 lg:pt-0 lg:pb-0 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       {/* Enhanced Background decoration from HeroSection */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Animated gradient orbs */}
-        <m.div
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
-        />
-        <m.div
-          animate={{
-            x: [0, -40, 0],
-            y: [0, -25, 0],
-            scale: [1, 1.15, 1],
-            opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
-        />
+        {/* Gradient orbs - animated on desktop, static on mobile */}
+        {!isMobile ? (
+          <>
+            <m.div
+              animate={{
+                x: [0, 50, 0],
+                y: [0, 30, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+            />
+            <m.div
+              animate={{
+                x: [0, -40, 0],
+                y: [0, -25, 0],
+                scale: [1, 1.15, 1],
+                opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+            />
+          </>
+        ) : (
+          <>
+            <div className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-20" />
+            <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl opacity-15" />
+          </>
+        )}
 
         {/* Premium grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10 w-full">
@@ -591,8 +602,8 @@ const CommandCenter = () => {
             </div>
           </div>
 
-          {/* Right Image (3D Dashboard) */}
-          <div className="relative w-full" style={{ perspective: '1000px' }}>
+          {/* Right Image (3D Dashboard) - Hidden on mobile */}
+          <div className={`relative w-full hidden lg:block`} style={{ perspective: '1000px' }}>
             <m.div
               initial={{ opacity: 0, rotateX: 10, rotateY: -10, scale: 0.9 }}
               animate={{ opacity: 1, rotateX: 5, rotateY: -10, scale: 1 }}
@@ -746,7 +757,7 @@ const CommandCenter = () => {
     </section>,
 
     // Automations
-     <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
+    <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content: Logic Flow */}
@@ -791,7 +802,7 @@ const CommandCenter = () => {
               </div>
 
               {/* Canvas Area */}
-              <div className="flex-1 p-6 relative bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px]">
+              <div className="flex-1 p-6 relative bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] mobile-hide-bg">
                 {/* Animated Nodes */}
                 <div className="flex flex-col gap-8 relative z-10 h-full justify-center">
 
@@ -904,9 +915,9 @@ const CommandCenter = () => {
         </div>
       </div>
     </section>,
-  <section key="visibility" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+    <section key="visibility" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       {/* Background Grid Decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(219,154,70,0.1)_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-40 dark:opacity-20" />
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(219,154,70,0.1)_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-40 dark:opacity-20 mobile-hide-bg" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 dark:via-accent/50 to-transparent" />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -952,10 +963,10 @@ const CommandCenter = () => {
         </div>
       </div>
     </section>,
-   
+
 
     // Integration
-     <section key="integrations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-20 lg:py-24 relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+    <section key="integrations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-20 lg:py-24 relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content: 3D Image Card */}

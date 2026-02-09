@@ -19,8 +19,11 @@ import humanHandoffImg from "@/assets/external/human-handoff.jpg";
 import aiStrategyImg from "@/assets/external/ai-strategy.jpg";
 import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const AIEmployees = () => {
+  const isMobile = useIsMobile();
+
   // Animation variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -103,42 +106,60 @@ const AIEmployees = () => {
     <section key="hero" className="relative overflow-x-hidden pt-24 pb-16 min-h-screen flex items-center bg-white dark:bg-[#020617]">
       {/* Enhanced Background decoration from HeroSection */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Animated gradient orbs */}
-        <m.div
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
-        />
-        <m.div
-          animate={{
-            x: [0, -40, 0],
-            y: [0, -25, 0],
-            scale: [1, 1.15, 1],
-            opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
-        />
+        {/* Gradient orbs - animated on desktop, static on mobile */}
+        {!isMobile ? (
+          <>
+            <m.div
+              animate={{
+                x: [0, 50, 0],
+                y: [0, 30, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+            />
+            <m.div
+              animate={{
+                x: [0, -40, 0],
+                y: [0, -25, 0],
+                scale: [1, 1.15, 1],
+                opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+            />
+          </>
+        ) : (
+          <>
+            <div className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-20" />
+            <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl opacity-15" />
+          </>
+        )}
 
         {/* Premium grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
 
-        {/* Glowing Data Lines */}
-        <m.div
-          animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent hidden sm:block"
-        />
-        <m.div
-          animate={{ x: [100, -100], opacity: [0, 1, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "linear", delay: 1 }}
-          className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent hidden sm:block"
-        />
+        {/* Data lines - animated on desktop, static on mobile */}
+        {!isMobile ? (
+          <>
+            <m.div
+              animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+            />
+            <m.div
+              animate={{ x: [100, -100], opacity: [0, 1, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "linear", delay: 1 }}
+              className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent"
+            />
+          </>
+        ) : (
+          <>
+            <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-30" />
+            <div className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/15 to-transparent opacity-30" />
+          </>
+        )}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -208,7 +229,7 @@ const AIEmployees = () => {
               <img
                 src={heroImage}
                 alt="AI Specialist Team"
-                loading="lazy"
+                loading="eager"
                 className="relative z-10 w-full h-auto max-h-[500px] lg:max-h-[600px] object-cover rounded-[40px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] dark:drop-shadow-[0_20px_50px_rgba(255,220,100,0.15)] transition-all duration-700 group-hover:scale-[1.02]"
               />
 
@@ -217,7 +238,7 @@ const AIEmployees = () => {
                 initial={{ x: 20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 1, duration: 0.8 }}
-                className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 xl:-top-10 xl:-right-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-accent/20 z-30"
+                className="absolute -top-4 -right-4 lg:-top-6 lg:-right-6 xl:-top-10 xl:-right-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/95 dark:bg-[#0f172a]/95 md:backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-accent/20 z-30"
               >
                 <div className="w-8 h-8 xl:w-12 xl:h-12 rounded-lg xl:rounded-2xl bg-primary/10 flex items-center justify-center">
                   <Headphones className="w-4 h-4 xl:w-6 xl:h-6 text-accent" />
@@ -233,7 +254,7 @@ const AIEmployees = () => {
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.8 }}
-                className="absolute bottom-6 left-2 lg:bottom-10 lg:left-4 xl:-bottom-10 xl:-left-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/90 dark:bg-[#0f172a]/90 backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-accent/20 z-30"
+                className="absolute bottom-6 left-2 lg:bottom-10 lg:left-4 xl:-bottom-10 xl:-left-10 hidden lg:flex items-center gap-2 xl:gap-4 p-2 xl:p-5 bg-white/95 dark:bg-[#0f172a]/95 md:backdrop-blur-xl rounded-xl xl:rounded-3xl shadow-2xl border border-accent/20 z-30"
               >
                 <div className="w-8 h-8 xl:w-12 xl:h-12 rounded-lg xl:rounded-2xl bg-accent/10 flex items-center justify-center">
                   <CheckCircle className="w-4 h-4 xl:w-6 xl:h-6 text-accent" />
@@ -261,16 +282,26 @@ const AIEmployees = () => {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.02]"
           style={{ backgroundImage: 'radial-gradient(#6366f1 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-        <m.div
-          animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.25, 0.15] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute top-[5%] left-[5%] w-[50%] h-[50%] bg-accent/30 blur-[150px] rounded-full"
-        />
-        <m.div
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 12, repeat: Infinity }}
-          className="absolute bottom-[5%] right-[5%] w-[40%] h-[40%] bg-primary/25 blur-[130px] rounded-full"
-        />
+        {/* Blur orbs - animated on desktop, static on mobile */}
+        {!isMobile ? (
+          <>
+            <m.div
+              animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.25, 0.15] }}
+              transition={{ duration: 10, repeat: Infinity }}
+              className="absolute top-[5%] left-[5%] w-[50%] h-[50%] bg-accent/30 blur-[150px] rounded-full"
+            />
+            <m.div
+              animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }}
+              transition={{ duration: 12, repeat: Infinity }}
+              className="absolute bottom-[5%] right-[5%] w-[40%] h-[40%] bg-primary/25 blur-[130px] rounded-full"
+            />
+          </>
+        ) : (
+          <>
+            <div className="absolute top-[5%] left-[5%] w-[50%] h-[50%] bg-accent/20 blur-3xl rounded-full opacity-15" />
+            <div className="absolute bottom-[5%] right-[5%] w-[40%] h-[40%] bg-primary/15 blur-3xl rounded-full opacity-10" />
+          </>
+        )}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -345,19 +376,19 @@ const AIEmployees = () => {
               >
                 {/* Timeline Node - Desktop */}
                 <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 z-20">
-                  <m.div
-                    whileHover={{ scale: 1.2 }}
-                    className="relative"
-                  >
-                    <m.div
-                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                      className="absolute inset-0 w-16 h-16 rounded-full bg-accent/30"
-                    />
+                  <div className="relative">
+                    {/* Pulse animation only on desktop - Safari 26.2 fix */}
+                    {!isMobile && (
+                      <m.div
+                        animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                        className="absolute inset-0 w-16 h-16 rounded-full bg-accent/30"
+                      />
+                    )}
                     <div className="w-16 h-16 rounded-full bg-gradient-to-br from-accent to-amber-400 flex items-center justify-center shadow-xl shadow-accent/30 border-4 border-white dark:border-slate-900">
                       <Icon className="w-7 h-7 text-white" />
                     </div>
-                  </m.div>
+                  </div>
                 </div>
 
                 {/* Content Card */}
@@ -586,18 +617,27 @@ const AIEmployees = () => {
 
       return (
         <div key="features-showcase" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden py-24 lg:py-32">
-          {/* Cinematic Background */}
+          {/* Background - animated on desktop, static on mobile */}
           <div className="absolute inset-0 pointer-events-none">
-            <m.div
-              animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-              transition={{ duration: 15, repeat: Infinity }}
-              className="absolute top-0 left-0 w-[60%] h-[60%] bg-accent/20 blur-[200px] rounded-full"
-            />
-            <m.div
-              animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
-              transition={{ duration: 20, repeat: Infinity }}
-              className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-500/20 blur-[180px] rounded-full"
-            />
+            {!isMobile ? (
+              <>
+                <m.div
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+                  transition={{ duration: 15, repeat: Infinity }}
+                  className="absolute top-0 left-0 w-[60%] h-[60%] bg-accent/20 blur-[200px] rounded-full"
+                />
+                <m.div
+                  animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
+                  transition={{ duration: 20, repeat: Infinity }}
+                  className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-500/20 blur-[180px] rounded-full"
+                />
+              </>
+            ) : (
+              <>
+                <div className="absolute top-0 left-0 w-[60%] h-[60%] bg-accent/15 blur-3xl rounded-full opacity-10" />
+                <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-500/10 blur-3xl rounded-full opacity-5" />
+              </>
+            )}
             {/* Film grain overlay */}
             <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />
           </div>
@@ -662,13 +702,11 @@ const AIEmployees = () => {
                           opacity: isActive ? 1 : 0.3,
                           scale: isActive ? 1 : 0.9 - Math.abs(offset) * 0.05,
                           y: offset * 30,
-                          zIndex: isActive ? 30 : 20 - Math.abs(offset),
-                          rotateX: offset * 5
+                          zIndex: isActive ? 30 : 20 - Math.abs(offset)
                         }}
                         exit={{ opacity: 0, scale: 0.8, y: -100 }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
                         className="absolute inset-0"
-                        style={{ perspective: '1000px' }}
                       >
                         <div className={`w-full h-full bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl border ${isActive ? 'border-accent/30' : 'border-white/10'} shadow-2xl overflow-hidden transition-all duration-500`}>
                           <div className="grid lg:grid-cols-2 h-full">

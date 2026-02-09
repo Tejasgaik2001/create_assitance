@@ -8,6 +8,7 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { useRef, useState } from "react";
 import { AssemblingWord } from "@/components/ui/AssemblingWord";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import businessSystemImg from "@/assets/external/crm-dashboard-premium.webp";
 import smartConversationsImg from "@/assets/external/ai-voice-assistant.webp";
 import whiteGloveImg from "@/assets/external/white-glove-service.webp";
@@ -115,6 +116,7 @@ const RoadmapCard = ({ pillar, index }: { pillar: any; index: number }) => {
 };
 
 const WhatYouGet = () => {
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   const narrativeRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -201,39 +203,52 @@ const WhatYouGet = () => {
         <ScrollSection className="relative overflow-hidden pt-24 pb-16">
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {/* Animated gradient orbs */}
-            <m.div
-              animate={{
-                x: [0, 50, 0],
-                y: [0, 30, 0],
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3]
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px] backface-hidden"
-              style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
-            />
-            <m.div
-              animate={{
-                x: [0, -40, 0],
-                y: [0, -25, 0],
-                scale: [1, 1.15, 1],
-                opacity: [0.2, 0.4, 0.2]
-              }}
-              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px] backface-hidden"
-              style={{ y: backgroundY2, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
-            />
+            {/* Gradient orbs - animated on desktop, static on mobile */}
+            {!isMobile ? (
+              <>
+                <m.div
+                  animate={{
+                    x: [0, 50, 0],
+                    y: [0, 30, 0],
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                  }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px] backface-hidden"
+                  style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
+                />
+                <m.div
+                  animate={{
+                    x: [0, -40, 0],
+                    y: [0, -25, 0],
+                    scale: [1, 1.15, 1],
+                    opacity: [0.2, 0.4, 0.2]
+                  }}
+                  transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px] backface-hidden"
+                  style={{ y: backgroundY2, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
+                />
+              </>
+            ) : (
+              <>
+                <div className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-20" />
+                <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl opacity-15" />
+              </>
+            )}
 
             {/* Premium grid pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
 
-            {/* Glowing Data Lines - subtle for this page */}
-            <m.div
-              animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-              className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent hidden sm:block"
-            />
+            {/* Data lines - animated on desktop, static on mobile */}
+            {!isMobile ? (
+              <m.div
+                animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+              />
+            ) : (
+              <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/15 to-transparent opacity-30" />
+            )}
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -344,7 +359,7 @@ const WhatYouGet = () => {
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl backface-hidden"
               style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
             />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] mobile-hide-bg" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -434,7 +449,7 @@ const WhatYouGet = () => {
               className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl backface-hidden"
               style={{ y: backgroundY2, rotate: 0.01, z: 0, willChange: "transform" }}
             />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] mobile-hide-bg" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10 text-center">
