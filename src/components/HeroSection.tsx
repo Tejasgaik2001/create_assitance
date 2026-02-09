@@ -62,75 +62,83 @@ const HeroSection = () => {
     <section ref={ref} className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-20">
       {/* Enhanced Background decoration */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Animated gradient orbs - disabled on Safari mobile */}
-        <motion.div
-          animate={shouldAnimate ? {
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
-          } : {}}
-          transition={shouldAnimate ? { duration: 15, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
-          className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
-        />
-        <motion.div
-          animate={shouldAnimate ? {
-            x: [0, -40, 0],
-            y: [0, -25, 0],
-            scale: [1, 1.15, 1],
-            opacity: [0.2, 0.4, 0.2]
-          } : {}}
-          transition={shouldAnimate ? { duration: 18, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
-          className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
-        />
+        {/* Animated gradient orbs - Desktop Only (heavy blur + infinite animation) */}
+        {!isMobile && (
+          <>
+            <motion.div
+              animate={{
+                x: [0, 50, 0],
+                y: [0, 30, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+            />
+            <motion.div
+              animate={{
+                x: [0, -40, 0],
+                y: [0, -25, 0],
+                scale: [1, 1.15, 1],
+                opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+            />
+          </>
+        )}
 
-        {/* Premium grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" style={{ WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, #000 70%, transparent 110%)', maskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, #000 70%, transparent 110%)' }} />
+        {/* Premium grid pattern - Desktop only (mask-image) */}
+        {!isMobile && (
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" style={{ WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, #000 70%, transparent 110%)', maskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, #000 70%, transparent 110%)' }} />
+        )}
       </div>
 
-      {/* Floating Demo Invitation - Hidden per request (Demo is mobile-only) */}
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1, duration: 0.8 }}
-        className="absolute top-24 right-8 z-30 hidden lg:flex"
-      >
+      {/* Floating Demo Invitation - Desktop Only (infinite animation) */}
+      {!isMobile && (
         <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          onClick={handleDemoRedirect}
-          className="group relative cursor-pointer"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
+          className="absolute top-24 right-8 z-30 hidden lg:flex"
         >
-          {/* Animated Glow Surround */}
-          <div className="absolute -inset-4 bg-gradient-to-r from-accent/20 to-primary/20 rounded-full blur-2xl group-hover:opacity-100 opacity-50 transition-opacity" />
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            onClick={handleDemoRedirect}
+            className="group relative cursor-pointer"
+          >
+            {/* Animated Glow Surround */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-accent/20 to-primary/20 rounded-full blur-2xl group-hover:opacity-100 opacity-50 transition-opacity" />
 
-          <div className="relative flex items-center gap-4 bg-background/40 backdrop-blur-xl border border-accent/30 rounded-2xl p-4 shadow-2xl hover:border-accent/60 transition-all duration-300">
-            <div className="relative">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
-                <Play className="w-6 h-6 text-white fill-current" />
+            <div className="relative flex items-center gap-4 bg-background/40 backdrop-blur-xl border border-accent/30 rounded-2xl p-4 shadow-2xl hover:border-accent/60 transition-all duration-300">
+              <div className="relative">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-primary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
+                  <Play className="w-6 h-6 text-white fill-current" />
+                </div>
+                <motion.div
+                  animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-background"
+                />
               </div>
-              <motion.div
-                animate={{ scale: [1, 1.5, 1], opacity: [1, 0, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-background"
-              />
-            </div>
 
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-accent uppercase tracking-[0.2em] leading-none mb-1">
-                Live Demo
-              </span>
-              <span className="text-sm font-bold text-foreground">
-                Demo Our AI
-              </span>
-            </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold text-accent uppercase tracking-[0.2em] leading-none mb-1">
+                  Live Demo
+                </span>
+                <span className="text-sm font-bold text-foreground">
+                  Demo Our AI
+                </span>
+              </div>
 
-            <div className="ml-2 w-8 h-8 rounded-full border border-border/60 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all">
-              <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-white transition-colors" />
+              <div className="ml-2 w-8 h-8 rounded-full border border-border/60 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all">
+                <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-white transition-colors" />
+              </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full flex flex-col justify-center">
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-16 items-center max-w-7xl mx-auto w-full">
@@ -138,10 +146,13 @@ const HeroSection = () => {
           <div className="text-center lg:text-left space-y-6 sm:space-y-8 max-w-3xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
             {/* Enhanced Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 200, damping: 20 }}
-              className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/30 backdrop-blur-sm shadow-lg shadow-primary/10"
+              initial={isMobile ? { opacity: 0, y: 10 } : { opacity: 0, y: 20, scale: 0.9 }}
+              animate={isInView ? (isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, scale: 1 }) : (isMobile ? { opacity: 0, y: 10 } : { opacity: 0, y: 20, scale: 0.9 })}
+              transition={isMobile ? { duration: 0.3 } : { type: "spring", stiffness: 200, damping: 20 }}
+              className={isMobile
+                ? "inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/30 shadow-lg shadow-primary/10"
+                : "inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/30 backdrop-blur-sm shadow-lg shadow-primary/10"
+              }
             >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-accent animate-pulse" />
               <span className="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent bg-clip-text text-transparent">

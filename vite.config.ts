@@ -90,14 +90,19 @@ export default defineConfig(({ mode }) => ({
             return 'vendor-motion';
           }
 
-          // Radix UI (defer, only needed for interactive components)
-          if (id.includes('node_modules/@radix-ui')) {
-            return 'vendor-ui';
+          // Lucide Icons (often very large, split them out)
+          if (id.includes('node_modules/lucide-react')) {
+            return 'vendor-lucide';
           }
 
-          // Icons (defer)
-          if (id.includes('node_modules/lucide-react')) {
-            return 'vendor-icons';
+          // Radix UI Components
+          if (id.includes('node_modules/@radix-ui')) {
+            return 'vendor-radix';
+          }
+
+          // Other third-party vendors
+          if (id.includes('node_modules')) {
+            return 'vendor-others';
           }
 
           // Everything else stays in main bundle
