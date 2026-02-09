@@ -229,10 +229,12 @@
 
 /* ── Safari Responsive Fixes ── */
 @supports (-webkit-touch-callout: none) {
+
   /* iOS Safari: fix 100vh including address bar */
   .min-h-screen {
     min-height: -webkit-fill-available !important;
   }
+
   .h-screen {
     height: -webkit-fill-available !important;
   }
@@ -240,6 +242,7 @@
 
 /* ── Backdrop-Filter Fallback for Safari ── */
 @supports not (backdrop-filter: blur(10px)) {
+
   /* Provide solid background when backdrop-filter is unsupported */
   .backdrop-blur-xl,
   .backdrop-blur-3xl,
@@ -251,7 +254,7 @@
     -webkit-backdrop-filter: none !important;
     background-color: hsl(var(--background) / 0.95) !important;
   }
-  
+
   /* Glass card fallback */
   .glass-card {
     background-color: hsl(var(--card) / 0.95) !important;
@@ -267,9 +270,10 @@ section:not(:first-of-type) {
 }
 
 @media (max-width: 1024px) {
-  *,
-  *::before,
-  *::after {
+
+  *:not(.animate-pulse):not(.animate-spin):not([class*="animate-pulse"]):not([class*="animate-spin"]),
+  *:not(.animate-pulse):not(.animate-spin):not([class*="animate-pulse"]):not([class*="animate-spin"])::before,
+  *:not(.animate-pulse):not(.animate-spin):not([class*="animate-pulse"]):not([class*="animate-spin"])::after {
     animation: none !important;
   }
 }

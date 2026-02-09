@@ -274,7 +274,7 @@ const HeroSection = () => {
                       className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-muted overflow-hidden bg-gradient-to-tr from-accent/20 to-primary/20 flex items-center justify-center"
                     >
                       <img
-                        src={`https://i.pravatar.cc/150?u=${i + 10}`}
+                        src={`/avatars/avatar-${i + 10}.jpg`}
                         alt="User"
                         loading="lazy"
                         decoding="async"
