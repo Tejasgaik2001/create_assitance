@@ -2,10 +2,12 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FiBriefcase, FiHeart, FiUsers, FiZap } from "react-icons/fi";
 import crmDashboard from "@/assets/crm-dashboard.jpg";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const WhyChooseUs = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-10%" });
+  const isMobile = useIsMobile();
+  const isInView = useInView(ref, { once: isMobile, margin: "-10%" });
 
   return (
     <section ref={ref} id="solutions" className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
@@ -65,7 +67,10 @@ const WhyChooseUs = () => {
                     y: -6,
                     transition: { type: "spring", stiffness: 400, damping: 15 }
                   }}
-                  className="group relative p-5 sm:p-6 rounded-2xl border border-border/40 bg-gradient-to-br from-background via-background/95 to-background/80 backdrop-blur-sm shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-accent/20 hover:border-accent/50 transition-all duration-500 overflow-hidden"
+                  className={isMobile
+                    ? "group relative p-5 sm:p-6 rounded-2xl border border-border/40 bg-gradient-to-br from-background via-background/95 to-background/80 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-accent/20 hover:border-accent/50 transition-all duration-500 overflow-hidden"
+                    : "group relative p-5 sm:p-6 rounded-2xl border border-border/40 bg-gradient-to-br from-background via-background/95 to-background/80 backdrop-blur-sm shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-accent/20 hover:border-accent/50 transition-all duration-500 overflow-hidden"
+                  }
                 >
                   {/* Gradient overlays */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -144,7 +149,10 @@ const WhyChooseUs = () => {
                   scale: 1.05,
                   transition: { type: "spring", stiffness: 400, damping: 15 }
                 }}
-                className="absolute -bottom-6 -left-6 lg:-bottom-8 lg:-left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2rem] p-6 lg:p-8 shadow-2xl shadow-black/20 hover:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.3)] hover:border-primary/50 transition-all duration-300 max-w-[180px] lg:max-w-none"
+                className={isMobile
+                  ? "absolute -bottom-6 -left-6 lg:-bottom-8 lg:-left-8 bg-gradient-to-br from-background via-background to-background/95 border border-border/40 rounded-[2rem] p-6 lg:p-8 shadow-2xl shadow-black/20 hover:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.3)] hover:border-primary/50 transition-all duration-300 max-w-[180px] lg:max-w-none"
+                  : "absolute -bottom-6 -left-6 lg:-bottom-8 lg:-left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2rem] p-6 lg:p-8 shadow-2xl shadow-black/20 hover:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.3)] hover:border-primary/50 transition-all duration-300 max-w-[180px] lg:max-w-none"
+                }
               >
                 <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
                 <div className="relative">
@@ -154,8 +162,10 @@ const WhyChooseUs = () => {
               </motion.div>
             </motion.div>
 
-            {/* Atmospheric Glow */}
-            <div className="absolute -inset-20 bg-primary/10 blur-[120px] rounded-full -z-10 animate-pulse pointer-events-none" />
+            {/* Atmospheric Glow - Desktop Only (heavy blur-[120px]) */}
+            {!isMobile && (
+              <div className="absolute -inset-20 bg-primary/10 blur-[120px] rounded-full -z-10 animate-pulse pointer-events-none" />
+            )}
           </div>
         </div>
       </div>

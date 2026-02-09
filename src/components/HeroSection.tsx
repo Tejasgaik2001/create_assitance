@@ -9,14 +9,15 @@ import { handleBookingRedirect, handleDemoRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { isSafari, shouldEnableAnimations } from "@/utils/safariDetection";
 import { useLazyVideo } from "@/hooks/useLazyVideo";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isMobileRef = useRef(window.matchMedia("(max-width: 1024px)").matches);
-  const [isMobile, setIsMobile] = useState(isMobileRef.current);
+  const isMobile = useIsMobile();
 
   // Track if user explicitly clicked to watch the video (defaults to true for desktop)
-  const [userRequestedVideo, setUserRequestedVideo] = useState(!isMobileRef.current);
+  const isMobileInitially = useRef(window.matchMedia("(max-width: 1024px)").matches).current;
+  const [userRequestedVideo, setUserRequestedVideo] = useState(!isMobileInitially);
 
   // Lazy load video to prevent blocking initial page load
   const { videoRef, isLoaded, isPlaying, play } = useLazyVideo({
@@ -24,14 +25,9 @@ const HeroSection = () => {
     rootMargin: '100px' // Load when 100px from viewport
   });
 
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1024px)");
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+  // useIsMobile hook handles the event listener internally
 
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { once: isMobile });
 
   // Mobile & Safari: play video/show video when user taps
   const handlePlayVideo = () => {

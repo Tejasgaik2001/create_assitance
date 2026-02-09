@@ -8,10 +8,12 @@ import automation from "@/assets/automation.jpg";
 import { Sparkles, Zap, TrendingUp } from "lucide-react";
 import { handleBookingRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const IntroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-10%" });
+  const isMobile = useIsMobile();
+  const isInView = useInView(ref, { once: isMobile, margin: "-10%" });
   const navigate = useNavigate();
 
   const stats = [
@@ -37,8 +39,10 @@ const IntroSection = () => {
 
   return (
     <section id="intro" ref={ref} className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
-      {/* Premium Background Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
+      {/* Premium Background Grid - Desktop Only (mask-image) */}
+      {!isMobile && (
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
+      )}
 
       {/* Gradient Orbs */}
       <div className="absolute top-1/4 -left-48 w-96 h-96 bg-primary/30 rounded-full blur-3xl opacity-20" />
@@ -56,7 +60,10 @@ const IntroSection = () => {
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="inline-block"
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/20 backdrop-blur-sm">
+                <div className={isMobile
+                  ? "inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/20"
+                  : "inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/20 backdrop-blur-sm"
+                }>
                   <Sparkles className="w-4 h-4 text-accent" />
                   <span className="text-xs md:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-accent to-accent bg-clip-text text-transparent">
                     Enterprise Growth Platform
@@ -125,7 +132,10 @@ const IntroSection = () => {
                   <MagneticWrapper strength={0.2}>
                     <button
                       onClick={() => navigate("/how-it-works")}
-                      className="h-12 px-8 rounded-full border-2 border-border/60 bg-background/40 backdrop-blur-sm font-semibold hover:border-accent/50 hover:bg-background/60 transition-all font-bold"
+                      className={isMobile
+                        ? "h-12 px-8 rounded-full border-2 border-border/60 bg-background/40 font-semibold hover:border-accent/50 hover:bg-background/60 transition-all font-bold"
+                        : "h-12 px-8 rounded-full border-2 border-border/60 bg-background/40 backdrop-blur-sm font-semibold hover:border-accent/50 hover:bg-background/60 transition-all font-bold"
+                      }
                     >
                       See How It Works
                     </button>
@@ -296,23 +306,27 @@ const IntroSection = () => {
 
 
 
-                {/* Animated Glow Effects */}
-                <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-8 -right-8 w-32 h-32 bg-primary/40 rounded-full blur-3xl"
-                />
-                <motion.div
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.3, 0.5, 0.3]
-                  }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -bottom-8 -left-8 w-28 h-28 bg-accent/40 rounded-full blur-3xl"
-                />
+                {/* Animated Glow Effects - Desktop Only (infinite animations + heavy blur) */}
+                {!isMobile && (
+                  <>
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.5, 0.3]
+                      }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute -top-8 -right-8 w-32 h-32 bg-primary/40 rounded-full blur-3xl"
+                    />
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.3, 1],
+                        opacity: [0.3, 0.5, 0.3]
+                      }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute -bottom-8 -left-8 w-28 h-28 bg-accent/40 rounded-full blur-3xl"
+                    />
+                  </>
+                )}
               </div>
             </motion.div>
           </div>
