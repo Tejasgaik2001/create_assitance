@@ -77,18 +77,7 @@ const HowItWorks = () => {
     }
   ];
 
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkScreen = () => {
-      setIsMobile(window.innerWidth < 1024); // lg breakpoint
-    };
-
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-
-    return () => window.removeEventListener("resize", checkScreen);
-  }, []);
 
   const benefits = [
     { icon: FiZap, title: "Lightning Fast Responses", description: "AI responds instantly, 24/7" },
@@ -97,20 +86,7 @@ const HowItWorks = () => {
     { icon: FiCheckCircle, title: "Hands-Off Growth", description: "Fully automated system" }
   ];
 
-  if (isMobile) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-24 pb-16 px-4 text-center">
-          <h1 className="text-3xl font-bold">How It Works</h1>
-          <p className="text-muted-foreground mt-4">
-            Discover how our automated system captures and converts leads.
-          </p>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-300">

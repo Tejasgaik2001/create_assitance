@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { handleBookingRedirect } from "@/utils/navigation";
 import { MagneticWrapper } from "@/components/MagneticWrapper";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const TestimonialSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-20%" });
+  const isMobile = useIsMobile();
+  const isInView = useInView(ref, { once: isMobile, margin: "-20%" });
 
   return (
     <section ref={ref} className="min-h-screen w-full flex items-center justify-center bg-foreground text-background relative overflow-hidden py-20 sm:py-24">
@@ -80,12 +82,14 @@ const TestimonialSection = () => {
                 className="w-full sm:w-auto relative bg-gradient-to-r from-accent via-primary to-accent text-white hover:scale-105 active:scale-95 py-3 transition-all duration-500 rounded-full px-8 sm:px-12 h-14 sm:h-auto whitespace-normal sm:whitespace-nowrap overflow-hidden border-none shadow-xl shadow-primary/20"
                 onClick={handleBookingRedirect}
               >
-                {/* Gold Shimmer effect */}
-                <motion.div
-                  animate={{ x: ["-200%", "200%"] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
-                />
+                {/* Gold Shimmer effect - Desktop Only (infinite animation) */}
+                {!isMobile && (
+                  <motion.div
+                    animate={{ x: ["-200%", "200%"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+                  />
+                )}
                 <span className="relative z-10 flex items-center justify-center">
                   Claim Your Success
                   <ArrowRight className="ml-3 w-5 h-5 sm:w-6 sm:h-6" />

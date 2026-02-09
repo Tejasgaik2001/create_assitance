@@ -5,6 +5,7 @@ import { Layers, Bot, HeadphonesIcon, ArrowUpRight } from "lucide-react";
 import crmDashboard from "@/assets/crm-dashboard.jpg";
 import aiVoice from "@/assets/ai-voice.jpg";
 import automation from "@/assets/automation.jpg";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const pillars = [
   {
@@ -42,6 +43,7 @@ const pillars = [
 const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars[0]; index: number; isSectionInView: boolean }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   return (
     <motion.div
@@ -86,7 +88,10 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
           <div className="flex sm:flex-col items-center sm:items-start justify-between sm:justify-start mb-6 sm:mb-0">
             <motion.span
               whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-bold text-accent shadow-md backdrop-blur-sm sm:mb-6"
+              className={isMobile
+                ? "inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-bold text-accent shadow-md sm:mb-6"
+                : "inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-bold text-accent shadow-md backdrop-blur-sm sm:mb-6"
+              }
             >
               {pillar.number}
             </motion.span>
@@ -128,7 +133,8 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
 
 const PillarsSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "-10%" });
+  const isMobile = useIsMobile();
+  const isInView = useInView(ref, { once: isMobile, margin: "-10%" });
 
   return (
     <section ref={ref} id="product" className="min-h-screen w-full flex items-center justify-center bg-muted/30 relative overflow-hidden py-24 sm:py-32">

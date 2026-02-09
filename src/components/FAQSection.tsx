@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import Footer from "@/components/Footer";
 import { handleBookingRedirect } from "@/utils/navigation";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const faqs = [
   {
@@ -44,7 +45,8 @@ type FAQSectionProps = {
 
 const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-10%" });
+  const isMobile = useIsMobile();
+  const isInView = useInView(ref, { once: isMobile, margin: "-10%" });
 
   return (
     <section
@@ -72,7 +74,10 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                   transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                  className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/60 backdrop-blur-sm"
+                  className={isMobile
+                    ? "inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/60"
+                    : "inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/60 backdrop-blur-sm"
+                  }
                 >
                   <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-gradient">
                     FAQ
@@ -166,7 +171,10 @@ const FAQSection: FC<FAQSectionProps> = ({ withFooter = false }) => {
                     >
                       <AccordionItem
                         value={`item-${index}`}
-                        className="group border border-border/40 rounded-xl px-4 sm:px-6 bg-gradient-to-br from-background via-background/95 to-background/80 backdrop-blur-sm shadow-lg shadow-black/5 data-[state=open]:shadow-xl data-[state=open]:shadow-primary/20 data-[state=open]:border-accent/50 hover:border-accent/30 transition-all duration-500 overflow-hidden"
+                        className={isMobile
+                          ? "group border border-border/40 rounded-xl px-4 sm:px-6 bg-gradient-to-br from-background via-background/95 to-background/80 shadow-lg shadow-black/5 data-[state=open]:shadow-xl data-[state=open]:shadow-primary/20 data-[state=open]:border-accent/50 hover:border-accent/30 transition-all duration-500 overflow-hidden"
+                          : "group border border-border/40 rounded-xl px-4 sm:px-6 bg-gradient-to-br from-background via-background/95 to-background/80 backdrop-blur-sm shadow-lg shadow-black/5 data-[state=open]:shadow-xl data-[state=open]:shadow-primary/20 data-[state=open]:border-accent/50 hover:border-accent/30 transition-all duration-500 overflow-hidden"
+                        }
                       >
                         {/* Gradient overlay on open */}
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/5 to-accent/10 opacity-0 data-[state=open]:opacity-100 transition-opacity duration-500" />
