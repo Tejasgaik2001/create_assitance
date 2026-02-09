@@ -746,7 +746,7 @@ const CommandCenter = () => {
     </section>,
 
     // Automations
-    <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
+     <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content: Logic Flow */}
@@ -794,39 +794,83 @@ const CommandCenter = () => {
               <div className="flex-1 p-6 relative bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px]">
                 {/* Animated Nodes */}
                 <div className="flex flex-col gap-8 relative z-10 h-full justify-center">
-                  {/* Mock Nodes - Purely visual */}
+
+                  {/* Trigger Node */}
                   <m.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    className="p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3 w-4/5"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    className="bg-white dark:bg-slate-800 border border-accent/20 dark:border-accent/30 p-4 rounded-xl shadow-lg relative"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center text-accent">
-                      <Zap size={16} />
+                    <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-lg bg-accent" />
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-accent/10 dark:bg-accent/20 text-accent"><Users size={16} /></div>
+                      <div>
+                        <div className="text-[10px] text-accent font-bold uppercase tracking-wider">Trigger</div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">New Lead Submitted</div>
+                      </div>
                     </div>
-                    <div className="h-2 w-20 bg-slate-200 dark:bg-slate-800 rounded" />
+                    {/* Connector Line Down */}
+                    <div className="absolute left-8 bottom-0 translate-y-full h-8 w-0.5 bg-slate-200 dark:bg-slate-700">
+                      <m.div
+                        animate={{ height: ["0%", "100%"], opacity: [0, 1, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                        className="w-full bg-accent"
+                      />
+                    </div>
                   </m.div>
 
+                  {/* Action Node 1 */}
                   <m.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3 w-4/5 self-end"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-white dark:bg-slate-800 border border-accent/20 dark:border-accent/30 p-4 rounded-xl shadow-lg relative ml-8"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
-                      <Mail size={16} />
+                    <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 z-20" />
+                    {/* Connecting Curve */}
+                    <div className="absolute -left-8 -top-8 w-8 h-[calc(100%+32px)] border-l-2 border-b-2 border-slate-200 dark:border-slate-700 rounded-bl-2xl -z-10" />
+
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-accent/10 dark:bg-accent/20 text-accent"><Mail size={16} /></div>
+                      <div>
+                        <div className="text-[10px] text-accent font-bold uppercase tracking-wider">Action</div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">Send Welcome Email</div>
+                      </div>
                     </div>
-                    <div className="h-2 w-24 bg-slate-200 dark:bg-slate-800 rounded" />
                   </m.div>
 
+                  {/* Delay Node */}
                   <m.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-white dark:bg-slate-800 border border-accent/20 dark:border-accent/30 p-3 rounded-lg shadow-lg relative w-max self-center"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                      <span className="text-xs font-medium text-slate-600 dark:text-slate-300">Wait 2 Days</span>
+                    </div>
+                    {/* Connector Line Down */}
+                    <div className="absolute left-1/2 bottom-0 translate-y-full h-8 w-0.5 bg-slate-200 dark:bg-slate-700 -translate-x-1/2" />
+                  </m.div>
+
+                  {/* Action Node 2 */}
+                  <m.div
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6 }}
-                    className="p-4 bg-accent/10 rounded-2xl border border-accent/20 flex flex-col gap-3 w-full"
+                    className="bg-white dark:bg-slate-800 border border-accent/20 dark:border-accent/30 p-4 rounded-xl shadow-lg relative"
                   >
-                    <div className="h-2 w-1/3 bg-accent/20 rounded" />
-                    <div className="h-2 w-full bg-accent/10 rounded" />
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-0.5 h-8 bg-slate-200 dark:bg-slate-700" />
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-accent/10 dark:bg-accent/20 text-accent"><MessageSquare size={16} /></div>
+                      <div>
+                        <div className="text-[10px] text-accent font-bold uppercase tracking-wider">Follow Up</div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">SMS Check-in</div>
+                      </div>
+                    </div>
                   </m.div>
+
                 </div>
               </div>
             </div>
@@ -836,129 +880,122 @@ const CommandCenter = () => {
     </section>,
 
     // Tools
-    <section key="tools" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
+    <section key="tools" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4">
-        <AnimatedSection direction="up" className="text-center mb-16">
-          <h2 className="section-headline mb-4 font-bold">
-            Everything You Need <br />
-            <span className="text-gradient">To Scale Efficiency</span>
-          </h2>
-          <p className="body-large max-w-2xl mx-auto">
-            Integrated tools that save your team hours of manual work every single day.
-          </p>
-        </AnimatedSection>
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <AnimatedSection direction="up">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-6">
+              <CreditCard className="w-3 h-3 text-accent" />
+              <span className="text-xs font-semibold tracking-wide uppercase">Financial Ecosystem</span>
+            </div>
+            <h2 className="section-headline mb-6">
+              Built‑In <span className="text-gradient">Scheduling & Payments</span>
+            </h2>
+            <p className="body-large text-slate-500 dark:text-slate-400">
+              From first hello to final settlement. Manage the entire customer lifecycle without leaving your command center.
+            </p>
+          </AnimatedSection>
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-8 items-stretch max-w-7xl mx-auto">
           {tools.map((item, index) => (
-            <ToolCard key={item.title} item={item} index={index} />
+            <JourneyStep key={item.title} item={item} index={index} />
           ))}
         </div>
       </div>
     </section>,
-
-    // Visibility
-    <section key="visibility" className="py-24 bg-slate-50 dark:bg-slate-950/50 relative overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1">
-            <ThreeDImageCard src={cubesImg} alt="Data reporting" />
-          </div>
-
-          <div className="order-1 lg:order-2">
-            <AnimatedSection direction="right">
-              <h2 className="section-headline mb-8">
-                Complete <span className="text-gradient">Operations </span>
-                Visibility
-              </h2>
-
-              <div className="grid gap-6">
-                {visibility.map((item, index) => (
-                  <GlossyCard key={item.title} item={item} index={index} />
-                ))}
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </div>
-    </section>,
-
-    // Integration
-    <section key="integration" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(#db9a4615_1px,transparent_1px)] [background-size:40px_40px] opacity-50" />
-
-      <div className="container mx-auto px-4 relative">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div>
-            <AnimatedSection direction="left">
-              <h2 className="section-headline mb-8">
-                Built To Work With <br />
-                <span className="text-gradient">AI Employees</span>
-              </h2>
-              <p className="body-large mb-12">
-                The Command Center isn't just a CRM—it's the brain that coordinates your entire AI and human workforce.
-              </p>
-
-              <div className="grid gap-6">
-                {integrations.map((text, index) => (
-                  <IntegrationNode key={index} text={text} index={index} />
-                ))}
-              </div>
-            </AnimatedSection>
-          </div>
-
-          <AnimatedSection direction="right" className="relative aspect-square">
-            <div className="absolute inset-0 bg-accent/5 rounded-full blur-3xl" />
-            <img
-              src={integrationDashboardImg}
-              alt="Integration Hub"
-              loading="lazy"
-              className="relative z-10 w-full h-full object-contain drop-shadow-2xl"
-            />
-          </AnimatedSection>
-        </div>
-      </div>
-    </section>,
-
-    // Journey
-    <section key="journey" className="py-24 bg-slate-950 relative overflow-hidden selection:bg-accent/30">
-      {/* Dark background particles effect */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150" />
-      </div>
+  <section key="visibility" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+      {/* Background Grid Decoration */}
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(219,154,70,0.1)_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:40px_40px] opacity-40 dark:opacity-20" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 dark:via-accent/50 to-transparent" />
 
       <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection direction="up" className="text-center mb-16">
-          <h2 className="text-white section-headline mb-6">
-            The Journey to <span className="text-gradient italic">Total Control</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-6 font-medium">
+            <BarChart3 className="w-3 h-3" />
+            <span className="text-xs tracking-wide uppercase">Performance Insights</span>
+          </div>
+          <h2 className="section-headline mb-6 flex flex-wrap justify-center gap-x-3 gap-y-1">
+            {/* Staggered Letter Animation for Title */}
+            {"Real‑Time Visibility".split(" ").map((word, wordIndex) => (
+              <span key={wordIndex} className="inline-block whitespace-nowrap">
+                {word.split("").map((char, charIndex) => (
+                  <m.span
+                    key={charIndex}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: (wordIndex * 0.1) + (charIndex * 0.03),
+                      ease: [0.215, 0.61, 0.355, 1]
+                    }}
+                    className={cn(
+                      "inline-block",
+                      (word === "Visibility") ? "text-gradient" : "text-slate-900 dark:text-white"
+                    )}
+                  >
+                    {char}
+                  </m.span>
+                ))}
+              </span>
+            ))}
           </h2>
-          <p className="text-slate-400 body-large max-w-2xl mx-auto">
-            How strangers become customers through your automated system.
+          <p className="body-large text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            Complete transparency into your operations. Monitor every lead, deal, and dollar in real-time through high-performance dashboards.
           </p>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            {
-              title: "Stranger to Lead",
-              description: "Capture via forms, and AI engagement.",
-              icon: Users
-            },
-            {
-              title: "Lead to Customer",
-              description: "Nurture through automations and deal closing.",
-              icon: TrendingUp
-            },
-            {
-              title: "Customer to Advocate",
-              description: "Review requests and referral tracking.",
-              icon: BarChart3
-            }
-          ].map((item, index) => (
-            <JourneyStep key={index} item={item} index={index} />
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {visibility.map((item, index) => (
+            <GlossyCard key={item.title} item={item} index={index} />
           ))}
         </div>
       </div>
     </section>,
+   
+
+    // Integration
+     <section key="integrations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-20 lg:py-24 relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Content: 3D Image Card */}
+          <AnimatedSection direction="left" className="relative group">
+            <ThreeDImageCard
+              src={integrationDashboardImg}
+              alt="AI integration dashboard"
+            />
+          </AnimatedSection>
+
+          {/* Right Content: Advanced Integration Nodes */}
+          <div>
+            <AnimatedSection direction="right" className="mb-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-4">
+                <Shield className="w-3 h-3" />
+                <span className="text-xs font-semibold tracking-wide uppercase">Unified Infrastructure</span>
+              </div>
+              <h2 className="section-headline mb-4 text-left font-bold">
+                Seamless Integration with <span className="text-gradient">AI Employees</span>
+              </h2>
+              <p className="body-large text-slate-500 dark:text-slate-400 text-left mb-8 max-w-xl">
+                Bridge the gap between artificial intelligence and human operations. Our command center acts as the final destination for all automated interactions.
+              </p>
+
+              <div className="space-y-4">
+                {integrations.map((integration, index) => (
+                  <IntegrationNode
+                    key={index}
+                    text={integration}
+                    index={index}
+                  />
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </div>
+    </section>,
+
+
 
     <section key="cta" className="py-24 bg-white dark:bg-[#020617] relative overflow-hidden">
       <div className="flex-grow flex items-center justify-center py-12 lg:py-16">
