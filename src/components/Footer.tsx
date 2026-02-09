@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 import { m, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
-import logo from "@/assets/logo.webp";
+import logoBlack from "@/assets/logo_black.webp";
+import logoWhite from "@/assets/logo_white.webp";
+import { useTheme } from "@/hooks/useTheme";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const Footer = () => {
   const ref = useRef(null);
+  const { theme } = useTheme();
   const isMobile = useIsMobile();
   const isInView = useInView(ref, { once: isMobile, margin: "-10%" });
 
@@ -47,7 +50,11 @@ const Footer = () => {
               transition={{ duration: 0.5 }}
             >
               <Link to="/" className="flex items-center gap-3">
-                <img src={logo} alt="Logo" className="w-10 h-10 object-contain p-1 bg-white/5 rounded-xl border border-white/10" />
+                <img
+                  src={theme === "dark" ? logoWhite : logoBlack}
+                  alt="Logo"
+                  className="w-10 h-10 object-contain p-1 bg-white/5 rounded-xl border border-white/10 dark:invert-0"
+                />
                 <span className="text-xl font-bold tracking-tighter uppercase italic">Create Assistants</span>
               </Link>
             </m.div>

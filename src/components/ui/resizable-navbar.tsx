@@ -110,7 +110,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         y: visible ? 20 : 0,
         paddingLeft: visible ? "2rem" : "1rem",
         paddingRight: visible ? "2rem" : "1rem",
-        borderRadius: visible ? "9999px" : "0px",
+        borderRadius: "1.5rem",
       }}
       transition={{
         type: "spring",
@@ -135,7 +135,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
     <m.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "flex-1 hidden flex-row items-center justify-center space-x-1 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-1",
+        "flex-1 hidden flex-row items-center justify-center space-x-1 text-sm font-semibold text-neutral-600 dark:text-neutral-400 transition duration-200 lg:flex lg:space-x-1",
         className,
       )}
     >
@@ -146,10 +146,10 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
             onMouseEnter={() => setHovered(idx)}
             onClick={onItemClick}
             className={cn(
-              "group relative px-3 py-2 transition-colors duration-200 whitespace-nowrap",
+              "group relative px-4 py-2 transition-colors duration-200 whitespace-nowrap",
               isActive
                 ? "text-neutral-900 dark:text-white"
-                : "text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white"
+                : "text-neutral-500 hover:text-neutral-900 dark:hover:text-white font-medium"
             )}
             key={`link-${idx}`}
             to={item.link}
@@ -157,7 +157,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
             <span className="relative z-20">{item.name}</span>
             <span
               className={cn(
-                "absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center bg-accent transition-transform duration-300 ease-out",
+                "absolute -bottom-1 left-0 h-[2px] w-full origin-left bg-accent transition-transform duration-300 ease-out",
                 isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               )}
             />
