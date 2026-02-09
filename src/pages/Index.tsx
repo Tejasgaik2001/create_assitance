@@ -37,7 +37,7 @@ const Index = () => {
     <div className="min-h-screen bg-background transition-colors duration-300">
       <Header />
       <main>
-        <CursorSpotlight />
+        {/* <CursorSpotlight /> */}
         <HeroSection />
         <Suspense fallback={<SectionsLoader />}>
           <IntroSection />

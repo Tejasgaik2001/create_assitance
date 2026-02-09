@@ -1,5 +1,5 @@
 import { motion, useInView, Variants } from "framer-motion";
-import { useRef, ReactNode } from "react";
+import { useRef, ReactNode, useState, useEffect } from "react";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -18,6 +18,16 @@ const AnimatedSection = ({
 }: AnimatedSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: triggerOnce, margin: "-10%" });
+
+  // Detect mobile devices
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const directions = {
     up: { y: 100, x: 0 },
@@ -45,6 +55,16 @@ const AnimatedSection = ({
     },
   };
 
+  // On mobile: disable all animations, render content immediately
+  if (isMobile) {
+    return (
+      <div ref={ref} className={className}>
+        {children}
+      </div>
+    );
+  }
+
+  // On desktop: use Framer Motion animations
   return (
     <motion.div
       ref={ref}

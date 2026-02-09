@@ -15,9 +15,6 @@ const HeroSection = () => {
   const isMobileRef = useRef(window.matchMedia("(max-width: 1024px)").matches);
   const [isMobile, setIsMobile] = useState(isMobileRef.current);
 
-  // Safari mobile: disable heavy animations to prevent render blocking
-  const shouldAnimate = shouldEnableAnimations();
-
   // Track if user explicitly clicked to watch the video (defaults to true for desktop)
   const [userRequestedVideo, setUserRequestedVideo] = useState(!isMobileRef.current);
 
@@ -45,18 +42,20 @@ const HeroSection = () => {
     });
   };
 
+  // Disable animations on mobile for performance
+  const shouldAnimate = !isMobile && shouldEnableAnimations();
+
   const textVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: (i: number) => ({
+    hidden: shouldAnimate ? { opacity: 0, y: 50 } : { opacity: 1, y: 0 },
+    visible: (i: number) => shouldAnimate ? ({
       opacity: 1,
       y: 0,
       transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15,
-        delay: i * 0.1,
+        delay: i * 0.2,
+        duration: 0.8,
+        ease: [0.6, 0.05, 0.01, 0.9] as any,
       },
-    }),
+    }) : { opacity: 1, y: 0 },
   };
 
   return (
