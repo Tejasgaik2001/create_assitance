@@ -798,7 +798,52 @@ const AIEmployees = () => {
               </div>
             </m.div>
 
-            {/* Content for the right side or more details can go here */}
+            <m.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative pr-8 pb-8"
+            >
+              <m.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="relative lg:max-w-[110%] xl:max-w-none"
+              >
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
+                  <img
+                    src={aiStrategyImg}
+                    alt="AI Strategy"
+                    className="w-full h-[320px] md:h-[400px] object-cover"
+                  />
+                </div>
+
+                {/* Floating Badge */}
+                <m.div
+                  animate={{ y: [0, 5, 0], x: [0, -3, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-6 left-6"
+                >
+                  <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl flex items-center gap-3 border border-slate-200 shadow-xl">
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse" />
+                    <span className="text-sm font-semibold text-slate-900">API Integration Active</span>
+                  </div>
+                </m.div>
+
+                {/* Stat Box */}
+                <div className="absolute -bottom-4 -right-4 md:bottom-6 md:-right-8 lg:-right-12 lg:bottom-12">
+                  <m.div
+                    animate={{ y: [0, -10, 0], x: [0, 3, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="bg-accent p-5 md:p-6 rounded-2xl shadow-2xl shadow-accent/20 border border-white/20 w-44 md:w-56"
+                  >
+                    <div className="text-3xl md:text-4xl font-black text-white mb-1">94%</div>
+                    <div className="text-[10px] md:text-xs font-bold text-white uppercase tracking-wider leading-tight">
+                      Reduction In <br /> Response Latency
+                    </div>
+                  </m.div>
+                </div>
+              </m.div>
+            </m.div>
           </div>
         </div>
       </div>

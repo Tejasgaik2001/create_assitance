@@ -157,7 +157,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
             <span className="relative z-20">{item.name}</span>
             <span
               className={cn(
-                "absolute -bottom-1 left-0 h-[2px] w-8 origin-left bg-accent transition-transform duration-300 ease-out",
+                "absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-8 origin-center bg-accent transition-transform duration-300 ease-out",
                 isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               )}
             />
