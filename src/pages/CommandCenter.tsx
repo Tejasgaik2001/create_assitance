@@ -746,7 +746,7 @@ const CommandCenter = () => {
     </section>,
 
     // Automations
-    <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
+     <section key="automations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative bg-slate-50 dark:bg-slate-950/50 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content: Logic Flow */}
@@ -794,39 +794,83 @@ const CommandCenter = () => {
               <div className="flex-1 p-6 relative bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px]">
                 {/* Animated Nodes */}
                 <div className="flex flex-col gap-8 relative z-10 h-full justify-center">
-                  {/* Mock Nodes - Purely visual */}
+
+                  {/* Trigger Node */}
                   <m.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    className="p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3 w-4/5"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    className="bg-white dark:bg-slate-800 border border-accent/20 dark:border-accent/30 p-4 rounded-xl shadow-lg relative"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center text-accent">
-                      <Zap size={16} />
+                    <div className="absolute -left-1 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-lg bg-accent" />
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-accent/10 dark:bg-accent/20 text-accent"><Users size={16} /></div>
+                      <div>
+                        <div className="text-[10px] text-accent font-bold uppercase tracking-wider">Trigger</div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">New Lead Submitted</div>
+                      </div>
                     </div>
-                    <div className="h-2 w-20 bg-slate-200 dark:bg-slate-800 rounded" />
+                    {/* Connector Line Down */}
+                    <div className="absolute left-8 bottom-0 translate-y-full h-8 w-0.5 bg-slate-200 dark:bg-slate-700">
+                      <m.div
+                        animate={{ height: ["0%", "100%"], opacity: [0, 1, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                        className="w-full bg-accent"
+                      />
+                    </div>
                   </m.div>
 
+                  {/* Action Node 1 */}
                   <m.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3 w-4/5 self-end"
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-white dark:bg-slate-800 border border-accent/20 dark:border-accent/30 p-4 rounded-xl shadow-lg relative ml-8"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
-                      <Mail size={16} />
+                    <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 z-20" />
+                    {/* Connecting Curve */}
+                    <div className="absolute -left-8 -top-8 w-8 h-[calc(100%+32px)] border-l-2 border-b-2 border-slate-200 dark:border-slate-700 rounded-bl-2xl -z-10" />
+
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-accent/10 dark:bg-accent/20 text-accent"><Mail size={16} /></div>
+                      <div>
+                        <div className="text-[10px] text-accent font-bold uppercase tracking-wider">Action</div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">Send Welcome Email</div>
+                      </div>
                     </div>
-                    <div className="h-2 w-24 bg-slate-200 dark:bg-slate-800 rounded" />
                   </m.div>
 
+                  {/* Delay Node */}
                   <m.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-white dark:bg-slate-800 border border-accent/20 dark:border-accent/30 p-3 rounded-lg shadow-lg relative w-max self-center"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                      <span className="text-xs font-medium text-slate-600 dark:text-slate-300">Wait 2 Days</span>
+                    </div>
+                    {/* Connector Line Down */}
+                    <div className="absolute left-1/2 bottom-0 translate-y-full h-8 w-0.5 bg-slate-200 dark:bg-slate-700 -translate-x-1/2" />
+                  </m.div>
+
+                  {/* Action Node 2 */}
+                  <m.div
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6 }}
-                    className="p-4 bg-accent/10 rounded-2xl border border-accent/20 flex flex-col gap-3 w-full"
+                    className="bg-white dark:bg-slate-800 border border-accent/20 dark:border-accent/30 p-4 rounded-xl shadow-lg relative"
                   >
-                    <div className="h-2 w-1/3 bg-accent/20 rounded" />
-                    <div className="h-2 w-full bg-accent/10 rounded" />
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-0.5 h-8 bg-slate-200 dark:bg-slate-700" />
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-accent/10 dark:bg-accent/20 text-accent"><MessageSquare size={16} /></div>
+                      <div>
+                        <div className="text-[10px] text-accent font-bold uppercase tracking-wider">Follow Up</div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-white">SMS Check-in</div>
+                      </div>
+                    </div>
                   </m.div>
+
                 </div>
               </div>
             </div>
