@@ -15,28 +15,13 @@ const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
-  // Track if user explicitly clicked to watch the video (defaults to true for desktop)
-  const isMobileInitially = useRef(window.matchMedia("(max-width: 1024px)").matches).current;
-  const [userRequestedVideo, setUserRequestedVideo] = useState(!isMobileInitially);
-
-  // Lazy load video to prevent blocking initial page load checking
+  // Lazy load video to prevent blocking initial page load
   const { videoRef, isLoaded, isPlaying, play } = useLazyVideo({
     autoplay: true,
     rootMargin: '100px' // Load when 100px from viewport
   });
 
-  // useIsMobile hook handles the event listener internally
-
   const isInView = useInView(ref, { once: isMobile });
-
-  // Mobile & Safari: play video/show video when user taps
-  const handlePlayVideo = () => {
-    setUserRequestedVideo(true);
-    // Use requestAnimationFrame to ensure the video element is rendered before calling play
-    requestAnimationFrame(() => {
-      play();
-    });
-  };
 
   // Disable animations on mobile for performance
   const shouldAnimate = !isMobile && shouldEnableAnimations();
@@ -96,7 +81,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="absolute top-24 right-8 z-30 hidden lg:flex"
+          className="absolute top-16 right-4 sm:top-24 sm:right-8 z-30 flex"
         >
           <m.div
             animate={{ y: [0, -10, 0] }}
@@ -286,7 +271,7 @@ const HeroSection = () => {
                       className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-muted overflow-hidden bg-gradient-to-tr from-accent/20 to-primary/20 flex items-center justify-center"
                     >
                       <img
-                        src={`/ avatars / avatar - ${i + 10}.jpg`}
+                        src={`/avatars/avatar-${i + 10}.jpg`}
                         alt="User"
                         loading="lazy"
                         decoding="async"
@@ -325,53 +310,17 @@ const HeroSection = () => {
             className="relative w-full max-w-full lg:scale-105 lg:translate-x-2"
           >
             <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group" style={{ isolation: 'isolate' }}>
-              {(userRequestedVideo || !isMobile) ? (
-                <video
-                  ref={videoRef}
-                  data-src={heroVideo}
-                  poster={heroPoster}
-                  muted
-                  loop
-                  playsInline
-                  webkit-playsinline="true"
-                  preload="none"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                />
-              ) : (
-                <div
-                  className="relative w-full h-full cursor-pointer group/image"
-                  onClick={handlePlayVideo}
-                >
-                  <img
-                    src={heroPoster}
-                    alt="Hero Visual"
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover/image:scale-110"
-                    // High priority for the largest contentful paint
-                    fetchPriority="high"
-                    loading="eager"
-                    decoding="sync"
-                  />
-                  {/* High-quality overlay to make image look like video frame */}
-                  <div className="absolute inset-0 bg-black/5 group-hover/image:bg-transparent transition-colors duration-500" />
-                </div>
-              )}
-
-              {/* Play button overlay - visible if video hasn't started or on image state (Mobile Only) */}
-              {isMobile && !isPlaying && (
-                <button
-                  onClick={handlePlayVideo}
-                  aria-label="Play video"
-                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/10 backdrop-blur-[1px] hover:bg-black/20 transition-all group/play"
-                >
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 shadow-[0_0_30px_rgba(0,0,0,0.2)] flex items-center justify-center group-hover/play:scale-110 active:scale-95 transition-transform">
-                    <Play className="w-7 h-7 sm:w-8 sm:h-8 text-foreground ml-1" fill="currentColor" />
-                  </div>
-                  {/* Label to encourage click */}
-                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-widest opacity-0 group-hover/play:opacity-100 transition-opacity duration-300">
-                    Watch Demo
-                  </div>
-                </button>
-              )}
+              <video
+                ref={videoRef}
+                data-src={heroVideo}
+                poster={heroPoster}
+                muted
+                loop
+                playsInline
+                webkit-playsinline="true"
+                preload="none"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+              />
 
               {/* Enhanced overlays */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-accent/30 mix-blend-overlay" />
@@ -385,11 +334,11 @@ const HeroSection = () => {
                 } : {}}
                 transition={shouldAnimate ? { duration: 5, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
                 whileHover={{ scale: 1.05, y: -8 }}
-                className="absolute bottom-8 left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2.5rem] p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all hidden sm:block"
+                className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all flex"
               >
                 <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
                 <div className="relative">
-                  <p className="text-5xl lg:text-6xl font-bold text-accent tracking-tighter mb-1 drop-shadow-lg">
+                  <p className="text-3xl sm:text-5xl lg:text-6xl font-bold text-accent tracking-tighter mb-1 drop-shadow-lg">
                     24/7
                   </p>
                   <p className="text-xs font-bold text-foreground/70 uppercase tracking-widest leading-none">
@@ -420,7 +369,7 @@ const HeroSection = () => {
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         onClick={() => document.getElementById("intro")?.scrollIntoView({ behavior: isSafari() ? "auto" : "smooth" })}
-        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none hidden lg:flex z-20 group"
+        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none z-20 group"
       >
         <div className="w-px h-16 sm:h-20 bg-gradient-to-b from-primary via-accent to-transparent group-hover:from-accent group-hover:via-primary transition-colors" />
         <span className="text-[9px] font-bold uppercase tracking-[0.4em] rotate-180 [writing-mode:vertical-lr] text-muted-foreground group-hover:text-accent font-montserrat">
