@@ -18,6 +18,9 @@ const HeroSection = () => {
   // Safari mobile: disable heavy animations to prevent render blocking
   const shouldAnimate = shouldEnableAnimations();
 
+  // Track if user explicitly clicked to watch the video (defaults to true for desktop)
+  const [userRequestedVideo, setUserRequestedVideo] = useState(!isMobileRef.current);
+
   // Lazy load video to prevent blocking initial page load
   const { videoRef, isLoaded, isPlaying, play } = useLazyVideo({
     autoplay: true,
@@ -33,10 +36,13 @@ const HeroSection = () => {
 
   const isInView = useInView(ref, { once: true });
 
-  // Mobile: play video when user taps play button
-  const handleMobilePlay = () => {
-    if (!isMobile) return;
-    play();
+  // Mobile & Safari: play video/show video when user taps
+  const handlePlayVideo = () => {
+    setUserRequestedVideo(true);
+    // Use requestAnimationFrame to ensure the video element is rendered before calling play
+    requestAnimationFrame(() => {
+      play();
+    });
   };
 
   const textVariants = {
@@ -313,27 +319,50 @@ const HeroSection = () => {
             className="relative w-full max-w-full lg:scale-105 lg:translate-x-2"
           >
             <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group" style={{ isolation: 'isolate' }}>
-              <video
-                ref={videoRef}
-                data-src={heroVideo}
-                poster={heroPoster}
-                muted
-                loop
-                playsInline
-                webkit-playsinline="true"
-                preload="none"
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-              />
+              {(userRequestedVideo || !isMobile) ? (
+                <video
+                  ref={videoRef}
+                  data-src={heroVideo}
+                  poster={heroPoster}
+                  muted
+                  loop
+                  playsInline
+                  webkit-playsinline="true"
+                  preload="none"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+              ) : (
+                <div
+                  className="relative w-full h-full cursor-pointer group/image"
+                  onClick={handlePlayVideo}
+                >
+                  <img
+                    src={heroPoster}
+                    alt="Hero Visual"
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover/image:scale-110"
+                    // High priority for the largest contentful paint
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="sync"
+                  />
+                  {/* High-quality overlay to make image look like video frame */}
+                  <div className="absolute inset-0 bg-black/5 group-hover/image:bg-transparent transition-colors duration-500" />
+                </div>
+              )}
 
-              {/* Mobile: play button overlay (no autoplay to save CPU) */}
+              {/* Play button overlay - visible if video hasn't started or on image state (Mobile Only) */}
               {isMobile && !isPlaying && (
                 <button
-                  onClick={handleMobilePlay}
+                  onClick={handlePlayVideo}
                   aria-label="Play video"
-                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/20 backdrop-blur-[2px] transition-opacity"
+                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/10 backdrop-blur-[1px] hover:bg-black/20 transition-all group/play"
                 >
-                  <div className="w-16 h-16 rounded-full bg-white/90 shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform">
-                    <Play className="w-7 h-7 text-foreground ml-1" fill="currentColor" />
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 shadow-[0_0_30px_rgba(0,0,0,0.2)] flex items-center justify-center group-hover/play:scale-110 active:scale-95 transition-transform">
+                    <Play className="w-7 h-7 sm:w-8 sm:h-8 text-foreground ml-1" fill="currentColor" />
+                  </div>
+                  {/* Label to encourage click */}
+                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-widest opacity-0 group-hover/play:opacity-100 transition-opacity duration-300">
+                    Watch Demo
                   </div>
                 </button>
               )}
