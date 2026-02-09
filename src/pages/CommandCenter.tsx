@@ -952,109 +952,50 @@ const CommandCenter = () => {
         </div>
       </div>
     </section>,
-    // Visibility
-    <section key="visibility" className="py-24 bg-slate-50 dark:bg-slate-950/50 relative overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="order-2 lg:order-1">
-            <ThreeDImageCard src={cubesImg} alt="Data reporting" />
-          </div>
-
-          <div className="order-1 lg:order-2">
-            <AnimatedSection direction="right">
-              <h2 className="section-headline mb-8">
-                Complete <span className="text-gradient">Operations </span>
-                Visibility
-              </h2>
-
-              <div className="grid gap-6">
-                {visibility.map((item, index) => (
-                  <GlossyCard key={item.title} item={item} index={index} />
-                ))}
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </div>
-    </section>,
+   
 
     // Integration
-    <section key="integration" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(#db9a4615_1px,transparent_1px)] [background-size:40px_40px] opacity-50" />
+     <section key="integrations" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-20 lg:py-24 relative bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Content: 3D Image Card */}
+          <AnimatedSection direction="left" className="relative group">
+            <ThreeDImageCard
+              src={integrationDashboardImg}
+              alt="AI integration dashboard"
+            />
+          </AnimatedSection>
 
-      <div className="container mx-auto px-4 relative">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          {/* Right Content: Advanced Integration Nodes */}
           <div>
-            <AnimatedSection direction="left">
-              <h2 className="section-headline mb-8">
-                Built To Work With <br />
-                <span className="text-gradient">AI Employees</span>
+            <AnimatedSection direction="right" className="mb-0">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 text-accent mb-4">
+                <Shield className="w-3 h-3" />
+                <span className="text-xs font-semibold tracking-wide uppercase">Unified Infrastructure</span>
+              </div>
+              <h2 className="section-headline mb-4 text-left font-bold">
+                Seamless Integration with <span className="text-gradient">AI Employees</span>
               </h2>
-              <p className="body-large mb-12">
-                The Command Center isn't just a CRM—it's the brain that coordinates your entire AI and human workforce.
+              <p className="body-large text-slate-500 dark:text-slate-400 text-left mb-8 max-w-xl">
+                Bridge the gap between artificial intelligence and human operations. Our command center acts as the final destination for all automated interactions.
               </p>
 
-              <div className="grid gap-6">
-                {integrations.map((text, index) => (
-                  <IntegrationNode key={index} text={text} index={index} />
+              <div className="space-y-4">
+                {integrations.map((integration, index) => (
+                  <IntegrationNode
+                    key={index}
+                    text={integration}
+                    index={index}
+                  />
                 ))}
               </div>
             </AnimatedSection>
           </div>
-
-          <AnimatedSection direction="right" className="relative aspect-square">
-            <div className="absolute inset-0 bg-accent/5 rounded-full blur-3xl" />
-            <img
-              src={integrationDashboardImg}
-              alt="Integration Hub"
-              loading="lazy"
-              className="relative z-10 w-full h-full object-contain drop-shadow-2xl"
-            />
-          </AnimatedSection>
         </div>
       </div>
     </section>,
 
-    // Journey
-    <section key="journey" className="py-24 bg-slate-950 relative overflow-hidden selection:bg-accent/30">
-      {/* Dark background particles effect */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150" />
-      </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <AnimatedSection direction="up" className="text-center mb-16">
-          <h2 className="text-white section-headline mb-6">
-            The Journey to <span className="text-gradient italic">Total Control</span>
-          </h2>
-          <p className="text-slate-400 body-large max-w-2xl mx-auto">
-            How strangers become customers through your automated system.
-          </p>
-        </AnimatedSection>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            {
-              title: "Stranger to Lead",
-              description: "Capture via forms, and AI engagement.",
-              icon: Users
-            },
-            {
-              title: "Lead to Customer",
-              description: "Nurture through automations and deal closing.",
-              icon: TrendingUp
-            },
-            {
-              title: "Customer to Advocate",
-              description: "Review requests and referral tracking.",
-              icon: BarChart3
-            }
-          ].map((item, index) => (
-            <JourneyStep key={index} item={item} index={index} />
-          ))}
-        </div>
-      </div>
-    </section>,
 
     <section key="cta" className="py-24 bg-white dark:bg-[#020617] relative overflow-hidden">
       <div className="flex-grow flex items-center justify-center py-12 lg:py-16">
