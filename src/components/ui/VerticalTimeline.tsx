@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface TimelineStep {
     number: number;
@@ -30,8 +31,10 @@ const TimelineCard = ({
     const [rotateY, setRotateY] = useState(0);
     const Icon = step.icon;
 
+    const isMobile = useIsMobile();
+
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!cardRef.current) return;
+        if (!cardRef.current || isMobile) return;
 
         const rect = cardRef.current.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -49,6 +52,7 @@ const TimelineCard = ({
     };
 
     const handleMouseLeave = () => {
+        if (isMobile) return;
         setRotateX(0);
         setRotateY(0);
     };
@@ -56,8 +60,8 @@ const TimelineCard = ({
     return (
         <motion.div
             ref={cardRef}
-            initial={{ opacity: 0, x: isLeft ? -80 : 80 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isLeft ? -80 : 80 }}
+            initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: isLeft ? -80 : 80 }}
+            animate={isMobile ? { opacity: 1, x: 0 } : (isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isLeft ? -80 : 80 })}
             transition={{
                 duration: 0.6,
                 delay: 0.1,
@@ -70,13 +74,13 @@ const TimelineCard = ({
         >
             <motion.div
                 className="glass-card rounded-2xl p-6 md:p-8 shadow-2xl border border-accent/30 bg-background/95 backdrop-blur-xl w-full cursor-pointer"
-                animate={{
+                animate={isMobile ? {} : {
                     rotateX,
                     rotateY,
                     scale: rotateX !== 0 || rotateY !== 0 ? 1.02 : 1,
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                style={{ transformStyle: "preserve-3d" }}
+                style={{ transformStyle: isMobile ? "flat" : "preserve-3d" }}
             >
                 {/* Glow effect on hover */}
                 <motion.div
@@ -104,7 +108,7 @@ const TimelineCard = ({
                 {/* Content with staggered animations */}
                 <motion.div
                     initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
+                    animate={isMobile ? "visible" : (isInView ? "visible" : "hidden")}
                     variants={{
                         hidden: { opacity: 0 },
                         visible: {
@@ -115,7 +119,7 @@ const TimelineCard = ({
                             }
                         }
                     }}
-                    style={{ transform: "translateZ(10px)" }}
+                    style={{ transform: isMobile ? "none" : "translateZ(10px)" }}
                 >
                     <motion.h3
                         className="text-2xl md:text-3xl font-bold mb-2"

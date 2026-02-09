@@ -2,6 +2,7 @@ import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import React, { useRef } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // --- Card Component (3D Effect) ---
 interface ThreeDCardProps {
@@ -23,8 +24,10 @@ export const ThreeDCard = ({ title, description, icon: Icon, className }: ThreeD
     const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"]);
     const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"]);
 
+    const isMobile = useIsMobile();
+
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!ref.current) return;
+        if (!ref.current || isMobile) return;
 
         const rect = ref.current.getBoundingClientRect();
 
@@ -51,7 +54,7 @@ export const ThreeDCard = ({ title, description, icon: Icon, className }: ThreeD
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            style={{
+            style={isMobile ? {} : {
                 rotateY,
                 rotateX,
                 transformStyle: "preserve-3d",
@@ -62,7 +65,7 @@ export const ThreeDCard = ({ title, description, icon: Icon, className }: ThreeD
             )}
         >
             <div
-                style={{
+                style={isMobile ? {} : {
                     transform: "translateZ(75px)",
                     transformStyle: "preserve-3d",
                 }}
