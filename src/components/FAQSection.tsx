@@ -1,6 +1,6 @@
 import { m, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
-import { ChevronDown, Plus, Minus, MessageCircle, HelpCircle } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const faqs = [
@@ -40,15 +40,15 @@ const FAQItem = ({ faq, index, isSectionInView }: { faq: typeof faqs[0]; index: 
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          "w-full text-left p-6 rounded-2xl transition-all duration-300 group shadow-sm border border-border/40 hover:border-accent/40",
-          isOpen ? "bg-accent/5" : "bg-white dark:bg-black/40"
+          "w-full text-left p-6 rounded-xl transition-all duration-300 group shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-border/40 hover:border-accent/40",
+          isOpen ? "bg-white dark:bg-neutral-900" : "bg-white dark:bg-black/40"
         )}
       >
         <div className="flex items-center justify-between gap-4">
-          <h3 className="text-lg font-bold uppercase tracking-tight transition-colors group-hover:text-accent">
+          <h3 className="text-base font-bold uppercase tracking-tight transition-colors group-hover:text-accent italic">
             {faq.question}
           </h3>
-          <div className={`p-2 rounded-xl transition-all duration-300 ${isOpen ? 'bg-accent text-white rotate-180' : 'bg-primary/10 text-primary'}`}>
+          <div className={`transition-all duration-300 ${isOpen ? 'rotate-180 text-accent' : 'text-neutral-400'}`}>
             <ChevronDown className="w-5 h-5 transition-transform duration-300" />
           </div>
         </div>
@@ -80,13 +80,13 @@ const FAQSection = () => {
   return (
     <section ref={ref} id="faq" className="w-full flex items-center justify-center relative overflow-hidden bg-background py-24 sm:py-32">
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 max-w-7xl mx-auto">
           {/* Left Side: Header Content */}
           <div className="flex flex-col justify-center text-left">
             <m.span
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent border border-accent/20 text-xs font-bold uppercase tracking-widest mb-6 w-fit"
+              className="inline-block px-4 py-1.5 rounded-full bg-accent/5 text-accent border border-accent/20 text-xs font-bold uppercase tracking-widest mb-6 w-fit"
             >
               FAQ
             </m.span>
@@ -94,18 +94,18 @@ const FAQSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-5xl font-bold tracking-tight mb-6 text-neutral-900 dark:text-white leading-[1.1]"
+              className="text-5xl sm:text-6xl font-bold tracking-tight mb-6 text-neutral-900 dark:text-white leading-[1.05]"
             >
-              Everything you need <br />
-              <span className="text-accent">to know</span>
+              Frequently Asked <br />
+              <span className="text-accent">Questions</span>
             </m.h2>
             <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg text-neutral-600 dark:text-neutral-400 font-medium mb-10 max-w-md"
+              className="text-lg text-neutral-600 dark:text-neutral-400 font-medium mb-10 max-w-sm"
             >
-              Transform your business with intelligent automation. Frequently asked questions about our process and results.
+              Got questions? We've got answers. Find everything you need to know about our AI-powered growth platform.
             </m.p>
 
             <m.div
@@ -116,9 +116,9 @@ const FAQSection = () => {
             >
               <button
                 onClick={() => window.open('https://calendly.com/createassistants', '_blank')}
-                className="px-8 py-4 rounded-2xl bg-accent text-white font-bold hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 text-center"
+                className="px-6 py-3 rounded-xl bg-accent/5 border border-accent/20 text-accent font-bold hover:bg-accent/10 transition-all flex items-center gap-2 w-fit text-sm"
               >
-                Still have questions?
+                Still have questions? <ArrowRight size={16} />
               </button>
             </m.div>
           </div>
