@@ -1010,7 +1010,7 @@ const CommandCenter = () => {
               <div
                 className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[2.5rem]"
                 style={{
-                  background: `radial-gradient(400px circle, hsla(34, 67%, 57%, 0.4), transparent 40%)`,
+                  background: `radial-gradient(400px circle, hsla(var(--accent), 0.4), transparent 40%)`,
                   padding: '2px',
                   WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
                   WebkitMaskComposite: 'destination-out',
@@ -1021,7 +1021,7 @@ const CommandCenter = () => {
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                 style={{
-                  background: `radial-gradient(800px circle, hsla(34, 67%, 57%, 0.08), transparent 80%)`,
+                  background: `radial-gradient(800px circle, hsla(var(--accent), 0.08), transparent 80%)`,
                 }}
               />
 
@@ -1053,7 +1053,7 @@ const CommandCenter = () => {
                 <div className="flex flex-col sm:flex-row gap-6 items-center">
                   <MagneticWrapper strength={0.2}>
                     <Button
-                      className="h-16 px-10 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_rgba(219,154,70,0.3)] hover:-translate-y-1 group/btn relative overflow-hidden"
+                      className="h-16 px-10 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg transition-all duration-300 hover:shadow-[0_20px_40px_-10px_hsla(var(--accent),0.3)] hover:-translate-y-1 group/btn relative overflow-hidden"
                       onClick={handleBookingRedirect}
                     >
                       <div className="absolute inset-0 bg-accent translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
