@@ -732,8 +732,7 @@ const CommandCenter = () => {
               // Mobile: Simple text without animation
               <>
                 <span>Unified </span>
-                <span className="text-gradient">CRM & Marketing</span>
-                <span> Hub</span>
+                <span className="whitespace-nowrap"><span className="text-gradient">CRM & Marketing</span> Hub</span>
               </>
             )}
           </h2>
