@@ -44,9 +44,13 @@ const IntroSection = () => {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20" />
       )}
 
-      {/* Gradient Orbs */}
-      <div className="absolute top-1/4 -left-48 w-96 h-96 bg-primary/30 rounded-full blur-3xl opacity-20" />
-      <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-accent/30 rounded-full blur-3xl opacity-20" />
+      {/* Gradient Orbs - desktop only, completely hidden on mobile */}
+      {!isMobile && (
+        <>
+          <div className="absolute top-1/4 -left-48 w-96 h-96 bg-primary/30 rounded-full blur-3xl opacity-20" />
+          <div className="absolute bottom-1/4 -right-48 w-96 h-96 bg-accent/30 rounded-full blur-3xl opacity-20" />
+        </>
+      )}
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
@@ -163,7 +167,7 @@ const IntroSection = () => {
                         damping: 15,
                         delay: 0.6 + index * 0.1
                       }}
-                      whileHover={{
+                      whileHover={isMobile ? {} : {
                         y: -4,
                         transition: { type: "spring", stiffness: 400, damping: 10 }
                       }}
@@ -209,7 +213,7 @@ const IntroSection = () => {
                     damping: 15,
                     delay: 0.5
                   }}
-                  whileHover={{
+                  whileHover={isMobile ? {} : {
                     scale: 1.02,
                     transition: { type: "spring", stiffness: 300, damping: 20 }
                   }}
@@ -252,7 +256,7 @@ const IntroSection = () => {
                     damping: 15,
                     delay: 0.7
                   }}
-                  whileHover={{
+                  whileHover={isMobile ? {} : {
                     scale: 1.05,
                     rotate: -2,
                     y: -4,
@@ -283,7 +287,7 @@ const IntroSection = () => {
                     damping: 15,
                     delay: 0.8
                   }}
-                  whileHover={{
+                  whileHover={isMobile ? {} : {
                     scale: 1.05,
                     rotate: 2,
                     y: -4,
