@@ -18,14 +18,24 @@ const ScrollSection = ({
   children,
   className = "",
   id,
+  disableMotion = false,
 }: {
   children: React.ReactNode;
   className?: string;
   id?: string;
+  disableMotion?: boolean;
 }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const prefersReducedMotion = useReducedMotion();
+
+  if (disableMotion) {
+    return (
+      <section ref={sectionRef} id={id} className={className}>
+        {children}
+      </section>
+    );
+  }
 
   return (
     <m.section
@@ -120,6 +130,7 @@ const WhatYouGet = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const narrativeRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const disableMotion = isMobile;
 
   // Main scroll progress
   const { scrollYProgress } = useScroll({
@@ -200,72 +211,97 @@ const WhatYouGet = () => {
 
       <main>
         {/* Hero Section */}
-        <ScrollSection className="relative overflow-hidden pt-24 pb-16">
-          {/* Background effects - desktop only, completely hidden on mobile */}
-          {!isMobile && (
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              {/* Gradient orbs */}
-              <m.div
-                animate={{
-                  x: [0, 50, 0],
-                  y: [0, 30, 0],
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.5, 0.3]
-                }}
-                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px] backface-hidden"
-                style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
-              />
-              <m.div
-                animate={{
-                  x: [0, -40, 0],
-                  y: [0, -25, 0],
-                  scale: [1, 1.15, 1],
-                  opacity: [0.2, 0.4, 0.2]
-                }}
-                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px] backface-hidden"
-                style={{ y: backgroundY2, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
-              />
+        <ScrollSection className="relative overflow-hidden pt-24 pb-16" disableMotion={disableMotion}>
+          {/* Background effects */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {/* Gradient orbs - animated on desktop, static on mobile */}
+            {!isMobile ? (
+              <>
+                <m.div
+                  animate={{
+                    x: [0, 50, 0],
+                    y: [0, 30, 0],
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                  }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px] backface-hidden"
+                  style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
+                />
+                <m.div
+                  animate={{
+                    x: [0, -40, 0],
+                    y: [0, -25, 0],
+                    scale: [1, 1.15, 1],
+                    opacity: [0.2, 0.4, 0.2]
+                  }}
+                  transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px] backface-hidden"
+                  style={{ y: backgroundY2, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
+                />
+              </>
+            ) : (
+              <>
+                <div className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-20" />
+                <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl opacity-15" />
+              </>
+            )}
 
-              {/* Premium grid pattern */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
+            {/* Premium grid pattern */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
 
-              {/* Data lines */}
-              <m.div
-                animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"
-              />
-            </div>
+            {/* Data lines */}
+            <m.div
+              animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+              className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+            />
+          </div>
           )}
 
           <div className="container mx-auto px-4 relative z-10">
-            <m.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center max-w-3xl mx-auto"
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 mb-6">
-                <span className="text-xs font-medium">The Complete Create Assistants Solution</span>
+            {disableMotion ? (
+              <div className="text-center max-w-3xl mx-auto">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 mb-6">
+                  <span className="text-xs font-medium">The Complete Create Assistants Solution</span>
+                </div>
+
+                <h1 className="hero-headline mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                  <span className="block">What You Get –</span>
+                  <span className="block text-gradient">A Turnkey Growth Engine</span>
+                </h1>
+
+                <p className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium mb-10">
+                  You don't need another app, you need a system that works. Create Assistants combines a powerful business
+                  operating system, human-like AI employees and hands-on support.
+                </p>
               </div>
+            ) : (
+              <m.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-center max-w-3xl mx-auto"
+              >
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 mb-6">
+                  <span className="text-xs font-medium">The Complete Create Assistants Solution</span>
+                </div>
 
-              <h1 className="hero-headline mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-                <span className="block">What You Get –</span>
-                <span className="block text-gradient">A Turnkey Growth Engine</span>
-              </h1>
+                <h1 className="hero-headline mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                  <span className="block">What You Get –</span>
+                  <span className="block text-gradient">A Turnkey Growth Engine</span>
+                </h1>
 
-              <p className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium mb-10">
-                You don't need another app, you need a system that works. Create Assistants combines a powerful business
-                operating system, human-like AI employees and hands-on support.
-              </p>
-            </m.div>
+                <p className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium mb-10">
+                  You don't need another app, you need a system that works. Create Assistants combines a powerful business
+                  operating system, human-like AI employees and hands-on support.
+                </p>
+              </m.div>
+            )}
           </div>
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
         </ScrollSection>
 
-        {/* Snake Roadmap Section */}
         <section ref={narrativeRef} className="py-24 relative overflow-visible">
           <div className="container mx-auto px-4 relative">
             <div className="text-center mb-24">
@@ -323,15 +359,21 @@ const WhatYouGet = () => {
                       key={pillar.title}
                       className={`md:flex ${isEven ? 'md:justify-start' : 'md:justify-end'} relative md:py-16`}
                     >
-                      <m.div
-                        className="md:w-[45%]"
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                      >
-                        <RoadmapCard pillar={pillar} index={index} />
-                      </m.div>
+                      {disableMotion ? (
+                        <div className="md:w-[45%]">
+                          <RoadmapCard pillar={pillar} index={index} />
+                        </div>
+                      ) : (
+                        <m.div
+                          className="md:w-[45%]"
+                          initial={{ opacity: 0, y: 50 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, margin: "-100px" }}
+                          transition={{ duration: 0.6, delay: 0.1 }}
+                        >
+                          <RoadmapCard pillar={pillar} index={index} />
+                        </m.div>
+                      )}
                     </div>
                   );
                 })}
@@ -341,103 +383,173 @@ const WhatYouGet = () => {
         </section>
 
         {/* Why It Matters Section */}
-        <ScrollSection className="py-24 relative bg-muted/30 overflow-hidden border-y border-border/40">
+        <ScrollSection className="py-24 relative bg-muted/30 overflow-hidden border-y border-border/40" disableMotion={disableMotion}>
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            <m.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl backface-hidden"
-              style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
-            />
+            {disableMotion ? (
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl backface-hidden" />
+            ) : (
+              <m.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl backface-hidden"
+                style={{ y: backgroundY1, rotate: 0.01, z: 0, scale: 1, willChange: "transform" }}
+              />
+            )}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] mobile-hide-bg" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
-            <m.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-center max-w-5xl mx-auto"
-            >
-              <h2 className="section-headline mb-4">
-                Why It <span className="text-gradient">Matters</span>
-              </h2>
-              <p className="body-large text-lg text-muted-foreground mb-16">
-                More than a toolkit. A complete operating system for growth.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                {[
-                  {
-                    title: "Unified Software",
-                    desc: "Consolidate every tool into one central hub.",
-                    icon: Layers3,
-                    color: "primary"
-                  },
-                  {
-                    title: "AI Employees",
-                    desc: "Scale your capacity with 24/7 intelligent agents.",
-                    icon: BrainCircuit,
-                    color: "accent"
-                  },
-                  {
-                    title: "White-Glove Service",
-                    desc: "Hands-on Iowa-based support at every step.",
-                    icon: Headphones,
-                    color: "primary"
-                  }
-                ].map((item, i) => (
-                  <m.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    whileHover={{ y: -8 }}
-                    className="relative group p-8 rounded-3xl bg-background border border-border/50 shadow-xl dark:shadow-none hover:border-accent/30 transition-all duration-300"
-                  >
-                    <div className={cn(
-                      "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-500 group-hover:scale-110",
-                      item.color === "primary" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
-                    )}>
-                      <item.icon size={32} />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                    <p className="text-muted-foreground text-sm font-medium leading-relaxed">
-                      {item.desc}
-                    </p>
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-                  </m.div>
-                ))}
-              </div>
-
-              <m.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-                className="p-8 rounded-[2rem] bg-accent/5 border border-accent/20 backdrop-blur-sm"
-              >
-                <p className="text-lg md:text-xl text-foreground font-medium leading-relaxed">
-                  By combining these three pillars, you get <span className="text-accent font-bold">more than a toolkit</span>. You get a complete operating system designed to capture every opportunity and grow with you.
+            {disableMotion ? (
+              <div className="text-center max-w-5xl mx-auto">
+                <h2 className="section-headline mb-4">
+                  Why It <span className="text-gradient">Matters</span>
+                </h2>
+                <p className="body-large text-lg text-muted-foreground mb-16">
+                  More than a toolkit. A complete operating system for growth.
                 </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                  {[
+                    {
+                      title: "Unified Software",
+                      desc: "Consolidate every tool into one central hub.",
+                      icon: Layers3,
+                      color: "primary"
+                    },
+                    {
+                      title: "AI Employees",
+                      desc: "Scale your capacity with 24/7 intelligent agents.",
+                      icon: BrainCircuit,
+                      color: "accent"
+                    },
+                    {
+                      title: "White-Glove Service",
+                      desc: "Hands-on Iowa-based support at every step.",
+                      icon: Headphones,
+                      color: "primary"
+                    }
+                  ].map((item) => (
+                    <div
+                      key={item.title}
+                      className="relative group p-8 rounded-3xl bg-background border border-border/50 shadow-xl dark:shadow-none hover:border-accent/30 transition-all duration-300"
+                    >
+                      <div className={cn(
+                        "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-500 group-hover:scale-110",
+                        item.color === "primary" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
+                      )}>
+                        <item.icon size={32} />
+                      </div>
+                      <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm font-medium leading-relaxed">
+                        {item.desc}
+                      </p>
+                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="p-8 rounded-[2rem] bg-accent/5 border border-accent/20 backdrop-blur-sm">
+                  <p className="text-lg md:text-xl text-foreground font-medium leading-relaxed">
+                    By combining these three pillars, you get <span className="text-accent font-bold">more than a toolkit</span>. You get a complete operating system designed to capture every opportunity and grow with you.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <m.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="text-center max-w-5xl mx-auto"
+              >
+                <h2 className="section-headline mb-4">
+                  Why It <span className="text-gradient">Matters</span>
+                </h2>
+                <p className="body-large text-lg text-muted-foreground mb-16">
+                  More than a toolkit. A complete operating system for growth.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                  {[
+                    {
+                      title: "Unified Software",
+                      desc: "Consolidate every tool into one central hub.",
+                      icon: Layers3,
+                      color: "primary"
+                    },
+                    {
+                      title: "AI Employees",
+                      desc: "Scale your capacity with 24/7 intelligent agents.",
+                      icon: BrainCircuit,
+                      color: "accent"
+                    },
+                    {
+                      title: "White-Glove Service",
+                      desc: "Hands-on Iowa-based support at every step.",
+                      icon: Headphones,
+                      color: "primary"
+                    }
+                  ].map((item, i) => (
+                    <m.div
+                      key={item.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      whileHover={{ y: -8 }}
+                      className="relative group p-8 rounded-3xl bg-background border border-border/50 shadow-xl dark:shadow-none hover:border-accent/30 transition-all duration-300"
+                    >
+                      <div className={cn(
+                        "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-500 group-hover:scale-110",
+                        item.color === "primary" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
+                      )}>
+                        <item.icon size={32} />
+                      </div>
+                      <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm font-medium leading-relaxed">
+                        {item.desc}
+                      </p>
+                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+                    </m.div>
+                  ))}
+                </div>
+
+                <m.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                  className="p-8 rounded-[2rem] bg-accent/5 border border-accent/20 backdrop-blur-sm"
+                >
+                  <p className="text-lg md:text-xl text-foreground font-medium leading-relaxed">
+                    By combining these three pillars, you get <span className="text-accent font-bold">more than a toolkit</span>. You get a complete operating system designed to capture every opportunity and grow with you.
+                  </p>
+                </m.div>
               </m.div>
-            </m.div>
+            )}
           </div>
         </ScrollSection>
 
         {/* CTA Section */}
-        <ScrollSection className="py-24 relative overflow-hidden">
+        <ScrollSection className="py-24 relative overflow-hidden" disableMotion={disableMotion}>
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            <m.div
-              className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl backface-hidden"
-              style={{ y: backgroundY1, rotate: 0.01, z: 0, willChange: "transform" }}
-            />
-            <m.div
-              className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl backface-hidden"
-              style={{ y: backgroundY2, rotate: 0.01, z: 0, willChange: "transform" }}
-            />
+            {disableMotion ? (
+              <>
+                <div className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl backface-hidden" />
+                <div className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl backface-hidden" />
+              </>
+            ) : (
+              <>
+                <m.div
+                  className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl backface-hidden"
+                  style={{ y: backgroundY1, rotate: 0.01, z: 0, willChange: "transform" }}
+                />
+                <m.div
+                  className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl backface-hidden"
+                  style={{ y: backgroundY2, rotate: 0.01, z: 0, willChange: "transform" }}
+                />
+              </>
+            )}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] mobile-hide-bg" />
           </div>
 
