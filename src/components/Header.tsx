@@ -56,7 +56,10 @@ const Header = () => {
 
   const currentLogo = theme === "dark" ? logoWhite : logoBlack;
 
-  const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>, to: string) => {
+  const handleNavigate = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    to: string,
+  ) => {
     const button = typeof e.button === "number" ? e.button : 0;
     if (
       e.defaultPrevented ||
@@ -94,7 +97,9 @@ const Header = () => {
                 whileHover={{ rotate: 5 }}
                 transition={{ type: "spring", stiffness: 400 }}
               />
-              <span className="font-bold text-base hidden lg:block whitespace-nowrap">Create Assistants</span>
+              <span className="font-bold text-base hidden lg:block whitespace-nowrap">
+                Create Assistants
+              </span>
             </a>
           </div>
           <NavItems items={navItems} activeLink={location.pathname} />
@@ -161,7 +166,7 @@ const Header = () => {
                     "relative py-2 block font-medium transition-colors duration-200",
                     isActive
                       ? "text-accent"
-                      : "text-neutral-600 dark:text-neutral-300"
+                      : "text-neutral-600 dark:text-neutral-300",
                   )}
                 >
                   <span className="block whitespace-nowrap">{item.name}</span>
