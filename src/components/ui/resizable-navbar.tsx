@@ -134,9 +134,10 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
   const navigate = useNavigate();
 
   const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>, to: string) => {
+    const button = typeof e.button === "number" ? e.button : 0;
     if (
       e.defaultPrevented ||
-      e.button !== 0 ||
+      button !== 0 ||
       e.metaKey ||
       e.altKey ||
       e.ctrlKey ||
