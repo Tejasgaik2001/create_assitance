@@ -33,17 +33,75 @@ export const DesktopSkeletonLoader = () => (
       </div>
     </div>
 
-    {/* Hero Section Skeleton */}
-    <div className="container mx-auto px-6 py-20 space-y-8">
-      <div className="max-w-4xl mx-auto text-center space-y-6">
-        <div className="space-y-4">
-          <div className="h-12 w-full bg-muted rounded-lg animate-pulse" />
-          <div className="h-16 w-4/5 mx-auto bg-muted rounded-lg animate-pulse animation-delay-100" />
-          <div className="h-8 w-3/4 mx-auto bg-muted/70 rounded-lg animate-pulse animation-delay-200" />
+    {/* Hero Section Skeleton - Two Column Layout */}
+    <div className="container mx-auto px-6 lg:px-8 py-20">
+      <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8 lg:gap-16 items-center max-w-7xl mx-auto">
+        {/* Left Column - Text Content Skeleton */}
+        <div className="text-center lg:text-left space-y-6 sm:space-y-8 max-w-3xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
+          {/* Badge Skeleton */}
+          <div className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-accent/30">
+            <div className="w-3 h-3 sm:w-4 sm:h-4 bg-accent rounded-full animate-pulse" />
+            <div className="w-32 h-4 bg-muted rounded-md animate-pulse" />
+          </div>
+
+          {/* Headlines Skeleton */}
+          <div className="space-y-2 sm:space-y-4 flex flex-col items-center lg:items-start w-full">
+            <div className="h-10 sm:h-12 md:h-14 lg:h-16 w-full bg-muted rounded-lg animate-pulse" />
+            <div className="h-8 sm:h-10 md:h-12 lg:h-14 w-4/5 bg-muted rounded-lg animate-pulse animation-delay-100" />
+          </div>
+
+          {/* Description Skeleton */}
+          <div className="w-full max-w-xl space-y-2">
+            <div className="h-4 bg-muted/70 rounded-md animate-pulse" />
+            <div className="h-4 bg-muted/70 rounded-md animate-pulse animation-delay-100" />
+            <div className="h-4 w-3/4 bg-muted/70 rounded-md animate-pulse animation-delay-200" />
+          </div>
+
+          {/* CTA Buttons Skeleton */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <div className="h-12 sm:h-14 w-40 sm:w-48 bg-primary/20 rounded-full animate-pulse" />
+            <div className="h-12 sm:h-14 w-40 sm:w-48 bg-muted rounded-full animate-pulse animation-delay-100" />
+          </div>
+
+          {/* Trust Indicators Skeleton */}
+          <div className="flex items-center gap-4 pt-4">
+            <div className="flex -space-x-2.5">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-muted animate-pulse"
+                />
+              ))}
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-background bg-accent animate-pulse" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <div className="flex gap-1">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <div key={s} className="w-2.5 h-2.5 bg-accent rounded-full animate-pulse" />
+                ))}
+              </div>
+              <div className="h-3 w-32 bg-muted/70 rounded-md animate-pulse" />
+            </div>
+          </div>
         </div>
-        <div className="flex gap-4 justify-center">
-          <div className="h-14 w-36 bg-primary/20 rounded-lg animate-pulse" />
-          <div className="h-14 w-36 bg-muted rounded-lg animate-pulse animation-delay-100" />
+
+        {/* Right Column - Video/Image Skeleton */}
+        <div className="relative w-full">
+          <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden border border-border/40">
+            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 animate-pulse" />
+            
+            {/* Floating Stats Text - No Card Background */}
+            <div className="absolute top-16 left-4">
+              <div className="h-8 sm:h-10 lg:h-12 w-16 bg-muted rounded-md animate-pulse mb-2" />
+              <div className="h-3 w-20 bg-muted/70 rounded-md animate-pulse" />
+            </div>
+
+            {/* Glowing corner accent */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/30 to-transparent rounded-[3rem] blur-xl animate-pulse" />
+          </div>
+
+          {/* Background decoration */}
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/30 rounded-full blur-3xl animate-pulse" />
         </div>
       </div>
     </div>
