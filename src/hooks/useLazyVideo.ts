@@ -87,15 +87,81 @@ export const useLazyVideo = (options: UseLazyVideoOptions = {}): UseLazyVideoRet
                 });
             }
 
-            // iOS Safari requires muted + playsInline for autoplay
-            video.muted = true;
+            // Set required attributes for mobile playback
             video.setAttribute('playsinline', 'true');
             video.setAttribute('webkit-playsinline', 'true');
 
-            await video.play();
-            setIsPlaying(true);
+            // Check if Safari
+            const isSafariBrowser = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            
+            if (isSafariBrowser) {
+                // Safari: Always muted for autoplay
+                video.muted = true;
+                
+                try {
+                    await video.play();
+                    setIsPlaying(true);
+                    console.log('Safari: Video playing muted successfully');
+                } catch (safariError) {
+                    console.warn('Safari autoplay failed, trying fallback:', safariError);
+                    
+                    // Fallback 1: Try with different attributes
+                    video.setAttribute('muted', 'true');
+                    video.setAttribute('autoplay', 'true');
+                    
+                    try {
+                        await video.play();
+                        setIsPlaying(true);
+                        console.log('Safari: Fallback autoplay successful');
+                    } catch (fallbackError) {
+                        console.warn('Safari fallback failed, adding user interaction listener:', fallbackError);
+                        
+                        // Fallback 2: Add user interaction listener
+                        const playOnInteraction = () => {
+                            video.muted = true;
+                            video.play().then(() => {
+                                setIsPlaying(true);
+                                console.log('Safari: Video started after user interaction');
+                            }).catch(e => console.log('Safari: Even interaction failed:', e));
+                            
+                            // Remove listeners after first successful play
+                            document.removeEventListener('touchstart', playOnInteraction);
+                            document.removeEventListener('click', playOnInteraction);
+                        };
+                        
+                        // Listen for user interaction
+                        document.addEventListener('touchstart', playOnInteraction, { once: true });
+                        document.addEventListener('click', playOnInteraction, { once: true });
+                        
+                        // Try one more time with muted
+                        video.muted = true;
+                        await video.play().catch(() => {
+                            console.log('Safari: All autoplay attempts failed, waiting for user interaction');
+                        });
+                    }
+                }
+            } else {
+                // Non-Safari browsers: try with sound first
+                video.muted = false;
+                
+                try {
+                    await video.play();
+                    setIsPlaying(true);
+                } catch (soundError) {
+                    // If autoplay with sound is blocked, try muted autoplay
+                    console.log('Autoplay with sound blocked, trying muted autoplay');
+                    video.muted = true;
+                    await video.play();
+                    setIsPlaying(true);
+                    
+                    // Let user know they can unmute using native controls
+                    setTimeout(() => {
+                        console.log('Video is playing muted. Use volume controls to enable audio.');
+                    }, 1000);
+                }
+            }
         } catch (error) {
-            console.warn('Video autoplay blocked:', error);
+            console.warn('Video play failed:', error);
             setIsPlaying(false);
         }
     };
