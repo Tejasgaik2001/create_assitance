@@ -548,7 +548,7 @@ const WhyCreateAssistants = () => {
             >
               <span className="text-accent font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
               <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter">
-                THE <span className="text-gradient px-2">TEAM</span>
+                THE <span className="text-gradient px-2" style={{ "--safari-fallback": "0 0% 100%" } as any}>TEAM</span>
               </h2>
             </m.div>
           </div>
@@ -557,7 +557,7 @@ const WhyCreateAssistants = () => {
           <div className="lg:hidden w-full px-6 py-24 z-10 bg-slate-950 relative">
             <div className="text-center mb-16">
               <span className="text-accent font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
-              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-gradient px-2">Team</span></h2>
+              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-gradient px-2" style={{ "--safari-fallback": "0 0% 100%" } as any}>Team</span></h2>
               <div className="h-px w-12 bg-accent/30 mx-auto" />
             </div>
 
@@ -617,7 +617,11 @@ const ProcessItem = ({ item, index }: { item: any; index: number }) => {
   const Icon = item.icon;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
   };
 
   return (
@@ -667,7 +671,7 @@ const ProcessItem = ({ item, index }: { item: any; index: number }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
-            className="fixed pointer-events-none z-50 hidden md:block w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
+            className="absolute pointer-events-none z-50 hidden md:block w-48 h-32 md:w-64 md:h-44 rounded-xl overflow-hidden shadow-2xl border border-border/50"
             style={{ left: mousePos.x + 20, top: mousePos.y - 80 }}
           >
             <img src={item.image} alt={item.title} loading="lazy" className="w-full h-full object-cover" />
