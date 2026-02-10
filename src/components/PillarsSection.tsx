@@ -138,8 +138,10 @@ const PillarsSection = () => {
 
   return (
     <section ref={ref} id="product" className="min-h-screen w-full flex items-center justify-center bg-muted/30 relative overflow-hidden py-24 sm:py-32">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.08)_0%,transparent_50%)] pointer-events-none" />
+      {/* Background decoration - desktop only */}
+      {!isMobile && (
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.08)_0%,transparent_50%)] pointer-events-none" />
+      )}
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}

@@ -23,7 +23,6 @@ const MobileTeamMember = ({ member }: { member: any }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <m.div
-      layout
       onClick={() => setIsExpanded(!isExpanded)}
       className="flex flex-col items-center text-center p-8 rounded-[3rem] bg-white/5 border border-white/10 transition-all duration-300 w-full mb-6 cursor-pointer"
     >
@@ -422,14 +421,17 @@ const WhyCreateAssistants = () => {
 
         {/* Process Section */}
         <div className="py-24 w-full flex items-center justify-center bg-background relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <m.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/15 rounded-full blur-3xl"
-              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] mobile-hide-bg" />
-          </div>
+          {/* Background effects - desktop only */}
+          {!isMobile && (
+            <div className="absolute inset-0 pointer-events-none">
+              <m.div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/15 rounded-full blur-3xl"
+                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] mobile-hide-bg" />
+            </div>
+          )}
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-16">
@@ -451,10 +453,13 @@ const WhyCreateAssistants = () => {
 
         {/* Values Section */}
         <div className="py-32 w-full flex items-center justify-center bg-[#FDFCFB] dark:bg-[#030614] relative overflow-hidden transition-colors duration-500">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] dark:bg-accent/10" />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40 mobile-hide-bg" />
-          </div>
+          {/* Background effects - desktop only */}
+          {!isMobile && (
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] dark:bg-accent/10" />
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-40 mobile-hide-bg" />
+            </div>
+          )}
 
           <div className="container mx-auto px-4 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-20">
@@ -543,7 +548,7 @@ const WhyCreateAssistants = () => {
             >
               <span className="text-accent font-bold tracking-[0.5em] uppercase text-[10px] mb-3 block">Infinite Evolution</span>
               <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter">
-                THE <span className="text-gradient">TEAM</span>
+                THE <span className="text-gradient px-2">TEAM</span>
               </h2>
             </m.div>
           </div>
@@ -552,7 +557,7 @@ const WhyCreateAssistants = () => {
           <div className="lg:hidden w-full px-6 py-24 z-10 bg-slate-950 relative">
             <div className="text-center mb-16">
               <span className="text-accent font-bold tracking-[0.2em] uppercase text-[10px] mb-2 block opacity-60">The Collective</span>
-              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-gradient">Team</span></h2>
+              <h2 className="text-4xl font-black text-white italic mb-2">The <span className="text-gradient px-2">Team</span></h2>
               <div className="h-px w-12 bg-accent/30 mx-auto" />
             </div>
 
@@ -566,13 +571,16 @@ const WhyCreateAssistants = () => {
 
         {/* Partnership/CTA */}
         <div className="py-24 w-full flex items-center justify-center bg-background relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <m.div
-              className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-50"
-              animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </div>
+          {/* Background effects - desktop only */}
+          {!isMobile && (
+            <div className="absolute inset-0 pointer-events-none">
+              <m.div
+                className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl opacity-50"
+                animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </div>
+          )}
 
           <div className="container mx-auto px-4 text-center relative z-10">
             <AnimatedSection direction="up" className="max-w-3xl mx-auto">
