@@ -261,7 +261,8 @@ const WhatYouGet = () => {
               <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/15 to-transparent opacity-30" />
             )}
           </div>
-          
+
+
           <div className="container mx-auto px-4 relative z-10">
             {disableMotion ? (
               <div className="text-center max-w-3xl mx-auto">

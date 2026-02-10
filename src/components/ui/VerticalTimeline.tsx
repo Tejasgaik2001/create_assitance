@@ -263,7 +263,7 @@ export const VerticalTimeline = ({ steps }: VerticalTimelineProps) => {
                                     <m.div
                                         initial={{ scale: 0 }}
                                         whileInView={{ scale: 1 }}
-                                        viewport={{ once: false, margin: "-100px" }}
+                                        viewport={{ once: true, margin: "0px" }}
                                         transition={{
                                             type: "spring",
                                             stiffness: 200,
