@@ -56,7 +56,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
         damping: 15,
         delay: index * 0.15
       }}
-      whileHover={{
+      whileHover={isMobile ? {} : {
         y: -10,
         scale: 1.02,
         transition: { type: "spring", stiffness: 400, damping: 15 }
@@ -87,7 +87,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
           {/* Number and Icon Header */}
           <div className="flex sm:flex-col items-center sm:items-start justify-between sm:justify-start mb-6 sm:mb-0">
             <m.span
-              whileHover={{ scale: 1.05 }}
+              whileHover={isMobile ? {} : { scale: 1.05 }}
               className={isMobile
                 ? "inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-bold text-accent shadow-md sm:mb-6"
                 : "inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 text-2xl font-bold text-accent shadow-md backdrop-blur-sm sm:mb-6"
@@ -97,7 +97,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
             </m.span>
 
             <m.div
-              whileHover={{
+              whileHover={isMobile ? {} : {
                 scale: 1.1,
                 rotate: 5,
                 transition: { type: "spring", stiffness: 400, damping: 10 }
@@ -122,7 +122,7 @@ const PillarCard = ({ pillar, index, isSectionInView }: { pillar: typeof pillars
           {/* Bottom accent line */}
           <m.div
             initial={{ scaleX: 0 }}
-            whileHover={{ scaleX: 1 }}
+            whileHover={isMobile ? {} : { scaleX: 1 }}
             className="mt-6 h-1 bg-gradient-to-r from-primary to-accent rounded-full origin-left"
           />
         </div>
