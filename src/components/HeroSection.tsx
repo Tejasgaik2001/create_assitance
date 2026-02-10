@@ -319,38 +319,38 @@ const HeroSection = () => {
                 ref={videoRef}
                 data-src={heroVideo}
                 poster={heroPoster}
+                muted
                 loop
                 playsInline
                 webkit-playsinline="true"
                 preload="none"
                 controls
                 autoPlay
-                muted
-                className="w-full h-full object-cover relative z-10"
+                className={`w-full h-full object-cover relative ${isMobile ? 'z-50' : 'z-0'}`}
               />
 
-             
-
-              {/* Floating Stats Card - Enhanced - Moved to top to avoid controls */}
-              <m.div
-                animate={shouldAnimate ? {
-                  y: [0, -12, 0],
-                  rotate: [-1, 1, -1]
-                } : {}}
-                transition={shouldAnimate ? { duration: 5, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
-                whileHover={{ scale: 1.05, y: -8 }}
-                className="absolute top-16 left-4 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all flex z-0"
-              >
-                <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
-                <div className="relative">
-                  <p className="text-3xl sm:text-5xl lg:text-6xl font-bold text-accent tracking-tighter mb-1 drop-shadow-lg">
-                    24/7
-                  </p>
-                  <p className="text-xs font-bold text-foreground/70 uppercase tracking-widest leading-none">
-                    COVERAGE
-                  </p>
-                </div>
-              </m.div>
+              {/* Floating Stats Card - Enhanced - Hidden on mobile for better video control access */}
+              {!isMobile && (
+                <m.div
+                  animate={shouldAnimate ? {
+                    y: [0, -12, 0],
+                    rotate: [-1, 1, -1]
+                  } : {}}
+                  transition={shouldAnimate ? { duration: 5, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
+                  whileHover={{ scale: 1.05, y: -8 }}
+                  className="absolute top-16 left-4 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all flex z-20"
+                >
+                  <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
+                  <div className="relative">
+                    <p className="text-3xl sm:text-5xl lg:text-6xl font-bold text-accent tracking-tighter mb-1 drop-shadow-lg">
+                      24/7
+                    </p>
+                    <p className="text-xs font-bold text-foreground/70 uppercase tracking-widest leading-none">
+                      COVERAGE
+                    </p>
+                  </div>
+                </m.div>
+              )}
 
               {/* Glowing corner accent */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/30 to-transparent rounded-[3rem] blur-xl" />
