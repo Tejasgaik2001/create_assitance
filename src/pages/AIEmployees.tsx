@@ -285,23 +285,27 @@ const AIEmployees = () => {
         {/* Hero Header */}
         <div className="text-center max-w-4xl mx-auto mb-24">
           <m.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
+            initial={isMobile ? {} : { opacity: 0, scale: 0.8 }}
+            whileInView={isMobile ? {} : { opacity: 1, scale: 1 }}
+            transition={isMobile ? {} : { duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6"
           >
-            <m.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-2 h-2 rounded-full bg-accent"
-            />
+            {!isMobile ? (
+              <m.span
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="w-2 h-2 rounded-full bg-accent"
+              />
+            ) : (
+              <span className="w-2 h-2 rounded-full bg-accent" />
+            )}
             <span className="text-xs font-bold text-accent uppercase tracking-widest">The Customer Journey</span>
           </m.div>
 
           <m.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={isMobile ? {} : { opacity: 0, y: 40 }}
+            whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+            transition={isMobile ? {} : { duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white mb-6 leading-tight"
           >
             How <span className="text-gradient">AI Employees</span>
@@ -309,9 +313,9 @@ const AIEmployees = () => {
           </m.h2>
 
           <m.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={isMobile ? {} : { opacity: 0, y: 30 }}
+            whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+            transition={isMobile ? {} : { duration: 0.6, delay: 0.4 }}
             className="text-sm sm:text-base lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto font-medium"
           >
             Follow the journey of a customer interaction — from first contact to completed transaction
@@ -322,12 +326,16 @@ const AIEmployees = () => {
         <div className="relative max-w-6xl mx-auto">
           {/* Central Journey Line */}
           <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2">
-            <m.div
-              initial={{ scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-              className="w-full h-full bg-gradient-to-b from-accent/20 via-accent to-accent/20 origin-top rounded-full"
-            />
+            {!isMobile ? (
+              <m.div
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className="w-full h-full bg-gradient-to-b from-accent/20 via-accent to-accent/20 origin-top rounded-full"
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-b from-accent/20 via-accent to-accent/20 rounded-full" />
+            )}
           </div>
 
           {/* Journey Steps */}
@@ -345,10 +353,10 @@ const AIEmployees = () => {
             return (
               <m.div
                 key={item.title}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={isMobile ? {} : { opacity: 0, y: 60 }}
+                whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: index * 0.15 }}
+                transition={isMobile ? {} : { duration: 0.8, delay: index * 0.15 }}
                 className={`relative flex items-center mb-16 lg:mb-24 ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
               >
                 {/* Timeline Node - Desktop */}
@@ -388,9 +396,9 @@ const AIEmployees = () => {
 
                     {/* Story Prefix */}
                     <m.p
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ delay: 0.3 + index * 0.1 }}
+                      initial={isMobile ? {} : { opacity: 0 }}
+                      whileInView={isMobile ? {} : { opacity: 1 }}
+                      transition={isMobile ? {} : { delay: 0.3 + index * 0.1 }}
                       className="text-accent font-semibold text-sm mb-2 italic"
                     >
                       {storyPrefixes[index]}
@@ -435,19 +443,26 @@ const AIEmployees = () => {
 
           {/* Journey End */}
           <m.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
+            initial={isMobile ? {} : { opacity: 0, scale: 0.8 }}
+            whileInView={isMobile ? {} : { opacity: 1, scale: 1 }}
+            transition={isMobile ? {} : { duration: 0.6 }}
             className="text-center mt-16"
           >
-            <m.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent text-accent-foreground font-bold shadow-xl shadow-accent/30"
-            >
-              <CheckCircle className="w-5 h-5" />
-              Customer Converted Successfully
-            </m.div>
+            {!isMobile ? (
+              <m.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent text-accent-foreground font-bold shadow-xl shadow-accent/30"
+              >
+                <CheckCircle className="w-5 h-5" />
+                Customer Converted Successfully
+              </m.div>
+            ) : (
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-accent text-accent-foreground font-bold shadow-xl shadow-accent/30">
+                <CheckCircle className="w-5 h-5" />
+                Customer Converted Successfully
+              </div>
+            )}
           </m.div>
         </div>
       </div>
