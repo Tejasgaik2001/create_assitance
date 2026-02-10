@@ -104,63 +104,47 @@ const AIEmployees = () => {
   const sections = [
     // Hero Section - Revamped for SaaS Standard
     <section key="hero" className="relative overflow-x-hidden pt-24 pb-16 min-h-screen flex items-center bg-white dark:bg-[#020617]">
-      {/* Enhanced Background decoration from HeroSection */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Gradient orbs - animated on desktop, static on mobile */}
-        {!isMobile ? (
-          <>
-            <m.div
-              animate={{
-                x: [0, 50, 0],
-                y: [0, 30, 0],
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3]
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
-            />
-            <m.div
-              animate={{
-                x: [0, -40, 0],
-                y: [0, -25, 0],
-                scale: [1, 1.15, 1],
-                opacity: [0.2, 0.4, 0.2]
-              }}
-              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
-            />
-          </>
-        ) : (
-          <>
-            <div className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-20" />
-            <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl opacity-15" />
-          </>
-        )}
+      {/* Enhanced Background decoration - desktop only, completely hidden on mobile */}
+      {!isMobile && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Gradient orbs */}
+          <m.div
+            animate={{
+              x: [0, 50, 0],
+              y: [0, 30, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+          />
+          <m.div
+            animate={{
+              x: [0, -40, 0],
+              y: [0, -25, 0],
+              scale: [1, 1.15, 1],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+          />
 
-        {/* Premium grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
+          {/* Premium grid pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
 
-        {/* Data lines - animated on desktop, static on mobile */}
-        {!isMobile ? (
-          <>
-            <m.div
-              animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-              className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"
-            />
-            <m.div
-              animate={{ x: [100, -100], opacity: [0, 1, 0] }}
-              transition={{ duration: 7, repeat: Infinity, ease: "linear", delay: 1 }}
-              className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent"
-            />
-          </>
-        ) : (
-          <>
-            <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-30" />
-            <div className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/15 to-transparent opacity-30" />
-          </>
-        )}
-      </div>
+          {/* Data lines */}
+          <m.div
+            animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+          />
+          <m.div
+            animate={{ x: [100, -100], opacity: [0, 1, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "linear", delay: 1 }}
+            className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/20 to-transparent"
+          />
+        </div>
+      )}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-8 xl:gap-16 items-center">
@@ -278,31 +262,24 @@ const AIEmployees = () => {
 
     // What Are AI Employees - Story-Based Journey
     <div key="what" className="w-full bg-slate-50 dark:bg-slate-950 relative overflow-hidden py-24 lg:py-40">
-      {/* Background Decorations */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-[0.02]"
-          style={{ backgroundImage: 'radial-gradient(#6366f1 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-        {/* Blur orbs - animated on desktop, static on mobile */}
-        {!isMobile ? (
-          <>
-            <m.div
-              animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.25, 0.15] }}
-              transition={{ duration: 10, repeat: Infinity }}
-              className="absolute top-[5%] left-[5%] w-[50%] h-[50%] bg-accent/30 blur-[150px] rounded-full"
-            />
-            <m.div
-              animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }}
-              transition={{ duration: 12, repeat: Infinity }}
-              className="absolute bottom-[5%] right-[5%] w-[40%] h-[40%] bg-primary/25 blur-[130px] rounded-full"
-            />
-          </>
-        ) : (
-          <>
-            <div className="absolute top-[5%] left-[5%] w-[50%] h-[50%] bg-accent/20 blur-3xl rounded-full opacity-15" />
-            <div className="absolute bottom-[5%] right-[5%] w-[40%] h-[40%] bg-primary/15 blur-3xl rounded-full opacity-10" />
-          </>
-        )}
-      </div>
+      {/* Background Decorations - desktop only, completely hidden on mobile */}
+      {!isMobile && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full opacity-[0.02]"
+            style={{ backgroundImage: 'radial-gradient(#6366f1 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+          {/* Blur orbs */}
+          <m.div
+            animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.25, 0.15] }}
+            transition={{ duration: 10, repeat: Infinity }}
+            className="absolute top-[5%] left-[5%] w-[50%] h-[50%] bg-accent/30 blur-[150px] rounded-full"
+          />
+          <m.div
+            animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.2, 0.1] }}
+            transition={{ duration: 12, repeat: Infinity }}
+            className="absolute bottom-[5%] right-[5%] w-[40%] h-[40%] bg-primary/25 blur-[130px] rounded-full"
+          />
+        </div>
+      )}
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Hero Header */}
@@ -617,30 +594,23 @@ const AIEmployees = () => {
 
       return (
         <div key="features-showcase" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden py-24 lg:py-32">
-          {/* Background - animated on desktop, static on mobile */}
-          <div className="absolute inset-0 pointer-events-none">
-            {!isMobile ? (
-              <>
-                <m.div
-                  animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-                  transition={{ duration: 15, repeat: Infinity }}
-                  className="absolute top-0 left-0 w-[60%] h-[60%] bg-accent/20 blur-[200px] rounded-full"
-                />
-                <m.div
-                  animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
-                  transition={{ duration: 20, repeat: Infinity }}
-                  className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-500/20 blur-[180px] rounded-full"
-                />
-              </>
-            ) : (
-              <>
-                <div className="absolute top-0 left-0 w-[60%] h-[60%] bg-accent/15 blur-3xl rounded-full opacity-10" />
-                <div className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-500/10 blur-3xl rounded-full opacity-5" />
-              </>
-            )}
-            {/* Film grain overlay */}
-            <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />
-          </div>
+          {/* Background - desktop only, completely hidden on mobile */}
+          {!isMobile && (
+            <div className="absolute inset-0 pointer-events-none">
+              <m.div
+                animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+                transition={{ duration: 15, repeat: Infinity }}
+                className="absolute top-0 left-0 w-[60%] h-[60%] bg-accent/20 blur-[200px] rounded-full"
+              />
+              <m.div
+                animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
+                transition={{ duration: 20, repeat: Infinity }}
+                className="absolute bottom-0 right-0 w-[50%] h-[50%] bg-indigo-500/20 blur-[180px] rounded-full"
+              />
+              {/* Film grain overlay */}
+              <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />
+            </div>
+          )}
 
           <div className="container mx-auto px-4 relative z-10">
             {/* Header */}

@@ -250,17 +250,14 @@ const WhatYouGet = () => {
             {/* Premium grid pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
 
-            {/* Data lines - animated on desktop, static on mobile */}
-            {!isMobile ? (
-              <m.div
-                animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"
-              />
-            ) : (
-              <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/15 to-transparent opacity-30" />
-            )}
+            {/* Data lines */}
+            <m.div
+              animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+              className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+            />
           </div>
+          )}
 
           <div className="container mx-auto px-4 relative z-10">
             {disableMotion ? (
@@ -464,69 +461,69 @@ const WhatYouGet = () => {
                 transition={{ duration: 0.8 }}
                 className="text-center max-w-5xl mx-auto"
               >
-              <h2 className="section-headline mb-4">
-                Why It <span className="text-gradient">Matters</span>
-              </h2>
-              <p className="body-large text-lg text-muted-foreground mb-16">
-                More than a toolkit. A complete operating system for growth.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                {[
-                  {
-                    title: "Unified Software",
-                    desc: "Consolidate every tool into one central hub.",
-                    icon: Layers3,
-                    color: "primary"
-                  },
-                  {
-                    title: "AI Employees",
-                    desc: "Scale your capacity with 24/7 intelligent agents.",
-                    icon: BrainCircuit,
-                    color: "accent"
-                  },
-                  {
-                    title: "White-Glove Service",
-                    desc: "Hands-on Iowa-based support at every step.",
-                    icon: Headphones,
-                    color: "primary"
-                  }
-                ].map((item, i) => (
-                  <m.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    whileHover={{ y: -8 }}
-                    className="relative group p-8 rounded-3xl bg-background border border-border/50 shadow-xl dark:shadow-none hover:border-accent/30 transition-all duration-300"
-                  >
-                    <div className={cn(
-                      "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-500 group-hover:scale-110",
-                      item.color === "primary" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
-                    )}>
-                      <item.icon size={32} />
-                    </div>
-                    <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                    <p className="text-muted-foreground text-sm font-medium leading-relaxed">
-                      {item.desc}
-                    </p>
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
-                  </m.div>
-                ))}
-              </div>
-
-              <m.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-                className="p-8 rounded-[2rem] bg-accent/5 border border-accent/20 backdrop-blur-sm"
-              >
-                <p className="text-lg md:text-xl text-foreground font-medium leading-relaxed">
-                  By combining these three pillars, you get <span className="text-accent font-bold">more than a toolkit</span>. You get a complete operating system designed to capture every opportunity and grow with you.
+                <h2 className="section-headline mb-4">
+                  Why It <span className="text-gradient">Matters</span>
+                </h2>
+                <p className="body-large text-lg text-muted-foreground mb-16">
+                  More than a toolkit. A complete operating system for growth.
                 </p>
-              </m.div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                  {[
+                    {
+                      title: "Unified Software",
+                      desc: "Consolidate every tool into one central hub.",
+                      icon: Layers3,
+                      color: "primary"
+                    },
+                    {
+                      title: "AI Employees",
+                      desc: "Scale your capacity with 24/7 intelligent agents.",
+                      icon: BrainCircuit,
+                      color: "accent"
+                    },
+                    {
+                      title: "White-Glove Service",
+                      desc: "Hands-on Iowa-based support at every step.",
+                      icon: Headphones,
+                      color: "primary"
+                    }
+                  ].map((item, i) => (
+                    <m.div
+                      key={item.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      whileHover={{ y: -8 }}
+                      className="relative group p-8 rounded-3xl bg-background border border-border/50 shadow-xl dark:shadow-none hover:border-accent/30 transition-all duration-300"
+                    >
+                      <div className={cn(
+                        "w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-500 group-hover:scale-110",
+                        item.color === "primary" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
+                      )}>
+                        <item.icon size={32} />
+                      </div>
+                      <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm font-medium leading-relaxed">
+                        {item.desc}
+                      </p>
+                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl" />
+                    </m.div>
+                  ))}
+                </div>
+
+                <m.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                  className="p-8 rounded-[2rem] bg-accent/5 border border-accent/20 backdrop-blur-sm"
+                >
+                  <p className="text-lg md:text-xl text-foreground font-medium leading-relaxed">
+                    By combining these three pillars, you get <span className="text-accent font-bold">more than a toolkit</span>. You get a complete operating system designed to capture every opportunity and grow with you.
+                  </p>
+                </m.div>
               </m.div>
             )}
           </div>

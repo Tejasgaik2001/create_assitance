@@ -529,41 +529,34 @@ const CommandCenter = () => {
     // Hero Section - Command Center Style
     <section key="hero" className="min-h-screen w-full flex items-center justify-center relative overflow-hidden pt-16 pb-12 lg:pt-0 lg:pb-0 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       {/* Enhanced Background decoration from HeroSection */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Gradient orbs - animated on desktop, static on mobile */}
-        {!isMobile ? (
-          <>
-            <m.div
-              animate={{
-                x: [0, 50, 0],
-                y: [0, 30, 0],
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3]
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
-            />
-            <m.div
-              animate={{
-                x: [0, -40, 0],
-                y: [0, -25, 0],
-                scale: [1, 1.15, 1],
-                opacity: [0.2, 0.4, 0.2]
-              }}
-              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
-            />
-          </>
-        ) : (
-          <>
-            <div className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-20" />
-            <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl opacity-15" />
-          </>
-        )}
+      {!isMobile && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Gradient orbs - desktop only */}
+          <m.div
+            animate={{
+              x: [0, 50, 0],
+              y: [0, 30, 0],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+          />
+          <m.div
+            animate={{
+              x: [0, -40, 0],
+              y: [0, -25, 0],
+              scale: [1, 1.15, 1],
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+          />
 
-        {/* Premium grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
-      </div>
+          {/* Premium grid pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
+        </div>
+      )}
 
       <div className="container mx-auto px-4 relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
@@ -681,38 +674,31 @@ const CommandCenter = () => {
 
     // Unified CRM & Marketing Hub
     <section key="features" className="min-h-screen lg:min-h-screen w-full flex items-center justify-center py-16 lg:py-24 relative overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500">
-      {/* Gradient Background - animated on desktop, static on mobile */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {!isMobile ? (
-          <>
-            <m.div
-              animate={{
-                x: [0, 30, 0],
-                y: [0, 20, 0],
-                scale: [1, 1.15, 1],
-                opacity: [0.15, 0.25, 0.15]
-              }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-[100px]"
-            />
-            <m.div
-              animate={{
-                x: [0, -25, 0],
-                y: [0, -15, 0],
-                scale: [1.1, 1, 1.1],
-                opacity: [0.1, 0.2, 0.1]
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-[120px]"
-            />
-          </>
-        ) : (
-          <>
-            <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-3xl opacity-10" />
-            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-3xl opacity-5" />
-          </>
-        )}
-      </div>
+      {/* Gradient Background - desktop only, completely hidden on mobile */}
+      {!isMobile && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <m.div
+            animate={{
+              x: [0, 30, 0],
+              y: [0, 20, 0],
+              scale: [1, 1.15, 1],
+              opacity: [0.15, 0.25, 0.15]
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 via-accent/20 to-transparent rounded-full blur-[100px]"
+          />
+          <m.div
+            animate={{
+              x: [0, -25, 0],
+              y: [0, -15, 0],
+              scale: [1.1, 1, 1.1],
+              opacity: [0.1, 0.2, 0.1]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-accent/20 via-primary/15 to-transparent rounded-full blur-[120px]"
+          />
+        </div>
+      )}
 
       <div className="container mx-auto px-4 relative z-10">
         <AnimatedSection direction="up" className="text-center mb-16">
