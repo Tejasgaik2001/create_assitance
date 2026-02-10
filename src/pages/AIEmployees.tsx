@@ -371,7 +371,7 @@ const AIEmployees = () => {
                 {/* Content Card */}
                 <div className={`w-full lg:w-[calc(50%-4rem)] ${isLeft ? 'lg:pr-8' : 'lg:pl-8'}`}>
                   <m.div
-                    whileHover={{ y: -8, scale: 1.02 }}
+                    whileHover={isMobile ? {} : { y: -8, scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                     className="relative bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl group"
                   >
@@ -380,13 +380,9 @@ const AIEmployees = () => {
 
                     {/* Mobile Icon */}
                     <div className="lg:hidden mb-6 flex items-center justify-between">
-                      <m.div
-                        animate={{ rotate: [0, 5, -5, 0] }}
-                        transition={{ duration: 4, repeat: Infinity }}
-                        className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-amber-400 flex items-center justify-center shadow-lg"
-                      >
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-amber-400 flex items-center justify-center shadow-lg">
                         <Icon className="w-7 h-7 text-white" />
-                      </m.div>
+                      </div>
                       <div className="text-3xl font-black text-accent/20">0{index + 1}</div>
                     </div>
 
@@ -417,13 +413,19 @@ const AIEmployees = () => {
 
                     {/* Connector Arrow */}
                     <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 ${isLeft ? '-right-8' : '-left-8'}`}>
-                      <m.div
-                        animate={{ x: isLeft ? [0, 5, 0] : [0, -5, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        className={`w-8 h-8 flex items-center justify-center`}
-                      >
-                        <ArrowRight className={`w-5 h-5 text-accent ${isLeft ? '' : 'rotate-180'}`} />
-                      </m.div>
+                      {!isMobile ? (
+                        <m.div
+                          animate={{ x: isLeft ? [0, 5, 0] : [0, -5, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                          className={`w-8 h-8 flex items-center justify-center`}
+                        >
+                          <ArrowRight className={`w-5 h-5 text-accent ${isLeft ? '' : 'rotate-180'}`} />
+                        </m.div>
+                      ) : (
+                        <div className={`w-8 h-8 flex items-center justify-center`}>
+                          <ArrowRight className={`w-5 h-5 text-accent ${isLeft ? '' : 'rotate-180'}`} />
+                        </div>
+                      )}
                     </div>
                   </m.div>
                 </div>
