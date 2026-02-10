@@ -610,7 +610,7 @@ const CommandCenter = () => {
                   src={dashboardMockup}
                   alt="Command Center Dashboard"
                   loading="lazy"
-                  className="w-full h-auto max-h-[450px] lg:max-h-[550px] object-contain"
+                  className="w-full h-auto max-h-[40vh] xl:max-h-[50vh] object-contain"
                 />
               </div>
 

@@ -67,7 +67,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontSize: {
-        '6xl': "3.5rem"
+        '6xl': "3.25rem"
 
       },
       keyframes: {
