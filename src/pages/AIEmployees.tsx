@@ -456,10 +456,13 @@ const AIEmployees = () => {
     // 24/7 Responses
     <div key="247" className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-indigo-50 dark:from-slate-950 to-white dark:to-slate-900 text-slate-900 dark:text-white relative overflow-x-hidden py-20 lg:py-32">
       {/* Dark theme background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 -right-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl opacity-30" />
-        <div className="absolute bottom-1/4 -left-24 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl opacity-30" />
-      </div>
+      {/* Background effects - desktop only */}
+      {!isMobile && (
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 -right-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl opacity-30" />
+          <div className="absolute bottom-1/4 -left-24 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl opacity-30" />
+        </div>
+      )}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -635,7 +638,7 @@ const AIEmployees = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight"
               >
-                The <span className="text-gradient">AI Advantage</span>
+                The <span className="text-gradient px-2" style={{ "--safari-fallback": "0 0% 100%" } as any}>AI Advantage</span>
               </m.h2>
             </div>
 
