@@ -250,12 +250,16 @@ const WhatYouGet = () => {
             {/* Premium grid pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
 
-            {/* Data lines */}
-            <m.div
-              animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-              className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"
-            />
+            {/* Data lines - animated on desktop, static on mobile */}
+            {!isMobile ? (
+              <m.div
+                animate={{ x: [-100, 100], opacity: [0, 1, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+              />
+            ) : (
+              <div className="absolute top-[20%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/15 to-transparent opacity-30" />
+            )}
           </div>
 
 
