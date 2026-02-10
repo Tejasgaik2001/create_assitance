@@ -153,8 +153,8 @@ const HeroSection = () => {
                 <span className="text-gradient uppercase drop-shadow-2xl">
                   Automate
                 </span>
-                <span className="text-gradient italic font-light opacity-60">
-                  &
+                <span className="text-gradient italic font-light opacity-60 px-2">
+                  &{" "}
                 </span>
                 <span className="text-gradient uppercase drop-shadow-2xl">
                   Scale
@@ -364,18 +364,20 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Enhanced Scroll Indicator */}
-      <m.div
-        animate={{ y: [0, 12, 0] }}
-        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-        onClick={() => document.getElementById("intro")?.scrollIntoView({ behavior: isSafari() ? "auto" : "smooth" })}
-        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none z-20 group"
-      >
-        <div className="w-px h-16 sm:h-20 bg-gradient-to-b from-primary via-accent to-transparent group-hover:from-accent group-hover:via-primary transition-colors" />
-        <span className="text-[9px] font-bold uppercase tracking-[0.4em] rotate-180 [writing-mode:vertical-lr] text-muted-foreground group-hover:text-accent font-montserrat">
-          Scroll
-        </span>
-      </m.div>
+      {/* Enhanced Scroll Indicator - Desktop only */}
+      {!isMobile && (
+        <m.div
+          animate={{ y: [0, 12, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          onClick={() => document.getElementById("intro")?.scrollIntoView({ behavior: isSafari() ? "auto" : "smooth" })}
+          className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40 hover:opacity-100 hover:scale-110 active:scale-95 transition-all cursor-pointer select-none z-20 group"
+        >
+          <div className="w-px h-16 sm:h-20 bg-gradient-to-b from-primary via-accent to-transparent group-hover:from-accent group-hover:via-primary transition-colors" />
+          <span className="text-[9px] font-bold uppercase tracking-[0.4em] rotate-180 [writing-mode:vertical-lr] text-muted-foreground group-hover:text-accent font-montserrat">
+            Scroll
+          </span>
+        </m.div>
+      )}
 
 
     </section>
