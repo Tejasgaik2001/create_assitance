@@ -193,39 +193,33 @@ const WhyCreateAssistants = () => {
       <main>
         {/* Hero Section */}
         <div className="min-h-[90vh] w-full flex items-center justify-center relative bg-background overflow-hidden pt-20">
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Gradient orbs - animated on desktop, static on mobile */}
-            {!isMobile ? (
-              <>
-                <m.div
-                  animate={{
-                    x: [0, 50, 0],
-                    y: [0, 30, 0],
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.5, 0.3]
-                  }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
-                />
-                <m.div
-                  animate={{
-                    x: [0, -40, 0],
-                    y: [0, -25, 0],
-                    scale: [1, 1.15, 1],
-                    opacity: [0.2, 0.4, 0.2]
-                  }}
-                  transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
-                />
-              </>
-            ) : (
-              <>
-                <div className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-20" />
-                <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl opacity-15" />
-              </>
-            )}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
-          </div>
+          {/* Background effects - desktop only, completely hidden on mobile */}
+          {!isMobile && (
+            <div className="absolute inset-0 pointer-events-none">
+              {/* Gradient orbs */}
+              <m.div
+                animate={{
+                  x: [0, 50, 0],
+                  y: [0, 30, 0],
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3]
+                }}
+                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
+              />
+              <m.div
+                animate={{
+                  x: [0, -40, 0],
+                  y: [0, -25, 0],
+                  scale: [1, 1.15, 1],
+                  opacity: [0.2, 0.4, 0.2]
+                }}
+                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-[120px]"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] opacity-20 mobile-hide-bg" />
+            </div>
+          )}
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
@@ -282,18 +276,16 @@ const WhyCreateAssistants = () => {
 
         {/* Why Choose Section (Orbital Satellite Grid) */}
         <div className="py-16 w-full bg-background relative overflow-hidden min-h-[700px] flex items-center justify-center">
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Orbital blur - animated on desktop, static on mobile */}
-            {!isMobile ? (
+          {/* Orbital blur - desktop only, completely hidden on mobile */}
+          {!isMobile && (
+            <div className="absolute inset-0 pointer-events-none">
               <m.div
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-[140px]"
                 animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
                 transition={{ duration: 15, repeat: Infinity }}
               />
-            ) : (
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/5 rounded-full blur-3xl opacity-15" />
-            )}
-          </div>
+            </div>
+          )}
 
           <div className="container mx-auto px-4 relative z-10 w-full max-w-7xl">
             <div className="hidden md:grid grid-cols-12 grid-rows-3 gap-4 lg:gap-8 items-center">
