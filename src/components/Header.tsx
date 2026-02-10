@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/resizable-navbar";
 import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { m } from "framer-motion";
 import { cn } from "@/lib/utils";
 import logoBlack from "@/assets/logo_black.webp";
@@ -25,30 +25,51 @@ const Header = () => {
     {
       name: "How It Works",
       link: "/how-it-works",
+      prefetch: () => import("@/pages/HowItWorks"),
     },
     {
       name: "What You Get",
       link: "/what-you-get",
+      prefetch: () => import("@/pages/WhatYouGet"),
     },
     {
       name: "AI Employees",
       link: "/ai-employees",
+      prefetch: () => import("@/pages/AIEmployees"),
     },
     {
       name: "Command Center",
       link: "/command-center",
+      prefetch: () => import("@/pages/CommandCenter"),
     },
     {
       name: "Why Create Assistants",
       link: "/why-create-assistants",
+      prefetch: () => import("@/pages/WhyCreateAssistants"),
     },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { theme } = useTheme();
 
   const currentLogo = theme === "dark" ? logoWhite : logoBlack;
+
+  const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>, to: string) => {
+    if (
+      e.defaultPrevented ||
+      e.button !== 0 ||
+      e.metaKey ||
+      e.altKey ||
+      e.ctrlKey ||
+      e.shiftKey
+    ) {
+      return;
+    }
+    e.preventDefault();
+    navigate(to);
+  };
 
   return (
     <div className="fixed top-0 left-0 w-full z-50">
@@ -56,7 +77,13 @@ const Header = () => {
         {/* Desktop Navigation */}
         <NavBody>
           <div className="flex items-center gap-2 relative z-30">
-            <Link to="/" className="flex items-center gap-2 cursor-pointer">
+            <a
+              href="/"
+              className="flex items-center gap-2 cursor-pointer"
+              onMouseEnter={() => import("@/pages/Index")}
+              onTouchStart={() => import("@/pages/Index")}
+              onClick={(e) => handleNavigate(e, "/")}
+            >
               <m.img
                 src={currentLogo}
                 alt="Create Assistants Logo"
@@ -67,7 +94,7 @@ const Header = () => {
                 transition={{ type: "spring", stiffness: 400 }}
               />
               <span className="font-bold text-base hidden lg:block whitespace-nowrap">Create Assistants</span>
-            </Link>
+            </a>
           </div>
           <NavItems items={navItems} activeLink={location.pathname} />
           <div className="flex items-center gap-2 relative z-30">
@@ -87,7 +114,16 @@ const Header = () => {
         <MobileNav>
           <MobileNavHeader>
             <div className="flex items-center gap-2">
-              <Link to="/" className="flex items-center gap-2">
+              <a
+                href="/"
+                className="flex items-center gap-2"
+                onMouseEnter={() => import("@/pages/Index")}
+                onTouchStart={() => import("@/pages/Index")}
+                onClick={(e) => {
+                  handleNavigate(e, "/");
+                  setIsMobileMenuOpen(false);
+                }}
+              >
                 <img
                   src={currentLogo}
                   alt="Create Assistants Logo"
@@ -95,7 +131,7 @@ const Header = () => {
                   height={32}
                   className="w-8 h-8 object-contain p-1"
                 />
-              </Link>
+              </a>
             </div>
 
             <MobileNavToggle
@@ -111,10 +147,15 @@ const Header = () => {
             {navItems.map((item, idx) => {
               const isActive = location.pathname === item.link;
               return (
-                <Link
+                <a
                   key={`mobile-link-${idx}`}
-                  to={item.link}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  href={item.link}
+                  onMouseEnter={() => item.prefetch?.()}
+                  onTouchStart={() => item.prefetch?.()}
+                  onClick={(e) => {
+                    handleNavigate(e, item.link);
+                    setIsMobileMenuOpen(false);
+                  }}
                   className={cn(
                     "relative py-2 block font-medium transition-colors duration-200",
                     isActive
@@ -123,7 +164,7 @@ const Header = () => {
                   )}
                 >
                   <span className="block whitespace-nowrap">{item.name}</span>
-                </Link>
+                </a>
               );
             })}
             <div className="flex w-full flex-col gap-4 mt-8 pb-8 items-stretch">

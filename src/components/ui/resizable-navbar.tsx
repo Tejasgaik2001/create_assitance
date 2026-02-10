@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { isSafari, supportsBackdropFilter } from "@/utils/safariDetection";
 
 // Interfaces for props
@@ -28,7 +28,8 @@ interface NavItemsProps {
   items: {
     name: string;
     link: string;
-    icon?: any;
+    icon?: React.ReactNode;
+    prefetch?: () => void;
   }[];
   className?: string;
   onItemClick?: () => void;
@@ -130,6 +131,23 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
 
 export const NavItems = ({ items, className, onItemClick, activeLink }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>, to: string) => {
+    if (
+      e.defaultPrevented ||
+      e.button !== 0 ||
+      e.metaKey ||
+      e.altKey ||
+      e.ctrlKey ||
+      e.shiftKey
+    ) {
+      return;
+    }
+    e.preventDefault();
+    navigate(to);
+    onItemClick?.();
+  };
 
   return (
     <m.div
@@ -142,9 +160,14 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
       {items.map((item, idx) => {
         const isActive = activeLink === item.link;
         return (
-          <Link
-            onMouseEnter={() => setHovered(idx)}
-            onClick={onItemClick}
+          <a
+            href={item.link}
+            onMouseEnter={() => {
+              setHovered(idx);
+              item.prefetch?.();
+            }}
+            onTouchStart={() => item.prefetch?.()}
+            onClick={(e) => handleNavigate(e, item.link)}
             className={cn(
               "group relative px-4 py-2 transition-colors duration-200 whitespace-nowrap",
               isActive
@@ -152,7 +175,6 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
                 : "text-neutral-500 hover:text-neutral-900 dark:hover:text-white font-medium"
             )}
             key={`link-${idx}`}
-            to={item.link}
           >
             <span className="relative z-20">{item.name}</span>
             <span
@@ -161,7 +183,7 @@ export const NavItems = ({ items, className, onItemClick, activeLink }: NavItems
                 isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
               )}
             />
-          </Link>
+          </a>
         );
       })}
     </m.div>
