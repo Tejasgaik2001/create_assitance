@@ -11,8 +11,11 @@ import { MagneticWrapper } from "@/components/MagneticWrapper";
 import { RollingTextList } from "@/components/ui/RollingTextList";
 import { VerticalTimeline } from "@/components/ui/VerticalTimeline";
 import { handleBookingRedirect } from "@/utils/navigation";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const HowItWorks = () => {
+  const isMobile = useIsMobile();
+
   const steps = [
     {
       number: 1,
@@ -144,33 +147,44 @@ const HowItWorks = () => {
         <section className="py-16 relative overflow-hidden">
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            {/* Left floating orb */}
-            <m.div
-              className="absolute top-20 -left-20 w-80 h-80 bg-accent/15 rounded-full blur-3xl"
-              animate={{
-                y: [0, 40, 0],
-                scale: [1, 1.15, 1],
-              }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Right floating orb */}
-            <m.div
-              className="absolute bottom-40 -right-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl"
-              animate={{
-                y: [0, -40, 0],
-                scale: [1.1, 1, 1.1],
-              }}
-              transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Center accent */}
-            <m.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.3, 0.5, 0.3],
-              }}
-              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-            />
+            {/* Animated orbs on desktop, static on mobile */}
+            {!isMobile ? (
+              <>
+                {/* Left floating orb */}
+                <m.div
+                  className="absolute top-20 -left-20 w-80 h-80 bg-accent/15 rounded-full blur-3xl"
+                  animate={{
+                    y: [0, 40, 0],
+                    scale: [1, 1.15, 1],
+                  }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Right floating orb */}
+                <m.div
+                  className="absolute bottom-40 -right-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl"
+                  animate={{
+                    y: [0, -40, 0],
+                    scale: [1.1, 1, 1.1],
+                  }}
+                  transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Center accent */}
+                <m.div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.3, 0.5, 0.3],
+                  }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </>
+            ) : (
+              <>
+                <div className="absolute top-20 -left-20 w-80 h-80 bg-accent/15 rounded-full blur-3xl opacity-20" />
+                <div className="absolute bottom-40 -right-20 w-72 h-72 bg-primary/15 rounded-full blur-3xl opacity-15" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/5 rounded-full blur-3xl opacity-10" />
+              </>
+            )}
             {/* Grid pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] mobile-hide-bg" />
           </div>
@@ -193,32 +207,43 @@ const HowItWorks = () => {
         <section className="py-16 relative bg-muted/20 overflow-hidden">
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            {/* Central pulsing orb */}
-            <m.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-              }}
-              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Top left orb */}
-            <m.div
-              className="absolute -top-20 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
-              animate={{
-                x: [0, 30, 0],
-                y: [0, 20, 0],
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Bottom right orb */}
-            <m.div
-              className="absolute -bottom-10 right-1/4 w-72 h-72 bg-accent/8 rounded-full blur-3xl"
-              animate={{
-                x: [0, -20, 0],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            />
+            {/* Animated orbs on desktop, static on mobile */}
+            {!isMobile ? (
+              <>
+                {/* Central pulsing orb */}
+                <m.div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Top left orb */}
+                <m.div
+                  className="absolute -top-20 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
+                  animate={{
+                    x: [0, 30, 0],
+                    y: [0, 20, 0],
+                  }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Bottom right orb */}
+                <m.div
+                  className="absolute -bottom-10 right-1/4 w-72 h-72 bg-accent/8 rounded-full blur-3xl"
+                  animate={{
+                    x: [0, -20, 0],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </>
+            ) : (
+              <>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-15" />
+                <div className="absolute -top-20 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl opacity-15" />
+                <div className="absolute -bottom-10 right-1/4 w-72 h-72 bg-accent/8 rounded-full blur-3xl opacity-10" />
+              </>
+            )}
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -240,32 +265,43 @@ const HowItWorks = () => {
         <section className="py-16 relative overflow-hidden">
           {/* Background effects */}
           <div className="absolute inset-0 pointer-events-none">
-            {/* Left glow */}
-            <m.div
-              className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
-              animate={{
-                x: [0, 40, 0],
-                opacity: [0.4, 0.7, 0.4],
-              }}
-              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Right glow */}
-            <m.div
-              className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl"
-              animate={{
-                x: [0, -40, 0],
-                opacity: [0.5, 0.8, 0.5],
-              }}
-              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* Center subtle orb */}
-            <m.div
-              className="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl"
-              animate={{
-                y: [0, 20, 0],
-              }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            />
+            {/* Animated orbs on desktop, static on mobile */}
+            {!isMobile ? (
+              <>
+                {/* Left glow */}
+                <m.div
+                  className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
+                  animate={{
+                    x: [0, 40, 0],
+                    opacity: [0.4, 0.7, 0.4],
+                  }}
+                  transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Right glow */}
+                <m.div
+                  className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl"
+                  animate={{
+                    x: [0, -40, 0],
+                    opacity: [0.5, 0.8, 0.5],
+                  }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                />
+                {/* Center subtle orb */}
+                <m.div
+                  className="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl"
+                  animate={{
+                    y: [0, 20, 0],
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                />
+              </>
+            ) : (
+              <>
+                <div className="absolute top-1/2 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl opacity-20" />
+                <div className="absolute top-1/2 -right-32 w-96 h-96 bg-accent/15 rounded-full blur-3xl opacity-20" />
+                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl opacity-10" />
+              </>
+            )}
             {/* Grid pattern */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] mobile-hide-bg" />
           </div>
