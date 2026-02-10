@@ -181,7 +181,7 @@
       background-image: none !important;
       -webkit-background-clip: border-box !important;
       background-clip: border-box !important;
-      color: hsl(var(--safari-fallback)) !important;
+      color: hsl(var(--accent)) !important;
       -webkit-text-fill-color: currentColor !important;
     }
   }
