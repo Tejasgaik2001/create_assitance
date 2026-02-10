@@ -156,7 +156,8 @@
 @layer components {
   .text-gradient {
     @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text bg-[length:200%_auto] animate-gradient py-1;
-    color: hsl(var(--primary));
+    --safari-fallback: var(--foreground);
+    color: hsl(var(--safari-fallback));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-backface-visibility: hidden;
@@ -180,7 +181,7 @@
       background-image: none !important;
       -webkit-background-clip: border-box !important;
       background-clip: border-box !important;
-      color: hsl(var(--foreground)) !important;
+      color: hsl(var(--safari-fallback)) !important;
       -webkit-text-fill-color: currentColor !important;
     }
   }
