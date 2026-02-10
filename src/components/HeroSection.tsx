@@ -1,6 +1,6 @@
 import { m, useInView, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Play } from "lucide-react";
+import { ArrowRight, Sparkles, Play, Volume2, VolumeX } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import heroVideo from "@/assets/hero.mp4";
 // Use public/ URL to match the <link rel="preload"> in index.html
@@ -11,12 +11,17 @@ import { isSafari, shouldEnableAnimations } from "@/utils/safariDetection";
 import { useLazyVideo } from "@/hooks/useLazyVideo";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
+// Safari detection helper
+const isSafariBrowser = () => {
+  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+};
+
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
   // Lazy load video to prevent blocking initial page load
-  const { videoRef, isLoaded, isPlaying, play } = useLazyVideo({
+  const { videoRef, isLoaded, isPlaying, play, pause } = useLazyVideo({
     autoplay: true,
     rootMargin: '100px' // Load when 100px from viewport
   });
@@ -309,24 +314,24 @@ const HeroSection = () => {
             }}
             className="relative w-full max-w-full lg:scale-105 lg:translate-x-2"
           >
-            <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group" style={{ isolation: 'isolate' }}>
+            <div className="relative aspect-video md:aspect-[16/10] lg:aspect-video rounded-2xl sm:rounded-[3rem] overflow-hidden shadow-[0_50px_120px_-20px_rgba(0,0,0,0.3)] shadow-primary/30 border border-border/40 group">
               <video
                 ref={videoRef}
                 data-src={heroVideo}
                 poster={heroPoster}
-                muted
                 loop
                 playsInline
                 webkit-playsinline="true"
                 preload="none"
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                controls
+                autoPlay
+                muted
+                className="w-full h-full object-cover relative z-10"
               />
 
-              {/* Enhanced overlays */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-accent/30 mix-blend-overlay" />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
+             
 
-              {/* Floating Stats Card - Enhanced */}
+              {/* Floating Stats Card - Enhanced - Moved to top to avoid controls */}
               <m.div
                 animate={shouldAnimate ? {
                   y: [0, -12, 0],
@@ -334,7 +339,7 @@ const HeroSection = () => {
                 } : {}}
                 transition={shouldAnimate ? { duration: 5, repeat: Infinity, ease: "easeInOut" } : { duration: 0 }}
                 whileHover={{ scale: 1.05, y: -8 }}
-                className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all flex"
+                className="absolute top-16 left-4 bg-gradient-to-br from-background via-background to-background/95 backdrop-blur-xl border border-border/40 rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-6 shadow-2xl shadow-black/20 hover:shadow-accent/30 transition-all flex z-0"
               >
                 <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-primary/10 to-accent/10 opacity-50" />
                 <div className="relative">

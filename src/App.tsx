@@ -6,6 +6,7 @@ import { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/hooks/useTheme";
 import { MotionConfig, LazyMotion, domMax } from "framer-motion";
+import { PageLoader, MobileSkeletonLoader, DesktopSkeletonLoader } from "@/components/ui/PageLoader";
 const Index = lazy(() => import("./pages/Index"));
 const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 const WhatYouGet = lazy(() => import("./pages/WhatYouGet"));
@@ -42,9 +43,10 @@ const App = () => {
               <BrowserRouter>
                 <ScrollToTop />
                 <Suspense fallback={
-                  <div className="min-h-screen flex items-center justify-center bg-background">
-                    <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
-                  </div>
+                  <>
+                    <MobileSkeletonLoader />
+                    <DesktopSkeletonLoader />
+                  </>
                 }>
                   <Routes>
                     <Route path="/" element={<Index />} />
