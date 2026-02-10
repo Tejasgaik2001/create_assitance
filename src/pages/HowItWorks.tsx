@@ -106,6 +106,7 @@ const HowItWorks = () => {
                 transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
                 className="absolute top-1/4 -left-32 w-[700px] h-[700px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-[140px]"
               />
+
               <m.div
                 animate={{
                   x: [0, -40, 0],
