@@ -6,7 +6,9 @@ import { useState, useEffect } from 'react';
  * Handles SSR/hydration safely by defaulting to false
  */
 export const useIsMobile = (): boolean => {
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(() =>
+        typeof window !== "undefined" ? window.innerWidth < 1024 : false
+    );
 
     useEffect(() => {
         // Check on mount
