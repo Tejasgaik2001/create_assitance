@@ -8,7 +8,7 @@ const ThemeToggle = () => {
   return (
     <m.button
       onClick={toggleTheme}
-      className="relative w-9 h-9 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 group"
+      className="relative w-7 h-7 sm:w-9 sm:h-9 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 group"
       whileTap={{ scale: 0.9 }}
       whileHover={{ scale: 1.05 }}
       aria-label="Toggle theme"
@@ -22,9 +22,9 @@ const ThemeToggle = () => {
           transition={{ duration: 0.2 }}
         >
           {theme === "light" ? (
-            <Sun className="w-4 h-4 text-amber-500" />
+            <Sun className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500" />
           ) : (
-            <Moon className="w-4 h-4 text-indigo-400" />
+            <Moon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-indigo-400" />
           )}
         </m.div>
       </AnimatePresence>

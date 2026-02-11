@@ -140,10 +140,13 @@ const Header = () => {
               </a>
             </div>
 
-            <MobileNavToggle
-              isOpen={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            />
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <MobileNavToggle
+                isOpen={isMobileMenuOpen}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              />
+            </div>
           </MobileNavHeader>
 
           <MobileNavMenu
@@ -174,9 +177,6 @@ const Header = () => {
               );
             })}
             <div className="flex w-full flex-col gap-4 mt-8 pb-8 items-stretch">
-              <div className="flex justify-center mb-2">
-                <ThemeToggle />
-              </div>
               <NavbarButton
                 onClick={() => {
                   setIsMobileMenuOpen(false);
