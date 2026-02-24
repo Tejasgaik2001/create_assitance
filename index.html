@@ -41,11 +41,14 @@
   <meta name="twitter:image:alt" content="Create Assistants" />
 
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-WRGT8RDV');</script>
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-WRGT8RDV');</script>
   <!-- End Google Tag Manager -->
 
   <script type="application/ld+json">
@@ -132,29 +135,7 @@
   </script>
   <script type="module" src="/src/main.tsx"></script>
   <!-- Defer Google Analytics to after page load (Desktop Only) -->
-  <script>
-    window.addEventListener('load', function () {
-      // Detect mobile devices
-      var isMobileDevice = /iphone|ipad|ipod|android/i.test(navigator.userAgent);
 
-      // Skip analytics entirely on mobile to save bandwidth and CPU
-      if (isMobileDevice) {
-        console.log('Mobile detected: Analytics disabled for performance');
-        return;
-      }
-
-      var s = document.createElement('script');
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-S6BDQZ7Q22';
-      s.async = true;
-      document.head.appendChild(s);
-      s.onload = function () {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-S6BDQZ7Q22');
-      };
-    });
-  </script>
 </body>
 
 </html>
