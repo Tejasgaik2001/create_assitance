@@ -115,7 +115,7 @@ const FAQSection = () => {
               className="flex flex-col sm:flex-row gap-4"
             >
               <button
-                onClick={() => window.open('https://calendly.com/createassistants', '_blank')}
+                onClick={() => window.open('https://go.createassistants.ai/call', '_blank')}
                 className="px-6 py-3 rounded-xl bg-accent/5 border border-accent/20 text-accent font-bold hover:bg-accent/10 transition-all flex items-center gap-2 w-fit text-sm"
               >
                 Still have questions? <ArrowRight size={16} />
